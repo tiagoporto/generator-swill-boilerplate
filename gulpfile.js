@@ -8,18 +8,18 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	cache = require('gulp-cache'),
 	compass = require('gulp-compass'),
-	path = require('path');
-	minifyCSS = require('gulp-minify-css');
+	path = require('path'),
+	minifyCSS = require('gulp-minify-css'),
 	watch = require('gulp-watch'),
-	livereload = require('gulp-livereload');
+	livereload = require('gulp-livereload'),
 	lr = require('tiny-lr'),
 	server = lr();
 
 // Path configs
 var	css_path  = 'build/css/*.css', // .css files
 	js_path   = 'src/scripts/**/*.js', // .js files
-	sass_path = 'src/stylesheets/**/*.scss'; // .sass files
-	img_path  = 'src/images/**/*' // image files
+	sass_path = 'src/stylesheets/**/*.scss', // .sass files
+	img_path  = 'src/images/**/*'; // image files
 
 
 //***************************************Tasks***************************************//
@@ -59,28 +59,22 @@ gulp.task('compass', function() {
 
 // Images
 gulp.task('images', function() {
-  gulp.src(img_path)
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('build/img'))
-    .pipe(livereload(server));
-});
-
-//Clean
-gulp.task('clean', function() {
-  return gulp.src(['build/css', 'build/js', 'build/img'], {read: false})
-    .pipe(clean());
-});
-
-// Reload browser
-gulp.task('reload-browser', function() {
-	gulp.src('build/**/*.html')
+	gulp.src(img_path)
+		.pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+		.pipe(gulp.dest('build/img'))
 		.pipe(livereload(server));
 });
 
+// Clean directories
+gulp.task('clean', function() {
+	return gulp.src(['build/css', 'build/js', 'build/img'], {read: false})
+		.pipe(clean());
+});
 
-// Default task
-gulp.task('default', ['clean'], function() {
-    gulp.run('scripts', 'images', 'compass' );
+// Reload
+gulp.task('reload-browser', function() {
+	gulp.src('build/**/*.html')
+		.pipe(livereload(server));
 });
 
 //Watch
@@ -113,4 +107,9 @@ gulp.task('watch', function() {
 		});
 
 	});
+});
+
+// Default task
+gulp.task('default', ['clean' , 'images', 'scripts'], function() {
+	gulp.run('watch' );
 });

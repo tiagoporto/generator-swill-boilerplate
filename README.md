@@ -14,3 +14,7 @@ $ gem install compass
 ## Dependencies
 
 ## Usage
+
+```
+$ gulp
+```
