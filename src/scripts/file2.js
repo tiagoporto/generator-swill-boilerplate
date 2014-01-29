@@ -1,3 +1,1 @@
-function teste (argument) {
-	alert("testeeeeww");
-}
+alert("file 2");

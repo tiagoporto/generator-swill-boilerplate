@@ -1,6 +1,5 @@
 // Load plugins
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
 	uglify = require('gulp-uglify'),
 	imagemin = require('gulp-imagemin'),
 	rename = require('gulp-rename'),
@@ -16,64 +15,63 @@ var gulp = require('gulp'),
 	server = lr();
 
 // Path configs
-var	css_path  = 'build/css/*.css', // .css files
+var	css_path  = 'project/css/*.css', // .css files
 	js_path   = 'src/scripts/**/*.js', // .js files
 	sass_path = 'src/stylesheets/**/*.scss', // .sass files
-	img_path  = 'src/images/**/*'; // image files
+	img_path  = 'src/images/**/*.{png,jpg,gif}'; // image files
 
 
-//***************************************Tasks***************************************//
+//**********************************Tasks**********************************//
 
-// Concat + Minifier scripts
-gulp.task('scripts', function() {
-	gulp.src(js_path)
-		.pipe(concat('main.js'))
-		.pipe(gulp.dest('build/js'))
-		.pipe(rename('main.min.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest('build/js'))
+// Optimize images
+gulp.task('images', function() {
+	gulp.src(img_path)
+		.pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+		.pipe(gulp.dest('project/img'))
 		.pipe(livereload(server));
 });
 
+// Concat and Minify scripts
+gulp.task('scripts', function() {
+	gulp.src(js_path)
+		.pipe(concat('main.js'))
+		.pipe(gulp.dest('project/js'))
+		.pipe(rename('main.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('project/js'))
+		.pipe(livereload(server));
+});
 
-//Compass
+// Compile and Minify Sass
 gulp.task('compass', function() {
 	gulp.src(sass_path)
 		.pipe(compass({
 			config_file: 'src/config.rb',
 			//project: path.join(__dirname, 'src/stylesheets'),
-			// css: 'build/css',
+			// css: 'project/css',
 			// sass: 'src/stylesheets'
-			// imagesDir : 'build/images',
-			// fontsDir : 'build/fonts',
-			// generatedImagesDir : 'build/img',
-			// httpPath : '/build',
+			// imagesDir : 'project/images',
+			// fontsDir : 'project/fonts',
+			// generatedImagesDir : 'project/img',
+			// httpPath : '/project',
 			// httpStylesheetsPath : '/styles',
-			// httpGeneratedImagesPath : 'build/images',
+			// httpGeneratedImagesPath : 'project/images',
 			// httpFontsPath : '/fonts'
 		}))
 		.pipe(minifyCSS())
-		.pipe(gulp.dest('build/css'))
-		.pipe(livereload(server));
-});
-
-// Images
-gulp.task('images', function() {
-	gulp.src(img_path)
-		.pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-		.pipe(gulp.dest('build/img'))
+		.pipe(gulp.dest('project/css'))
 		.pipe(livereload(server));
 });
 
 // Clean directories
 gulp.task('clean', function() {
-	return gulp.src(['build/css', 'build/js', 'build/img'], {read: false})
+	return gulp.src(['project/css', 'project/js', 'project/img'], {read: false})
 		.pipe(clean());
 });
 
-// Reload
+// Reload Browser
 gulp.task('reload-browser', function() {
-	gulp.src('build/**/*.html')
+	gulp.src('project/**/*.html')
 		.pipe(livereload(server));
 });
 
@@ -85,24 +83,21 @@ gulp.task('watch', function() {
 
 		// Watch .js files
 		gulp.watch(js_path, function(event) {
-			gutil.log('File '+event.path+' was '+event.type+', running tasks...');
 			gulp.run('scripts');
 		});
 
 		// Watch .scss files
 		gulp.watch(sass_path, function(event) {
-			console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 			gulp.run('compass');
 		});
 
-		// Watch image files
+		// Watch .jpg .png .gif files
 		gulp.watch(img_path, function(event) {
-		  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 		  gulp.run('images');
 		});
 
-		//Watch html Files
-		gulp.watch('build/**/*.html', function(){
+		//Watch .html .php Files
+		gulp.watch('project/**/*.{html,php}', function(){
 			gulp.run('reload-browser');
 		});
 
