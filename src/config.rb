@@ -1,12 +1,12 @@
-css_dir = "css"
-sass_dir = "sass"
-images_dir = "../img"
-javascripts_dir = "../js"
+css_dir = "../build/css"
+sass_dir = "stylesheets"
+# images_dir = "../img"
+# javascripts_dir = "../js"
 
-http_path = "/"
-http_images_path = "img"
-http_generated_images_path = "../img"
-relative_assets = true;
+http_path = "build/"
+# http_images_path = "img"
+# http_generated_images_path = "../img"
+#relative_assets = true;
 # Saída do css
 # :nested
 # .class{
