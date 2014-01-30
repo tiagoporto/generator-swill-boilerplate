@@ -46,10 +46,10 @@ gulp.task('scripts', function() {
 gulp.task('compass', function() {
 	gulp.src(sass_path)
 		.pipe(compass({
-			config_file: 'src/config.rb',
-			//project: path.join(__dirname, 'src/stylesheets'),
-			// css: 'project/css',
-			// sass: 'src/stylesheets'
+			//config_file: 'src/config.rb',
+			project: path.join(__dirname, 'src/'),
+			css: '../project/css',
+			sass: 'stylesheets'
 			// imagesDir : 'project/images',
 			// fontsDir : 'project/fonts',
 			// generatedImagesDir : 'project/img',
@@ -59,7 +59,7 @@ gulp.task('compass', function() {
 			// httpFontsPath : '/fonts'
 		}))
 		.pipe(minifyCSS())
-		.pipe(gulp.dest('project/css'))
+		.pipe(gulp.dest('temp'))
 		.pipe(livereload(server));
 });
 
