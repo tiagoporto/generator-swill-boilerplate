@@ -33,7 +33,7 @@ gulp.task('images', function() {
 
 // Concat and Minify Scripts
 gulp.task('scripts', function() {
-	gulp.src(js_path)
+	gulp.src(['src/scripts/vendor/**', 'src/scripts/plugins/**', js_path])
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest('project/js'))
 		.pipe(rename('main.min.js'))

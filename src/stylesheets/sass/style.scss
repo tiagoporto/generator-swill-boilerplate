@@ -1,4 +1,5 @@
 @import "compass";
+@import "compass/reset";
 //@import "icons/*.png";
 //@include all-icons-sprites;
 
@@ -8,8 +9,7 @@ $corFundo: #9a0055;
 
 /* teste */
 body{
-	//background: darken($corFundo, 13%);
-	background: $corFundo;
+	background: darken($corFundo, 13%) url(../img/bg.png) 0 0 repeat;
 }
 
 // #box{
