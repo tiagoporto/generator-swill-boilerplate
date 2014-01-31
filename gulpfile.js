@@ -15,15 +15,15 @@ var gulp = require('gulp'),
 	server = lr();
 
 // Path configs
-var	css_path  = 'project/css/*.css', // .css files
+var	css_path  = 'src/stylesheets/css/**/*.css', // .css files
+	sass_path = 'src/stylesheets/sass/**/*.scss', // .sass files
 	js_path   = 'src/scripts/**/*.js', // .js files
-	sass_path = 'src/stylesheets/**/*.scss', // .sass files
 	img_path  = 'src/images/**/*.{png,jpg,gif}'; // image files
 
 
 //**********************************Tasks**********************************//
 
-// Optimize images
+// Optimize Images
 gulp.task('images', function() {
 	gulp.src(img_path)
 		.pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
@@ -31,7 +31,7 @@ gulp.task('images', function() {
 		.pipe(livereload(server));
 });
 
-// Concat and Minify scripts
+// Concat and Minify Scripts
 gulp.task('scripts', function() {
 	gulp.src(js_path)
 		.pipe(concat('main.js'))
@@ -42,28 +42,35 @@ gulp.task('scripts', function() {
 		.pipe(livereload(server));
 });
 
-// Compile and Minify Sass
+// Compile Compass and Minify CSS
 gulp.task('compass', function() {
 	gulp.src(sass_path)
 		.pipe(compass({
-			//config_file: 'src/config.rb',
-			project: path.join(__dirname, 'src/'),
-			css: '../project/css',
-			sass: 'stylesheets'
-			// imagesDir : 'project/images',
-			// fontsDir : 'project/fonts',
-			// generatedImagesDir : 'project/img',
-			// httpPath : '/project',
-			// httpStylesheetsPath : '/styles',
-			// httpGeneratedImagesPath : 'project/images',
-			// httpFontsPath : '/fonts'
+	// 		//config_file: 'src/config.rb',
+			project: path.join(__dirname, 'src/stylesheets/'),
+			css: 'css',
+			sass: 'sass',
+	// 		// imagesDir : 'project/images',
+	// 		// fontsDir : 'project/fonts',
+	// 		// generatedImagesDir : 'project/img',
+	// 		// httpPath : '/project',
+	// 		// httpStylesheetsPath : '/styles',
+	// 		// httpGeneratedImagesPath : 'project/images',
+	// 		// httpFontsPath : '/fonts'
 		}))
-		.pipe(minifyCSS())
-		.pipe(gulp.dest('temp'))
-		.pipe(livereload(server));
+		.pipe(gulp.dest('src/stylesheets/css'))
 });
 
-// Clean directories
+// Concat and Minify Styles
+gulp.task('styles', function() {
+	gulp.src(css_path)
+	.pipe(concat('main.css'))
+	.pipe(minifyCSS())
+	.pipe(gulp.dest('project/css'))
+	.pipe(livereload(server));
+});
+
+// Clean Directories
 gulp.task('clean', function() {
 	return gulp.src(['project/css', 'project/js', 'project/img'], {read: false})
 		.pipe(clean());
@@ -91,6 +98,11 @@ gulp.task('watch', function() {
 			gulp.run('compass');
 		});
 
+		// Watch .css files
+		gulp.watch(css_path, function(event) {
+			gulp.run('styles');
+		});
+
 		// Watch .jpg .png .gif files
 		gulp.watch(img_path, function(event) {
 		  gulp.run('images');
@@ -105,6 +117,6 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['clean' , 'images', 'scripts'], function() {
-	gulp.run('watch' );
+gulp.task('default', ['clean', 'compass', 'scripts', 'images'], function() {
+	gulp.run('watch');
 });
