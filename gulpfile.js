@@ -25,8 +25,8 @@ var	css_path  = 'src/stylesheets/css/**/*.css', // .css files
 
 // Optimize Images
 gulp.task('images', function() {
-	gulp.src(img_path)
-		.pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+	gulp.src([img_path, '!src/images/icons/*' ])
+		//.pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
 		.pipe(gulp.dest('project/img'))
 		.pipe(livereload(server));
 });
@@ -46,17 +46,14 @@ gulp.task('scripts', function() {
 gulp.task('compass', function() {
 	gulp.src(sass_path)
 		.pipe(compass({
-	// 		//config_file: 'src/config.rb',
-			project: path.join(__dirname, 'src/stylesheets/'),
-			css: 'css',
-			sass: 'sass',
-	// 		// imagesDir : 'project/images',
-	// 		// fontsDir : 'project/fonts',
-	// 		// generatedImagesDir : 'project/img',
-	// 		// httpPath : '/project',
-	// 		// httpStylesheetsPath : '/styles',
-	// 		// httpGeneratedImagesPath : 'project/images',
-	// 		// httpFontsPath : '/fonts'
+			// config_file: '../config.rb',
+			project: path.join(__dirname, '/'),
+			css: 'src/stylesheets/css',
+			sass: 'src/stylesheets/sass',
+			image: 'src/images',
+			comments: false,
+			relative: false,
+
 		}))
 		.pipe(gulp.dest('src/stylesheets/css'))
 });

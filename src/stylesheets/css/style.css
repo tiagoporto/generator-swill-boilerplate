@@ -45,6 +45,43 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block; }
 
+.icons-sprite, .icons-left_arrow, .icons-right_arrow, #seta, #seta:hover {
+  background: url('../img/icons-s4d545161d9.png') no-repeat; }
+
+.icons-left_arrow {
+  background-position: 0 0; }
+
+.icons-right_arrow {
+  background-position: 0 -32px; }
+
 /* teste */
 body {
-  background: #580030 url(../img/bg.png) 0 0 repeat; }
+  background: url('../img/bg.png?1391464351') 0 0 repeat; }
+
+#box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  background: #9a0055;
+  -webkit-border-radius: 20px 20px;
+  -moz-border-radius: 20px / 20px;
+  border-radius: 20px / 20px; }
+
+h1 {
+  color: #580030;
+  font-size: 5em; }
+
+#seta {
+  color: #FFF;
+  height: 32px;
+  width: 32px;
+  background-position: 0 0;
+  text-indent: -9999px;
+  cursor: pointer;
+  -webkit-transition: all, 1s;
+  -moz-transition: all, 1s;
+  -o-transition: all, 1s;
+  transition: all, 1s; }
+  #seta:hover {
+    background-position: 0 -32px; }

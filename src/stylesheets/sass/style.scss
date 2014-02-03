@@ -1,7 +1,7 @@
 @import "compass";
 @import "compass/reset";
-//@import "icons/*.png";
-//@include all-icons-sprites;
+@import "icons/*.png";
+@include all-icons-sprites;
 
 
 $corFundo: #9a0055;
@@ -9,32 +9,33 @@ $corFundo: #9a0055;
 
 /* teste */
 body{
-	background: darken($corFundo, 13%) url(../img/bg.png) 0 0 repeat;
+	background:  image-url("bg.png") 0 0 repeat;
 }
 
-// #box{
-// 	position: relative;
-// 	width: 200px;
-// 	height: 200px;
-// 	margin:auto;
-// 	background: $corFundo;
-// 	@include border-radius(20px, 20px);
-// }
+#box{
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin:auto;
+	background: $corFundo;
+	@include border-radius(20px, 20px);
+}
 
-// p{
-// 	color: green;
-// }
+h1{
+	color: darken($corFundo, 13%);
+	font-size: 5em;
+}
 
-// #seta{
-// 	color: #FFF;
-// 	height: image-height("icons/left_arrow.png");
-// 	width: image-width("icons/right_arrow.png");
-// 	@include icons-sprite(seta1);
-// 	text-indent: -9999px;
-// 	cursor: pointer;
-// 	@include transition(all, 1s);
+#seta{
+	color: #FFF;
+	height: image-height("icons/left_arrow.png");
+	width: image-width("icons/right_arrow.png");
+	@include icons-sprite(left_arrow);
+	text-indent: -9999px;
+	cursor: pointer;
+	@include transition(all, 1s);
 
-// 	&:hover{
-// 		@include icons-sprite(seta2);
-// 	}
-// }
+	&:hover{
+		@include icons-sprite(right_arrow);
+	}
+}

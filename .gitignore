@@ -5,3 +5,4 @@ Thumbs.db
 # Ignorar todos os diretórios e arquivos em um diretório.
 node_modules/**/*
 .sass-cache/**/*
+src/.sass-cache/**/*
