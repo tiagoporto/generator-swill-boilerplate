@@ -5,7 +5,6 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	clean = require('gulp-clean'),
 	concat = require('gulp-concat'),
-	cache = require('gulp-cache'),
 	compass = require('gulp-compass'),
 	path = require('path'),
 	minifyCSS = require('gulp-minify-css'),
@@ -26,7 +25,7 @@ var	css_path  = 'src/stylesheets/css/**/*.css', // .css files
 // Optimize Images
 gulp.task('images', function() {
 	gulp.src([img_path, '!src/images/icons/*' ])
-		//.pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+		.pipe(imagemin({ optimizationLevel: 3, progressive: true, cache: true }))
 		.pipe(gulp.dest('project/img'))
 		.pipe(livereload(server));
 });
