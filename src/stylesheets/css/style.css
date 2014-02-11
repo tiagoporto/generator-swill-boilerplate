@@ -56,7 +56,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* teste */
 body {
-  background: url('../img/bg.png?1391464351') 0 0 repeat; }
+  background: url('../img/bg.png?1391532059') 0 0 repeat; }
 
 #box {
   position: relative;
@@ -85,3 +85,16 @@ h1 {
   transition: all, 1s; }
   #seta:hover {
     background-position: 0 -32px; }
+
+@media (max-width: 320px) {
+  .test {
+    background: #9a0055; } }
+@media (max-width: 480px) {
+  .test {
+    background: #9a0055; } }
+@media (min-width: 481px) and (max-width: 767px) {
+  .test {
+    background: #9a0055; } }
+@media (min-width: 768px) and (max-width: 1000px) {
+  .test {
+    background: #9a0055; } }

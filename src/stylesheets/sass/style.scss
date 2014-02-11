@@ -39,3 +39,8 @@ h1{
 		@include icons-sprite(right_arrow);
 	}
 }
+
+@import "media_queries/max_320.scss";
+@import "media_queries/max_480.scss";
+@import "media_queries/min_481_max_767.scss";
+@import "media_queries/min_768_max_1000.scss";

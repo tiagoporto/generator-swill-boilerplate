@@ -52,7 +52,6 @@ gulp.task('compass', function() {
 			image: 'src/images',
 			comments: false,
 			relative: false,
-
 		}))
 		.pipe(gulp.dest('src/stylesheets/css'))
 });
