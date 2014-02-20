@@ -41,7 +41,7 @@ gulp.task('scripts', function() {
 		.pipe(livereload(server));
 });
 
-// Compile Compass and Minify CSS
+// Compile Compass
 gulp.task('compass', function() {
 	gulp.src([sass_path, '!src/stylesheets/sass/media_queries/*'])
 		.pipe(compass({
