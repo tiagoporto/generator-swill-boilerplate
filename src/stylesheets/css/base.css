@@ -88,7 +88,7 @@ h1 {
 
 @media (max-width: 320px) {
   .test {
-    background: #9a0055; } }
+    background: #777; } }
 @media (max-width: 480px) {
   .test {
     background: #9a0055; } }
@@ -97,4 +97,4 @@ h1 {
     background: #9a0055; } }
 @media (min-width: 768px) and (max-width: 1000px) {
   .test {
-    background: #9a0055; } }
+    background: #333; } }

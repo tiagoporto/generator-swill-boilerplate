@@ -40,7 +40,18 @@ h1{
 	}
 }
 
-@import "media_queries/max_320.scss";
-@import "media_queries/max_480.scss";
-@import "media_queries/min_481_max_767.scss";
-@import "media_queries/min_768_max_1000.scss";
+@media (max-width: 320px) {
+	@import "media_queries/max_320";
+}
+
+@media (max-width: 480px) {
+	@import "media_queries/max_480";
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	@import "media_queries/min_481_max_767";
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+	@import "media_queries/min_768_max_1000";
+}

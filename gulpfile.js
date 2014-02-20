@@ -43,9 +43,8 @@ gulp.task('scripts', function() {
 
 // Compile Compass and Minify CSS
 gulp.task('compass', function() {
-	gulp.src(sass_path)
+	gulp.src([sass_path, '!src/stylesheets/sass/media_queries/*'])
 		.pipe(compass({
-			// config_file: '../config.rb',
 			project: path.join(__dirname, '/'),
 			css: 'src/stylesheets/css',
 			sass: 'src/stylesheets/sass',
@@ -53,16 +52,15 @@ gulp.task('compass', function() {
 			comments: false,
 			relative: false,
 		}))
-		.pipe(gulp.dest('src/stylesheets/css'))
 });
 
 // Concat and Minify Styles
 gulp.task('styles', function() {
 	gulp.src(css_path)
-	.pipe(concat('main.css'))
-	.pipe(minifyCSS())
-	.pipe(gulp.dest('project/css'))
-	.pipe(livereload(server));
+		.pipe(concat('styles.css'))
+		.pipe(minifyCSS())
+		.pipe(gulp.dest('project/css'))
+		.pipe(livereload(server));
 });
 
 // Clean Directories
