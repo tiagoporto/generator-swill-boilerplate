@@ -1,3 +1,9 @@
+// Gulp.js Config File
+// Author: Tiago Porto - http://www.tiagoporto.com
+// https://github.com/tiagoporto
+// Contact: me@tiagoporto.com
+
+
 // Load plugins
 var gulp = require('gulp'),
 	download = require('gulp-download'),
@@ -6,6 +12,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	clean = require('gulp-clean'),
 	concat = require('gulp-concat'),
+	notify = require('gulp-notify'),
 	compass = require('gulp-compass'),
 	path = require('path'),
 	minifyCSS = require('gulp-minify-css'),
@@ -27,7 +34,8 @@ gulp.task('images', function() {
 	gulp.src([img_path, '!src/images/icons/*' ])
 		.pipe(imagemin({ optimizationLevel: 3, progressive: true, cache: true }))
 		.pipe(gulp.dest('project/img'))
-		.pipe(livereload(server));
+		.pipe(livereload(server))
+		.pipe(notify({ message: 'Images task complete' }));
 });
 
 // Concat and Minify Scripts
@@ -38,7 +46,8 @@ gulp.task('scripts', function() {
 		.pipe(rename('main.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('project/js'))
-		.pipe(livereload(server));
+		.pipe(livereload(server))
+		.pipe(notify({ message: 'Scripts task complete' }));
 });
 
 // Compile Compass
@@ -58,19 +67,22 @@ gulp.task('compass', function() {
 			comments: false,
 			relative: false,
 		}))
-		.pipe(livereload(server));
+		.pipe(livereload(server))
+		.pipe(notify({ message: 'Compass task complete' }));
 });
 
 // Clean Directories
 gulp.task('clean', function() {
 	return gulp.src(['project/css', 'project/js', 'project/img'], {read: false})
-		.pipe(clean());
+		.pipe(clean())
+		.pipe(notify({ message: 'Clean task complete' }));
 });
 
 // Reload Browser
 gulp.task('reload-browser', function() {
 	gulp.src('project/**/*.html')
-		.pipe(livereload(server));
+		.pipe(livereload(server))
+		.pipe(notify({ message: 'Reload complete' }));
 });
 
 // Watch
@@ -105,13 +117,15 @@ gulp.task('watch', function() {
 // Download the latest version of jQuery
 gulp.task('jquery', function() {
 	download('http://code.jquery.com/jquery.js')
-    	.pipe(gulp.dest("src/scripts/libs"));
+    	.pipe(gulp.dest("src/scripts/libs"))
+    	.pipe(notify({ message: 'Jquery Copied' }));
 });
 
 // Download the latest version of jQuery UI
 gulp.task('jqueryui', function() {
 	download('http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js')
-    	.pipe(gulp.dest("src/scripts/libs"));
+    	.pipe(gulp.dest("src/scripts/libs"))
+    	.pipe(notify({ message: 'Jquery UI Copied' }));
 });
 
 //Make task for jquery UI styles
