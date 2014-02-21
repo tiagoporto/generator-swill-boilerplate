@@ -15,8 +15,7 @@ var gulp = require('gulp'),
 	server = lr();
 
 // Path configs
-var	css_path  = 'src/stylesheets/css/**/*.css', // .css files
-	sass_path = 'src/stylesheets/sass/**/*.scss', // .sass files
+var	sass_path = 'src/stylesheets/**/*.scss', // .sass files
 	js_path   = 'src/scripts/**/*.js', // .js files
 	img_path  = 'src/images/**/*.{png,jpg,gif}'; // image files
 
@@ -44,23 +43,21 @@ gulp.task('scripts', function() {
 
 // Compile Compass
 gulp.task('compass', function() {
-	gulp.src([sass_path, '!src/stylesheets/sass/media_queries/*'])
+	gulp.src(sass_path)
 		.pipe(compass({
 			project: path.join(__dirname, '/'),
-			css: 'src/stylesheets/css',
-			sass: 'src/stylesheets/sass',
+			css: 'project/css',
+			sass: 'src/stylesheets/',
 			image: 'src/images',
+
+			style: 'expanded',
+			//description:
+			//The output style for the compiled css.
+			//Nested, expanded, compact, or compressed.
+
 			comments: false,
 			relative: false,
 		}))
-});
-
-// Concat and Minify Styles
-gulp.task('styles', function() {
-	gulp.src(css_path)
-		.pipe(concat('styles.css'))
-		.pipe(minifyCSS())
-		.pipe(gulp.dest('project/css'))
 		.pipe(livereload(server));
 });
 
@@ -90,11 +87,6 @@ gulp.task('watch', function() {
 		// Watch .scss files
 		gulp.watch(sass_path, function(event) {
 			gulp.run('compass');
-		});
-
-		// Watch .css files
-		gulp.watch(css_path, function(event) {
-			gulp.run('styles');
 		});
 
 		// Watch .jpg .png .gif files

@@ -1,15 +1,18 @@
 @import "compass";
+/* Reset */
 @import "compass/reset";
+/* Icons Sprit */
 @import "icons/*.png";
 @include all-icons-sprites;
 
-
-$corFundo: #9a0055;
+$corFundo: #EB4A4B;
 
 
 /* teste */
 body{
 	background:  image-url("bg.png") 0 0 repeat;
+	font-family: Helvetica,Arial,sans-serif;
+	font-weight: bold;
 }
 
 #box{
