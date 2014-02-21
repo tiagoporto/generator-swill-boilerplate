@@ -1,5 +1,6 @@
 // Load plugins
 var gulp = require('gulp'),
+	download = require('gulp-download'),
 	uglify = require('gulp-uglify'),
 	imagemin = require('gulp-imagemin'),
 	rename = require('gulp-rename'),
@@ -32,7 +33,7 @@ gulp.task('images', function() {
 
 // Concat and Minify Scripts
 gulp.task('scripts', function() {
-	gulp.src(['src/scripts/vendor/**', 'src/scripts/plugins/**', js_path])
+	gulp.src(['src/scripts/libs/**', 'src/scripts/plugins/**', js_path])
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest('project/js'))
 		.pipe(rename('main.min.js'))
@@ -75,7 +76,7 @@ gulp.task('reload-browser', function() {
 		.pipe(livereload(server));
 });
 
-//Watch
+// Watch
 gulp.task('watch', function() {
 	//Listen on port 35729
 	server.listen(35729, function (err) {
@@ -108,6 +109,24 @@ gulp.task('watch', function() {
 
 	});
 });
+
+// Download the latest version of jQuery
+gulp.task('jquery', function() {
+	download('http://code.jquery.com/jquery.js')
+    	.pipe(gulp.dest("src/scripts/libs"));
+});
+
+// Download the latest version of jQuery UI
+gulp.task('jqueryui', function() {
+	download('http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js')
+    	.pipe(gulp.dest("src/scripts/libs"));
+});
+
+//Make task for jquery UI styles
+
+//Make task for jquery mobile
+
+//Make task for angular
 
 // Default task
 gulp.task('default', ['clean', 'compass', 'scripts', 'images'], function() {
