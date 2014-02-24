@@ -2,25 +2,58 @@
 
 Basic Template to start using [Gulp](http://gulpjs.com/)
 
+This template includes
+
+1. [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
+2. Js
+
 
 ## Dependencies
 
 
-[node.js](http://nodejs.org/) installation
-Enable npm Package manager
+1. [Node.js](http://nodejs.org/) installation
+
+  `Mark npm package manager`
 
 
-Install Gulp
+1. Install Gulp
+
+  ```
+  $ npm install -g gulp
+  ```
+
+  For Mac or Linux User
+
+  ```
+  $ sudo npm install gulp -g
+  ```
+
+
+1. [gulp-compass](https://www.npmjs.org/package/gulp-compass) require ruby and compass
+
+
+  For Windows Users Only is necessary installer ruby
+
+  Download [Ruby](https://www.ruby-lang.org/pt/)
+
+  Download Development Kit from [Ruby Installer](http://rubyinstaller.org/downloads/)
+
+  * Unzip the zip
+  * Open command-line and go to unzipperd folder
+  * `ruby dk.rb init`
+  * `ruby dk.rb install`
+  * `gem install rdiscount --platform=ruby`
+
 
 ```
-$ npm install -g gulp
+$ gem update --system
+$ gem install compass
 ```
 
-
-Go to the folder
+Go to the local folder
 
 ```
-$ cd local/template-gulp
+$ cd local/gulp-template
 ```
 
 
@@ -30,38 +63,15 @@ $ npm install
 ```
 
 
-`gulp-compass` require ruby and compass
-
-For Windows
-
-Download [Ruby](https://www.ruby-lang.org/pt/)
-
-Download Development Kit from here http://rubyinstaller.org/downloads/
-
-DevKit url at this time : https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe
-
-Follow instructions here : https://github.com/oneclick/rubyinstaller/wiki/development-kit
-
-Or short instructions :
-
-    Unzip the zip
-
-    open command-line and go to unzipperd folder
-
-    ruby dk.rb init
-
-    ruby dk.rb install
-
-    gem install rdiscount --platform=ruby
-
-
-
-```
-$ gem update --system
-$ gem install compass
-```
-
 ## Usage
+
+Go to the local folder
+
+```
+$ cd local/template-gulp
+```
+
+Execute
 
 ```
 $ gulp
@@ -69,9 +79,9 @@ $ gulp
 
 ## Bugs
 
-Error: ENOENT, no such file or directory
+[Error: ENOENT, no such file or directory](https://github.com/appleboy/gulp-compass/issues/15)
 
-``
+```
 sudo gem uninstall sass
 sudo gem install sass -v 3.2.12
 ```
