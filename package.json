@@ -14,7 +14,7 @@
   "author": "Tiago Porto",
   "license": "Open-Source",
   "devDependencies": {
-    "gulp": "~3.4.0",
+    "gulp": "~3.5.2",
     "gulp-uglify": "~0.1.0",
     "gulp-watch": "~0.5.0",
     "gulp-livereload": "~0.2.0",
