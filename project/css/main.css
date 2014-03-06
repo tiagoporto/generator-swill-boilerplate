@@ -56,16 +56,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* Icons Sprit */
-.icons-sprite, .icons-left_arrow, .icons-right_arrow, #seta, #seta:hover {
-  background: url('../img/icons-s4d545161d9.png') no-repeat;
+.icons-sprite, .icons-bg, .icons-left_arrow, .icons-right_arrow, #seta, #seta:hover {
+  background: url('../img/icons-s05a1fe4cdd.png') no-repeat;
 }
 
-.icons-left_arrow {
+.icons-bg {
   background-position: 0 0;
 }
 
+.icons-left_arrow {
+  background-position: 0 -402px;
+}
+
 .icons-right_arrow {
-  background-position: 0 -32px;
+  background-position: 0 -434px;
 }
 
 /* teste */
@@ -95,6 +99,7 @@ h1 {
   color: #FFF;
   height: 32px;
   width: 32px;
+  background-position: 0 -402px;
   background-position: 0 0;
   text-indent: -9999px;
   cursor: pointer;
@@ -104,7 +109,7 @@ h1 {
   transition: all, 1s;
 }
 #seta:hover {
-  background-position: 0 -32px;
+  background-position: 0 -434px;
 }
 
 @media (max-width: 320px) {
