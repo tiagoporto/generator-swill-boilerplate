@@ -1,0 +1,1 @@
+	alert("Alert 2");

@@ -25345,7 +25345,7 @@ return jQuery;
 
 }));
 
-$(document).ready(function() {
-	alert('File 11');
+$(document).ready(function(){
+	alert('Alert 1');
+	alert("Alert 2");
 });
-alert("file 2");

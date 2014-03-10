@@ -34,7 +34,6 @@ h1{
 	height: image-height("icons/left_arrow.png");
 	width: image-width("icons/right_arrow.png");
 	@include icons-sprite(left_arrow);
-	@include icons-sprite(bg);
 	text-indent: -9999px;
 	cursor: pointer;
 	@include transition(all, 1s);

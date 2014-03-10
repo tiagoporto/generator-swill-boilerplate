@@ -56,20 +56,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* Icons Sprit */
-.icons-sprite, .icons-bg, .icons-left_arrow, .icons-right_arrow, #seta, #seta:hover {
-  background: url('../img/icons-s05a1fe4cdd.png') no-repeat;
-}
-
-.icons-bg {
-  background-position: 0 0;
+.icons-sprite, .icons-left_arrow, .icons-right_arrow, #seta, #seta:hover {
+  background: url('../img/icons-s4d545161d9.png') no-repeat;
 }
 
 .icons-left_arrow {
-  background-position: 0 -402px;
+  background-position: 0 0;
 }
 
 .icons-right_arrow {
-  background-position: 0 -434px;
+  background-position: 0 -32px;
 }
 
 /* teste */
@@ -99,7 +95,6 @@ h1 {
   color: #FFF;
   height: 32px;
   width: 32px;
-  background-position: 0 -402px;
   background-position: 0 0;
   text-indent: -9999px;
   cursor: pointer;
@@ -109,9 +104,96 @@ h1 {
   transition: all, 1s;
 }
 #seta:hover {
-  background-position: 0 -434px;
+  background-position: 0 -32px;
 }
 
+@media print {
+  /* Reset by Dani Guerrato - www.popupdesign.com.br */
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4em;
+    font: 12pt Georgia, "Times New Roman", Times, serif;
+    color: #000;
+  }
+
+  @page {
+    margin: 1.5cm;
+}
+
+  .wrap {
+    width: 100%;
+    margin: 0;
+    float: none !important;
+  }
+
+  .no-print, nav, footer, video, audio, object, embed {
+    display: none;
+  }
+
+  .print {
+    display: block;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  aside {
+    display: block;
+    page-break-before: always;
+  }
+
+  h1 {
+    font-size: 24pt;
+  }
+
+  h2 {
+    font-size: 18pt;
+  }
+
+  h3 {
+    font-size: 14pt;
+  }
+
+  p {
+    font-size: 12pt;
+    widows: 3;
+    orphans: 3;
+  }
+
+  a, a:visited {
+    text-decoration: underline;
+  }
+
+  a:link:after, a:visited:after {
+    content: " (" attr(href) ") ";
+  }
+
+  p a {
+    word-wrap: break-word;
+  }
+
+  q:after {
+    content: " (" attr(cite) ")";
+  }
+
+  a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: "";
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+}
 @media (max-width: 320px) {
   .test {
     background: #777;
