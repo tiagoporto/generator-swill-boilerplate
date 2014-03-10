@@ -1,9 +1,15 @@
 @import "compass";
+
 /* Reset */
-@import "compass/reset";
-/* Icons Sprit */
+//@import "compass/reset";
+
+@import "bootstrap";
+
+/* Icons Sprite */
 @import "icons/*.png";
 @include all-icons-sprites;
+
+/* Variables */
 
 $corFundo: #EB4A4B;
 

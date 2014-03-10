@@ -5,7 +5,9 @@ Basic Template to start using [Gulp](http://gulpjs.com/)
 This template includes
 
 1. [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
-2. Js
+1. [jQuery](http://jquery.com/) v1.11.0
+1. [jQuery UI](http://jqueryui.com/) v1.10.4
+1. [Bootstrap](http://getbootstrap.com/) v3.1.1
 
 
 ## Dependencies
