@@ -1,1 +1,3 @@
-	alert('Alert 1');
+	alert('Hello');
+
+	console.log("teste");

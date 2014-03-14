@@ -1,1 +1,1 @@
-	alert("Alert 2");
+	alert("Welcome To My Template");
