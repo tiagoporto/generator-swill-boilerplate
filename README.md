@@ -7,11 +7,11 @@ Page [Gulp Template](http://tiagoporto.github.io/gulp-template/).
 This template includes
 
 1. [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
-1. [jQuery](http://jquery.com/) v1.11.0
-1. [jQuery UI](http://jqueryui.com/) v1.10.4
-1. [Jquery Mobile](http://jquerymobile.com/) v1.4.2
-1. [Bootstrap](http://getbootstrap.com/) v3.1.1
-1. [AngularJS](http://angularjs.org/) v1.1.14
+1. [jQuery](http://jquery.com/)
+1. [jQuery UI](http://jqueryui.com/)
+1. [Jquery Mobile](http://jquerymobile.com/)
+1. [Bootstrap](http://getbootstrap.com/)
+1. [AngularJS](http://angularjs.org/)
 
 
 ## Dependencies

@@ -40,7 +40,7 @@ gulp.task('images', function() {
 
 // Concat and Minify Scripts
 gulp.task('scripts', function() {
-	gulp.src(['src/scripts/libs/**', 'src/scripts/plugins/**', 'src/scripts/onread/open_onread.js', js_path, 'src/scripts/onread/close_onread.js'])
+	gulp.src(['src/scripts/libs/**', 'src/scripts/frameworks/**', 'src/scripts/plugins/**', 'src/scripts/onread/open_onread.js', js_path, 'src/scripts/onread/close_onread.js'])
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest('project/js'))
 		.pipe(rename('main.min.js'))

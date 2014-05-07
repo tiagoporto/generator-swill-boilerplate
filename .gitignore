@@ -6,3 +6,5 @@ Thumbs.db
 node_modules/**/*
 .sass-cache/**/*
 src/.sass-cache/**/*
+
+
