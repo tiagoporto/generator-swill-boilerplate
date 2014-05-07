@@ -6,5 +6,8 @@ Thumbs.db
 node_modules/**/*
 .sass-cache/**/*
 src/.sass-cache/**/*
+project/css/**
+project/img/**
+project/js/**
 
 
