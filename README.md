@@ -1,17 +1,88 @@
 # Gulp Template
 
-Basic Template to start using [Gulp](http://gulpjs.com/)
+Basic Template Front-end with [Gulp](http://gulpjs.com/)
 
 Page [Gulp Template](http://tiagoporto.github.io/gulp-template/).
 
 This template includes
 
-1. [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
-1. [jQuery](http://jquery.com/)
-1. [jQuery UI](http://jqueryui.com/)
-1. [Jquery Mobile](http://jquerymobile.com/)
-1. [Bootstrap](http://getbootstrap.com/)
-1. [AngularJS](http://angularjs.org/)
+* [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
+* [jQuery](http://jquery.com/)
+* [jQuery UI](http://jqueryui.com/)
+* [Jquery Mobile](http://jquerymobile.com/)
+* [Bootstrap](http://getbootstrap.com/)
+* [AngularJS](http://angularjs.org/)
+
+Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use.
+
+## Features
+
+* Compress Images
+* Compile Sass
+* Minify JavaScript
+* Monitors changes in the file with LiveReload - reload browser
+* Clean the assets (img, css, js) in the project to maintain the directory organized
+* Notify when tasks are complete
+
+## Directories Structures
+
+```
+./
+├───┐
+│   ├── .sass-cache
+│   │   └─ //SASS Cache
+│   │
+│   ├── node-modules //Will appear after installed the NPM modules
+│   │   └─ //All Gulp.js plugins
+│   │
+│   ├── project //Files for deployment
+│   │   ├─ css
+│   │   │  └─ //CSS used by the project
+│   │   │
+│   │   ├─ fonts
+│   │   │  └─ //Web Fonts used by the project
+│   │   │
+│   │   ├─ img
+│   │   │  └─ //Images used by the project
+│   │   │
+│   │   ├─ js
+│   │   │  └─ //Scripts used by the project
+│   │   │
+│   │   ├─ //Favicons Files
+│   │   │
+│   │   └─ //HTML Files
+│   │
+│   │
+│   └── src //Source files for the projects
+│       ├── images
+│       │   └─ //Original imagens, don't compressed
+│       │
+│       ├── scripts
+│       │   ├─ frameworks
+│       │   │
+│       │   ├─ libs
+│       │   │
+│       │   ├─ onread
+│       │   │
+│       │   ├─ plugins
+│       │   │
+│       │   └─ //Javascript files will be concatenated and minify
+│       │
+│       └── stylesheets
+│           │
+│           ├─ bootstrap
+│           │
+│           ├─ media_queries
+│           │
+│           └─ //SASS files be concatenated and minify
+│
+│
+├── .gitignore //Ignored files to GIT commit
+├── gulpfile.js //Gulp.js configuration file
+├── package.json //NPM dependencies
+├── README.md //Descrition of project
+└── config.rb //Additional configurations for the SASS
+```
 
 
 ## Dependencies
