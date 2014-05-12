@@ -37,20 +37,20 @@ Just remove what you will not use or include in specific directories: libraries,
 │   │
 │   ├── project //Files for deployment
 │   │   ├─ css
-│   │   │  └─ //CSS used by the project
+│   │   │  └─ //CSS public css
 │   │   │
 │   │   ├─ fonts
-│   │   │  └─ //Web Fonts used by the project
+│   │   │  └─ //Web Fonts
 │   │   │
 │   │   ├─ img
-│   │   │  └─ //Images used by the project
+│   │   │  └─ //public images
 │   │   │
 │   │   ├─ js
-│   │   │  └─ //Scripts used by the project
+│   │   │  └─ //public scripts
 │   │   │
 │   │   ├─ //Favicons Files
 │   │   │
-│   │   └─ //HTML Files
+│   │   └─ //HTML or PHP Files
 │   │
 │   │
 │   └── src //Source files for the projects
@@ -87,7 +87,6 @@ Just remove what you will not use or include in specific directories: libraries,
 
 ## Dependencies
 
-
 1. [Node.js](http://nodejs.org/) installation
 
   `Mark npm package manager`
@@ -107,7 +106,6 @@ Just remove what you will not use or include in specific directories: libraries,
 
 
 1. [gulp-compass](https://www.npmjs.org/package/gulp-compass) require ruby and compass
-
 
   For Windows Users Only is necessary installer ruby
 
@@ -145,7 +143,7 @@ $ npm install
 Go to the local folder
 
 ```
-$ cd local/template-gulp
+$ cd local/gulp-template
 ```
 
 Execute
