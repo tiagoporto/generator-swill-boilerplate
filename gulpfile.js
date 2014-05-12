@@ -1,36 +1,37 @@
-// Gulp.js Config File
-// Author: Tiago Porto - http://www.tiagoporto.com
-// https://github.com/tiagoporto
-// Contact: me@tiagoporto.com
+/*
+	Gulp.js Config File
+	Version: 1.0.0
+	Author: Tiago Porto - http://www.tiagoporto.com
+	https://github.com/tiagoporto
+	Contact: me@tiagoporto.com
+*/
 
-
-// Load plugins
-var gulp = require('gulp'),
-	uglify = require('gulp-uglify'),
-	imagemin = require('gulp-imagemin'),
-	rename = require('gulp-rename'),
-	clean = require('gulp-clean'),
-	concat = require('gulp-concat'),
-	notify = require('gulp-notify'),
-	compass = require('gulp-compass'),
-	path = require('path'),
-	minifyCSS = require('gulp-minify-css'),
-	watch = require('gulp-watch'),
+//************************* Load dependencies ****************************//
+var		  gulp = require('gulp'),
+		uglify = require('gulp-uglify'),
+	  imagemin = require('gulp-imagemin'),
+		rename = require('gulp-rename'),
+		 clean = require('gulp-clean'),
+		concat = require('gulp-concat'),
+		notify = require('gulp-notify'),
+	   compass = require('gulp-compass'),
+		  path = require('path'),
+		 watch = require('gulp-watch'),
 	livereload = require('gulp-livereload'),
-	lr = require('tiny-lr'),
-	server = lr();
+			lr = require('tiny-lr'),
+		server = lr();
 
-// Path configs
-var public_path = 'project/', // public files
-	public_images = public_path + 'img', // optimized images
-	public_styles = public_path + 'css', // minified styles
+//***************************** Path configs *****************************//
+var	   public_path = 'project/', // public files
+	 public_images = public_path + 'img', // optimized images
+	 public_styles = public_path + 'css', // minified styles
 	public_scripts = public_path + 'js', // concat and minify scripts
-	sass_path = 'src/stylesheets/', // sass files
-	js_path   = 'src/scripts/', // js files
-	img_path  = 'src/images/'; // original image files
+		 sass_path = 'src/stylesheets/', // sass files
+		 js_path   = 'src/scripts/', // js files
+		 img_path  = 'src/images/'; // original image files
 
 
-//**********************************Tasks**********************************//
+//******************************** Tasks *********************************//
 
 // Optimize Images
 gulp.task('images', function() {
@@ -66,7 +67,7 @@ gulp.task('compass', function() {
 			css: public_styles,
 			sass: sass_path,
 			image: img_path,
-			style: 'expanded', //The output style for the compiled css. Nested, expanded, compact, or compressed.
+			style: 'compressed', //The output style for the compiled css. Nested, expanded, compact, or compressed.
 			comments: false,
 			relative: false,
 		}))

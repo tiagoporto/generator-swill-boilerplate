@@ -116,7 +116,7 @@ Just remove what you will not use or include in specific directories: libraries,
   Download Development Kit from [Ruby Installer](http://rubyinstaller.org/downloads/)
 
   * Unzip the zip
-  * Open command-line and go to unzipperd folder
+  * Open command-line and go to unzipped folder
   * `ruby dk.rb init`
   * `ruby dk.rb install`
   * `gem install rdiscount --platform=ruby`
