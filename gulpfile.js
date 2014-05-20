@@ -67,7 +67,7 @@ gulp.task('compass', function() {
 			css: public_styles,
 			sass: sass_path,
 			image: img_path,
-			style: 'compressed', //The output style for the compiled css. Nested, expanded, compact, or compressed.
+			style: 'nested', //The output style for the compiled css. Nested, expanded, compact, or compressed.
 			comments: false,
 			relative: false,
 		}))

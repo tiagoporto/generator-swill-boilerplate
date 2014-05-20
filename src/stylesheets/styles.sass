@@ -1,0 +1,79 @@
+// Imports
+
+@import "compass"
+
+/* Reset */
+@import "compass/reset"
+
+/* Web Fonts */
+@import "web-fonts"
+
+/* Grid */
+//@import "grid"
+
+//@import "bootstrap"
+
+
+// Variables
+$corFundo: #EB4A4B
+
+
+/* Icons Sprite */
+@import "icons/*.png"
+@include all-icons-sprites
+
+/* Main */
+body
+	background:  image-url("bg.png") 0 0 repeat
+	font-family: Helvetica,Arial,sans-serif
+	font-weight: bold
+
+
+#box
+	position: relative
+	width: 200px
+	height: 200px
+	margin:auto
+	background: $corFundo
+	@include border-radius(20px, 20px)
+
+
+h1
+	font-family: "GLYPHICONS Halflings", arial
+	color: darken($corFundo, 13%)
+	font-size: 5em
+	&:after
+		content: "\e002"
+
+
+#seta
+	color: #FFF
+	height: image-height("icons/left_arrow.png")
+	width: image-width("icons/right_arrow.png")
+	@include icons-sprite(left_arrow)
+	text-indent: -9999px
+	cursor: pointer
+	@include transition(all, 1s)
+
+	&:hover
+		@include icons-sprite(right_arrow)
+
+
+/* Media Queries */
+@media print
+	@import "media_queries/print"
+
+@media (max-width: 320px)
+	@import "media_queries/max_320"
+
+@media (max-width: 480px)
+	@import "media_queries/max_480"
+
+@media (min-width: 481px) and (max-width: 767px)
+	@import "media_queries/min_481_max_767"
+
+@media (min-width: 768px) and (max-width: 1000px)
+	@import "media_queries/min_768_max_1000"
+
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)
+	@import "media_queries/retina"
