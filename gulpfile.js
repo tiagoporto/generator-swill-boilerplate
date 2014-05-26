@@ -1,6 +1,6 @@
 /*
 	Gulp.js Config File
-	Version: 1.0.0
+	Version: 1.0.1
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
