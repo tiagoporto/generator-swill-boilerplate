@@ -51,7 +51,7 @@ gulp.task('scripts', function() {
 		      js_path + '/**/*.js',
 		      js_path + 'onread/close_onread.js'])
 		.pipe(concat('main.js'))
-		.pipe(gulp.dest('project/js'))
+		.pipe(gulp.dest(public_scripts))
 		.pipe(rename('main.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest(public_scripts))
