@@ -1,6 +1,6 @@
 /*
 	Gulp.js Config File
-	Version: 1.0.1
+	Version: 1.0.2
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -10,6 +10,7 @@
 var		  gulp = require('gulp'),
 		uglify = require('gulp-uglify'),
 	  imagemin = require('gulp-imagemin'),
+		svgmin = require('gulp-svgmin'),
 		rename = require('gulp-rename'),
 		 clean = require('gulp-clean'),
 		concat = require('gulp-concat'),
@@ -40,6 +41,15 @@ gulp.task('images', function() {
 		.pipe(gulp.dest(public_images))
 		.pipe(livereload(server))
 		.pipe(notify({message: 'Images task complete'}));
+});
+
+//Otimize svg Images
+gulp.task('svgImagens', function() {
+	gulp.src(img_path + '**/*.svg')
+		.pipe(svgmin())
+		.pipe(gulp.dest(public_images))
+		.pipe(livereload(server))
+		.pipe(notify({message: 'SVG task complete'}));
 });
 
 // Concat and Minify Scripts
@@ -112,6 +122,11 @@ gulp.task('watch', function() {
 		  gulp.run('images');
 		});
 
+		// Watch .svg files
+		gulp.watch(img_path + '**/*.svg', function(event) {
+		  gulp.run('svgImagens');
+		});
+
 		//Watch .html .php Files
 		gulp.watch(public_path + '**/*.{html,php}', function(){
 			gulp.run('reload-browser');
@@ -121,6 +136,6 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['clean', 'compass', 'scripts', 'images'], function() {
+gulp.task('default', ['clean', 'compass', 'scripts', 'images', 'svgImagens'], function() {
 	gulp.run('watch');
 });
