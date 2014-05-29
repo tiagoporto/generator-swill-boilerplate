@@ -16,8 +16,25 @@
 
 
 /* Icons Sprite */
+$icons-layout: vertical // Layout of the sprite options vertical, horizontal, diagonal, smart
+$icons-spacing: 2px // Space between icons
 @import "icons/*.png"
 @include all-icons-sprites
+
+
+// This is a mixin
+=inline
+	display: inline
+	float: left
+
+// This is a placeholder
+%inline
+	+inline //Include a mixin
+
+.extending-inline
+	@extend inline //Extend a placeholder
+
+
 
 /* Main */
 body
