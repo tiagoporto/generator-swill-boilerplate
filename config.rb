@@ -1,3 +1,11 @@
+=begin
+	My template gulp.js
+	Version: 1.0.2
+	Author: Tiago Porto - http://www.tiagoporto.com
+	https://github.com/tiagoporto
+	Contact: me@tiagoporto.com
+=end
+
 http_path = "/";
 http_images_path = "../img";
 http_generated_images_path = "../img";

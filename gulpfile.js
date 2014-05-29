@@ -1,5 +1,5 @@
 /*
-	Gulp.js Config File
+	My template gulp.js
 	Version: 1.0.2
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
@@ -7,6 +7,7 @@
 */
 
 //************************* Load dependencies ****************************//
+
 var		  gulp = require('gulp'),
 		uglify = require('gulp-uglify'),
 	  imagemin = require('gulp-imagemin'),
@@ -23,6 +24,7 @@ var		  gulp = require('gulp'),
 		server = lr();
 
 //***************************** Path configs *****************************//
+
 var	   public_path = 'project/', // public files
 	 public_images = public_path + 'img', // optimized images
 	 public_styles = public_path + 'css', // minified styles
