@@ -1,7 +1,7 @@
 {
   "name": "gulp-template",
-  "version": "1.0.0",
-  "description": "Gulp Template",
+  "version": "1.0.2",
+  "description": "My Template Gulp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
