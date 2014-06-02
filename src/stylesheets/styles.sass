@@ -2,6 +2,10 @@
 
 @import "compass"
 
+@import "variables"
+
+@import "mixins"
+
 /* Web Fonts */
 @import "web-fonts"
 
@@ -9,11 +13,11 @@
 @import "compass/reset"
 //@import "bootstrap"
 
+/* Typography */
+@import "typography"
+
 /* Grid */
 //@import "grid"
-
-@import "variables"
-
 
 /* Icons Sprite */
 $icons-layout: vertical // Layout of the sprite options vertical, horizontal, diagonal, smart
@@ -48,13 +52,13 @@ body
 	width: 200px
 	height: 200px
 	margin:auto
-	background: $corFundo
+	background: $primary-color
 	@include border-radius(20px, 20px)
 
 
 h1
 	font-family: "GLYPHICONS Halflings", arial
-	color: darken($corFundo, 13%)
+	color: darken($primary-color, 13%)
 	font-size: 5em
 	&:after
 		content: "\e002"
