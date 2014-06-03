@@ -6,6 +6,8 @@
 
 @import "mixins"
 
+@import "functions"
+
 /* Web Fonts */
 @import "web-fonts"
 
@@ -13,11 +15,11 @@
 @import "compass/reset"
 //@import "bootstrap"
 
-/* Typography */
-@import "typography"
-
 /* Grid */
 //@import "grid"
+
+/* Typography */
+@import "typography"
 
 /* Icons Sprite */
 $icons-layout: vertical // Layout of the sprite options vertical, horizontal, diagonal, smart
@@ -51,14 +53,14 @@ body
 	position: relative
 	width: 200px
 	height: 200px
-	margin:auto
-	background: $primary-color
+	margin: auto
+	background: $bg-color
 	@include border-radius(20px, 20px)
 
 
 h1
 	font-family: "GLYPHICONS Halflings", arial
-	color: darken($primary-color, 13%)
+	color: darken($black-color, 50%)
 	font-size: 5em
 	&:after
 		content: "\e002"
