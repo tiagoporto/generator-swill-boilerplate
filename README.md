@@ -137,6 +137,17 @@ Install dependences of npm
 $ npm install
 ```
 
+### Recommendations
+
+Compass generates PNG files using a pure-ruby library called `chunky_png`. This library can be made faster by installing a simple C extension called `oily_png`.
+
+[http://compass-style.org/help/tutorials/spriting/](http://compass-style.org/help/tutorials/spriting/)
+
+```
+$ sudo gem install oily_png
+```
+
+
 
 ## Usage
 
