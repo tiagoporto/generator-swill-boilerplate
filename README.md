@@ -2,9 +2,11 @@
 
 Basic Template Front-end with [Gulp](http://gulpjs.com/)
 
-Page [Gulp Template](http://tiagoporto.github.io/gulp-template/).
+Example [Gulp Template](http://tiagoporto.github.io/gulp-template/).
 
-This template includes
+This template includes files and configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
+
+Uses the following technologies:
 
 * [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
 * [jQuery](http://jquery.com/)
