@@ -1,0 +1,58 @@
+
+//=============== Helpers ===============//
+
+// Escape var
+// #{$icon}
+
+// This is a mixin
+=inline
+	display: inline
+	float: left
+
+// This is a placeholder
+%inline
+	+inline //Include a mixin
+
+.extend-placeholder
+	@extend %inline //Extending a placeholder
+
+.using-mixin
+	+inline
+	@extend %inline
+
+//=======================================//
+
+body
+	background:  image-url("bg.png") 0 0 repeat
+	font-family: Helvetica,Arial,sans-serif
+	font-weight: bold
+
+
+#box
+	position: relative
+	width: 200px
+	height: 200px
+	margin: auto
+	background: $bg-color
+	@include border-radius(20px, 20px)
+
+
+h1
+	font-family: "GLYPHICONS Halflings", arial
+	color: darken($black-color, 50%)
+	font-size: 5em
+	&:after
+		content: "\e002"
+
+
+#seta
+	color: #FFF
+	height: image-height("icons/left_arrow.png")
+	width: image-width("icons/right_arrow.png")
+	@include icons-sprite(left_arrow)
+	text-indent: -9999px
+	cursor: pointer
+	@include transition(all, 1s)
+
+	&:hover
+		@include icons-sprite(right_arrow)
