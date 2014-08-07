@@ -25,7 +25,7 @@ var		  gulp = require('gulp'),
 
 //***************************** Path configs *****************************//
 
-var	   public_path = 'project/', // public files
+var	   public_path = 'public/', // public files
 	 public_images = public_path + 'img', // optimized images
 	 public_styles = public_path + 'css', // minified styles
 	public_scripts = public_path + 'js', // concat and minify scripts

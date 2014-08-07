@@ -1,0 +1,222 @@
+/* Web Fonts */
+@font-face {
+  font-family: "Glyphicons Halflings";
+  src: url('../fonts/glyphicons-halflings-regular.eot') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.svg') format('svg'); }
+
+/* Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+/* Grid */
+/* Typography */
+body {
+  font: normal normal 1em/1.1875em Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "frac", "liga";
+  -moz-font-feature-settings: "frac=1, liga=1";
+  -ms-font-feature-settings: "frac", "liga";
+  -o-font-feature-settings: "frac", "liga";
+  -webkit-font-feature-settings: "frac", "liga";
+  font-feature-settings: "frac", "liga"; }
+
+/* Icons Sprite */
+.icons-sprite, .icons-left_arrow, .icons-right_arrow, #seta, #seta:hover {
+  background: url('../img/sprite-icons.png') no-repeat; }
+
+.icons-left_arrow {
+  background-position: 0 0; }
+
+.icons-right_arrow {
+  background-position: 0 -34px; }
+
+/* Main */
+.extend-placeholder, .using-mixin {
+  display: inline;
+  float: left; }
+
+.using-mixin {
+  display: inline;
+  float: left; }
+
+body {
+  background: url('../img/bg.png?1399400604') 0 0 repeat;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold; }
+
+#box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  background: white;
+  -webkit-border-radius: 20px 20px;
+  -moz-border-radius: 20px / 20px;
+  border-radius: 20px / 20px; }
+
+h1 {
+  font-family: "GLYPHICONS Halflings", arial;
+  color: black;
+  font-size: 5em; }
+  h1:after {
+    content: "\e002"; }
+
+#seta {
+  color: white;
+  height: 32px;
+  width: 32px;
+  background-position: 0 0;
+  text-indent: -9999px;
+  cursor: pointer;
+  -webkit-transition: all, 1s;
+  -moz-transition: all, 1s;
+  -o-transition: all, 1s;
+  transition: all, 1s; }
+  #seta:hover {
+    background-position: 0 -34px; }
+
+/* Media Queries */
+@media print {
+  /* Reset by Dani Guerrato - www.popupdesign.com.br and H5bp.com */
+  * {
+    background: transparent !important;
+    color: black !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4em;
+    font: 12pt Georgia, "Times New Roman", Times, serif;
+    color: black; }
+
+  @page {
+    margin: 1.5cm; }
+
+  .wrap {
+    width: 100%;
+    margin: 0;
+    float: none !important; }
+
+  .no-print, nav, footer, video, audio, object, embed {
+    display: none; }
+
+  .print {
+    display: block; }
+
+  .page-break {
+    page-break-before: always; }
+
+  a,
+  a:visited {
+    text-decoration: underline; }
+
+  a:link:after,
+  a:visited:after {
+    content: " (" attr(href) ") "; }
+
+  p a {
+    word-wrap: break-word; }
+
+  q:after {
+    content: " (" attr(cite) ")"; }
+
+  /* Don't show links that are fragment identifiers,
+   * or use the `javascript:` pseudo protocol
+   */
+  a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: ""; }
+
+  a[href]:after {
+    content: " (" attr(href) ")"; }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")"; }
+
+  aside {
+    display: block;
+    page-break-before: always; }
+
+  h1 {
+    font-size: 24pt; }
+
+  h2 {
+    font-size: 18pt;
+    orphans: 3;
+    widows: 3;
+    page-break-after: avoid; }
+
+  h3 {
+    font-size: 14pt;
+    orphans: 3;
+    widows: 3;
+    page-break-after: avoid; }
+
+  img {
+    max-width: 100% !important; }
+
+  p {
+    font-size: 12pt;
+    widows: 3;
+    orphans: 3; }
+
+  pre,
+  blockquote {
+    border: 1px solid #999999;
+    page-break-inside: avoid; }
+
+  thead {
+    display: table-header-group; }
+
+  tr,
+  img {
+    page-break-inside: avoid; } }
