@@ -1,6 +1,6 @@
 =begin
-	My template gulp.js
-	Version: 1.0.2
+	My gulp.js template
+	Version: 1.0.3
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
