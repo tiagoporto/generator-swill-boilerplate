@@ -84,6 +84,13 @@ body {
   display: inline;
   float: left; }
 
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
 body {
   background: url('../img/bg.png?1399400604') 0 0 repeat;
   font-family: Helvetica, Arial, sans-serif;
