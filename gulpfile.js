@@ -1,6 +1,6 @@
 /*
 	My gulp.js template
-	Version: 1.1.0
+	Version: 1.1.1
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -42,7 +42,7 @@ var			public_path = 'public/', // public files
 
 // Optimize Images
 gulp.task('images', function() {
-	gulp.src([img_path + '**/*.{png,jpg,gif}', '!' + img_path + '/icons/*', '!' + sprite_path])
+	gulp.src([img_path + '*.{png,jpg,gif}', '!' + img_path + '/icons/*', '!' + sprite_path])
 		.pipe(imagemin({optimizationLevel: 5, progressive: true, cache: true}))
 		.pipe(gulp.dest(public_images))
 		.pipe(livereload(server))
@@ -59,7 +59,7 @@ gulp.task('sprite', function() {
 });
 
 //Otimize svg Images
-gulp.task('svgImagens', function() {
+gulp.task('svg-imagens', function() {
 	gulp.src(img_path + '**/*.svg')
 		.pipe(svgmin())
 		.pipe(gulp.dest(public_images))
@@ -104,7 +104,7 @@ gulp.task('compass', function() {
 gulp.task('clean', function() {
 	return gulp.src([public_styles,
 					 public_scripts,
-					 public_images], {read: false})
+					 public_images + '*'], {read: false})
 		.pipe(clean())
 		.pipe(notify({message: 'Clean task complete'}));
 });
@@ -156,6 +156,6 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['clean', 'compass', 'scripts', 'images', 'sprite', 'svgImagens'], function() {
+gulp.task('default', ['clean', 'compass', 'scripts', 'images', 'sprite', 'svg-imagens'], function() {
 	gulp.run('watch');
 });
