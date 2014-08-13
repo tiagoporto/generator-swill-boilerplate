@@ -8,25 +8,32 @@ This template includes files and configs from [HTML5 Boilerplate](https://github
 
 Uses the following technologies:
 
+* [Gulp](http://gulpjs.com/)
 * [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
-* [jQuery](http://jquery.com/)
-* [jQuery UI](http://jqueryui.com/)
-* [Jquery Mobile](http://jquerymobile.com/)
-* [Bootstrap](http://getbootstrap.com/)
-* [AngularJS](http://angularjs.org/)
-
-Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use.
+* [LiveReload](http://livereload.com/)
 
 ## Features
 
 * Compress Images
 * Compile Sass
 * Minify JavaScript
-* Monitors changes in the file with LiveReload - reload browser
+* Monitors changes in the files and reload browser with LiveReload
 * Clean the assets (img, css, js) in the project to maintain the directory organized
 * Notify when tasks are complete
 
-## Directories Structures
+## Include
+
+* [AngularJS](http://angularjs.org/)
+* [jQuery](http://jquery.com/)
+* [jQuery UI](http://jqueryui.com/)
+* [Jquery Mobile](http://jquerymobile.com/)
+* [Underscore.js](http://underscorejs.org/)
+* [Bootstrap](http://getbootstrap.com/)
+
+Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use.
+
+
+## Folder Structure
 
 ```
 ./
@@ -37,7 +44,7 @@ Just remove what you will not use or include in specific directories: libraries,
 │   ├── node-modules //Will appear after installed the NPM modules
 │   │   └─ //All Gulp.js plugins
 │   │
-│   ├── project //Files for deployment
+│   ├── public //Files for deployment
 │   │   ├─ css
 │   │   │  └─ //CSS public css
 │   │   │
@@ -60,32 +67,38 @@ Just remove what you will not use or include in specific directories: libraries,
 │       │   └─ //Original imagens, don't compressed
 │       │
 │       ├── scripts
+│       │   │
+│       │   ├─ angular_scripts //Development AngularJS scripts
+│       │   │
 │       │   ├─ frameworks
 │       │   │
 │       │   ├─ libs
 │       │   │
-│       │   ├─ onread
+│       │   ├─ onread //Open and close elements of Jquery
 │       │   │
 │       │   ├─ plugins
 │       │   │
-│       │   └─ //Javascript files will be concatenated and minify
+│       │   └─ //Development Javascript files will be concatenated and minify
 │       │
 │       └── stylesheets
 │           │
 │           ├─ bootstrap
 │           │
+│           ├─ helpers
+│           │
 │           ├─ media_queries
+│           │
+│           ├─ typography
 │           │
 │           └─ //SASS files be concatenated and minify
 │
 │
 ├── .gitignore //Ignored files to GIT commit
+├── config.rb //Additional configurations for the SASS
 ├── gulpfile.js //Gulp.js configuration file
 ├── package.json //NPM dependencies
-├── README.md //Descrition of project
-└── config.rb //Additional configurations for the SASS
+└── README.md //Descrition of project
 ```
-
 
 ## Dependencies
 
@@ -150,13 +163,12 @@ $ sudo gem install oily_png
 ```
 
 
-
 ## Usage
 
 Go to the local folder
 
 ```
-$ cd local/gulp-template
+$ cd gulp-template
 ```
 
 Execute
@@ -164,6 +176,18 @@ Execute
 ```
 $ gulp
 ```
+
+For best performance on optimize images, set just the current image folder on variable `current_path_images` in `gulpfile.js`
+
+```js
+var curent_path_images = "/", //Set the root source images
+
+var curent_path_images = "subfolder/", //Set especific subfolder in folder of source images
+```
+
+If you want chance the name of folders just change the path variables in `gulpfile.js` and `config.rb`.
+
+If you want change the filename of the sprite its necessary change the variable `sprite_path` in `gulpfile.js`.
 
 ## Bugs
 

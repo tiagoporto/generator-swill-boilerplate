@@ -1,6 +1,6 @@
 {
   "name": "mw-gulpjs-template",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Gulp.js template",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,6 +24,7 @@
     "gulp-compass": "~1.0.9",
     "gulp-concat": "~2.1.7",
     "gulp": "~3.5.2",
-    "gulp-svgmin": "~0.4.5"
+    "gulp-svgmin": "~0.4.5",
+    "run-sequence": "~0.3.6"
   }
 }

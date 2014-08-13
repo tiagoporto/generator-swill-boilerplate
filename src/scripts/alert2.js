@@ -1,1 +1,1 @@
-	alert("Welcome To My Template");
+	console.log('Welcome To My Template');

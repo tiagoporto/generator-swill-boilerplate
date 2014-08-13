@@ -1,6 +1,6 @@
 /*
 	My gulp.js template
-	Version: 1.1.1
+	Version: 1.2.0
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -19,6 +19,7 @@ var		  gulp = require('gulp'),
 	   compass = require('gulp-compass'),
 		  path = require('path'),
 		 watch = require('gulp-watch'),
+   runSequence = require('run-sequence'),
 	livereload = require('gulp-livereload'),
 			lr = require('tiny-lr'),
 		server = lr();
@@ -27,22 +28,24 @@ var		  gulp = require('gulp'),
 
 var			public_path = 'public/', // public files
    global_public_images = public_path + 'img', //root public images directory
-   	 curent_path_images = '/', //atual image path
-		  public_images = public_path + 'img' + curent_path_images, // optimized images
+   	 current_path_images = '/', //current image path
+		  public_images = public_path + 'img' + current_path_images, // optimized images
 		  public_styles = public_path + 'css', // minified styles
 		 public_scripts = public_path + 'js', // concat and minify scripts
 			  sass_path = 'src/stylesheets/', // sass files
 				js_path = 'src/scripts/', // js files
 	  global_image_path = 'src/images/', //root original images directory
-			  img_path  = global_image_path + curent_path_images, // original image files
+			  img_path  = global_image_path + current_path_images, // original image files
 			sprite_path = global_image_path + 'sprite-icons.png'; // sprite filename
-
 
 //******************************** Tasks *********************************//
 
 // Optimize Images
 gulp.task('images', function() {
-	gulp.src([img_path + '*.{png,jpg,gif}', '!' + img_path + '/icons/*', '!' + sprite_path])
+	return gulp.src([
+		img_path + '*.{png,jpg,gif}',
+		'!' + img_path + '/icons/*', '!' + sprite_path
+	])
 		.pipe(imagemin({optimizationLevel: 5, progressive: true, cache: true}))
 		.pipe(gulp.dest(public_images))
 		.pipe(livereload(server))
@@ -51,42 +54,83 @@ gulp.task('images', function() {
 
 // Optimize Sprite
 gulp.task('sprite', function() {
-	gulp.src(sprite_path)
+	return gulp.src(sprite_path)
 		.pipe(imagemin({optimizationLevel: 3, progressive: true, cache: true}))
 		.pipe(gulp.dest(global_public_images))
 		.pipe(livereload(server))
 		.pipe(notify({message: 'Sprite task complete'}));
 });
 
-//Otimize svg Images
+// Otimize svg Images
 gulp.task('svg-imagens', function() {
-	gulp.src(img_path + '**/*.svg')
+	return gulp.src(img_path + '**/*.svg')
 		.pipe(svgmin())
 		.pipe(gulp.dest(public_images))
 		.pipe(livereload(server))
 		.pipe(notify({message: 'SVG task complete'}));
 });
 
+// Execute concat-scripts, min-angular-scripts, concat-all-min-scripts and clean-scripts tasks
+gulp.task('scripts', function(callback) {
+	runSequence('concat-scripts',
+		'min-angular-scripts',
+		'concat-all-min-scripts',
+		'clean-scripts',
+		callback
+	);
+});
+
 // Concat and Minify Scripts
-gulp.task('scripts', function() {
-	gulp.src([js_path + '/libs/**',
-		      js_path + 'frameworks/**',
-		      js_path + 'plugins/**',
-		      js_path + 'onread/open_onread.js',
-		      js_path + '/**/*.js',
-		      js_path + 'onread/close_onread.js'])
-		.pipe(concat('main.js'))
-		.pipe(gulp.dest(public_scripts))
-		.pipe(rename('main.min.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest(public_scripts))
-		.pipe(livereload(server))
-		.pipe(notify({message: 'Scripts task complete'}));
+gulp.task('concat-scripts', function() {
+	return gulp.src([
+		js_path + '/libs/**',
+		js_path + 'frameworks/**',
+		js_path + 'plugins/**',
+		js_path + 'onread/open_onread.js',
+		js_path + '/*.js',
+		js_path + 'onread/close_onread.js'
+	])
+	.pipe(concat('main.js'))
+	.pipe(gulp.dest(public_scripts))
+	.pipe(rename('scripts.min.js'))
+	.pipe(uglify())
+	.pipe(gulp.dest(public_scripts));
+});
+
+// Concat and Minify Angular Scripts
+gulp.task('min-angular-scripts',  function() {
+	return gulp.src([
+		js_path + 'angular_scripts/**',
+	])
+	.pipe(concat('angular.min.js'))
+	.pipe(uglify({mangle: false}))
+	.pipe(gulp.dest(public_scripts));
+});
+
+// Concat Minified Scripts
+gulp.task('concat-all-min-scripts',  function() {
+	return gulp.src([
+		public_scripts + '/scripts.min.js',
+		public_scripts + '/angular.min.js'
+	])
+	.pipe(concat('main.min.js'))
+	.pipe(gulp.dest(public_scripts));
+});
+
+// Clean Unutilized Scripts
+gulp.task('clean-scripts', function() {
+	return gulp.src([
+		public_scripts + '/scripts.min.js',
+		public_scripts + '/angular.min.js'
+	], {read: false})
+	.pipe(clean())
+	.pipe(livereload(server))
+	.pipe(notify({message: 'Scripts task complete'}));
 });
 
 // Compile Compass
 gulp.task('compass', function() {
-	gulp.src(sass_path + '**/*.{sass,scss}')
+	return gulp.src(sass_path + '**/*.{sass,scss}')
 		.pipe(compass({
 			project: path.join(__dirname, '/'),
 			css: public_styles,
@@ -134,7 +178,7 @@ gulp.task('watch', function() {
 
 		// Watch .jpg .png .gif files
 		gulp.watch([img_path + '**/*.{png,jpg,gif}', '!' + sprite_path], function(event) {
-		  gulp.run('images');
+				gulp.run('images');
 		});
 
 		// Watch sprite file
@@ -151,7 +195,6 @@ gulp.task('watch', function() {
 		gulp.watch(public_path + '**/*.{html,php}', function(){
 			gulp.run('reload-browser');
 		});
-
 	});
 });
 
