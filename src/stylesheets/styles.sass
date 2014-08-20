@@ -2,10 +2,10 @@
 
 @import "compass"
 
+
+// Helpers
 @import "helpers/variables"
-
 @import "helpers/mixins"
-
 @import "helpers/functions"
 
 /* Web Fonts */
@@ -13,7 +13,11 @@
 
 /* Reset */
 @import "compass/reset"
-//@import "bootstrap"
+
+/* Additional Styles */
+@import "additional/outdatedbrowser"
+@import "additional/bootstrap"
+@import "additional/jquery.mobile.structure-1.4.2"
 
 /* Grid */
 //@import "grid"
@@ -28,7 +32,7 @@ $icons-spacing: 2px // Space between icons
 @include all-icons-sprites
 
 /* Main */
-@import "base"
+@import "main/base"
 
 /* Media Queries */
 @media print

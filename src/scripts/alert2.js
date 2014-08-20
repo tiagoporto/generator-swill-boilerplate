@@ -1,1 +1,0 @@
-	console.log('Welcome To My Template');

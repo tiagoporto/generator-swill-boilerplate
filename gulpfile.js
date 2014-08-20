@@ -1,6 +1,6 @@
 /*
 	My gulp.js template
-	Version: 1.2.0
+	Version: 1.2.1
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -42,10 +42,10 @@ var			public_path = 'public/', // public files
 
 // Optimize Images
 gulp.task('images', function() {
-	return gulp.src([
-		img_path + '*.{png,jpg,gif}',
-		'!' + img_path + '/icons/*', '!' + sprite_path
-	])
+	gulp.src([
+			img_path + '*.{png,jpg,gif}',
+			'!' + img_path + '/icons/*', '!' + sprite_path
+		])
 		.pipe(imagemin({optimizationLevel: 5, progressive: true, cache: true}))
 		.pipe(gulp.dest(public_images))
 		.pipe(livereload(server))
@@ -54,7 +54,7 @@ gulp.task('images', function() {
 
 // Optimize Sprite
 gulp.task('sprite', function() {
-	return gulp.src(sprite_path)
+	gulp.src(sprite_path)
 		.pipe(imagemin({optimizationLevel: 3, progressive: true, cache: true}))
 		.pipe(gulp.dest(global_public_images))
 		.pipe(livereload(server))
@@ -63,7 +63,7 @@ gulp.task('sprite', function() {
 
 // Otimize svg Images
 gulp.task('svg-imagens', function() {
-	return gulp.src(img_path + '**/*.svg')
+	gulp.src(img_path + '**/*.svg')
 		.pipe(svgmin())
 		.pipe(gulp.dest(public_images))
 		.pipe(livereload(server))
@@ -83,60 +83,62 @@ gulp.task('scripts', function(callback) {
 // Concat and Minify Scripts
 gulp.task('concat-scripts', function() {
 	return gulp.src([
-		js_path + '/libs/**',
-		js_path + 'frameworks/**',
-		js_path + 'plugins/**',
-		js_path + 'onread/open_onread.js',
-		js_path + '/*.js',
-		js_path + 'onread/close_onread.js'
-	])
-	.pipe(concat('main.js'))
-	.pipe(gulp.dest(public_scripts))
-	.pipe(rename('scripts.min.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest(public_scripts));
+			js_path + 'plugins/outdatedbrowser-1.1.0.js',
+			js_path + 'libs/**',
+			js_path + 'frameworks/**',
+			js_path + 'plugins/**',
+			js_path + 'onread/open_onread.js',
+			js_path + 'settings/*',
+			js_path + 'main/*',
+			js_path + 'onread/close_onread.js'
+		])
+		.pipe(concat('main.js'))
+		.pipe(gulp.dest(public_scripts))
+		.pipe(rename('scripts.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest(public_scripts));
 });
 
 // Concat and Minify Angular Scripts
 gulp.task('min-angular-scripts',  function() {
 	return gulp.src([
-		js_path + 'angular_scripts/**',
-	])
-	.pipe(concat('angular.min.js'))
-	.pipe(uglify({mangle: false}))
-	.pipe(gulp.dest(public_scripts));
+			js_path + 'angular_scripts/**',
+		])
+		.pipe(concat('angular.min.js'))
+		.pipe(uglify({mangle: false}))
+		.pipe(gulp.dest(public_scripts));
 });
 
 // Concat Minified Scripts
 gulp.task('concat-all-min-scripts',  function() {
 	return gulp.src([
-		public_scripts + '/scripts.min.js',
-		public_scripts + '/angular.min.js'
-	])
-	.pipe(concat('main.min.js'))
-	.pipe(gulp.dest(public_scripts));
+			public_scripts + '/scripts.min.js',
+			public_scripts + '/angular.min.js'
+		])
+		.pipe(concat('main.min.js'))
+		.pipe(gulp.dest(public_scripts));
 });
 
 // Clean Unutilized Scripts
 gulp.task('clean-scripts', function() {
 	return gulp.src([
-		public_scripts + '/scripts.min.js',
-		public_scripts + '/angular.min.js'
-	], {read: false})
-	.pipe(clean())
-	.pipe(livereload(server))
-	.pipe(notify({message: 'Scripts task complete'}));
+			public_scripts + '/scripts.min.js',
+			public_scripts + '/angular.min.js'
+		], {read: false})
+		.pipe(clean())
+		.pipe(livereload(server))
+		.pipe(notify({message: 'Scripts task complete'}));
 });
 
 // Compile Compass
 gulp.task('compass', function() {
-	return gulp.src(sass_path + '**/*.{sass,scss}')
+	gulp.src(sass_path + '**/*.{sass,scss}')
 		.pipe(compass({
 			project: path.join(__dirname, '/'),
 			css: public_styles,
 			sass: sass_path,
 			image: global_image_path,
-			style: 'nested', //The output style for the compiled css. Nested, expanded, compact, or compressed.
+			style: 'compressed', //The output style for the compiled css. Nested, expanded, compact, or compressed.
 			comments: false,
 			relative: false,
 		}))

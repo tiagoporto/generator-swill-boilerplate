@@ -1,0 +1,68 @@
+//=============== Helpers ===============//
+
+// ********** ESCAPE VAR **********
+// #{$icon}
+
+// ********** IMAGE FUNCTIONS ***********
+// image-url("bg.png")
+// image-height("icons/left_arrow.png")
+// image-width("icons/right_arrow.png")
+
+// ********** COLOR FUNCTIONS ***********
+// darken( $base-color, 50%)
+// lighten( $base-color, 10% )
+// saturate( $base-color, 20% )
+// desaturate( $base-color, 20% )
+// adjust-hue( $base-color, 20% )
+// rgba( $base-color, .7 )
+// tint( $base-color, 10% )
+// shade( $base-color, 10% )
+
+// ********* ICON USAGE EXAMPLE *********
+// height: image-height("icons/left_arrow.png")
+// width: image-width("icons/right_arrow.png")
+// @include icons-sprite(left_arrow)
+// text-indent: -9999px
+
+// ************ EM FUNCTION *************
+// em(14)
+
+// ********** This is a mixin ***********
+=inline
+	display: inline
+	float: left
+
+// ******* This is a placeholder ********
+%inline
+	+inline //Include a mixin
+
+// ***** Using mixin & placeholder ******
+
+// .using-mixin
+// 		+inline
+// 		@extend %inline
+
+// Output
+// .using-mixin {
+// 		display: inline;
+// 		float: left;
+// }
+
+// .extend-placeholder
+// 		@extend %inline
+
+// Output
+// .extend-placeholder, .using-mixin {
+// 		display: inline;
+// 		float: left;
+// }
+
+//=======================================//
+
+*,
+*:before,
+*:after
+	+box-sizing(border-box)
+
+
+// News styles here

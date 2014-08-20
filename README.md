@@ -12,6 +12,7 @@ This template includes files and configs from [HTML5 Boilerplate](https://github
 Uses the following technologies:
 
 * [Gulp](http://gulpjs.com/)
+* [Ruby](https://www.ruby-lang.org/)
 * [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
 * [LiveReload](http://livereload.com/)
 
@@ -23,6 +24,7 @@ Uses the following technologies:
 * Monitors changes in the files and reload browser with LiveReload
 * Clean the assets (img, css, js) in the project to maintain the directory organized
 * Notify when tasks are complete
+* Checks if the browser is outdated
 
 ## Include
 
@@ -32,6 +34,7 @@ Uses the following technologies:
 * [Jquery Mobile](http://jquerymobile.com/)
 * [Underscore.js](http://underscorejs.org/)
 * [Bootstrap](http://getbootstrap.com/)
+* [Outdated Browser](http://outdatedbrowser.com/)
 
 Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use.
 
@@ -60,6 +63,12 @@ Just remove what you will not use or include in specific directories: libraries,
 │   │   ├─ js
 │   │   │  └─ //public scripts
 │   │   │
+│   │   ├─ lang
+│   │   │  │
+│   │   │  ├─ outdated_browser //langs to outdated browser plugin
+│   │   │  │
+│   │   │  └─ //langs to multilingue sites
+│   │   │
 │   │   ├─ //Favicons Files
 │   │   │
 │   │   └─ //HTML or PHP Files
@@ -77,23 +86,27 @@ Just remove what you will not use or include in specific directories: libraries,
 │       │   │
 │       │   ├─ libs
 │       │   │
+│       │   ├─ main //Development Javascript files will be concatenated and minify
+│       │   │
 │       │   ├─ onread //Open and close elements of Jquery
 │       │   │
 │       │   ├─ plugins
 │       │   │
-│       │   └─ //Development Javascript files will be concatenated and minify
+│       │   └─ settings //Necessary settings to setup plugins, etc.
 │       │
 │       └── stylesheets
 │           │
-│           ├─ bootstrap
+│           ├─ additional //Styles used by external plugins
 │           │
 │           ├─ helpers
+│           │
+│           ├─ main //Main Styles
 │           │
 │           ├─ media_queries
 │           │
 │           ├─ typography
 │           │
-│           └─ //SASS files be concatenated and minify
+│           └─ styles.sass //Base SASS file
 │
 │
 ├── .gitignore //Ignored files to GIT commit
