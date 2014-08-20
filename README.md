@@ -1,9 +1,10 @@
 # Gulp Template
 
-
 ![gulp.js Logo](https://raw2.github.com/gulpjs/artwork/master/gulp.png)
 
-Basic Template Front-end with [Gulp](http://gulpjs.com/)
+Basic Template Front-End with [Gulp](http://gulpjs.com/)
+
+Current version - **1.2.1**
 
 <!-- Example [Gulp Template](http://tiagoporto.github.io/my-gulp-template/). -->
 
@@ -24,7 +25,7 @@ Uses the following technologies:
 * Monitors changes in the files and reload browser with LiveReload
 * Clean the assets (img, css, js) in the project to maintain the directory organized
 * Notify when tasks are complete
-* Checks if the browser is outdated
+* Checks if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
 
 ## Include
 
@@ -36,7 +37,7 @@ Uses the following technologies:
 * [Bootstrap](http://getbootstrap.com/)
 * [Outdated Browser](http://outdatedbrowser.com/)
 
-Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use.
+Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use in scripts and stylesheets folders.
 
 
 ## Folder Structure
