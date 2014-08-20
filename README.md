@@ -5,7 +5,7 @@
 
 Basic Template Front-end with [Gulp](http://gulpjs.com/)
 
-<!-- Example [Gulp Template](http://tiagoporto.github.io/gulp-template/). -->
+<!-- Example [Gulp Template](http://tiagoporto.github.io/my-gulp-template/). -->
 
 This template includes files and configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 
