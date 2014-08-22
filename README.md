@@ -126,13 +126,13 @@ Just remove what you will not use or include in specific directories: libraries,
 
 1. Install Gulp
 
-  ```
-  $ npm install -g gulp
+  ```sh
+  $ npm install gulp -g
   ```
 
   For Mac or Linux User
 
-  ```
+  ```sh
   $ sudo npm install gulp -g
   ```
 
@@ -152,20 +152,19 @@ Just remove what you will not use or include in specific directories: libraries,
   * `gem install rdiscount --platform=ruby`
 
 
-```
+```sh
 $ gem update --system
 $ gem install compass
 ```
 
 Go to the local folder
-
-```
-$ cd local/gulp-template
+```sh
+$ cd my-gulp-template
 ```
 
 
 Install dependences of npm
-```
+```sh
 $ npm install
 ```
 
@@ -175,7 +174,7 @@ Compass generates PNG files using a pure-ruby library called `chunky_png`. This 
 
 [http://compass-style.org/help/tutorials/spriting/](http://compass-style.org/help/tutorials/spriting/)
 
-```
+```sh
 $ sudo gem install oily_png
 ```
 
@@ -184,13 +183,13 @@ $ sudo gem install oily_png
 
 Go to the local folder
 
-```
-$ cd gulp-template
+```sh
+$ cd my-gulp-template
 ```
 
 Execute
 
-```
+```sh
 $ gulp
 ```
 
@@ -206,11 +205,38 @@ If you want chance the name of folders just change the path variables in `gulpfi
 
 If you want change the filename of the sprite its necessary change the variable `sprite_path` in `gulpfile.js`.
 
+
 ## Bugs
 
 [Error: ENOENT, no such file or directory](https://github.com/appleboy/gulp-compass/issues/15)
 
+```sh
+$ sudo gem uninstall sass
+$ sudo gem install sass -v 3.2.12
 ```
-sudo gem uninstall sass
-sudo gem install sass -v 3.2.12
+
+Sass Multiline comments don`t work
+
+Example
+```
+/*
+	Multiline
+	Comment
+*/
+```
+
+Sass @debug don`t work
+
+Example
+```
+	@debug 10em + 12em
+```
+Sass Map structures don`t work
+
+Example
+```
+$list:
+	(1,  "value"),
+	(5,  "value"),
+	(23, "value")
 ```
