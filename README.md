@@ -1,10 +1,10 @@
-# Gulp Template
+# My Gulp.js Template
 
 ![gulp.js Logo](https://raw2.github.com/gulpjs/artwork/master/gulp.png)
 
-Basic Template Front-End with [Gulp](http://gulpjs.com/)
+Basic Template Front-End with [Gulp.js](http://gulpjs.com/)
 
-Current version - **1.2.1**
+Current version - **1.3.1**
 
 <!-- Example [Gulp Template](http://tiagoporto.github.io/my-gulp-template/). -->
 
@@ -12,7 +12,7 @@ This template includes files and configs from [HTML5 Boilerplate](https://github
 
 Uses the following technologies:
 
-* [Gulp](http://gulpjs.com/)
+* [Gulp.js](http://gulpjs.com/)
 * [Ruby](https://www.ruby-lang.org/)
 * [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
 * [LiveReload](http://livereload.com/)
@@ -36,8 +36,10 @@ Uses the following technologies:
 * [Underscore.js](http://underscorejs.org/)
 * [Bootstrap](http://getbootstrap.com/)
 * [Outdated Browser](http://outdatedbrowser.com/)
+* [Animate.css](https://github.com/daneden/animate.css)
 
 Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use in scripts and stylesheets folders.
+Remember to remove dependencies styles in `src/styles.sass`.
 
 
 ## Folder Structure
@@ -124,7 +126,7 @@ Just remove what you will not use or include in specific directories: libraries,
   `Mark npm package manager`
 
 
-1. Install Gulp
+1. Install Gulp.js
 
   ```sh
   $ npm install gulp -g

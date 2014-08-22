@@ -1,6 +1,6 @@
 /*
-	My gulp.js template
-	Version: 1.2.1
+	My Gulp.js Template
+	Version: 1.3.1
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
