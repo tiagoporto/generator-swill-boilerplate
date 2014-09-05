@@ -1,6 +1,6 @@
 /*
 	My Gulp.js Template
-	Version: 1.3.1
+	Version: 1.4.2
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -62,7 +62,7 @@ gulp.task('sprite', function() {
 });
 
 // Otimize svg Images
-gulp.task('svg-imagens', function() {
+gulp.task('svg-images', function() {
 	gulp.src(img_path + '**/*.svg')
 		.pipe(svgmin())
 		.pipe(gulp.dest(public_images))
@@ -138,7 +138,7 @@ gulp.task('compass', function() {
 			css: public_styles,
 			sass: sass_path,
 			image: global_image_path,
-			style: 'compressed', //The output style for the compiled css. Nested, expanded, compact, or compressed.
+			style: 'expanded', //The output style for the compiled css. Nested, expanded, compact, or compressed.
 			comments: false,
 			relative: false,
 		}))
@@ -190,7 +190,7 @@ gulp.task('watch', function() {
 
 		// Watch .svg files
 		gulp.watch(img_path + '**/*.svg', function(event) {
-		  gulp.run('svgImagens');
+		  gulp.run('svg-images');
 		});
 
 		//Watch .html .php Files
@@ -201,6 +201,6 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['clean', 'compass', 'scripts', 'images', 'sprite', 'svg-imagens'], function() {
+gulp.task('default', ['clean', 'compass', 'scripts', 'images', 'sprite', 'svg-images'], function() {
 	gulp.run('watch');
 });

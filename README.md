@@ -4,7 +4,7 @@
 
 Basic Template Front-End with [Gulp.js](http://gulpjs.com/)
 
-Current version - **1.3.1**
+Current version - **1.4.2**
 
 <!-- Example [Gulp Template](http://tiagoporto.github.io/my-gulp-template/). -->
 
