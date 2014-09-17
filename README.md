@@ -4,7 +4,7 @@
 
 Basic Template Front-End with [Gulp.js](http://gulpjs.com/)
 
-Current version - **1.4.2**
+Current version - **1.5.2**
 
 <!-- Example [Gulp Template](http://tiagoporto.github.io/my-gulp-template/). -->
 
@@ -16,6 +16,7 @@ Uses the following technologies:
 * [Ruby](https://www.ruby-lang.org/)
 * [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
 * [LiveReload](http://livereload.com/)
+* [EditorConfig](http://editorconfig.org/)
 
 ## Features
 
