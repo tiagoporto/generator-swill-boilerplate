@@ -11,13 +11,12 @@
 var		  gulp = require('gulp'),
 		uglify = require('gulp-uglify'),
 	  imagemin = require('gulp-imagemin'),
-		svgmin = require('gulp-svgmin'),
 		rename = require('gulp-rename'),
 		 clean = require('gulp-clean'),
 		concat = require('gulp-concat'),
 		notify = require('gulp-notify'),
-	   compass = require('gulp-compass'),
 		  path = require('path'),
+		  sass = require('gulp-ruby-sass'),
 		 watch = require('gulp-watch'),
    runSequence = require('run-sequence'),
 	livereload = require('gulp-livereload'),
@@ -43,7 +42,7 @@ var			public_path = 'public/', // public files
 // Optimize Images
 gulp.task('images', function() {
 	gulp.src([
-			img_path + '*.{png,jpg,gif}',
+			img_path + '*.{png,jpg,gif,svg}',
 			'!' + img_path + '/icons/*', '!' + sprite_path
 		])
 		.pipe(imagemin({optimizationLevel: 5, progressive: true, cache: true}))
@@ -59,15 +58,6 @@ gulp.task('sprite', function() {
 		.pipe(gulp.dest(global_public_images))
 		.pipe(livereload(server))
 		.pipe(notify({message: 'Sprite task complete'}));
-});
-
-// Otimize svg Images
-gulp.task('svg-images', function() {
-	gulp.src(img_path + '**/*.svg')
-		.pipe(svgmin())
-		.pipe(gulp.dest(public_images))
-		.pipe(livereload(server))
-		.pipe(notify({message: 'SVG task complete'}));
 });
 
 // Execute concat-scripts, min-angular-scripts, concat-all-min-scripts and clean-scripts tasks
@@ -130,20 +120,15 @@ gulp.task('clean-scripts', function() {
 		.pipe(notify({message: 'Scripts task complete'}));
 });
 
-// Compile Compass
-gulp.task('compass', function() {
-	gulp.src(sass_path + '**/*.{sass,scss}')
-		.pipe(compass({
-			project: path.join(__dirname, '/'),
-			css: public_styles,
-			sass: sass_path,
-			image: global_image_path,
-			style: 'expanded', //The output style for the compiled css. Nested, expanded, compact, or compressed.
-			comments: false,
-			relative: false,
+// Compile Sass
+gulp.task('sass', function() {
+	gulp.src(sass_path + '*.{sass,scss}')
+		.pipe(sass({
+			style: 'expanded' //The output style for the compiled css. Nested, expanded, compact, or compressed.
 		}))
+		.pipe(gulp.dest(public_styles))
 		.pipe(livereload(server))
-		.pipe(notify({message: 'Compass task complete'}));
+		.pipe(notify({message: 'Sass task complete'}));
 });
 
 // Clean Directories
@@ -175,7 +160,7 @@ gulp.task('watch', function() {
 
 		// Watch sass files
 		gulp.watch(sass_path + '**/*.{sass,scss}', function(event) {
-			gulp.run('compass');
+			gulp.run('sass');
 		});
 
 		// Watch .jpg .png .gif files
@@ -188,11 +173,6 @@ gulp.task('watch', function() {
 		  gulp.run('sprite');
 		});
 
-		// Watch .svg files
-		gulp.watch(img_path + '**/*.svg', function(event) {
-		  gulp.run('svg-images');
-		});
-
 		//Watch .html .php Files
 		gulp.watch(public_path + '**/*.{html,php}', function(){
 			gulp.run('reload-browser');
@@ -201,6 +181,6 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['clean', 'compass', 'scripts', 'images', 'sprite', 'svg-images'], function() {
+gulp.task('default', ['clean', 'sass', 'scripts', 'images', 'sprite'], function() {
 	gulp.run('watch');
 });
