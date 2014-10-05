@@ -14,7 +14,7 @@ Uses the following technologies:
 
 * [Gulp.js](http://gulpjs.com/)
 * [Ruby](https://www.ruby-lang.org/)
-* [Sass](http://sass-lang.com/) + [Compass](http://compass-style.org/)
+* [Sass](http://sass-lang.com/)
 * [LiveReload](http://livereload.com/)
 * [EditorConfig](http://editorconfig.org/)
 
@@ -100,9 +100,13 @@ Remember to remove dependencies styles in `src/styles.sass`.
 │       │
 │       └── stylesheets
 │           │
-│           ├─ additional //Styles used by external plugins
+│           ├─ dependencies //Styles used by external plugins
 │           │
 │           ├─ helpers
+│           │  │
+│			│  ├─ mixins
+│           │  │
+│           │  └─
 │           │
 │           ├─ main //Main Styles
 │           │
@@ -113,11 +117,11 @@ Remember to remove dependencies styles in `src/styles.sass`.
 │           └─ styles.sass //Base SASS file
 │
 │
+├── .editorconfig //Settings of editorconfig plugin
 ├── .gitignore //Ignored files to GIT commit
-├── config.rb //Additional configurations for the SASS
 ├── gulpfile.js //Gulp.js configuration file
 ├── package.json //NPM dependencies
-└── README.md //Descrition of project
+└── README.md //Descrition of template
 ```
 
 ## Dependencies
@@ -228,12 +232,6 @@ Example
 */
 ```
 
-Sass @debug don`t work
-
-Example
-```
-	@debug 10em + 12em
-```
 Sass Map structures don`t work
 
 Example

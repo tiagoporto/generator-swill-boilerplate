@@ -5,29 +5,30 @@
 @import "helpers/mixins"
 @import "helpers/functions"
 
-/* Web Fonts */
-@import "typography/web-fonts"
-
-/* Reset */
-// @import "reset"
-
 /* Dependence Styles */
 @import "dependencies/animate"
 @import "dependencies/outdatedbrowser"
 @import "dependencies/bootstrap"
 @import "dependencies/jquery.mobile.structure-1.4.2"
 
+//If you will use bootstrap you can remove this imports
+
+//============================================================//
+/* Web Fonts */
+@import "typography/web-fonts"
+
+/* Reset */
+@import "reset/reset"
+
 /* Grid */
 //@import "grid"
 
 /* Typography */
 @import "typography/typography"
+//============================================================//
 
 /* Icons Sprite */
-// $icons-layout: vertical // Layout of the sprite options vertical, horizontal, diagonal, smart
-// $icons-spacing: 2px // Space between icons
-// @import "icons/*.png"
-// @include all-icons-sprites
+
 
 /* Main */
 @import "main/base"

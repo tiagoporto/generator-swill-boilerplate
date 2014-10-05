@@ -12,8 +12,10 @@ var		  gulp = require('gulp'),
 		uglify = require('gulp-uglify'),
 	  imagemin = require('gulp-imagemin'),
 		rename = require('gulp-rename'),
+		  csso = require('gulp-csso'),
 		 clean = require('gulp-clean'),
 		concat = require('gulp-concat'),
+	minifyHTML = require('gulp-minify-html'),
 		notify = require('gulp-notify'),
 		  path = require('path'),
 		  sass = require('gulp-ruby-sass'),
@@ -27,21 +29,32 @@ var		  gulp = require('gulp'),
 
 var			public_path = 'public/', // public files
    global_public_images = public_path + 'img', //root public images directory
+
    	 current_path_images = '/', //current image path
 		  public_images = public_path + 'img' + current_path_images, // optimized images
-		  public_styles = public_path + 'css', // minified styles
-		 public_scripts = public_path + 'js', // concat and minify scripts
+
+		  styles_folder = 'css',
+		  public_styles = public_path + styles_folder, // minified styles
+
+		 scripts_folder = 'js', //
+		 public_scripts = public_path + scripts_folder, // concat and minified scripts
+
+			 fonts_path = public_path + 'fonts/', // concat and minified scripts
+
 			  sass_path = 'src/stylesheets/', // sass files
 				js_path = 'src/scripts/', // js files
 	  global_image_path = 'src/images/', //root original images directory
 			  img_path  = global_image_path + current_path_images, // original image files
-			sprite_path = global_image_path + 'sprite-icons.png'; // sprite filename
+			sprite_path = global_image_path + 'sprite-icons.png', // sprite filename
+
+			  dist_path = 'dist/', // compiled folder project
+		dist_fonts_path = dist_path + 'fonts'; // concat and minified scripts
 
 //******************************** Tasks *********************************//
 
 // Optimize Images
 gulp.task('images', function() {
-	gulp.src([
+	return gulp.src([
 			img_path + '*.{png,jpg,gif,svg}',
 			'!' + img_path + '/icons/*', '!' + sprite_path
 		])
@@ -53,7 +66,7 @@ gulp.task('images', function() {
 
 // Optimize Sprite
 gulp.task('sprite', function() {
-	gulp.src(sprite_path)
+	return gulp.src(sprite_path)
 		.pipe(imagemin({optimizationLevel: 3, progressive: true, cache: true}))
 		.pipe(gulp.dest(global_public_images))
 		.pipe(livereload(server))
@@ -62,7 +75,7 @@ gulp.task('sprite', function() {
 
 // Execute concat-scripts, min-angular-scripts, concat-all-min-scripts and clean-scripts tasks
 gulp.task('scripts', function(callback) {
-	runSequence('concat-scripts',
+	return runSequence('concat-scripts',
 		'min-angular-scripts',
 		'concat-all-min-scripts',
 		'clean-scripts',
@@ -70,7 +83,7 @@ gulp.task('scripts', function(callback) {
 	);
 });
 
-// Concat and Minify Scripts
+// Concatenate and Minify Scripts
 gulp.task('concat-scripts', function() {
 	return gulp.src([
 			js_path + 'plugins/outdatedbrowser-1.1.0.js',
@@ -89,7 +102,7 @@ gulp.task('concat-scripts', function() {
 		.pipe(gulp.dest(public_scripts));
 });
 
-// Concat and Minify Angular Scripts
+// Concatenate and Minify Angular Scripts
 gulp.task('min-angular-scripts',  function() {
 	return gulp.src([
 			js_path + 'angular_scripts/**',
@@ -99,7 +112,7 @@ gulp.task('min-angular-scripts',  function() {
 		.pipe(gulp.dest(public_scripts));
 });
 
-// Concat Minified Scripts
+// Concatenate Minified Scripts
 gulp.task('concat-all-min-scripts',  function() {
 	return gulp.src([
 			public_scripts + '/scripts.min.js',
@@ -122,7 +135,7 @@ gulp.task('clean-scripts', function() {
 
 // Compile Sass
 gulp.task('sass', function() {
-	gulp.src(sass_path + '*.{sass,scss}')
+	return gulp.src(sass_path + '*.{sass,scss}')
 		.pipe(sass({
 			style: 'expanded' //The output style for the compiled css. Nested, expanded, compact, or compressed.
 		}))
@@ -131,9 +144,53 @@ gulp.task('sass', function() {
 		.pipe(notify({message: 'Sass task complete'}));
 });
 
+// Minify and copy css
+gulp.task('css', function() {
+	return gulp.src(public_styles + '/*.css')
+			.pipe(csso())
+			.pipe(gulp.dest(dist_path + styles_folder));
+});
+
+
+// Copy Web Fonts To Dist
+gulp.task('fonts', function () {
+	return gulp.src(fonts_path + '**')
+		.pipe(gulp.dest(dist_fonts_path));
+});
+
+// Minify and Copy HTML and PHP
+gulp.task('minify-html', function() {
+	return gulp.src(public_path + '**/*.{html,php}')
+		.pipe(minifyHTML({
+			comments:false,
+			spare:true
+		}))
+		.pipe(gulp.dest(dist_path))
+});
+
+// Copy script
+gulp.task('copy-script', function () {
+	return gulp.src(public_scripts + '/main.min.js')
+			.pipe(rename('main.js'))
+			.pipe(gulp.dest(dist_path + scripts_folder));
+});
+
+// Copy All Files At (public)
+gulp.task('copy', function () {
+	return gulp.src([
+				public_path + '*',
+				global_public_images + '**/*',
+				'!' + public_path + '**/*.html'
+			], {
+				dot: true
+			})
+			.pipe(gulp.dest(dist_path));
+});
+
 // Clean Directories
 gulp.task('clean', function() {
-	return gulp.src([public_styles,
+	return gulp.src([dist_path,
+					 public_styles,
 					 public_scripts,
 					 public_images + '*'], {read: false})
 		.pipe(clean())
@@ -180,7 +237,15 @@ gulp.task('watch', function() {
 	});
 });
 
+//================= Main Tasks =================//
+
 // Default task
 gulp.task('default', ['clean', 'sass', 'scripts', 'images', 'sprite'], function() {
 	gulp.run('watch');
+});
+
+
+// Build Project
+gulp.task('build', ['clean'], function(callback) {
+	runSequence('minify-html', 'sass', 'css', 'concat-scripts', 'min-angular-scripts', 'concat-all-min-scripts', 'clean-scripts', 'copy-script', 'images', 'sprite', 'fonts', 'copy', callback);
 });
