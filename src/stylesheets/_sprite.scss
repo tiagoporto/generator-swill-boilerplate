@@ -15,9 +15,9 @@ $left-arrow-offset-y: 0px;
 $left-arrow-width: 32px;
 $left-arrow-height: 32px;
 $left-arrow-total-width: 32px;
-$left-arrow-total-height: 100px;
+$left-arrow-total-height: 66px;
 $left-arrow-image: 'sprite.png';
-$left-arrow: 0px 0px 0px 0px 32px 32px 32px 100px 'sprite.png';
+$left-arrow: 0px 0px 0px 0px 32px 32px 32px 66px 'sprite.png';
 $right-arrow-x: 0px;
 $right-arrow-y: 34px;
 $right-arrow-offset-x: 0px;
@@ -25,19 +25,9 @@ $right-arrow-offset-y: -34px;
 $right-arrow-width: 32px;
 $right-arrow-height: 32px;
 $right-arrow-total-width: 32px;
-$right-arrow-total-height: 100px;
+$right-arrow-total-height: 66px;
 $right-arrow-image: 'sprite.png';
-$right-arrow: 0px 34px 0px -34px 32px 32px 32px 100px 'sprite.png';
-$rrrrrrrr-x: 0px;
-$rrrrrrrr-y: 68px;
-$rrrrrrrr-offset-x: 0px;
-$rrrrrrrr-offset-y: -68px;
-$rrrrrrrr-width: 32px;
-$rrrrrrrr-height: 32px;
-$rrrrrrrr-total-width: 32px;
-$rrrrrrrr-total-height: 100px;
-$rrrrrrrr-image: 'sprite.png';
-$rrrrrrrr: 0px 68px 0px -68px 32px 32px 32px 100px 'sprite.png';
+$right-arrow: 0px 34px 0px -34px 32px 32px 32px 66px 'sprite.png';
 
 /*
 The provided mixins are intended to be used with the array-like variables

@@ -71,7 +71,7 @@ var		  gulp = require('gulp'),
 
 		scripts: {
 			 src: basePaths.src + assetsFolder.scripts.src,
-			dest: basePaths + assetsFolder.scripts.dest
+			dest: basePaths.dest + assetsFolder.scripts.dest
 		},
 
 		styles: {
@@ -171,8 +171,8 @@ gulp.task('concat-all-min-scripts',  function() {
 // Clean Unutilized Scripts
 gulp.task('clean-scripts', function() {
 	return gulp.src([
-			paths.scripts.dest + '/scripts.min.js',
-			paths.scripts.dest + '/angular.min.js'
+			paths.scripts.dest + 'scripts.min.js',
+			paths.scripts.dest + 'angular.min.js'
 		], {read: false})
 		.pipe(clean())
 		.pipe(livereload(server))
