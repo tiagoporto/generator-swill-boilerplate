@@ -93,7 +93,8 @@ gulp.task('concat-scripts', function() {
 			js_path + 'onread/open_onread.js',
 			js_path + 'settings/*',
 			js_path + 'main/*',
-			js_path + 'onread/close_onread.js'
+			js_path + 'onread/close_onread.js',
+			js_path + 'analytics/google_analytics.js'
 		])
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest(public_scripts))
