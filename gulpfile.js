@@ -32,7 +32,7 @@ var		   gulp = require('gulp'),
 //***************************** Path configs *****************************//
 	basePaths = {
 		 src: 'src/',
-		dest: 'public/',
+		dest: 'build/',
 		build: 'dist/'
 	},
 
