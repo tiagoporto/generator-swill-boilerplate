@@ -18,8 +18,8 @@ var		   gulp = require('gulp'),
 			 lr = require('tiny-lr'),
 	 minifyHTML = require('gulp-minify-html'),
 		 notify = require('gulp-notify'),
-		   path = require('path'),
-	   remember = require('gulp-remember'),
+		   // path = require('path'),
+		  merge = require('merge-stream')
 		 rename = require('gulp-rename'),
 	runSequence = require('run-sequence'),
 		   sass = require('gulp-ruby-sass'),
@@ -115,6 +115,7 @@ gulp.task('sprite', function () {
     var spriteData = gulp.src(paths.sprite.src + '**/*.png').pipe(spritesmith({
         imgName: 'sprite.png',
         cssName: '_sprite.scss',
+        imgPath: '../' + assetsFolder.images.dest + 'sprite.png',
         padding: 2,
         algorithmOpts: {
 			sort: false
@@ -130,61 +131,88 @@ gulp.task('sprite', function () {
 
 // Execute concat-scripts, min-angular-scripts, concat-all-min-scripts and clean-scripts tasks
 gulp.task('scripts', function(callback) {
-	return runSequence('concat-scripts',
-		'min-angular-scripts',
-		'concat-all-min-scripts',
+	return runSequence(
+		'concat-scripts',
+		'concat-all-scripts',
 		'clean-scripts',
 		callback
 	);
 });
 
-// Concatenate and Minify Scripts
-gulp.task('concat-scripts', function() {
+// Concatenate libs, frameworks and plugins Scripts
+gulp.task('dependence-scripts', function() {
 	return gulp.src([
-			paths.scripts.src + 'plugins/outdatedbrowser-1.1.0.js',
-			paths.scripts.src + 'libs/*',
-			paths.scripts.src + 'frameworks/*',
-			paths.scripts.src + 'plugins/**',
-			paths.scripts.src + 'main/settings/outdatedbrowser.js',
-			paths.scripts.src + 'main/jquery/onread/open_onread.js',
-			paths.scripts.src + 'main/jquery/*',
-			paths.scripts.src + 'main/jquery/onread/close_onread.js',
-			paths.scripts.src + 'main/*',
-			paths.scripts.src + 'main/settings/google_analytics.js'
+			paths.scripts.src + 'dependencies/plugins/outdatedbrowser-1.1.0.js',
+			paths.scripts.src + 'dependencies/libs/*',
+			paths.scripts.src + 'dependencies/frameworks/*',
+			paths.scripts.src + 'dependencies/plugins/**'
 		])
-		.pipe(concat('main.js'))
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(concat('dependencies.js'))
 		.pipe(gulp.dest(paths.scripts.dest))
-		.pipe(rename('scripts.min.js'))
+		.pipe(rename('dependencies.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest(paths.scripts.dest));
 });
 
-// Concatenate and Minify Angular Scripts
-gulp.task('min-angular-scripts',  function() {
-	return gulp.src([
-			paths.scripts.src + 'main/angular/**',
+// Concatenate and Minify Scripts
+gulp.task('concat-scripts', function() {
+	var scripts = gulp.src([
+			paths.scripts.src + 'settings/outdatedbrowser.js',
+			paths.scripts.src + 'jquery/onread/open_onread.js',
+			paths.scripts.src + 'jquery/*',
+			paths.scripts.src + 'jquery/onread/close_onread.js',
+			paths.scripts.src + '*',
+			paths.scripts.src + 'settings/google_analytics.js'
 		])
-		.pipe(concat('angular.min.js'))
+		.pipe(concat('my-scripts.js'))
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(gulp.dest(paths.scripts.dest))
+		.pipe(rename('my-scripts.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest(paths.scripts.dest));
+
+	var angular = gulp.src([
+			paths.scripts.src + 'angular/**',
+		])
+		.pipe(concat('angular.js'))
+		.pipe(gulp.dest(paths.scripts.dest))
+		.pipe(rename('angular.min.js'))
 		.pipe(uglify({mangle: false}))
 		.pipe(gulp.dest(paths.scripts.dest));
+
+		return merge(scripts, angular);
 });
 
+
 // Concatenate Minified Scripts
-gulp.task('concat-all-min-scripts',  function() {
-	return gulp.src([
-			paths.scripts.dest + 'scripts.min.js',
-			paths.scripts.dest + 'angular.min.js'
+gulp.task('concat-all-scripts',  function() {
+	var nonMin = gulp.src([
+			paths.scripts.dest + 'dependencies.js',
+			paths.scripts.dest + 'angular.js',
+			paths.scripts.dest + 'my-scripts.js'
+		])
+		.pipe(concat('main.js'))
+		.pipe(gulp.dest(paths.scripts.dest));
+
+	var min = gulp.src([
+			paths.scripts.dest + 'dependencies.min.js',
+			paths.scripts.dest + 'angular.min.js',
+			paths.scripts.dest + 'my-scripts.min.js'
 		])
 		.pipe(concat('main.min.js'))
 		.pipe(gulp.dest(paths.scripts.dest));
+
+		return merge(nonMin, min);
+
 });
 
-// Clean Unutilized Scripts
-gulp.task('clean-scripts', function() {
+
+gulp.task('clean-scripts', function(){
 	return gulp.src([
-			paths.scripts.dest + 'scripts.min.js',
+			paths.scripts.dest + 'my-scripts.js',
+			paths.scripts.dest + 'my-scripts.min.js',
+			paths.scripts.dest + 'angular.js',
 			paths.scripts.dest + 'angular.min.js'
 		], {read: false})
 		.pipe(clean())
@@ -192,8 +220,10 @@ gulp.task('clean-scripts', function() {
 		.pipe(notify({
 			message: 'Scripts task complete',
 			onLast: true
-		}));
+		})
+	);
 });
+
 
 // Compile Sass
 gulp.task('sass', function() {
@@ -201,6 +231,7 @@ gulp.task('sass', function() {
 		.pipe(sass({
 			style: 'expanded' //The output style for the compiled css. Nested, expanded, compact, or compressed.
 		}))
+		 .on('error', function (err) { console.log(err.message); })
 		.pipe(gulp.dest(paths.styles.dest))
 		.pipe(livereload(server))
 		.pipe(notify({
@@ -224,8 +255,8 @@ gulp.task('copy', function () {
 	// Minify and Copy HTML and PHP
 	var html = gulp.src(basePaths.dest + '**/*.{html,php}')
 		.pipe(minifyHTML({
-			comments:false,
-			spare:true
+			spare:true,
+			empty: true,
 		}))
 		.pipe(gulp.dest(basePaths.build));
 
@@ -277,7 +308,10 @@ gulp.task('watch', function() {
 		if (err) return console.log(err);
 
 		// Watch .js files
-		gulp.watch(paths.scripts.src + '**/*.js', ['scripts']);
+		gulp.watch([paths.scripts.src + '**/*.js', '!' + paths.scripts.src + 'dependencies/**/*.js'], ['scripts']);
+
+		// Watch dependencies .js files
+		gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts']);
 
 		// Watch sass files
 		gulp.watch(paths.styles.src + '**/*.{sass,scss}', ['sass']);
@@ -296,11 +330,11 @@ gulp.task('watch', function() {
 //================= Main Tasks =================//
 // Default task
 gulp.task('default', ['clean'], function(callback) {
-	runSequence(['images', 'sprite', 'scripts'], 'sass', 'watch',  callback);
+	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'sass', 'watch',  callback);
 });
 
 
 // Build Project
 gulp.task('build', ['clean'], function(callback) {
-	runSequence(['images', 'sprite', 'scripts'], 'sass', 'copy', callback);
+	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'sass', 'copy', callback);
 });
