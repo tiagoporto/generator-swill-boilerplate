@@ -7,25 +7,27 @@
 */
 
 //************************* Load dependencies ****************************//
-var		  gulp = require('gulp'),
-		uglify = require('gulp-uglify'),
-	  imagemin = require('gulp-imagemin'),
-		rename = require('gulp-rename'),
-		 cache = require('gulp-cached'),
-	  remember = require('gulp-remember'),
-		  csso = require('gulp-csso'),
-		 clean = require('gulp-clean'),
-		concat = require('gulp-concat'),
-	minifyHTML = require('gulp-minify-html'),
-		notify = require('gulp-notify'),
-		  path = require('path'),
-		  sass = require('gulp-ruby-sass'),
-   spritesmith = require('gulp.spritesmith'),
-		 watch = require('gulp-watch'),
-   runSequence = require('run-sequence'),
-	livereload = require('gulp-livereload'),
-			lr = require('tiny-lr'),
-		server = lr(),
+var		   gulp = require('gulp'),
+		  cache = require('gulp-cached'),
+		  clean = require('gulp-clean'),
+		 concat = require('gulp-concat'),
+		   csso = require('gulp-csso'),
+	   imagemin = require('gulp-imagemin'),
+		 jshint = require('gulp-jshint'),
+	 livereload = require('gulp-livereload'),
+			 lr = require('tiny-lr'),
+	 minifyHTML = require('gulp-minify-html'),
+		 notify = require('gulp-notify'),
+		   path = require('path'),
+	   remember = require('gulp-remember'),
+		 rename = require('gulp-rename'),
+	runSequence = require('run-sequence'),
+		   sass = require('gulp-ruby-sass'),
+		 server = lr(),
+	spritesmith = require('gulp.spritesmith'),
+		stylish = require('jshint-stylish'),
+		 uglify = require('gulp-uglify'),
+		  watch = require('gulp-watch'),
 
 //***************************** Path configs *****************************//
 	basePaths = {
@@ -61,26 +63,31 @@ var		  gulp = require('gulp'),
 
 	paths = {
 		images: {
-			 src: basePaths.src + assetsFolder.images.src ,
-			dest: basePaths.dest + assetsFolder.images.src
+			  src: basePaths.src + assetsFolder.images.src ,
+			 dest: basePaths.dest + assetsFolder.images.dest,
+			build: basePaths.build + assetsFolder.images.src
 		},
 
 		sprite: {
-			src: basePaths.src + assetsFolder.images.src + assetsFolder.sprite.src
+			 src: basePaths.src + assetsFolder.images.src + assetsFolder.sprite.src,
+			dest: basePaths.dest + assetsFolder.images.src + assetsFolder.sprite.src
 		},
 
 		scripts: {
-			 src: basePaths.src + assetsFolder.scripts.src,
-			dest: basePaths.dest + assetsFolder.scripts.dest
+			  src: basePaths.src + assetsFolder.scripts.src,
+			 dest: basePaths.dest + assetsFolder.scripts.dest,
+			build: basePaths.build + assetsFolder.scripts.dest
 		},
 
 		styles: {
-			 src: basePaths.src + assetsFolder.styles.src ,
-			dest: basePaths.dest + assetsFolder.styles.dest
+			 src: basePaths.src + assetsFolder.styles.src,
+			dest: basePaths.dest + assetsFolder.styles.dest,
+			build: basePaths.build + assetsFolder.styles.dest
 		},
 
 		fonts: {
-			dest: basePaths.dest + assetsFolder.fonts.dest
+			build: basePaths.build + assetsFolder.fonts.dest,
+			  src: basePaths.dest + assetsFolder.fonts.dest
 		},
 
 
@@ -97,7 +104,10 @@ gulp.task('images', function() {
 		.pipe(cache(imagemin({optimizationLevel: 5, progressive: true})))
 		.pipe(gulp.dest(paths.images.dest))
 		.pipe(livereload(server))
-		.pipe(notify({message: 'Images task complete'}));
+		.pipe(notify({
+			message: 'Images task complete',
+			onLast: true
+		}));
 });
 
 // Generate Sprite
@@ -142,6 +152,8 @@ gulp.task('concat-scripts', function() {
 			paths.scripts.src + 'analytics/google_analytics.js'
 		])
 		.pipe(concat('main.js'))
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(gulp.dest(paths.scripts.dest))
 		.pipe(rename('scripts.min.js'))
 		.pipe(uglify())
@@ -176,7 +188,10 @@ gulp.task('clean-scripts', function() {
 		], {read: false})
 		.pipe(clean())
 		.pipe(livereload(server))
-		.pipe(notify({message: 'Scripts task complete'}));
+		.pipe(notify({
+			message: 'Scripts task complete',
+			onLast: true
+		}));
 });
 
 // Compile Sass
@@ -187,51 +202,50 @@ gulp.task('sass', function() {
 		}))
 		.pipe(gulp.dest(paths.styles.dest))
 		.pipe(livereload(server))
-		.pipe(notify({message: 'Sass task complete'}));
+		.pipe(notify({
+			message: 'Sass task complete',
+			onLast: true
+		}));
 });
 
-// Minify and copy css
-gulp.task('css', function() {
-	return gulp.src(public_styles + '/*.css')
+
+// Copy All Files At (public)
+gulp.task('copy', function () {
+	// Minify and copy css
+	var css =  gulp.src(paths.styles.dest + '*.css')
 			.pipe(csso())
-			.pipe(gulp.dest(dist_path + styles_folder));
-});
+			.pipe(gulp.dest(paths.styles.build));
 
+	// Copy Web Fonts To Dist
+	var fonts = gulp.src(paths.fonts.src + '**/*')
+		.pipe(gulp.dest(paths.fonts.build));
 
-// Copy Web Fonts To Dist
-gulp.task('fonts', function () {
-	return gulp.src(paths.fonts.src + '**')
-		.pipe(gulp.dest(basePaths.build));
-});
-
-// Minify and Copy HTML and PHP
-gulp.task('minify-html', function() {
-	return gulp.src(basePaths.src + '**/*.{html,php}')
+	// Minify and Copy HTML and PHP
+	var html = gulp.src(basePaths.dest + '**/*.{html,php}')
 		.pipe(minifyHTML({
 			comments:false,
 			spare:true
 		}))
-		.pipe(gulp.dest(basePaths.build))
-});
+		.pipe(gulp.dest(basePaths.build));
 
-// Copy script
-gulp.task('copy-script', function () {
-	return gulp.src(public_scripts + '/main.min.js')
+	// Copy script And reaame
+	var script = gulp.src(paths.scripts.dest + 'main.min.js')
 			.pipe(rename('main.js'))
-			.pipe(gulp.dest(dist_path + scripts_folder));
-});
+			.pipe(gulp.dest(paths.scripts.build));
 
-// Copy All Files At (public)
-gulp.task('copy', function () {
-	return gulp.src([
-				public_path + '*',
-				global_public_images + '**/*',
-				'!' + public_path + '**/*.html'
+	var AllFiles = gulp.src([
+				basePaths.dest + '*',
+				'!' + basePaths.dest + '**/*.html'
 			], {
 				dot: true
 			})
-			.pipe(gulp.dest(dist_path));
+			.pipe(gulp.dest(basePaths.build));
+
+	var images = gulp.src(paths.images.dest + '**/*')
+			.pipe(gulp.dest(paths.images.build));
 });
+
+//================= Utility Tasks =================//
 
 // Clean Directories
 gulp.task('clean', function() {
@@ -240,57 +254,52 @@ gulp.task('clean', function() {
 					 paths.scripts.dest,
 					 paths.images.dest], {read: false})
 		.pipe(clean())
-		.pipe(notify({message: 'Clean task complete'}));
+		.pipe(notify({
+			message: 'Clean task complete',
+			onLast: true
+		}));
 });
 
 // Reload Browser
 gulp.task('reload-browser', function() {
 	gulp.src(basePaths.dest + '**/*.{html,php}')
 		.pipe(livereload(server))
-		.pipe(notify({message: 'Reload complete'}));
+		.pipe(notify({
+			message: 'Reload complete',
+			onLast: true
+		}));
 });
 
 // Watch
 gulp.task('watch', function() {
-	//Listen on port 35729
 	server.listen(35729, function (err) {
 		if (err) return console.log(err);
 
 		// Watch .js files
-		gulp.watch(paths.scripts.src + '**/*.js', function(event) {
-			gulp.run('scripts');
-		});
+		gulp.watch(paths.scripts.src + '**/*.js', ['scripts']);
 
 		// Watch sass files
-		gulp.watch(paths.styles.src + '**/*.{sass,scss}', function(event) {
-			gulp.run('sass');
-		});
+		gulp.watch(paths.styles.src + '**/*.{sass,scss}', ['sass']);
 
 		// Watch .jpg .png .gif files
-		gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.src + '**/*'], function(event) {
-				gulp.run('images');
-		});
+		gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.src + '**/*'], ['images']);
 
 		// Watch sprite file
-		gulp.watch(paths.sprite.src + '**/*.{png,jpg,gif}', function(event) {
-		  gulp.run('sprite');
-		});
+		gulp.watch(paths.sprite.src + '**/*.{png,jpg,gif}', ['sprite']);
 
 		//Watch .html .php Files
-		gulp.watch(basePaths.dest + '**/*.{html,php}', function(){
-			gulp.run('reload-browser');
-		});
+		gulp.watch(basePaths.dest + '**/*.{html,php}', ['reload-browser']);
 	});
 });
 
 //================= Main Tasks =================//
 // Default task
 gulp.task('default', ['clean'], function(callback) {
-	runSequence('images', 'sprite', 'sass', 'scripts', 'watch',  callback);
+	runSequence(['images', 'sprite', 'scripts'], 'sass', 'watch',  callback);
 });
 
 
 // Build Project
 gulp.task('build', ['clean'], function(callback) {
-	runSequence('images', 'sprite', 'sass', 'css', 'concat-scripts', 'min-angular-scripts', 'concat-all-min-scripts', 'clean-scripts', 'copy-script', 'minify-html', 'fonts', 'copy', callback);
+	runSequence(['images', 'sprite', 'scripts'], 'sass', 'copy', callback);
 });
