@@ -8,7 +8,8 @@
   "globals": {
 	  "$": false,
 	  "jQuery": false,
-	  "outdatedBrowser": false
+	  "outdatedBrowser": false,
+	  "ga": false
    },
   "immed": true,
   "indent": 4,

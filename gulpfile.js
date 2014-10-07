@@ -32,8 +32,8 @@ var		   gulp = require('gulp'),
 //***************************** Path configs *****************************//
 	basePaths = {
 		 src: 'src/',
-		dest: 'build/',
-		build: 'dist/'
+		dest: 'public/',
+		build: 'build/'
 	},
 
 	assetsFolder = {
@@ -142,14 +142,15 @@ gulp.task('scripts', function(callback) {
 gulp.task('concat-scripts', function() {
 	return gulp.src([
 			paths.scripts.src + 'plugins/outdatedbrowser-1.1.0.js',
-			paths.scripts.src + 'libs/**',
-			paths.scripts.src + 'frameworks/**',
+			paths.scripts.src + 'libs/*',
+			paths.scripts.src + 'frameworks/*',
 			paths.scripts.src + 'plugins/**',
-			paths.scripts.src + 'onread/open_onread.js',
-			paths.scripts.src + 'settings/*',
+			paths.scripts.src + 'main/settings/outdatedbrowser.js',
+			paths.scripts.src + 'main/jquery/onread/open_onread.js',
+			paths.scripts.src + 'main/jquery/*',
+			paths.scripts.src + 'main/jquery/onread/close_onread.js',
 			paths.scripts.src + 'main/*',
-			paths.scripts.src + 'onread/close_onread.js',
-			paths.scripts.src + 'analytics/google_analytics.js'
+			paths.scripts.src + 'main/settings/google_analytics.js'
 		])
 		.pipe(concat('main.js'))
 		.pipe(jshint())
@@ -163,7 +164,7 @@ gulp.task('concat-scripts', function() {
 // Concatenate and Minify Angular Scripts
 gulp.task('min-angular-scripts',  function() {
 	return gulp.src([
-			paths.scripts.src + 'angular_scripts/**',
+			paths.scripts.src + 'main/angular/**',
 		])
 		.pipe(concat('angular.min.js'))
 		.pipe(uglify({mangle: false}))
