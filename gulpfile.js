@@ -18,7 +18,6 @@ var		   gulp = require('gulp'),
 			 lr = require('tiny-lr'),
 	 minifyHTML = require('gulp-minify-html'),
 		 notify = require('gulp-notify'),
-		   // path = require('path'),
 		  merge = require('merge-stream')
 		 rename = require('gulp-rename'),
 	runSequence = require('run-sequence'),
@@ -89,217 +88,197 @@ var		   gulp = require('gulp'),
 			build: basePaths.build + assetsFolder.fonts.dest,
 			  src: basePaths.dest + assetsFolder.fonts.dest
 		},
-
-
 	}
 
 //******************************** Tasks *********************************//
 
 // Optimize Images
 gulp.task('images', function() {
-	return gulp.src([
-			paths.images.src + '**/*.{png,jpg,gif,svg}',
-			'!' + paths.sprite.src + '**/*'
-		])
-		.pipe(cache(imagemin({optimizationLevel: 5, progressive: true})))
-		.pipe(gulp.dest(paths.images.dest))
-		.pipe(livereload(server))
-		.pipe(notify({
-			message: 'Images task complete',
-			onLast: true
-		}));
+	return	gulp.src([
+				paths.images.src + '**/*.{png,jpg,gif,svg}',
+				'!' + paths.sprite.src + '**/*'
+			])
+			.pipe(cache(imagemin({optimizationLevel: 5, progressive: true})))
+			.pipe(gulp.dest(paths.images.dest))
+			.pipe(livereload(server))
+			.pipe(notify({message: 'Images task complete', onLast: true}));
 });
 
 // Generate Sprite
 gulp.task('sprite', function () {
-    var spriteData = gulp.src(paths.sprite.src + '**/*.png').pipe(spritesmith({
-        imgName: 'sprite.png',
-        cssName: '_sprite.scss',
-        imgPath: '../' + assetsFolder.images.dest + 'sprite.png',
-        padding: 2,
-        algorithmOpts: {
-			sort: false
-		}
-    }));
-    spriteData.img
-    	.pipe(imagemin())
-    	.pipe(gulp.dest(paths.images.dest));
-    spriteData.css
-    	.pipe(gulp.dest(paths.styles.src));
+	var spriteData   = 	gulp.src(paths.sprite.src + '**/*.png').pipe(spritesmith({
+							imgName: 'sprite.png',
+							cssName: '_sprite.scss',
+							imgPath: '../' + assetsFolder.images.dest + 'sprite.png',
+							padding: 2,
+							algorithmOpts: { sort: false}
+						}));
+
+	spriteData.img
+		.pipe(imagemin())
+		.pipe(gulp.dest(paths.images.dest));
+	spriteData.css
+		.pipe(gulp.dest(paths.styles.src));
 });
 
 
 // Execute concat-scripts, min-angular-scripts, concat-all-min-scripts and clean-scripts tasks
 gulp.task('scripts', function(callback) {
-	return runSequence(
-		'concat-scripts',
-		'concat-all-scripts',
-		'clean-scripts',
-		callback
-	);
+	return	runSequence(
+				'main-scripts',
+				'unify-scripts',
+				'clean-scripts',
+				callback
+			);
 });
 
-// Concatenate libs, frameworks and plugins Scripts
+// Concatenate libs, frameworks, plugins Scripts and Minify
 gulp.task('dependence-scripts', function() {
-	return gulp.src([
-			paths.scripts.src + 'dependencies/plugins/outdatedbrowser-1.1.0.js',
-			paths.scripts.src + 'dependencies/libs/*',
-			paths.scripts.src + 'dependencies/frameworks/*',
-			paths.scripts.src + 'dependencies/plugins/**'
-		])
-		.pipe(concat('dependencies.js'))
-		.pipe(gulp.dest(paths.scripts.dest))
-		.pipe(rename('dependencies.min.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest(paths.scripts.dest));
+	return	gulp.src([
+				paths.scripts.src + 'dependencies/plugins/outdatedbrowser-1.1.0.js',
+				paths.scripts.src + 'dependencies/libs/*',
+				paths.scripts.src + 'dependencies/frameworks/*',
+				paths.scripts.src + 'dependencies/plugins/**'
+			])
+			.pipe(concat('dependencies.js'))
+			.pipe(gulp.dest(paths.scripts.dest))
+			.pipe(rename('dependencies.min.js'))
+			.pipe(uglify())
+			.pipe(gulp.dest(paths.scripts.dest));
 });
 
-// Concatenate and Minify Scripts
-gulp.task('concat-scripts', function() {
-	var scripts = gulp.src([
-			paths.scripts.src + 'settings/outdatedbrowser.js',
-			paths.scripts.src + 'jquery/onread/open_onread.js',
-			paths.scripts.src + 'jquery/*',
-			paths.scripts.src + 'jquery/onread/close_onread.js',
-			paths.scripts.src + '*',
-			paths.scripts.src + 'settings/google_analytics.js'
-		])
-		.pipe(concat('my-scripts.js'))
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(gulp.dest(paths.scripts.dest))
-		.pipe(rename('my-scripts.min.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest(paths.scripts.dest));
+// Concatenate and Minify Main Scripts
+gulp.task('main-scripts', function() {
+	var scripts  =	gulp.src([
+						paths.scripts.src + 'settings/outdatedbrowser.js',
+						paths.scripts.src + 'jquery/onread/open_onread.js',
+						paths.scripts.src + 'jquery/*',
+						paths.scripts.src + 'jquery/onread/close_onread.js',
+						paths.scripts.src + '*',
+						paths.scripts.src + 'settings/google_analytics.js'
+					])
+					.pipe(concat('main-scripts.js'))
+					.pipe(jshint())
+					.pipe(jshint.reporter('jshint-stylish'))
+					.pipe(gulp.dest(paths.scripts.dest))
+					.pipe(rename('main-scripts.min.js'))
+					.pipe(uglify())
+					.pipe(gulp.dest(paths.scripts.dest));
 
-	var angular = gulp.src([
-			paths.scripts.src + 'angular/**',
-		])
-		.pipe(concat('angular.js'))
-		.pipe(gulp.dest(paths.scripts.dest))
-		.pipe(rename('angular.min.js'))
-		.pipe(uglify({mangle: false}))
-		.pipe(gulp.dest(paths.scripts.dest));
+	var angular  =	gulp.src([
+						paths.scripts.src + 'angular/**',
+					])
+					.pipe(concat('angular.js'))
+					.pipe(gulp.dest(paths.scripts.dest))
+					.pipe(rename('angular.min.js'))
+					.pipe(uglify({mangle: false}))
+					.pipe(gulp.dest(paths.scripts.dest));
 
-		return merge(scripts, angular);
+	return merge(scripts, angular);
 });
 
 
-// Concatenate Minified Scripts
-gulp.task('concat-all-scripts',  function() {
-	var nonMin = gulp.src([
+// Concatenate and minify compiled Scripts
+gulp.task('unify-scripts',  function() {
+	var unminify = gulp.src([
 			paths.scripts.dest + 'dependencies.js',
 			paths.scripts.dest + 'angular.js',
-			paths.scripts.dest + 'my-scripts.js'
+			paths.scripts.dest + 'main-scripts.js'
 		])
-		.pipe(concat('main.js'))
+		.pipe(concat('styles.js'))
 		.pipe(gulp.dest(paths.scripts.dest));
 
-	var min = gulp.src([
+	var minify = gulp.src([
 			paths.scripts.dest + 'dependencies.min.js',
 			paths.scripts.dest + 'angular.min.js',
-			paths.scripts.dest + 'my-scripts.min.js'
+			paths.scripts.dest + 'main-scripts.min.js'
 		])
-		.pipe(concat('main.min.js'))
+		.pipe(concat('styles.min.js'))
 		.pipe(gulp.dest(paths.scripts.dest));
 
-		return merge(nonMin, min);
-
+	return merge(unminify, minify);
 });
 
-
+//Clean unused Scripts
 gulp.task('clean-scripts', function(){
-	return gulp.src([
-			paths.scripts.dest + 'my-scripts.js',
-			paths.scripts.dest + 'my-scripts.min.js',
-			paths.scripts.dest + 'angular.js',
-			paths.scripts.dest + 'angular.min.js'
-		], {read: false})
-		.pipe(clean())
-		.pipe(livereload(server))
-		.pipe(notify({
-			message: 'Scripts task complete',
-			onLast: true
-		})
-	);
+	return	gulp.src([
+				paths.scripts.dest + 'main-scripts.js',
+				paths.scripts.dest + 'main-scripts.min.js',
+				paths.scripts.dest + 'angular.js',
+				paths.scripts.dest + 'angular.min.js'
+			], {read: false})
+			.pipe(clean())
+			.pipe(livereload(server))
+			.pipe(notify({message: 'Scripts task complete', onLast: true}));
 });
 
 
 // Compile Sass
 gulp.task('sass', function() {
-	return gulp.src(paths.styles.src + '*.{sass,scss}')
-		.pipe(sass({
-			style: 'expanded' //The output style for the compiled css. Nested, expanded, compact, or compressed.
-		}))
-		 .on('error', function (err) { console.log(err.message); })
-		.pipe(gulp.dest(paths.styles.dest))
-		.pipe(livereload(server))
-		.pipe(notify({
-			message: 'Sass task complete',
-			onLast: true
-		}));
+	return	gulp.src(paths.styles.src + '*.{sass,scss}')
+			.pipe(sass({
+				style: 'expanded' //The output style for the compiled css. Nested, expanded, compact, or compressed.
+			}))
+			.on('error', function (err) { console.log(err.message); })
+			.pipe(gulp.dest(paths.styles.dest))
+			.pipe(livereload(server))
+			.pipe(notify({
+				message: 'Sass task complete',
+				onLast: true
+			}));
 });
 
 
-// Copy All Files At (public)
+// Copy All Files to Build
 gulp.task('copy', function () {
 	// Minify and copy css
-	var css =  gulp.src(paths.styles.dest + '*.css')
-			.pipe(csso())
-			.pipe(gulp.dest(paths.styles.build));
+		 var css  =	gulp.src(paths.styles.dest + '*.css')
+						.pipe(csso())
+						.pipe(gulp.dest(paths.styles.build));
 
 	// Copy Web Fonts To Dist
-	var fonts = gulp.src(paths.fonts.src + '**/*')
-		.pipe(gulp.dest(paths.fonts.build));
+		var fonts =	gulp.src(paths.fonts.src + '**/*')
+						.pipe(gulp.dest(paths.fonts.build));
 
 	// Minify and Copy HTML and PHP
-	var html = gulp.src(basePaths.dest + '**/*.{html,php}')
-		.pipe(minifyHTML({
-			spare:true,
-			empty: true,
-		}))
-		.pipe(gulp.dest(basePaths.build));
+		 var html =	gulp.src(basePaths.dest + '**/*.{html,php}')
+						.pipe(minifyHTML({spare:true, empty: true}))
+						.pipe(gulp.dest(basePaths.build));
 
 	// Copy script And reaame
-	var script = gulp.src(paths.scripts.dest + 'main.min.js')
-			.pipe(rename('main.js'))
-			.pipe(gulp.dest(paths.scripts.build));
+	   var script =	gulp.src(paths.scripts.dest + 'main.min.js')
+						.pipe(rename('main.js'))
+						.pipe(gulp.dest(paths.scripts.build));
 
-	var AllFiles = gulp.src([
-				basePaths.dest + '*',
-				'!' + basePaths.dest + '**/*.html'
-			], {
-				dot: true
-			})
-			.pipe(gulp.dest(basePaths.build));
+	 var AllFiles =	gulp.src([
+							basePaths.dest + '*',
+							'!' + basePaths.dest + '**/*.html'
+						], {dot: true})
+						.pipe(gulp.dest(basePaths.build));
 
-	var images = gulp.src(paths.images.dest + '**/*')
-			.pipe(gulp.dest(paths.images.build));
+	   var images =	gulp.src(paths.images.dest + '**/*')
+						.pipe(gulp.dest(paths.images.build));
 });
 
 //================= Utility Tasks =================//
 
 // Clean Directories
 gulp.task('clean', function() {
-	return gulp.src([basePaths.build,
-					 paths.styles.dest,
-					 paths.scripts.dest,
-					 paths.images.dest], {read: false})
-		.pipe(clean())
-		.pipe(notify({
-			message: 'Clean task complete',
-			onLast: true
-		}));
+	return	gulp.src([
+					basePaths.build,
+					paths.styles.dest,
+					paths.scripts.dest,
+					paths.images.dest
+				], {read: false})
+				.pipe(clean())
+				.pipe(notify({message: 'Clean task complete', onLast: true}));
 });
 
 // Reload Browser
 gulp.task('reload-browser', function() {
 	gulp.src(basePaths.dest + '**/*.{html,php}')
 		.pipe(livereload(server))
-		.pipe(notify({
-			message: 'Reload complete',
-			onLast: true
-		}));
+		.pipe(notify({message: 'Reload complete', onLast: true}));
 });
 
 // Watch
