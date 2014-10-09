@@ -5,14 +5,12 @@
 @import "helpers/mixins"
 @import "helpers/functions"
 
-/* Dependence Styles */
-@import "dependencies/animate"
-@import "dependencies/outdatedbrowser-1.1.0"
+//If you will use bootstrap you can remove this imports
 @import "dependencies/bootstrap-3.2.0"
+@import "dependencies/outdatedbrowser-1.1.0"
+@import "dependencies/animate"
 @import "dependencies/jquery.mobile.structure-1.4.4"
 @import "dependencies/jquery-ui.structure-1.11.1"
-
-//If you will use bootstrap you can remove this imports
 
 //============================================================//
 /* Web Fonts */
@@ -31,9 +29,8 @@
 /* Sprite */
 @import "sprite"
 
-
 /* Main Styles */
-@import "main/base"
+@import "base"
 
 /* Media Queries */
 @media print
@@ -53,3 +50,18 @@
 
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)
 	@import "media_queries/retina"
+
+
+// 	/* Multiline
+// 	Comment */
+
+@debug 10em + 12em
+
+// $cores: (azul: #0176bb, vermelho: #e3413e, amarelo: #f8e042);
+
+// @each $tema, $cor in $cores {
+//   .tema-#{tema} body {
+//      background-color: $cor;
+//   }
+// }
+
