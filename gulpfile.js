@@ -240,8 +240,8 @@ gulp.task('copy', function () {
 						.pipe(gulp.dest(basePaths.build));
 
 	// Copy script And reaame
-	   var script =	gulp.src(paths.scripts.dest + 'main.min.js')
-						.pipe(rename('main.js'))
+	   var script =	gulp.src(paths.scripts.dest + 'styles.min.js')
+						.pipe(rename('styles.js'))
 						.pipe(gulp.dest(paths.scripts.build));
 
 	 var AllFiles =	gulp.src([
