@@ -15,7 +15,6 @@ var		   gulp = require('gulp'),
 		  clean = require('gulp-clean'),
 		 concat = require('gulp-concat'),
 		   csso = require('gulp-csso'),
-		 filter = require('gulp-filter'),
 	   imagemin = require('gulp-imagemin'),
 		 jshint = require('gulp-jshint'),
 	 minifyHTML = require('gulp-minify-html'),
@@ -272,6 +271,7 @@ gulp.task('clean', function() {
 // Watch
 gulp.task('watch', function() {
 	browserSync({
+		notify: false,
 		// proxy: "localhost/my-gulp-template/public/"
 		server: {
 			baseDir: [basePaths.src, basePaths.dest]
@@ -285,7 +285,10 @@ gulp.task('watch', function() {
 	gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts', browserSync.reload]);
 
 	// Watch sass files
-	gulp.watch(paths.styles.src + '**/*.{sass,scss}', ['styles', browserSync.reload]);
+	gulp.watch([paths.styles.src + '**/*.{sass,scss}', '!' + paths.styles.src + 'helpers/mixins/*.{sass,scss}'], ['styles', browserSync.reload]);
+
+	// Watch mixins sass files
+	gulp.watch(paths.styles.src + 'helpers/mixins/*.{sass,scss}', ['sass-mixins']);
 
 	// Watch .jpg .png .gif files
 	gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.src + '**/*'], ['images', browserSync.reload]);
