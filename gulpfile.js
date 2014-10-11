@@ -23,6 +23,7 @@ var		   gulp = require('gulp'),
 		 rename = require('gulp-rename'),
 	runSequence = require('run-sequence'),
 		   sass = require('gulp-ruby-sass'),
+	 sourcemaps = require('gulp-sourcemaps'),
 	spritesmith = require('gulp.spritesmith'),
 		stylish = require('jshint-stylish'),
 		 uglify = require('gulp-uglify'),
@@ -217,8 +218,10 @@ gulp.task('sass-mixins', function() {
 // Compile My Sass Styles
 gulp.task('styles', function() {
 	return	gulp.src(paths.styles.src + '*.{sass,scss}', { base: paths.styles.src})
-				.pipe(sass({style: 'expanded', sourcemap: true, sourcemapPath: '../stylesheets'}))
+				.pipe(sass({style: 'expanded'}))
 				.on('error', function (err) { console.log(err.message); })
+				.pipe(sourcemaps.init({loadMaps: true}))
+				.pipe(sourcemaps.write())
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(notify({message: 'Styles task complete <%= options.message %>'}));
 });
