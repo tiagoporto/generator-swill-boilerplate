@@ -1,0 +1,71 @@
+/*
+	Author: Tiago Porto - http://www.tiagoporto.com
+	https://github.com/tiagoporto
+	Contact: me@tiagoporto.com
+*/
+
+// Helpers
+@import "helpers/variables";
+@import "helpers/mixins";
+@import "helpers/functions";
+//If you will use bootstrap you can remove this import
+@import "typography/typography";
+
+@import "dependencies/outdatedbrowser-1.1.0";
+// @import "dependencies/bootstrap-3.2.0";
+// @import "dependencies/animate";
+// @import "dependencies/jquery.mobile.structure-1.4.4";
+// @import "dependencies/jquery-ui.structure-1.11.1";
+
+//If you will use bootstrap you can remove these imports
+//============================================================//
+/* Web Fonts */
+@import "typography/web-fonts";
+
+@import "normalize-3.0.2";
+
+/* Grid */
+// @import "grid";
+//============================================================//
+
+/* Sprite */
+@import "sprite";
+
+/* Main Styles */
+@import "base";
+
+/* Media Queries */
+@media print{
+	@import "media_queries/print";
+}
+
+@media (max-width: 320px){
+	@import "media_queries/max_320";
+}
+
+@media (max-width: 480px){
+	@import "media_queries/max_480";
+}
+
+@media (min-width: 481px) and (max-width: 767px){
+	@import "media_queries/min_481_max_767";
+}
+
+@media (min-width: 768px) and (max-width: 1000px){
+	@import "media_queries/min_768_max_1000";
+}
+
+@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi){
+	@import "media_queries/retina";
+}
+
+
+
+// $cores: (azul: #0176bb, vermelho: #e3413e, amarelo: #f8e042);
+
+// @each $tema, $cor in $cores {
+//   .tema-#{tema} body {
+//      background-color: $cor;
+//   }
+// }
+

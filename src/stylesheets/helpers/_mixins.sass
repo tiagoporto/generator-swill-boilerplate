@@ -81,13 +81,28 @@
 		border-right: $width/2 solid transparent
 		border-top: $height solid $color
 
-=box-sizing($type: "border")
-	// Acceptable values
-	// content-box|border-box|initial|inherit
-	//content is the default W3C model */
-	-webkit-box-sizing: #{$type}-box
-	-moz-box-sizing: #{$type}-box
-	box-sizing: #{$type}-box
+=background-size($value)
+	-webkit-background-size: $value
+	-moz-background-size: $value
+	-o-background-size: $value
+	background-size: $value
+=border-radius($radius...)
+	-webkit-border-radius: $radius
+	-moz-border-radius: $radius
+	border-radius: $radius
+
+=box-shadow($parameters)
+	-webkit-box-shadow: $parameters
+	-moz-box-shadow: $parameters
+	box-shadow: $parameters
+
+// Acceptable values
+// content-box|border-box|initial|inherit
+// Content is the default W3C model
+=box-sizing($type: "border-box")
+	-webkit-box-sizing: $type
+	-moz-box-sizing: $type
+	box-sizing: $type
 
 @mixin font-face($name, $filename, $eot-id: $name, $weight: false, $style: false)
 	$iefont: unquote("#{$filename}.eot?#iefix")
@@ -402,9 +417,6 @@
 		&:before
 			+icons-sprite($icon-name)
 
-=img($image-name, $repeat:null, $positionX:null, $positionY:null, $attachment:null, $background-color:null)
-	background: $background-color url("#{$image-path}#{$image-name}") $repeat $attachment $positionX $positionY
-
 =keyframes($animationName)
 	@-webkit-keyframes #{$animationName}
 		@content
@@ -414,3 +426,64 @@
 		@content
 	@keyframes #{$animationName}
 		@content
+
+=linear-gradient($direction, $startColor, $lastColor)
+
+	$reverseDirection: null
+
+	@if $direction == top
+		$reverseDirection: bottom
+
+	@if $direction == bottom
+		$reverseDirection: top
+
+	@if $direction == left
+		$reverseDirection: right
+
+	@if $direction == right
+		$reverseDirection: left
+
+	background-color: $startColor // Old browsers
+	background-image: -webkit-linear-gradient($reverseDirection, unquote($startColor), unquote($lastColor)) // Chrome 10+, Saf5.1+, iOS 5+
+	background-image:    -moz-linear-gradient($reverseDirection, unquote($startColor), unquote($lastColor)) // FF3.6+
+	background-image:     -ms-linear-gradient($reverseDirection, unquote($startColor), unquote($lastColor)) // IE10+
+	background-image:      -o-linear-gradient($reverseDirection, unquote($startColor), unquote($lastColor)) // Opera 11.10+
+	background-image:         linear-gradient(to $direction, unquote($startColor), unquote($lastColor)) // W3C
+
+=opacity($opacity)
+	$opacity-ie: $opacity * 100
+
+	opacity: $opacity
+	filter: alpha(opacity=$opacity-ie) //IE8
+
+=radial-gradient($startColor, $lastColor, $shape:null, $size:null, $position:null)
+
+	$sizePosition:null
+
+	@if $size != null and $position != null
+		$sizePosition: unquote($size) at unquote($position) + ","
+		$shape:null
+
+	@if $shape != null
+		$shape: unquote($shape) + ","
+
+	@if $size != null
+		$size: unquote($size) + ","
+
+	@if $position != null
+		$position: unquote($position) + ","
+
+
+	background-color: $startColor // Old browsers
+	background-image: -webkit-radial-gradient($shape unquote($size) unquote($position) unquote($startColor), unquote($lastColor)) // Chrome 10+, Saf5.1+, iOS 5+
+	background-image:    -moz-radial-gradient($shape unquote($size) unquote($position) unquote($startColor), unquote($lastColor)) // FF3.6+
+	background-image:     -ms-radial-gradient($shape unquote($size) unquote($position) unquote($startColor), unquote($lastColor)) // IE10+
+	background-image:      -o-radial-gradient($shape unquote($size) unquote($position) unquote($startColor), unquote($lastColor)) // Opera 11.10+
+	background-image:         radial-gradient($shape $sizePosition  unquote($startColor), unquote($lastColor)) // W3C
+
+=transition($parameters)
+	-webkit-transition: $parameters
+	-moz-transition: $parameters
+	-o-transition: $parameters
+	-ms-transition: $parameters
+	transition: $parameters
