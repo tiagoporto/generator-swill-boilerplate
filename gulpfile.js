@@ -23,7 +23,6 @@ var		   gulp = require('gulp'),
 		 rename = require('gulp-rename'),
 	runSequence = require('run-sequence'),
 		   sass = require('gulp-ruby-sass'),
-	 sourcemaps = require('gulp-sourcemaps'),
 	spritesmith = require('gulp.spritesmith'),
 		stylish = require('jshint-stylish'),
 		 uglify = require('gulp-uglify'),
@@ -198,7 +197,6 @@ gulp.task('unify-scripts',  function() {
 //Clean unused Scripts
 gulp.task('clean-scripts', function(){
 	return	gulp.src([
-				paths.scripts.dest + 'main-scripts.js',
 				paths.scripts.dest + 'main-scripts.min.js',
 				paths.scripts.dest + 'angular.js',
 				paths.scripts.dest + 'angular.min.js'
@@ -215,13 +213,11 @@ gulp.task('sass-mixins', function() {
 				.pipe(notify({message: 'Sass-mixins task complete', onLast: true}));
 });
 
-// Compile My Sass Styles
+// Compile Sass Styles
 gulp.task('styles', function() {
 	return	gulp.src(paths.styles.src + '*.{sass,scss}', { base: paths.styles.src})
-				.pipe(sass({style: 'expanded'}))
+				.pipe(sass({style: 'expanded', sourcemap: true, sourcemapPath: '../stylesheets'}))
 				.on('error', function (err) { console.log(err.message); })
-				.pipe(sourcemaps.init({loadMaps: true}))
-				.pipe(sourcemaps.write())
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(notify({message: 'Styles task complete <%= options.message %>'}));
 });

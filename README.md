@@ -6,41 +6,47 @@ Basic Template Front-End with [Gulp.js](http://gulpjs.com/)
 
 Current version - **2.0.0beta**
 
-<!-- Example [Gulp Template](http://tiagoporto.github.io/my-gulp-template/). -->
-
-This template includes files and configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
+I started this template when I start working with Gulp.js. When the google launch the [Web Starter Kit](https://developers.google.com/web/starter-kit/). I saw that I'm on the right track.
 
 Uses the following technologies:
 
+* [BrowserSync](http://www.browsersync.io/)
+* [EditorConfig](http://editorconfig.org/)
 * [Gulp.js](http://gulpjs.com/)
+* [JSHint](http://www.jshint.com/)
+* [Node.js](http://nodejs.org/)
 * [Ruby](https://www.ruby-lang.org/)
 * [Sass](http://sass-lang.com/)
-* [LiveReload](http://livereload.com/)
-* [EditorConfig](http://editorconfig.org/)
 
 ## Features
 
+* Clean the assets (images, css, js) in the project to maintain the directory organized
 * Compress Images
+* Generate Sprites
+* Concatenate And Minify JavaScript
+* Analyze JavaScript with jshint
+* Functions and [mixins](https://github.com/tiagoporto/sass-mixins) to use with Sass
 * Compile Sass
-* Minify JavaScript
-* Monitors changes in the files and reload browser with LiveReload
-* Clean the assets (img, css, js) in the project to maintain the directory organized
+* Generate sourcemap to help develop with sass
 * Notify when tasks are complete
-* Checks if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
+* Monitors changes in the files and reload browser with [BrowserSync](http://www.browsersync.io/)
+* Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
+* Check if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
+* Build the project compressing the HTML and the CSS.
 
 ## Include
 
 * [AngularJS](http://angularjs.org/)
-* [jQuery](http://jquery.com/)
-* [jQuery UI](http://jqueryui.com/)
-* [Jquery Mobile](http://jquerymobile.com/)
-* [Underscore.js](http://underscorejs.org/)
-* [Bootstrap](http://getbootstrap.com/)
-* [Outdated Browser](http://outdatedbrowser.com/)
 * [Animate.css](https://github.com/daneden/animate.css)
+* [Bootstrap](http://getbootstrap.com/)
+* [Google Analytics](http://www.google.com/analytics/)
+* [jQuery](http://jquery.com/)
+* [Jquery Mobile](http://jquerymobile.com/)
+* [jQuery UI](http://jqueryui.com/)
+* [Outdated Browser](http://outdatedbrowser.com/)
+* [Underscore.js](http://underscorejs.org/)
 
-Just remove what you will not use or include in specific directories: libraries, frameworks or plugins which you want use in scripts and stylesheets folders.
-Remember to remove dependencies styles in `src/styles.sass`.
+Just remove what you will not use or include in specific directories: `src/scripts` and `src/stylesheets`.
 
 
 ## Folder Structure
@@ -50,6 +56,8 @@ Remember to remove dependencies styles in `src/styles.sass`.
 ├───┐
 │   ├── .sass-cache
 │   │   └─ //SASS Cache
+│   │
+│   ├── build //Folder with the build project
 │   │
 │   ├── node-modules //Will appear after installed the NPM modules
 │   │   └─ //All Gulp.js plugins
@@ -61,7 +69,7 @@ Remember to remove dependencies styles in `src/styles.sass`.
 │   │   ├─ fonts
 │   │   │  └─ //Web Fonts
 │   │   │
-│   │   ├─ img
+│   │   ├─ images
 │   │   │  └─ //public images
 │   │   │
 │   │   ├─ js
@@ -73,30 +81,46 @@ Remember to remove dependencies styles in `src/styles.sass`.
 │   │   │  │
 │   │   │  └─ //langs to multilingue sites
 │   │   │
+│   │   ├─ .htaccess
+│   │   │
+│   │   ├─ crossdomain.xml
+│   │   │
+│   │   ├─ manifest.webapp
+│   │   │
+│   │   ├─ robots.txt
+│   │   │
 │   │   ├─ //Favicons Files
 │   │   │
 │   │   └─ //HTML or PHP Files
 │   │
-│   │
 │   └── src //Source files for the projects
-│       ├── images
-│       │   └─ //Original imagens, don't compressed
+│       ├── images //Original imagens, don't compressed
+│       │   │
+│       │   ├─ sprite //Images to generate the sprite
+│       │   │
+│       │   └─ touch //Icons to Mobile
 │       │
 │       ├── scripts
 │       │   │
-│       │   ├─ angular_scripts //Development AngularJS scripts
+│       │   ├─ angular //Development AngularJS
 │       │   │
-│       │   ├─ frameworks
+│       │   ├─ dependencies
+│       │   │  │
+│       │   │  ├─ frameworks
+│       │   │  │
+│       │   │  ├─ libs
+│       │   │  │
+│       │   │  └─ plugins
 │       │   │
-│       │   ├─ libs
+│       │   ├─ jquery
+│       │   │  │
+│       │   │  ├─ onread //Open and close elements of Jquery
+│       │   │  │
+│       │   │  └─ //Development JQuery
 │       │   │
-│       │   ├─ main //Development Javascript files will be concatenated and minify
+│       │   ├─ settings //Necessary settings to setup plugins, etc.
 │       │   │
-│       │   ├─ onread //Open and close elements of Jquery
-│       │   │
-│       │   ├─ plugins
-│       │   │
-│       │   └─ settings //Necessary settings to setup plugins, etc.
+│       │   └─ //Development Javascript files will be concatenated and minify
 │       │
 │       └── stylesheets
 │           │
@@ -104,21 +128,28 @@ Remember to remove dependencies styles in `src/styles.sass`.
 │           │
 │           ├─ helpers
 │           │  │
-│			│  ├─ mixins
+│           │  ├─ mixins
 │           │  │
-│           │  └─
-│           │
-│           ├─ main //Main Styles
+│           │  ├─ _functions.sass
+│           │  │
+│           │  ├─ _mixins.sass
+│           │  │
+│           │  └─ _variables.sass
 │           │
 │           ├─ media_queries
 │           │
 │           ├─ typography
 │           │
-│           └─ styles.sass //Base SASS file
-│
+│           ├─ _base.sass //Main Styles
+│           │
+│           ├─ _normalize-x-x-x.sass //Normalize
+│           │
+│           ├─ _sprite.sass //Generated class with use sprite
+│           │
+│           └─ styles.sass //Base SASS with imports
 │
 ├── .editorconfig //Settings of editorconfig plugin
-├── .gitignore //Ignored files to GIT commit
+├── .jshintrc //JSHint configuration file
 ├── gulpfile.js //Gulp.js configuration file
 ├── package.json //NPM dependencies
 └── README.md //Descrition of template
@@ -131,7 +162,7 @@ Remember to remove dependencies styles in `src/styles.sass`.
   `Mark npm package manager`
 
 
-1. Install Gulp.js
+1. Install [Gulp.js](http://gulpjs.com/)
 
   ```sh
   $ npm install gulp -g
@@ -143,10 +174,9 @@ Remember to remove dependencies styles in `src/styles.sass`.
   $ sudo npm install gulp -g
   ```
 
+1. [gulp-ruby-sass](https://www.npmjs.org/package/gulp-ruby-sass) require ruby and Sass 3.3+
 
-1. [gulp-compass](https://www.npmjs.org/package/gulp-compass) require ruby and compass
-
-  For Windows Users Only is necessary installer ruby
+  For Windows Users is necessary install ruby
 
   Download [Ruby](https://www.ruby-lang.org/pt/)
 
@@ -158,10 +188,9 @@ Remember to remove dependencies styles in `src/styles.sass`.
   * `ruby dk.rb install`
   * `gem install rdiscount --platform=ruby`
 
-
 ```sh
 $ gem update --system
-$ gem install compass
+$ gem install sass
 ```
 
 Go to the local folder
@@ -169,22 +198,10 @@ Go to the local folder
 $ cd my-gulp-template
 ```
 
-
 Install dependences of npm
 ```sh
 $ npm install
 ```
-
-### Recommendations
-
-Compass generates PNG files using a pure-ruby library called `chunky_png`. This library can be made faster by installing a simple C extension called `oily_png`.
-
-[http://compass-style.org/help/tutorials/spriting/](http://compass-style.org/help/tutorials/spriting/)
-
-```sh
-$ sudo gem install oily_png
-```
-
 
 ## Usage
 
@@ -194,50 +211,27 @@ Go to the local folder
 $ cd my-gulp-template
 ```
 
-Execute
+Execute to development
 
 ```sh
 $ gulp
 ```
 
-For best performance on optimize images, set just the current image folder on variable `current_path_images` in `gulpfile.js`
-
-```js
-var curent_path_images = "/", //Set the root source images
-
-var curent_path_images = "subfolder/", //Set especific subfolder in folder of source images
-```
-
-If you want chance the name of folders just change the path variables in `gulpfile.js` and `config.rb`.
-
-If you want change the filename of the sprite its necessary change the variable `sprite_path` in `gulpfile.js`.
-
-
-## Bugs
-
-[Error: ENOENT, no such file or directory](https://github.com/appleboy/gulp-compass/issues/15)
+Execute to build the project
 
 ```sh
-$ sudo gem uninstall sass
-$ sudo gem install sass -v 3.2.12
+$ gulp build
 ```
 
-Sass Multiline comments don`t work
+If you will work with dinamic files like .php its necessary make changes in gulpfile.js to BrowserSync
 
-Example
+Remove the lines
 ```
-/*
-	Multiline
-	Comment
-*/
+server: {
+	baseDir: [basePaths.src, basePaths.dest]
+}
 ```
-
-Sass Map structures don`t work
-
-Example
+Set the url to the server
 ```
-$list:
-	(1,  "value"),
-	(5,  "value"),
-	(23, "value")
+proxy: "localhost/my-gulp-template/public/"
 ```
