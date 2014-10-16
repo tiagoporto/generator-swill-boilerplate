@@ -50,10 +50,10 @@
 // Created by Stephen Burgess
 // http://minimalmonkey.com/sass-triangle-mixin/
 
-// @param width           :  px, em
-// @param height          :  px, em
-// @param direction       :  up, down, left, right
-// @param color           :  hex, rgb
+// @param width     : px, em
+// @param height    : px, em
+// @param direction : up, down, left, right
+// @param color     : hex, rgb
 
 
 =arrow($width: 20px, $height: 20px, $direction: up, $color: red)
@@ -86,7 +86,7 @@
 	-moz-background-size: $value
 	-o-background-size: $value
 	background-size: $value
-=border-radius($radius...)
+=border-radius($radius)
 	-webkit-border-radius: $radius
 	-moz-border-radius: $radius
 	border-radius: $radius
@@ -99,10 +99,22 @@
 // Acceptable values
 // content-box|border-box|initial|inherit
 // Content is the default W3C model
-=box-sizing($type: "border-box")
+=box-sizing($type: border-box)
 	-webkit-box-sizing: $type
 	-moz-box-sizing: $type
 	box-sizing: $type
+
+=columns($count, $width:null, $gap:null)
+
+	-webkit-columns: $width $count // Chrome, Safari, Opera
+	-moz-columns: $width $count // Firefox
+	columns: $width $count
+
+	@if $gap != null
+
+		-webkit-column-gap: $gap // Chrome, Safari, Opera
+		-moz-column-gap: $gap // Firefox
+		column-gap: $gap
 
 @mixin font-face($name, $filename, $eot-id: $name, $weight: false, $style: false)
 	$iefont: unquote("#{$filename}.eot?#iefix")
@@ -450,11 +462,11 @@
 	background-image:      -o-linear-gradient($reverseDirection, unquote($startColor), unquote($lastColor)) // Opera 11.10+
 	background-image:         linear-gradient(to $direction, unquote($startColor), unquote($lastColor)) // W3C
 
-=opacity($opacity)
-	$opacity-ie: $opacity * 100
+=opacity($value)
+	$value-ie: $value * 100
 
-	opacity: $opacity
-	filter: alpha(opacity=$opacity-ie) //IE8
+	opacity: $value
+	filter: alpha(opacity=$value-ie) //IE8 and earlier
 
 =radial-gradient($startColor, $lastColor, $shape:null, $size:null, $position:null)
 
