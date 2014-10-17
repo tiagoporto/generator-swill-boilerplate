@@ -203,6 +203,14 @@ Install dependences of npm
 $ npm install
 ```
 
+###EditorConfig
+
+To work with [EditorConfig](http://editorconfig.org/) it's necessary install the plugin on your text editor.
+
+Look if your text editor is supported, and make the download
+
+[http://editorconfig.org/#download](http://editorconfig.org/#download)
+
 ## Usage
 
 Go to the local folder
