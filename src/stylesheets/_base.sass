@@ -1,6 +1,6 @@
 //=============== Helpers ===============//
 
-// ********** ESCAPE VAR **********
+// *********** ESCAPE VAR ***************
 // #{$icon}
 
 // ********** COLOR FUNCTIONS ***********
@@ -13,54 +13,48 @@
 // tint( $base-color, 10% )
 // shade( $base-color, 10% )
 
-// ********** ICON FUNCTION *************
-// +icon("right-arrow", "icone")
-// +icon-before("right-arrow", "icone")
-
-// ************ EM FUNCTION *************
-// em(14)
-// ********** IMAGE FUNCTIONS ***********
-// image-url("bg.png")
-
 // ********** This is a mixin ***********
-=inline
-	display: inline
-	float: left
+//=inline
+//	display: inline
+//	float: left
 
 // ******* This is a placeholder ********
-%inline
-	+inline //Include a mixin
+//%inline
+//	+inline //Include a mixin
 
 // ***** Using mixin & placeholder ******
-
-// .using-mixin
-// 		+inline
-// 		@extend %inline
-
+//
+//	.using-mixin
+//		+inline
+//		@extend %inline
+//
 // Output
-// .using-mixin {
-// 		display: inline;
-// 		float: left;
+//	.using-mixin {
+//		display: inline;
+//		float: left;
 // }
-
+//
 // .extend-placeholder
-// 		@extend %inline
-
+//		@extend %inline
+//
 // Output
 // .extend-placeholder, .using-mixin {
 // 		display: inline;
-// 		float: left;
+//		float: left;
 // }
 
 //=======================================//
 
-*,
-*:before,
-*:after
-	+box-sizing(border)
 
 //If you will use bootstrap you can remove this imports
 //============================================================//
+
+// Box model reset
+*,
+*:before,
+*:after
+	+box-sizing(border-box)
+
 body
 	+body-typography
 	background-color: $bg-color
