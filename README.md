@@ -235,3 +235,76 @@ Set the url to the server
 ```
 proxy: "localhost/my-gulp-template/public/"
 ```
+
+### Sprites
+
+This template uses [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith) to generate sprites.
+
+When the sprite is generated, a file `_sprite.sass` is created with four mixins and the variables of the parameters of the images, like height and width (the names of the variables is same of the original file before the compilation).
+
+**`_sprite.sass` example**
+
+```scss
+
+$left-arrow-x: 0px;
+$left-arrow-y: 0px;
+$left-arrow-offset-x: 0px;
+$left-arrow-offset-y: 0px;
+$left-arrow-width: 32px;
+$left-arrow-height: 32px;
+$left-arrow-total-width: 32px;
+$left-arrow-total-height: 66px;
+$left-arrow-image: '../images/sprite.png';
+
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+```
+
+Just use the mixins with the variables as parameters.
+
+**Example**
+
+```sass
+#arrow
+	+sprite($left-arrow)
+
+	&:hover
+		+sprite-position($right-arrow)
+```
+
+**Output**
+
+```css
+#arrow {
+	background-image: url(../images/sprite.png);
+	background-position: 0px 0px;
+	width: 32px;
+	height: 32px;
+}
+#arrow:hover {
+	background-position: 0px -34px;
+}
+```

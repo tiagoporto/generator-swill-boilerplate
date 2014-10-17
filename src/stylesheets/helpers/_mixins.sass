@@ -409,26 +409,6 @@
 // ss02 - Stylistic Set 2.
 // Same idea as ss01 above, but some different effect. NOTE: There are further stylistic set features ss03–ss20.
 
-=icon($icon-name, $class-name:icon)
-	.#{$class-name}
-		position: relative
-		text-indent: -9999px
-		height: image-height("icons/#{$icon-name}.png")
-		width: image-width("icons/#{$icon-name}.png")
-
-		&:before
-			content: ""
-			height: image-height("icons/#{$icon-name}.png")
-			width: image-width("icons/#{$icon-name}.png")
-			position: absolute
-			left: 0
-			top: 0
-
-=icon-before($icon-name, $class-name:icon)
-	.#{$class-name}-#{$icon-name}
-		&:before
-			+icons-sprite($icon-name)
-
 =keyframes($animationName)
 	@-webkit-keyframes #{$animationName}
 		@content
