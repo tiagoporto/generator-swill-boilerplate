@@ -1,6 +1,6 @@
 /*
 	My Gulp.js Template
-	Version: 2.0.0beta
+	Version: 2.0.1beta
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -94,7 +94,8 @@ gulp.task('images', function() {
 				paths.images.src + '**/*.{png,jpg,gif,svg}',
 				'!' + paths.sprite.src + '**/*'
 			])
-			.pipe(cache(imagemin({optimizationLevel: 5, progressive: true})))
+			.pipe(cache('imagemin'))
+			.pipe(imagemin({optimizationLevel: 5, progressive: true}))
 			.pipe(gulp.dest(paths.images.dest))
 			.pipe(notify({message: 'Images task complete', onLast: true}));
 });
