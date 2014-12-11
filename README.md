@@ -4,7 +4,7 @@
 
 Basic Template Front-End with [Gulp.js](http://gulpjs.com/)
 
-Current version - **2.0.1beta**
+Current version - **2.0.2beta**
 
 I started this template when I start working with Gulp.js. When the google launch the [Web Starter Kit](https://developers.google.com/web/starter-kit/). I saw that I'm on the right track.
 
@@ -231,7 +231,9 @@ Execute to build the project
 $ gulp build
 ```
 
-If you will work with dinamic files like .php its necessary make changes in gulpfile.js to BrowserSync
+### BrowserSync
+
+If you will work with dinamic files like .php, it's necessary make changes in gulpfile.js to BrowserSync works
 
 Remove the lines
 ```
