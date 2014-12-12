@@ -1,6 +1,6 @@
 # My Gulp.js Template
 
-![gulp.js Logo](https://raw2.github.com/gulpjs/artwork/master/gulp.png)
+![gulp.js Logo](https://raw.githubusercontent.com/gulpjs/artwork/master/gulp.png)
 
 Basic Template Front-End with [Gulp.js](http://gulpjs.com/)
 
