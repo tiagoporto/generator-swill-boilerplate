@@ -81,17 +81,19 @@ Just remove what you will not use or include in specific directories: `src/scrip
 │   │   │  │
 │   │   │  └─ //langs to multilingue sites
 │   │   │
-│   │   ├─ .htaccess
+│   │   ├─ .htaccess //Configuration for use on web servers running the Apache Web Serve
 │   │   │
-│   │   ├─ crossdomain.xml
+│   │   │─ apple-touch-icon-precomposed.png //Icon for Safari on iOS
 │   │   │
-│   │   ├─ manifest.webapp
+│   │   ├─ crossdomain.xml //Permission to handle data across multiple domains
 │   │   │
-│   │   ├─ robots.txt
+│   │   ├─ manifest.webapp //Provides information about an app
 │   │   │
-│   │   ├─ //Favicons Files
+│   │   ├─ robots.txt //Give instructions about their site to search engines
 │   │   │
-│   │   └─ //HTML or PHP Files
+│   │   ├─ favicon.ico //Icon for address bar and bookmark
+│   │   │
+│   │   └─ //HTML or PHP, etc Files
 │   │
 │   └── src //Source files for the projects
 │       ├── images //Original imagens, don't compressed
@@ -99,6 +101,14 @@ Just remove what you will not use or include in specific directories: `src/scrip
 │       │   ├─ sprite //Images to generate the sprite
 │       │   │
 │       │   └─ touch //Icons to Mobile
+│       │  		│
+│       │   	├─ chrome-touch-icon-192x192.png //Icon for Chrome on Android
+│       │  		│
+│       │   	├─ icon-128x128.png //Icon for Firefox on FirefoxOS
+│       │  		│
+│       │   	├─ tile.png //Tile icon for Win8
+│       │   	│
+│       │   	└─ tile-wide.png //Wide tile icon for Win8
 │       │
 │       ├── scripts
 │       │   │
