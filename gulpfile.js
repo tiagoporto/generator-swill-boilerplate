@@ -1,6 +1,6 @@
 /*
 	My Gulp.js Template
-	Version: 2.0.2beta
+	Version: 3.0.0beta
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -22,7 +22,7 @@ var		   gulp = require('gulp'),
 		  merge = require('merge-stream'),
 		 rename = require('gulp-rename'),
 	runSequence = require('run-sequence'),
-		   sass = require('gulp-ruby-sass'),
+		 stylus = require('gulp-stylus'),
 	spritesmith = require('gulp.spritesmith'),
 		stylish = require('jshint-stylish'),
 		 uglify = require('gulp-uglify'),
@@ -104,7 +104,8 @@ gulp.task('images', function() {
 gulp.task('sprite', function () {
 	var spriteData   = 	gulp.src(paths.sprite.src + '**/*.png').pipe(spritesmith({
 							imgName: 'sprite.png',
-							cssName: '_sprite.scss',
+							cssName: 'sprite.styl',
+							// cssName: '_sprite.scss',
 							imgPath: '../' + assetsFolder.images.dest + 'sprite.png',
 							padding: 2,
 							algorithmOpts: { sort: false}
@@ -119,18 +120,19 @@ gulp.task('sprite', function () {
 	return spriteData;
 });
 
-// Concatenate Sass Mixins
-gulp.task('sass-mixins', function() {
-	return	gulp.src(paths.styles.src + 'helpers/mixins/*.sass')
-				.pipe(concat('_mixins.sass'))
+// Concatenate Stylus Mixins
+
+gulp.task('stylus-mixins', function() {
+	return	gulp.src(paths.styles.src + 'helpers/mixins/*.styl')
+				.pipe(concat('mixins.styl'))
 				.pipe(gulp.dest(paths.styles.src + 'helpers'))
-				.pipe(notify({message: 'Sass-mixins task complete', onLast: true}));
+				.pipe(notify({message: 'Stylus-mixins task complete', onLast: true}));
 });
 
-// Compile Sass Styles
+// Compile Stylus Styles
 gulp.task('styles', function() {
-	return	gulp.src(paths.styles.src + '*.{sass,scss}', { base: paths.styles.src})
-				.pipe(sass({style: 'compressed', sourcemap: true, sourcemapPath: '../stylesheets'}))
+	return	gulp.src(paths.styles.src + 'styles.styl', { base: paths.styles.src})
+				.pipe(stylus({compress: true, 'include css': true}))
 				.on('error', function (err) { console.log(err.message); })
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(notify({message: 'Styles task complete <%= options.message %>'}));
@@ -289,11 +291,11 @@ gulp.task('watch', function() {
 	// Watch dependencies .js files
 	gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts', browserSync.reload]);
 
-	// Watch sass files
-	gulp.watch([paths.styles.src + '**/*.{sass,scss}', '!' + paths.styles.src + 'helpers/mixins/*.{sass,scss}'], ['styles', browserSync.reload]);
+	// Watch .styl files
+	gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl'], ['styles', browserSync.reload]);
 
-	// Watch mixins sass files
-	gulp.watch(paths.styles.src + 'helpers/mixins/*.{sass,scss}', ['sass-mixins']);
+	// Watch Stylus mixins files
+	gulp.watch(paths.styles.src + 'helpers/mixins/*.styl', ['stylus-mixins']);
 
 	// Watch .jpg .png .gif files
 	gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.src + '**/*'], ['images', browserSync.reload]);
@@ -308,11 +310,11 @@ gulp.task('watch', function() {
 //================= Main Tasks =================//
 // Default task
 gulp.task('default', ['clean'], function(callback) {
-	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'sass-mixins', 'styles', 'watch',  callback);
+	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'stylus-mixins', 'styles', 'watch',  callback);
 });
 
 
 // Build Project
 gulp.task('build', ['clean'], function(callback) {
-	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'sass-mixins', 'styles', 'copy', callback);
+	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'stylus-mixins', 'styles', 'copy', callback);
 });
