@@ -11,19 +11,19 @@
 //************************* Load dependencies ****************************//
 var		   gulp = require('gulp'),
    autoprefixer = require('gulp-autoprefixer'),
-	// browserSync = require('browser-sync'),
+	browserSync = require('browser-sync'),
 		  cache = require('gulp-cached'),
 	// 	  clean = require('gulp-clean'),
 	// 	 concat = require('gulp-concat'),
 		   csso = require('gulp-csso'),
 	   imagemin = require('gulp-imagemin'),
 	// 	 jshint = require('gulp-jshint'),
-	// 	  merge = require('merge-stream'),
+		  merge = require('merge-stream'),
 	//  minifyHTML = require('gulp-minify-html'),
 		 notify = require('gulp-notify'),
 		plumber = require('gulp-plumber'),
 		 rename = require('gulp-rename'),
-	// sequence = require('run-sequence'),
+	   sequence = require('run-sequence'),
 	 sourcemaps = require('gulp-sourcemaps'),
 	spritesmith = require('gulp.spritesmith'),
 	// 	stylish = require('jshint-stylish'),
@@ -91,18 +91,6 @@ var		   gulp = require('gulp'),
 
 //******************************** Tasks *********************************//
 
-// Optimize Images
-gulp.task('images', function() {
-	return	gulp.src([
-				paths.images.src + '**/*.{png,jpg,gif,svg}',
-				'!' + paths.sprite.src + '**/*'
-			])
-			.pipe(cache('imagemin'))
-			.pipe(imagemin({optimizationLevel: 5, progressive: true}))
-			.pipe(gulp.dest(paths.images.dest))
-			.pipe(notify({message: 'Images task complete', onLast: true}));
-});
-
 // Generate Sprite
 gulp.task('sprite', function () {
 	var sprite = gulp.src(paths.sprite.src + '**/*.png')
@@ -120,9 +108,22 @@ gulp.task('sprite', function () {
 		.pipe(imagemin())
 		.pipe(gulp.dest(paths.images.dest));
 	sprite.css
-		.pipe(gulp.dest(paths.styles.src));
+		.pipe(gulp.dest(paths.styles.src))
+		.pipe(notify({message: 'Sprite task complete'}));
 
 	return sprite;
+});
+
+// Optimize Images
+gulp.task('images', function() {
+	return	gulp.src([
+				paths.images.src + '**/*.{png,jpg,gif,svg}',
+				'!' + paths.sprite.src + '**/*'
+			])
+			.pipe(cache('imagemin'))
+			.pipe(imagemin({optimizationLevel: 5, progressive: true}))
+			.pipe(gulp.dest(paths.images.dest))
+			.pipe(notify({message: 'Images task complete', onLast: true}));
 });
 
 // Concatenate Stylus Mixins
@@ -135,32 +136,72 @@ gulp.task('sprite', function () {
 
 // Compile Stylus Styles
 gulp.task('styles', function() {
-	return	gulp.src(paths.styles.src + 'styles.styl', { base: process.cwd() })
-				.pipe(plumber())
-				.pipe(
-					sourcemaps.init({
-						loadMaps: true
-					})
-				)
-				.pipe(stylus({
-					sourcemap: {
-						inline: true,
-						sourceRoot: '../',
-						basePath: paths.styles.src
-					}
-				}))
-				.pipe(autoprefixer({
-					browsers: ['safari >= 4', 'opera >= 3', "ie > 7", "ff > 10", 'chrome >= 10']
-				}))
-				.pipe(sourcemaps.write('.', {
-					includeContent: false,
-					sourceRoot: "../"
-				}))
-				.pipe(gulp.dest(paths.styles.dest))
-				.pipe(rename({suffix: '.min'}))
-				// .pipe(csso())
-				.pipe(gulp.dest(paths.styles.dest))
-				.pipe(notify({message: 'Styles task complete.'}));
+	return	gulp.src(paths.styles.src + 'styles.styl')
+						.pipe(plumber())
+						.pipe(
+							sourcemaps.init({debug:true})
+						)
+						.pipe(stylus())
+						.pipe(autoprefixer({
+							browsers: ['safari >= 4', 'opera >= 3', "ie > 7", "ff > 10", 'chrome >= 10']
+						}))
+						.pipe(sourcemaps.write('./', {
+							includeContent: false,
+							sourceRoot: "../" + assetsFolder.styles.src
+						}))
+						.pipe(gulp.dest(paths.styles.dest));
+
+
+	// 	var styles	=	gulp.src(paths.styles.src + 'styles.styl')
+	// 					.pipe(plumber())
+	// 					.pipe(
+	// 						sourcemaps.init({
+	// 							loadMaps: true
+	// 						})
+	// 					)
+	// 					.pipe(stylus({
+	// 						sourcemap: {
+	// 							inline: true,
+	// 							sourceRoot: '../',
+	// 							basePath: paths.styles.src
+	// 						}
+	// 					}))
+	// 					.pipe(autoprefixer({
+	// 						browsers: ['safari >= 4', 'opera >= 3', "ie > 7", "ff > 10", 'chrome >= 10']
+	// 					}))
+	// 					.pipe(sourcemaps.write('.', {
+	// 						includeContent: false,
+	// 						sourceRoot: "../"
+	// 					}))
+	// 					.pipe(gulp.dest(paths.styles.dest));
+
+	// var stylesmin =	gulp.src(paths.styles.src + 'styles.styl')
+	// 					.pipe(plumber())
+	// 					.pipe(
+	// 						sourcemaps.init({
+	// 							loadMaps: true
+	// 						})
+	// 					)
+	// 					.pipe(stylus({
+	// 						compress: true,
+	// 						sourcemap: {
+	// 							inline: true,
+	// 							sourceRoot: '../',
+	// 							basePath: paths.styles.src
+	// 						}
+	// 					}))
+	// 					.pipe(autoprefixer({
+	// 						browsers: ['safari >= 4', 'opera >= 3', "ie > 7", "ff > 10", 'chrome >= 10']
+	// 					}))
+	// 					.pipe(sourcemaps.write('.', {
+	// 						includeContent: false,
+	// 						sourceRoot: "../"
+	// 					}))
+	// 					.pipe(rename({suffix: '.min'}))
+	// 					.pipe(gulp.dest(paths.styles.dest))
+	// 					.pipe(notify({message: 'Styles task complete.'}));
+
+	// return merge(styles, stylesmin);
 });
 
 // Execute concat-scripts, min-angular-scripts, concat-all-min-scripts and clean-scripts tasks
@@ -302,13 +343,13 @@ gulp.task('copy', function () {
 
 // Watch
 gulp.task('watch', function() {
-	// browserSync({
-	// 	notify: false,
-	// 	// proxy: "localhost/my-gulp-template/public/"
-	// 	server: {
-	// 		baseDir: [basePaths.src, basePaths.dest]
-	// 	}
-	// });
+	browserSync({
+		notify: false,
+		// proxy: "localhost/my-gulp-template/public/"
+		server: {
+			baseDir: [basePaths.src, basePaths.dest]
+		}
+	});
 
 	// Watch .jpg .png .gif files
 	gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.src + '**/*'], ['images', browserSync.reload]);
@@ -323,7 +364,7 @@ gulp.task('watch', function() {
 	// gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts', browserSync.reload]);
 
 	// Watch .styl files
-	// gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl'], ['styles', browserSync.reload]);
+	gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl'], ['styles', browserSync.reload]);
 
 	// Watch Stylus mixins files
 	// gulp.watch(paths.styles.src + 'helpers/mixins/*.styl', ['stylus-mixins']);
@@ -334,6 +375,10 @@ gulp.task('watch', function() {
 
 //================= Main Tasks =================//
 // Default task
+gulp.task('default', function(callback) {
+	sequence('styles', 'watch',  callback);
+	// sequence(['images', 'sprite'], 'styles', 'watch',  callback);
+});
 // gulp.task('default', ['clean'], function(callback) {
 // 	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'stylus-mixins', 'styles', 'watch',  callback);
 // });
