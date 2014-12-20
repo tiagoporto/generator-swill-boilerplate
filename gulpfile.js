@@ -2,7 +2,7 @@
 	My Gulp.js Template
 	Version: 3.0.0beta
 	Author: Tiago Porto - http://www.tiagoporto.com
-	https://github.com/tiagoporto
+	https://github.com/tiagoporto/my-gulp-template
 	Contact: me@tiagoporto.com
 */
 
