@@ -137,12 +137,17 @@ gulp.task('images', function() {
 });
 
 // Concatenate Stylus Mixins
-// gulp.task('stylus-mixins', function() {
-// 	return	gulp.src(paths.styles.src + 'helpers/mixins/*.styl')
-// 				.pipe(concat('mixins.styl'))
-// 				.pipe(gulp.dest(paths.styles.src + 'helpers'))
-// 				.pipe(notify({message: 'Stylus-mixins task complete', onLast: true}));
-// });
+gulp.task('stylus-helpers', function() {
+	var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.styl')
+					.pipe(concat('_mixins.styl'))
+					.pipe(gulp.dest(paths.styles.src + 'helpers'));
+
+	var functions = gulp.src(paths.styles.src + 'helpers/functions/*.styl')
+						.pipe(concat('_functions.styl'))
+						.pipe(gulp.dest(paths.styles.src + 'helpers'));
+
+	return merge(mixins, functions);
+});
 
 // Compile Stylus Styles
 gulp.task('styles', function() {
@@ -172,9 +177,9 @@ gulp.task('scripts', function(callback) {
 gulp.task('dependence-scripts', function() {
 	return	gulp.src([
 				paths.scripts.src + 'dependencies/plugins/outdatedbrowser-1.1.0.js',
-				// paths.scripts.src + 'dependencies/libs/*',
-				// paths.scripts.src + 'dependencies/frameworks/*',
-				// paths.scripts.src + 'dependencies/plugins/**'
+				paths.scripts.src + 'dependencies/libs/*',
+				paths.scripts.src + 'dependencies/frameworks/*',
+				paths.scripts.src + 'dependencies/plugins/**'
 			])
 			.pipe(concat('dependencies.js'))
 			.pipe(gulp.dest(paths.scripts.dest))
@@ -311,7 +316,7 @@ gulp.task('watch', function() {
 	gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl'], ['styles', browserSync.reload]);
 
 	// Watch Stylus mixins files
-	// gulp.watch(paths.styles.src + 'helpers/mixins/*.styl', ['stylus-mixins']);
+	// gulp.watch(paths.styles.src + 'helpers/mixins/*.styl', ['stylus-helpers']);
 
 	//Watch .html .php Files
 	// gulp.watch(basePaths.dest + '**/*.{html,php}', browserSync.reload);
@@ -320,15 +325,15 @@ gulp.task('watch', function() {
 //================= Main Tasks =================//
 // Default task
 gulp.task('default', function(callback) {
-	sequence('styles', 'dependence-scripts', 'scripts', 'watch',  callback);
-	// sequence(['images', 'sprite'], 'styles', 'watch',  callback);
+	sequence(['images', 'sprite'], 'styles', 'dependence-scripts', 'scripts', 'watch',  callback);
 });
+
 // gulp.task('default', ['clean'], function(callback) {
-// 	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'stylus-mixins', 'styles', 'watch',  callback);
+// 	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'stylus-helpers', 'styles', 'watch',  callback);
 // });
 
 
 // Build Project
 // gulp.task('build', ['clean'], function(callback) {
-// 	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'stylus-mixins', 'styles', 'copy', callback);
+// 	runSequence(['images', 'sprite'], 'dependence-scripts', 'scripts', 'stylus-helpers', 'styles', 'copy', callback);
 // });
