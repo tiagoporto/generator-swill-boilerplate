@@ -1,0 +1,5 @@
+// Function em() by Viljami Salminen
+// http://viljamis.com/blog/2013/prototyping-responsive-typography/?utm_source=Responsive+Design+Weekly&utm_campaign=76e7785581-Responsive_Design_Weekly_046&utm_medium=email
+
+@function em($pixels, $context: $font-size-base)
+	@return #{$pixels/$context}em

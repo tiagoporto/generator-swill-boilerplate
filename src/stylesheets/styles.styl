@@ -1,4 +1,4 @@
-/*
+/*!
 	Author: Tiago Porto - http://www.tiagoporto.com
 	https://github.com/tiagoporto
 	Contact: me@tiagoporto.com
@@ -11,9 +11,9 @@
 //If you will use bootstrap you can remove this import
 // @import "typography/typography";
 
-// @import "dependencies/outdatedbrowser-1.1.0";
+@import "dependencies/_outdatedbrowser-1.1.0";
+@import "dependencies/_animate";
 // @import "dependencies/bootstrap-3.2.0";
-// @import "dependencies/animate";
 // @import "dependencies/jquery.mobile.structure-1.4.4";
 // @import "dependencies/jquery-ui.structure-1.11.1";
 
@@ -22,38 +22,34 @@
 /* Web Fonts */
 // @import "typography/web-fonts";
 
-// @import "normalize-3.0.2";
+@import "dependencies/_normalize-3.0.2";
 
 /* Grid */
-// @import "grid";
+@import "dependencies/_semantic.gs-1.2";
 //============================================================//
 
 /* Sprite */
-// @import "sprite";
+@import "_sprite";
 
 /* Main Styles */
 // @import "base";
 
 /* Media Queries */
-// @media print{
-	// @import "media_queries/print";
-// }
+@media print{
+	@import "media_queries/_print";
+}
 
 //480px
-// @media (max-width: 30em){
-	// @import "media_queries/max_480";
-// }
+@media (max-width: 30em){
+	@import "media_queries/_max_480";
+}
 
 // 481px - 768em
-// @media (min-width: 30.063em) and (max-width: 48em){
-	// @import "media_queries/min_481_max_768";
-// }
+@media (min-width: 30.063em) and (max-width: 48em){
+	@import "media_queries/_min_481_max_768";
+}
 
 // 769px - 992px
-// @media (min-width: 48.063em) and (max-width: 62em){
-	// @import "media_queries/min_769_max_992";
-// }
-
-
-body
-	width 20px
+@media (min-width: 48.063em) and (max-width: 62em){
+	@import "media_queries/_min_769_max_992";
+}

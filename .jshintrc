@@ -12,9 +12,10 @@
   "esnext": true,
   "globals": {
 	  "$": false,
+	  "console": false,
+	  "ga": false,
 	  "jQuery": false,
-	  "outdatedBrowser": false,
-	  "ga": false
+	  "outdatedBrowser": false
    },
   "immed": true,
   "indent": 4,
