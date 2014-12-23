@@ -5,33 +5,32 @@
 	Project Home page
 	Contact: email
 */
-
 // Helpers
-// @import "helpers/variables";
-// @import "helpers/mixins";
-// @import "helpers/functions";
-//If you will use bootstrap you can remove this import
-// @import "typography/typography";
+// @import "helpers/_variables";
+@import "helpers/_mixins";
+// @import "helpers/_functions";
+// @import "typography/_typography";
 
-@import "dependencies/_outdatedbrowser-1.1.0";
-@import "dependencies/_animate";
-// @import "dependencies/bootstrap-3.2.0";
-// @import "dependencies/jquery.mobile.structure-1.4.4";
-// @import "dependencies/jquery-ui.structure-1.11.1";
+// Dependencies
+@import "dependencies/_outdatedbrowser-1.1.0"
+@import "dependencies/_animate"
+@import "dependencies/_bootstrap-3.3.1"
 
 //If you will use bootstrap you can remove these imports
 //============================================================//
 /* Web Fonts */
 // @import "typography/web-fonts";
 
-@import "dependencies/_normalize-3.0.2";
+// Reset and normalize
+// @import "dependencies/_normalize-3.0.2"
 
-/* Grid */
-@import "dependencies/_semantic.gs-1.2";
+// Grid System
+// @import "dependencies/_semantic.gs-1.2"
 //============================================================//
 
+
 /* Sprite */
-@import "_sprite";
+// @import "_sprite"
 
 /* Main Styles */
 // @import "base";
@@ -41,7 +40,7 @@
 	@import "media_queries/_print";
 }
 
-//480px
+480px
 @media (max-width: 30em){
 	@import "media_queries/_max_480";
 }

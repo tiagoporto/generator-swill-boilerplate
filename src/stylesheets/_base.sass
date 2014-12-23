@@ -1,26 +1,25 @@
 //=============== Helpers ===============//
 
 // *********** ESCAPE VAR ***************
-// #{$icon}
+// {$icon}
 
 // ********** COLOR FUNCTIONS ***********
-// darken( $base-color, 50%)
-// lighten( $base-color, 10% )
-// saturate( $base-color, 20% )
-// desaturate( $base-color, 20% )
-// adjust-hue( $base-color, 20% )
-// rgba( $base-color, .7 )
-// tint( $base-color, 10% )
-// shade( $base-color, 10% )
+// darken(#D62828, 50%) Darken the given color by amount.
+// lighten(#2c2c2c, 10%) Lighten the given color by amount.
+// saturate(#00c, 20%) Saturate the given color by amount.
+// desaturate(#f00, 20%) Desaturate the given color by amount.
+// tint(#fd0cc7, 10%) Mix the given color with white.
+// shade(#fd0cc7, 10%) Mix the given color with black.
+// rgba(#ffcc00, .7) Return RGBA from the r,g,b,a channels
 
 // ********** This is a mixin ***********
-//=inline
-//	display: inline
-//	float: left
+//	=inline
+//		display: inline
+//		float: left
 
 // ******* This is a placeholder ********
-//%inline
-//	+inline //Include a mixin
+//	%inline
+//		+inline //Include a mixin
 
 // ***** Using mixin & placeholder ******
 //
@@ -28,20 +27,20 @@
 //		+inline
 //		@extend %inline
 //
-// Output
-//	.using-mixin {
-//		display: inline;
-//		float: left;
-// }
+// 	Output
+//		.using-mixin {
+//			display: inline;
+//			float: left;
+// 	}
 //
-// .extend-placeholder
+//	.extend-placeholder
 //		@extend %inline
 //
-// Output
-// .extend-placeholder, .using-mixin {
+//	Output
+//	.extend-placeholder, .using-mixin {
 // 		display: inline;
 //		float: left;
-// }
+// 	}
 
 //=======================================//
 
