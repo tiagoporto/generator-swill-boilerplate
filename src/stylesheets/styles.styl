@@ -1,3 +1,4 @@
+@charset "UTF-8"
 /*!
 	Project Name
 	Version: x.x.x
@@ -5,35 +6,34 @@
 	Project Home page
 	Contact: email
 */
-// Helpers
-// @import "helpers/_variables";
-@import "helpers/_mixins";
-// @import "helpers/_functions";
-// @import "typography/_typography";
 
-// Dependencies
-@import "dependencies/_outdatedbrowser-1.1.0"
-@import "dependencies/_animate"
-@import "dependencies/_bootstrap-3.3.1"
+// Helpers
+@import "helpers/_variables";
+@import "helpers/_mixins";
+@import "helpers/_functions";
+@import "helpers/_sprite"
 
 //If you will use bootstrap you can remove these imports
 //============================================================//
 /* Web Fonts */
-// @import "typography/web-fonts";
+@import "typography/_web-fonts";
+// @import "typography/_typography";
 
 // Reset and normalize
-// @import "dependencies/_normalize-3.0.2"
+@import "dependencies/_normalize-3.0.2"
 
 // Grid System
 // @import "dependencies/_semantic.gs-1.2"
 //============================================================//
 
-
-/* Sprite */
-// @import "_sprite"
+// Dependencies
+@import "dependencies/_outdatedbrowser-1.1.0"
+// @import "dependencies/_animate"
+// @import "dependencies/_bootstrap-3.3.1"
 
 /* Main Styles */
 // @import "base";
+
 
 /* Media Queries */
 @media print{

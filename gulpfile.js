@@ -59,7 +59,7 @@ var		   gulp = require('gulp'),
 		},
 
 		fonts: {
-			dest: 'fonts/'
+			dest: 'fonts/' //If change this directory remember to modify the variable $font-path in 'src/stylesheets/helpers/_variables.styl'
 		}
 	},
 
@@ -126,7 +126,7 @@ gulp.task('sprite', function () {
 		.pipe(imagemin())
 		.pipe(gulp.dest(paths.images.dest));
 	sprite.css
-		.pipe(gulp.dest(paths.styles.src))
+		.pipe(gulp.dest(paths.styles.src + 'helpers'))
 		.pipe(notify({message: 'Sprite task complete'}));
 
 	return sprite;
@@ -316,10 +316,10 @@ gulp.task('watch', function () {
 	});
 
 	// Watch .jpg .png .gif and .svg files
-	// gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.src + '**/*'], ['images', browserSync.reload]);
+	gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.src + '**/*'], ['images', browserSync.reload]);
 
 	// Watch sprite file
-	// gulp.watch(paths.sprite.src + '**/*.{png,jpg,gif}', ['sprite', browserSync.reload]);
+	gulp.watch(paths.sprite.src + '**/*.{png,jpg,gif}', ['sprite', browserSync.reload]);
 
 	// Watch .js files
 	// gulp.watch([paths.scripts.src + '**/*.js', '!' + paths.scripts.src + 'dependencies/**/*.js'], ['scripts', browserSync.reload]);
@@ -328,13 +328,13 @@ gulp.task('watch', function () {
 	// gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts', browserSync.reload]);
 
 	// Watch .styl files
-	// gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl', '!' + paths.styles.src + 'helpers/functions/*.styl'], ['styles', browserSync.reload]);
+	gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl', '!' + paths.styles.src + 'helpers/functions/*.styl'], ['styles', browserSync.reload]);
 
-	// Watch Stylus Helpers files
-	// gulp.watch([paths.styles.src + 'helpers/mixins/*.styl', paths.styles.src + 'helpers/functions/*.styl'], ['stylus-helpers']);
+	// Watch .styl Helpers and Functions files
+	gulp.watch([paths.styles.src + 'helpers/mixins/*.styl', paths.styles.src + 'helpers/functions/*.styl'], ['stylus-helpers']);
 
-	//Watch .html .php Files
-	// gulp.watch(basePaths.dest + '**/*.{html,php}', browserSync.reload);
+	//Watch .html and .php Files
+	gulp.watch(basePaths.dest + '**/*.{html,php}', browserSync.reload);
 });
 
 //================= Main Tasks =================//
