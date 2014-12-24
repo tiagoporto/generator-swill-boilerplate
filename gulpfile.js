@@ -29,7 +29,6 @@ var		   gulp = require('gulp'),
 		stylish = require('jshint-stylish'),
 		 stylus = require('gulp-stylus'),
 		 uglify = require('gulp-uglify'),
-		  watch = require('gulp-watch'),
 
 //***************************** Path configs *****************************//
 	basePaths = {
@@ -308,6 +307,7 @@ gulp.task('clean', function () {
 gulp.task('watch', function () {
 	browserSync({
 		notify: false,
+		port: 80,
 		logPrefix: 'BrowserSync',
 		// proxy: "localhost/my-gulp-template/public/"
 		server: {
@@ -322,10 +322,10 @@ gulp.task('watch', function () {
 	gulp.watch(paths.sprite.src + '**/*.{png,jpg,gif}', ['sprite', browserSync.reload]);
 
 	// Watch .js files
-	// gulp.watch([paths.scripts.src + '**/*.js', '!' + paths.scripts.src + 'dependencies/**/*.js'], ['scripts', browserSync.reload]);
+	gulp.watch([paths.scripts.src + '**/*.js', '!' + paths.scripts.src + 'dependencies/**/*.js'], ['scripts', browserSync.reload]);
 
 	// Watch dependencies .js files
-	// gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts', browserSync.reload]);
+	gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts', browserSync.reload]);
 
 	// Watch .styl files
 	gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl', '!' + paths.styles.src + 'helpers/functions/*.styl'], ['styles', browserSync.reload]);
@@ -352,6 +352,7 @@ gulp.task('build', ['clean'], function (cb) {
 gulp.task('build:server', ['build'], function (cb) {
 	browserSync({
 		notify: false,
+		port: 80,
 		logPrefix: 'BrowserSync',
 		// proxy: "localhost/my-gulp-template/public/"
 		server: {
