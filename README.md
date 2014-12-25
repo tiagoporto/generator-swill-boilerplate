@@ -1,3 +1,6 @@
+<!-- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
+http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
+ -->
 # My Gulp.js Template
 
 ![gulp.js Logo](https://raw.githubusercontent.com/gulpjs/artwork/master/gulp.png)
