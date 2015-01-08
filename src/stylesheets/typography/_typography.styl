@@ -1,31 +1,32 @@
-=body-typography
-	font: normal normal  #{$font-size-base}px/#{($font-size-base + 3)}px $font-family-base
+body-typography()
+	font: normal normal  $font-size-base\/($font-size-base + 3) $font-family-base
 
 	text-rendering: optimizeLegibility
 	-webkit-font-smoothing: antialiased
 	-moz-osx-font-smoothing: grayscale
-	+font-feature-settings(frac liga)
+	font-feature-settings: "frac", "liga"
 
-=h1-typography
+h1-typography()
 	font-size: em($font-size-h1)
 	line-height: em(($font-size-h1 + 3), $font-size-h1)
 
-=h2-typography
+h2-typography()
 	font-size: em($font-size-h2)
 	line-height: em(($font-size-h2 + 3), $font-size-h2)
 
-=h3-typography
+h3-typography()
 	font-size: em($font-size-h3)
 	line-height: em(($font-size-h3 + 3), $font-size-h3)
 
-=h4-typography
+h4-typography()
+
 	font-size: em($font-size-h4)
 	line-height: em(($font-size-h4 + 3), $font-size-h4)
 
-=h5-typography
+h5-typography()
 	font-size: em($font-size-h5)
 	line-height: em(($font-size-h5 + 3), $font-size-h5)
 
-=h6-typography
+h6-typography()
 	font-size: em($font-size-h6)
 	line-height: em(($font-size-h6 + 3), $font-size-h6)

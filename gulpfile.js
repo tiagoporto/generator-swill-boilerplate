@@ -40,7 +40,8 @@ var		   gulp = require('gulp'),
 		assetsFolder = {
 			images: {
 				 src: 'images/',
-				dest: 'images/'
+				dest: 'images/' // If change this directory remember to modify the variable $image-path
+								// in 'src/stylesheets/helpers/_variables.styl'
 		},
 
 		sprite: {
@@ -58,7 +59,8 @@ var		   gulp = require('gulp'),
 		},
 
 		fonts: {
-			dest: 'fonts/' //If change this directory remember to modify the variable $font-path in 'src/stylesheets/helpers/_variables.styl'
+			dest: 'fonts/' // If change this directory remember to modify the variable $font-path
+						   // in 'src/stylesheets/helpers/_variables.styl'
 		}
 	},
 
@@ -219,6 +221,7 @@ gulp.task('main-scripts', function () {
 				.pipe(gulp.dest(paths.scripts.dest))
 				.pipe(rename('main.min.js'))
 				.pipe(uglify())
+				// Required to minify angularjs scripts
 				// .pipe(uglify({mangle: false}))
 				.pipe(gulp.dest(paths.scripts.dest));
 });
@@ -309,6 +312,7 @@ gulp.task('watch', function () {
 		notify: false,
 		port: 80,
 		logPrefix: 'BrowserSync',
+		// To use with dinamic files
 		// proxy: "localhost/my-gulp-template/public/"
 		server: {
 			baseDir: [basePaths.src, basePaths.dest]
