@@ -261,10 +261,6 @@ gulp.task('copy', function () {
 	var css  =  gulp.src(paths.styles.dest + filename.styles.minified)
 					.pipe(gulp.dest(paths.styles.build));
 
-	// Copy Web Fonts
-	var fonts =	gulp.src(paths.fonts.src + '**/*')
-					.pipe(gulp.dest(paths.fonts.build));
-
 	// Minify and Copy HTML
 	var html  =	gulp.src(basePaths.dest + '**/*.{html,php}')
 					.pipe(replace(filename.scripts.expanded, filename.scripts.minified))
@@ -276,16 +272,14 @@ gulp.task('copy', function () {
 	var script = gulp.src(paths.scripts.dest + filename.scripts.minified)
 					 .pipe(gulp.dest(paths.scripts.build));
 
-	// Copy All Other files except HTML and PHP Files
+	// Copy All Other files except HTML, PHP, CSS e JS Files
 	var AllFiles  =	gulp.src([
-							basePaths.dest + '*',
+							basePaths.dest + '**/*',
+							'!' + paths.styles.dest + '**/*',
+							'!' + paths.scripts.dest + '**/*',
 							'!' + basePaths.dest + '**/*.{html,php}'
 						], {dot: true})
 						.pipe(gulp.dest(basePaths.build));
-
-	// Copy Images
-   var images =	gulp.src(paths.images.dest + '**/*')
-					.pipe(gulp.dest(paths.images.build));
 });
 
 //================= Utility Tasks =================//
@@ -349,7 +343,7 @@ gulp.task('default', ['clean'], function (cb) {
 
 // Build Project
 gulp.task('build', ['clean'], function (cb) {
-	runSequence(['images', 'sprite'], 'stylus-helpers', 'styles', 'dependence-scripts', 'scripts', 'copy', cb);
+	sequence(['images', 'sprite'], 'stylus-helpers', 'styles', 'dependence-scripts', 'scripts', 'copy', cb);
 });
 
 // Build and serve Builded Project
