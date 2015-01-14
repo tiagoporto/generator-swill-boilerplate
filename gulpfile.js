@@ -6,6 +6,19 @@
 	Contact: me@tiagoporto.com
 */
 
+
+/**
+
+	TODO:
+	- Sprite de svg
+	- Suportar mais arquivos para exportar css e js
+	- Retina
+	- Icons
+	- Verificar Font features
+
+**/
+
+
 'use strict';
 
 //************************* Load dependencies ****************************//
@@ -347,7 +360,7 @@ gulp.task('build', ['clean'], function (cb) {
 });
 
 // Build and serve Builded Project
-gulp.task('build:server', ['build'], function (cb) {
+gulp.task('build:serve', ['build'], function (cb) {
 	browserSync({
 		notify: false,
 		port: 80,

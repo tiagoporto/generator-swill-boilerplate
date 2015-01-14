@@ -1,5 +1,16 @@
-/* em functions */
-//Convert pixel unitos to em units
+/* EM function */
+//Convert pixel units to em units
 
 em($pixels, $context = $font-size-base)
 	($pixels/$context)em
+
+/* image-url function */
+
+image-url($image-name)
+	url($image-path + $image-name)
+
+/* EM function */
+//Convert pixel units to rem units
+
+rem($pixels, $context = $font-size-base)
+	($pixels/$context)rem
