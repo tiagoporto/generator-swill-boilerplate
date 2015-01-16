@@ -6,19 +6,13 @@
 	Contact: me@tiagoporto.com
 */
 
-
 /**
-
 	TODO:
 	- Sprite de svg
-	- Suportar mais arquivos para exportar css e js
 	- Retina
 	- Icons
 	- Verificar Font features
-
 **/
-
-
 'use strict';
 
 //************************* Load dependencies ****************************//
@@ -26,9 +20,10 @@ var		   gulp = require('gulp'),
    autoprefixer = require('gulp-autoprefixer'),
 	browserSync = require('browser-sync'),
 		  cache = require('gulp-cached'),
-		  clean = require('gulp-clean'),
 		 concat = require('gulp-concat'),
 		   csso = require('gulp-csso'),
+			del = require('del'),
+		 gulpif = require('gulp-if'),
 	   imagemin = require('gulp-imagemin'),
 		 jshint = require('gulp-jshint'),
 		  merge = require('merge-stream'),
@@ -36,12 +31,12 @@ var		   gulp = require('gulp'),
 		 notify = require('gulp-notify'),
 		plumber = require('gulp-plumber'),
 		 rename = require('gulp-rename'),
-		replace = require('gulp-replace'),
 	   sequence = require('run-sequence'),
 	spritesmith = require('gulp.spritesmith'),
 		stylish = require('jshint-stylish'),
 		 stylus = require('gulp-stylus'),
 		 uglify = require('gulp-uglify'),
+		 useref = require('gulp-useref'),
 
 //***************************** Path configs *****************************//
 	basePaths = {
@@ -53,8 +48,9 @@ var		   gulp = require('gulp'),
 		assetsFolder = {
 			images: {
 				 src: 'images/',
-				dest: 'images/' // If change this directory remember to modify the variable $image-path
-								// in 'src/stylesheets/helpers/_variables.styl'
+				dest: 'images/' // If change this directory remember to modify
+				                // the variable $image-path in
+								// 'src/stylesheets/helpers/_variables.styl'
 		},
 
 		sprite: {
@@ -72,8 +68,9 @@ var		   gulp = require('gulp'),
 		},
 
 		fonts: {
-			dest: 'fonts/' // If change this directory remember to modify the variable $font-path
-						   // in 'src/stylesheets/helpers/_variables.styl'
+			dest: 'fonts/' // If change this directory remember to modify
+			               // the variable $font-path in
+						   // 'src/stylesheets/helpers/_variables.styl'
 		}
 	},
 
@@ -105,20 +102,6 @@ var		   gulp = require('gulp'),
 			build: basePaths.build + assetsFolder.fonts.dest,
 			  src: basePaths.dest + assetsFolder.fonts.dest
 		}
-	},
-
-	filename = {
-		sprite: 'sprite.png',
-
-		scripts: {
-			expanded: 'scripts.js',
-			minified: 'scripts.min.js'
-		},
-
-		styles: {
-			expanded: 'styles.css',
-			minified: 'styles.min.css'
-		}
 	}
 
 //******************************** Tasks *********************************//
@@ -128,9 +111,9 @@ gulp.task('sprite', function () {
 	var sprite = gulp.src(paths.sprite.src + '**/*.png')
 					.pipe(
 						spritesmith({
-							imgName: filename.sprite,
+							imgName: 'sprite.png',
 							cssName: '_sprite.styl',
-							imgPath: '../' + assetsFolder.images.dest + filename.sprite,
+							imgPath: '../' + assetsFolder.images.dest + 'sprite.png',
 							padding: 2,
 							algorithmOpts: { sort: false}
 						})
@@ -189,16 +172,6 @@ gulp.task('styles', function () {
 				.pipe(notify({message: 'Styles task complete', onLast: true}));
 });
 
-// Execute concat-scripts, concat-all-min-scripts and clean-scripts tasks
-gulp.task('scripts', function (cb) {
-	return	sequence(
-				'main-scripts',
-				'unify-scripts',
-				'clean-scripts',
-				cb
-			);
-});
-
 // Concatenate libs, frameworks, plugins Scripts and Minify
 gulp.task('dependence-scripts', function () {
 	return	gulp.src([
@@ -208,82 +181,67 @@ gulp.task('dependence-scripts', function () {
 					paths.scripts.src + 'dependencies/plugins/**'
 				])
 				.pipe(concat('dependencies.js'))
-				.pipe(gulp.dest(paths.scripts.src))
+				.pipe(gulp.dest(paths.scripts.dest))
 				.pipe(rename('dependencies.min.js'))
 				.pipe(uglify())
-				.pipe(gulp.dest(paths.scripts.src));
-});
-
-// Concatenate and Minify Main Scripts
-gulp.task('main-scripts', function () {
-	return gulp.src([
-					'!' + paths.scripts.src + 'dependencies.js',
-					'!' + paths.scripts.src + 'dependencies.min.js',
-					paths.scripts.src + 'settings/outdatedbrowser.js',
-					paths.scripts.src + 'jquery/onread/open_onread.js',
-					paths.scripts.src + 'jquery/*',
-					paths.scripts.src + 'jquery/onread/close_onread.js',
-					paths.scripts.src + '*.js',
-					paths.scripts.src + 'angular/**',
-					paths.scripts.src + 'settings/google_analytics.js'
-				])
-				.pipe(plumber())
-				.pipe(concat('main.js'))
-				.pipe(jshint())
-				.pipe(jshint.reporter('jshint-stylish'))
-				.pipe(gulp.dest(paths.scripts.dest))
-				.pipe(rename('main.min.js'))
-				.pipe(uglify())
-				// Required to minify angularjs scripts
-				// .pipe(uglify({mangle: false}))
 				.pipe(gulp.dest(paths.scripts.dest));
 });
 
-// Concatenate and minify compiled Scripts
-gulp.task('unify-scripts',  function () {
-	var unminify = gulp.src([
-							paths.scripts.src + 'dependencies.js',
-							paths.scripts.dest + 'main.js'
+// Concatenate and Minify Main Scripts
+gulp.task('scripts', function () {
+	var concatenate = gulp.src([
+							'!' + paths.scripts.src + '**/_*.js',
+							paths.scripts.src + 'settings/outdatedbrowser.js',
+							paths.scripts.src + 'settings/*.js',
+							paths.scripts.src + '*.js',
+							paths.scripts.src + 'jquery/onread/open_onread.js',
+							paths.scripts.src + 'jquery/*',
+							paths.scripts.src + 'jquery/onread/close_onread.js',
+							paths.scripts.src + 'angular/**',
+							paths.scripts.src + 'settings/google_analytics.js'
 						])
-						.pipe(concat(filename.scripts.expanded))
+						.pipe(plumber())
+						.pipe(concat('main.js'))
+						.pipe(jshint())
+						.pipe(jshint.reporter('jshint-stylish'))
+						.pipe(gulp.dest(paths.scripts.dest))
+						.pipe(rename({suffix: ".min"}))
+						.pipe(uglify())
+						// Required to minify angularjs scripts
+						// .pipe(uglify({mangle: false}))
 						.pipe(gulp.dest(paths.scripts.dest));
 
-	var minify = gulp.src([
-						paths.scripts.src + 'dependencies.min.js',
-						paths.scripts.dest + 'main.min.js'
+	var copy = gulp.src([
+						paths.scripts.src + 'angular/_*.js',
+						paths.scripts.src + 'jquery/_*.js',
+						paths.scripts.src + '/_*.js'
 					])
-					.pipe(concat(filename.scripts.minified))
+					.pipe(jshint())
+					.pipe(jshint.reporter('jshint-stylish'))
+					.pipe(rename(function(path){
+						path.basename = path.basename.substring(1)
+					}))
+					.pipe(gulp.dest(paths.scripts.dest))
+					.pipe(uglify())
+					.pipe(rename({suffix: ".min"}))
 					.pipe(gulp.dest(paths.scripts.dest));
 
-	return merge(unminify, minify);
-});
-
-//Clean unused Scripts
-gulp.task('clean-scripts', function (){
-	return	gulp.src([
-					paths.scripts.dest + 'main.js',
-					paths.scripts.dest + 'main.min.js'
-				], {read: false})
-				.pipe(clean())
-				.pipe(notify({message: 'Scripts task complete', onLast: true}));
+	return merge(concatenate, copy);
 });
 
 // Copy Files to Build
 gulp.task('copy', function () {
-	// Minify and Copy css
-	var css  =  gulp.src(paths.styles.dest + filename.styles.minified)
-					.pipe(gulp.dest(paths.styles.build));
+	var assets = useref.assets();
 
 	// Minify and Copy HTML
 	var html  =	gulp.src(basePaths.dest + '**/*.{html,php}')
-					.pipe(replace(filename.scripts.expanded, filename.scripts.minified))
-					.pipe(replace(filename.styles.expanded, filename.styles.minified))
+					.pipe(assets)
+					.pipe(gulpif('*.js', uglify()))
+					.pipe(gulpif('*.css', csso()))
+					.pipe(assets.restore())
+					.pipe(useref())
 					.pipe(minifyHTML({spare:true, empty: true}))
 					.pipe(gulp.dest(basePaths.build));
-
-	// Copy Scripts
-	var script = gulp.src(paths.scripts.dest + filename.scripts.minified)
-					 .pipe(gulp.dest(paths.scripts.build));
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files
 	var AllFiles  =	gulp.src([
@@ -298,19 +256,13 @@ gulp.task('copy', function () {
 //================= Utility Tasks =================//
 
 // Clean Directories
-gulp.task('clean', function () {
-	return	gulp.src([
-					basePaths.build,
-					paths.styles.dest,
-					paths.styles.src + 'helpers/_mixins.styl',
-					paths.styles.src + 'helpers/_functions.styl',
-					paths.scripts.dest,
-					paths.scripts.src + 'dependencies.js',
-					paths.scripts.src + 'dependencies.min.js',
-					paths.images.dest
-				], {read: false})
-				.pipe(clean())
-				.pipe(notify({message: 'Clean task complete', onLast: true}));
+gulp.task('clean', function (cb) {
+	del([
+		basePaths.build,
+		paths.styles.dest,
+		paths.scripts.dest,
+		paths.images.dest
+		], cb)
 });
 
 // Watch
@@ -336,7 +288,7 @@ gulp.task('watch', function () {
 	gulp.watch([paths.scripts.src + '**/*.js', '!' + paths.scripts.src + 'dependencies/**/*.js'], ['scripts', browserSync.reload]);
 
 	// Watch dependencies .js files
-	gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', 'scripts', browserSync.reload]);
+	gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', browserSync.reload]);
 
 	// Watch .styl files
 	gulp.watch([paths.styles.src + '**/*.styl', '!' + paths.styles.src + 'helpers/mixins/*.styl', '!' + paths.styles.src + 'helpers/functions/*.styl'], ['styles', browserSync.reload]);
@@ -352,6 +304,11 @@ gulp.task('watch', function () {
 // Compile, watch and serve project
 gulp.task('default', ['clean'], function (cb) {
 	sequence(['images', 'sprite', 'stylus-helpers', 'dependence-scripts'], 'styles', 'scripts', 'watch',  cb);
+});
+
+// Compile project
+gulp.task('compile', ['clean'], function (cb) {
+	sequence(['images', 'sprite', 'stylus-helpers', 'dependence-scripts'], 'styles', 'scripts', cb);
 });
 
 // Build Project
