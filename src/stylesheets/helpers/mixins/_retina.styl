@@ -12,5 +12,5 @@ at2x($path, $width = auto, $height = auto)
 	       (min-device-pixel-ratio: 1.5),
 	       (min-resolution: 1.5dppx)
 
-		background-image: url(replace('\.', '@2x.', $path))
+		background-image: url($image-path + replace('\.', '@2x.', $path))
 		background-size: $width $height
