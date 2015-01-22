@@ -9,7 +9,6 @@
 /**
 	TODO:
 	- Sprite de svg
-	- Retina
 	- Icons
 	- Verificar Font features
 **/
@@ -33,6 +32,7 @@ var		   gulp = require('gulp'),
 		 rename = require('gulp-rename'),
 	   sequence = require('run-sequence'),
 	spritesmith = require('gulp.spritesmith'),
+	  svgSprite = require('gulp-svg-sprite'),
 		stylish = require('jshint-stylish'),
 		 stylus = require('gulp-stylus'),
 		 uglify = require('gulp-uglify'),
@@ -129,6 +129,24 @@ gulp.task('sprite', function () {
 	return sprite;
 });
 
+
+
+gulp.task('svg-sprite', function() {
+
+	gulp.src('src/images/svg-sprite/*.svg')
+		.pipe(svgSprite({
+			mode : {
+			    view : {         // Activate the «view» mode
+			        bust : false,
+			        render : {
+			            styl : true      // Activate Sass output (with default options)
+			        }
+			    }
+			}
+		}))
+		.pipe(gulp.dest('public/images/'));
+});
+
 // Optimize Images
 gulp.task('images', function () {
 	return	gulp.src([
@@ -205,10 +223,11 @@ gulp.task('scripts', function () {
 						.pipe(jshint())
 						.pipe(jshint.reporter('jshint-stylish'))
 						.pipe(gulp.dest(paths.scripts.dest))
-						.pipe(rename({suffix: ".min"}))
-						.pipe(uglify())
+						.pipe(rename({suffix: '.min'}))
+						.pipe(uglify(
 						// Required to minify angularjs scripts
-						// .pipe(uglify({mangle: false}))
+						// {mangle: false}
+						))
 						.pipe(gulp.dest(paths.scripts.dest));
 
 	var copy = gulp.src([
@@ -216,14 +235,19 @@ gulp.task('scripts', function () {
 						paths.scripts.src + 'jquery/_*.js',
 						paths.scripts.src + '/_*.js'
 					])
+					.pipe(plumber())
 					.pipe(jshint())
 					.pipe(jshint.reporter('jshint-stylish'))
 					.pipe(rename(function(path){
 						path.basename = path.basename.substring(1)
 					}))
 					.pipe(gulp.dest(paths.scripts.dest))
-					.pipe(uglify())
-					.pipe(rename({suffix: ".min"}))
+					.pipe(rename({suffix: '.min'}))
+					.pipe(uglify({
+						preserveComments: 'some'
+						// Required to minify angularjs scripts
+						// , mangle: false
+					}))
 					.pipe(gulp.dest(paths.scripts.dest));
 
 	return merge(concatenate, copy);
@@ -236,11 +260,15 @@ gulp.task('copy', function () {
 	// Minify and Copy HTML
 	var html  =	gulp.src(basePaths.dest + '**/*.{html,php}')
 					.pipe(assets)
-					.pipe(gulpif('*.js', uglify()))
+					.pipe(gulpif('*.js', uglify(
+						// Required to minify angularjs scripts
+						// {mangle: false}
+					)))
 					.pipe(gulpif('*.css', csso()))
 					.pipe(assets.restore())
 					.pipe(useref())
-					.pipe(minifyHTML({spare:true, empty: true}))
+					.pipe(gulpif('*.html', minifyHTML({spare:true, empty: true})))
+					.pipe(gulpif('*.php', minifyHTML({spare:true, empty: true})))
 					.pipe(gulp.dest(basePaths.build));
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files
@@ -272,7 +300,7 @@ gulp.task('watch', function () {
 		port: 80,
 		logPrefix: 'BrowserSync',
 		// To use with dinamic files
-		// proxy: "localhost/my-gulp-template/public/"
+		// proxy: 'localhost/my-gulp-template/public/'
 		server: {
 			baseDir: [basePaths.src, basePaths.dest]
 		}
@@ -322,7 +350,7 @@ gulp.task('build:serve', ['build'], function (cb) {
 		notify: false,
 		port: 80,
 		logPrefix: 'BrowserSync',
-		// proxy: "localhost/my-gulp-template/public/"
+		// proxy: 'localhost/my-gulp-template/public/''
 		server: {
 			baseDir: [basePaths.build]
 		}

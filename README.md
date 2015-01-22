@@ -1,6 +1,5 @@
 <!-- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
 http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
-http://retina-images.complexcompulsions.com/
  -->
 # My Gulp.js Template
 
