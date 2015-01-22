@@ -1,0 +1,32 @@
+{
+  "name": "my-gulp-template",
+  "version": "3.0.0beta",
+  "description": "Gulp.js template",
+  "keywords": [
+    "gulpjs",
+    "template",
+    "boilerplate"
+  ],
+  "authors": [
+    "Tiago Porto"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/tiagoporto/my-gulp-template",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^1.0.0",
+    "bootstrap": "latest",
+    "outdated-browser": "latest",
+    "angular": "latest",
+    "retina.js": "latest",
+    "animate.css": "latest",
+    "normalize.css": "latest"
+  }
+}
