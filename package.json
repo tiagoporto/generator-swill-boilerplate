@@ -41,11 +41,13 @@
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
     "gulp-stylus": "^2.0.0",
+    "gulp-svg-sprite": "^1.0.11",
     "gulp-uglify": "^1.0.2",
     "gulp-useref": "^1.1.1",
     "gulp.spritesmith": "^2.4.0",
     "jshint-stylish": "^1.0.0",
     "merge-stream": "^0.1.7",
-    "run-sequence": "^1.0.2"
+    "run-sequence": "^1.0.2",
+    "vinyl": "^0.4.6"
   }
 }
