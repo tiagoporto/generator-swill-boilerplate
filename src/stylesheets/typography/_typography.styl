@@ -1,10 +1,12 @@
 body-typography()
-	font: normal normal  $font-size-base\/($font-size-base + 3) $font-family-base
+	font: normal normal  $font-size-base\/130% $font-family-base
 
+	color: $color-text
 	text-rendering: optimizeLegibility
 	-webkit-font-smoothing: antialiased
 	-moz-osx-font-smoothing: grayscale
-	font-feature-settings: "frac", "liga"
+	font-smoothing: auto
+	font-feature-settings: "liga", "kern"
 
 h1-typography()
 	font-size: em($font-size-h1)
@@ -30,3 +32,7 @@ h5-typography()
 h6-typography()
 	font-size: em($font-size-h6)
 	line-height: em(($font-size-h6 + 3), $font-size-h6)
+
+p-typography()
+	hyphens auto
+	line-height 130%

@@ -13,29 +13,43 @@
 @import "helpers/_functions"
 @import "helpers/_sprite"
 
-//If you will use bootstrap you can remove these imports
-//============================================================//
-/* Web Fonts */
+//**** If you will use bootstrap you can remove these imports ********
+
+// Typography
 @import "typography/_web-fonts"
 @import "typography/_typography"
 
-// Reset and normalize
+/*! ==================================================================
+   Reset and normalize
+   ================================================================== */
 @import "dependencies/_normalize-3.0.2"
 
-// Grid System
+/*! ==================================================================
+   Grid System
+   ================================================================== */
 @import "dependencies/_semantic.gs-1.2"
-//============================================================//
 
-// Dependencies
+//********************************************************************
+
+/*! ==================================================================
+   Dependencies
+   ================================================================== */
 @import "dependencies/_outdatedbrowser-1.1.0"
-@import "dependencies/_animate"
 // @import "dependencies/_bootstrap-3.3.1"
+@import "dependencies/_animate"
 
-/* Main Styles */
+/*! ==================================================================
+   Placeholders
+   ================================================================== */
+@import "helpers/_placeholders"
+
+// Main Styles
 @import "_base"
 
 
-/* Media Queries */
+/*! ==================================================================
+   Media Queries
+   ================================================================== */
 // Printers
 @media print
 	@import "media_queries/_print"
@@ -51,3 +65,13 @@
 // 769px - 992px
 @media (min-width: 48.063em) and (max-width: 62em)
 	@import "media_queries/_min_769_max_992"
+
+//Better Font Smoothing in Chrome & Safari
+//http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25),\
+	only screen and ( min-device-pixel-ratio: 1.25),\
+	only screen and ( min-resolution: 200dpi),\
+	only screen and ( min-resolution: 1.25dppx)
+
+	body
+		-webkit-font-smoothing: subpixel-antialiased
