@@ -3,30 +3,37 @@
   "version": "3.0.0beta",
   "description": "Gulp.js template",
   "keywords": [
-    "gulpjs",
     "template",
+    "gulp",
+    "automation",
+    "stylus",
+    "stylus mixins",
+    "stylus functions",
+    "image optimization",
+    "live browser reloading",
+    "scripts concatenation",
+    "cross-device synchronization",
     "boilerplate"
   ],
+  "homepage": "https://github.com/tiagoporto/my-gulp-template",
   "authors": [
-    "Tiago Porto"
+    "Tiago Porto - http://tiagoporto.com/"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/tiagoporto/my-gulp-template",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "devDependencies": {
     "jquery": "^1.0.0",
+    "angular": "latest",
     "bootstrap": "latest",
     "outdated-browser": "latest",
-    "angular": "latest",
     "retina.js": "latest",
     "animate.css": "latest",
-    "normalize.css": "latest"
+    "normalize.css": "latest",
+    "semantic.gs": "*"
   }
 }
