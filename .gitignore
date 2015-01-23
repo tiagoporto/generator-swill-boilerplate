@@ -218,26 +218,27 @@ pip-log.txt
 ## NPM Dependencies
 #################
 
-node_modules/**/*
+node_modules/
 
 
 #################
 ## Bower Components
 #################
 
-bower_components/**/*
+bower_components/
 
 #################
 ## SASS Cache
 #################
 
-.sass-cache/**/*
+.sass-cache/
 
 #################
 ## Gulp.js Template
 #################
 
-build/**/*
-public/css/**
-public/images/**
-public/js/**
+build/
+public/css/
+public/images/*
+!public/images/copyright/
+public/js/
