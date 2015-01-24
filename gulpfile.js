@@ -44,13 +44,17 @@ var		   gulp = require('gulp'),
 		  dest: 'public/',
 		 build: 'build/',
 		 bower: 'bower_components/',
-		sprite: 'sprite/',
 
 		images: {
 			 src: 'images/',
 			dest: 'images/' // If change this directory remember to modify
 							// the variable $image-path in
 							// 'src/stylesheets/helpers/_variables.styl'
+		},
+
+		sprite: {
+			bitmap: 'sprite/',
+			   svg: 'svg-sprite/'
 		},
 
 		scripts: {
@@ -65,12 +69,15 @@ var		   gulp = require('gulp'),
 	},
 
 	paths = {
-		sprite: basePaths.src + basePaths.images.src + basePaths.sprite,
-
 		images: {
 			  src: basePaths.src + basePaths.images.src ,
 			 dest: basePaths.dest + basePaths.images.dest,
 			build: basePaths.build + basePaths.images.src
+		},
+
+		sprite: {
+			  bitmap: basePaths.src + basePaths.images.src + basePaths.sprite.bitmap,
+			 svg: basePaths.src + basePaths.images.src + basePaths.sprite.svg
 		},
 
 		scripts: {
@@ -84,13 +91,26 @@ var		   gulp = require('gulp'),
 			 dest: basePaths.dest + basePaths.styles.dest,
 			build: basePaths.build + basePaths.styles.dest
 		}
+	},
+
+//************************ browserSync config ***************************//
+
+	browserSyncConfig = {
+		notify: false,
+		port: 80,
+		logPrefix: 'BrowserSync',
+		// To use with dinamic files
+		// proxy: 'localhost/my-gulp-template/public/'
+		server: {
+			baseDir: [basePaths.src, basePaths.dest]
+		}
 	}
 
 //******************************** Tasks *********************************//
 
 // Generate Bitmap Sprite
 gulp.task('sprite', function () {
-	var sprite = gulp.src(paths.sprite + '**/*.png')
+	var sprite = gulp.src(paths.sprite.bitmap + '**/*.png')
 					.pipe(
 						spritesmith({
 							imgName: 'sprite.png',
@@ -134,7 +154,8 @@ gulp.task('svg-sprite', function() {
 gulp.task('images', function () {
 	return	gulp.src([
 					paths.images.src + '**/*.{png,jpg,gif,svg}',
-					'!' + paths.sprite + '**/*'
+					'!' + paths.sprite.bitmap + '**/*',
+					'!' + paths.sprite.svg + '**/*'
 				])
 				.pipe(cache('imagemin'))
 				.pipe(imagemin({optimizationLevel: 5, progressive: true}))
@@ -144,9 +165,9 @@ gulp.task('images', function () {
 
 // Concatenate Stylus Mixins and Functions
 gulp.task('stylus-helpers', function () {
-	var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.styl')
-					.pipe(concat('_mixins.styl'))
-					.pipe(gulp.dest(paths.styles.src + 'helpers'));
+	   var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.styl')
+						.pipe(concat('_mixins.styl'))
+						.pipe(gulp.dest(paths.styles.src + 'helpers'));
 
 	var functions = gulp.src(paths.styles.src + 'helpers/functions/*.styl')
 						.pipe(concat('_functions.styl'))
@@ -213,49 +234,49 @@ gulp.task('scripts', function () {
 						))
 						.pipe(gulp.dest(paths.scripts.dest));
 
-	var copy = gulp.src([
-						paths.scripts.src + 'angular/_*.js',
-						paths.scripts.src + 'jquery/_*.js',
-						paths.scripts.src + '/_*.js'
-					])
-					.pipe(plumber())
-					.pipe(jshint())
-					.pipe(jshint.reporter('jshint-stylish'))
-					.pipe(rename(function(path){
-						path.basename = path.basename.substring(1)
-					}))
-					.pipe(gulp.dest(paths.scripts.dest))
-					.pipe(rename({suffix: '.min'}))
-					.pipe(uglify({
-						preserveComments: 'some'
-						// Required to minify angularjs scripts
-						// , mangle: false
-					}))
-					.pipe(gulp.dest(paths.scripts.dest));
+		   var copy = gulp.src([
+							paths.scripts.src + 'angular/_*.js',
+							paths.scripts.src + 'jquery/_*.js',
+							paths.scripts.src + '/_*.js'
+						])
+						.pipe(plumber())
+						.pipe(jshint())
+						.pipe(jshint.reporter('jshint-stylish'))
+						.pipe(rename(function(path){
+							path.basename = path.basename.substring(1)
+						}))
+						.pipe(gulp.dest(paths.scripts.dest))
+						.pipe(rename({suffix: '.min'}))
+						.pipe(uglify({
+							preserveComments: 'some'
+							// Required to minify angularjs scripts
+							// , mangle: false
+						}))
+						.pipe(gulp.dest(paths.scripts.dest));
 
 	return merge(concatenate, copy);
 });
 
 // Copy Files to Build
 gulp.task('copy', function () {
-	var assets = useref.assets();
+	var assets   =  useref.assets();
 
 	// Minify and Copy HTML
-	var html  =	gulp.src(basePaths.dest + '**/*.{html,php}')
-					.pipe(assets)
-					.pipe(gulpif('*.js', uglify(
-						// Required to minify angularjs scripts
-						// {mangle: false}
-					)))
-					.pipe(gulpif('*.css', csso()))
-					.pipe(assets.restore())
-					.pipe(useref())
-					.pipe(gulpif('*.html', minifyHTML({spare:true, empty: true})))
-					.pipe(gulpif('*.php', minifyHTML({spare:true, empty: true})))
-					.pipe(gulp.dest(basePaths.build));
+	var  html    =   gulp.src(basePaths.dest + '**/*.{html,php}')
+						.pipe(assets)
+						.pipe(gulpif('*.js', uglify(
+							// Required to minify angularjs scripts
+							// {mangle: false}
+						)))
+						.pipe(gulpif('*.css', csso()))
+						.pipe(assets.restore())
+						.pipe(useref())
+						.pipe(gulpif('*.html', minifyHTML({spare:true, empty: true})))
+						.pipe(gulpif('*.php', minifyHTML({spare:true, empty: true})))
+						.pipe(gulp.dest(basePaths.build));
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files
-	var AllFiles  =	gulp.src([
+	var AllFiles =	gulp.src([
 							basePaths.dest + '**/*',
 							'!' + paths.styles.dest + '**/*',
 							'!' + paths.scripts.dest + '**/*',
@@ -279,22 +300,16 @@ gulp.task('clean', function (cb) {
 
 // Watch
 gulp.task('watch', function () {
-	browserSync({
-		notify: false,
-		port: 80,
-		logPrefix: 'BrowserSync',
-		// To use with dinamic files
-		// proxy: 'localhost/my-gulp-template/public/'
-		server: {
-			baseDir: [basePaths.src, basePaths.dest]
-		}
-	});
+	browserSync(browserSyncConfig);
 
 	// Watch .jpg .png .gif and .svg files
-	gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite + '**/*'], ['images', browserSync.reload]);
+	gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.bitmap + '**/*', '!' + paths.sprite.svg + '**/*'], ['images', browserSync.reload]);
 
-	// Watch sprite file
-	gulp.watch(paths.sprite + '**/*.{png,jpg,gif}', ['sprite', browserSync.reload]);
+	// Watch bitmap sprite files
+	gulp.watch(paths.sprite.bitmap + '**/*.{png,jpg,gif}', ['sprite', browserSync.reload]);
+
+	// Watch svg sprite files
+	gulp.watch(paths.sprite.svg + '**/*.svg', ['svg-sprite', browserSync.reload]);
 
 	// Watch .js files
 	gulp.watch([paths.scripts.src + '**/*.js', '!' + paths.scripts.src + 'dependencies/**/*.js'], ['scripts', browserSync.reload]);
@@ -317,58 +332,50 @@ gulp.task('watch', function () {
 // Copy Bower dependencies to specific folders
 gulp.task('bower', function() {
     var frameworks = gulp.src(basePaths.bower + 'angular/angular.js')
-      		.pipe(gulp.dest(paths.scripts.src + 'dependencies/frameworks'))
+      					.pipe(gulp.dest(paths.scripts.src + 'dependencies/frameworks'))
 
-    var lib = gulp.src(basePaths.bower + 'jquery/dist/jquery.js')
-      		.pipe(gulp.dest(paths.scripts.src + 'dependencies/libs'))
+    var    lib     = gulp.src(basePaths.bower + 'jquery/dist/jquery.js')
+      					.pipe(gulp.dest(paths.scripts.src + 'dependencies/libs'))
 
-    var plugins = gulp.src([
-		    			basePaths.bower + 'bootstrap/dist/js/bootstrap.js',
-		    			basePaths.bower + 'outdated-browser/outdatedbrowser/outdatedbrowser.js',
-		    			basePaths.bower + 'retina.js/dist/retina.js'
-		    		])
-      				.pipe(gulp.dest(paths.scripts.src + 'dependencies/plugins'))
-    var css = gulp.src([
-    					basePaths.bower + 'animate.css/animate.css',
-    					basePaths.bower + 'bootstrap/dist/css/bootstrap.css',
-    					basePaths.bower + 'normalize.css/normalize.css',
-    					basePaths.bower + 'outdated-browser/outdatedbrowser/outdatedbrowser.css'
-    				])
-    				.pipe(replace(/@charset "UTF-8";/g, ''))
-    				.pipe(replace(/@charset 'UTF-8';/g, ''))
-      				.pipe(gulp.dest(paths.styles.src + 'dependencies'))
+    var   plugins  = gulp.src([
+			    			basePaths.bower + 'bootstrap/dist/js/bootstrap.js',
+			    			basePaths.bower + 'outdated-browser/outdatedbrowser/outdatedbrowser.js',
+			    			basePaths.bower + 'retina.js/dist/retina.js'
+			    		])
+	      				.pipe(gulp.dest(paths.scripts.src + 'dependencies/plugins'))
+    var     css    = gulp.src([
+	    					basePaths.bower + 'animate.css/animate.css',
+	    					basePaths.bower + 'bootstrap/dist/css/bootstrap.css',
+	    					basePaths.bower + 'normalize.css/normalize.css',
+	    					basePaths.bower + 'outdated-browser/outdatedbrowser/outdatedbrowser.css'
+	    				])
+	    				.pipe(replace(/@charset "UTF-8";/g, ''))
+	    				.pipe(replace(/@charset 'UTF-8';/g, ''))
+	      				.pipe(gulp.dest(paths.styles.src + 'dependencies'))
 
-    var grid = gulp.src(basePaths.bower + 'semantic.gs/stylesheets/styl/grid.styl')
-      			.pipe(rename({prefix: '_'}))
-      			.pipe(gulp.dest(paths.styles.src + 'dependencies'));
+    var    grid    = gulp.src(basePaths.bower + 'semantic.gs/stylesheets/styl/grid.styl')
+						.pipe(rename({prefix: '_'}))
+						.pipe(gulp.dest(paths.styles.src + 'dependencies'));
 
     return merge(frameworks, lib, plugins, css, grid);
 });
 
 // Compile, watch and serve project
 gulp.task('default', ['clean'], function (cb) {
-	sequence(['images', 'sprite', 'stylus-helpers', 'dependence-scripts'], 'styles', 'scripts', 'watch',  cb);
+	sequence(['images', 'sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'styles', 'scripts', 'watch',  cb);
 });
 
 // Compile project
 gulp.task('compile', ['clean'], function (cb) {
-	sequence(['images', 'sprite', 'stylus-helpers', 'dependence-scripts'], 'styles', 'scripts', cb);
+	sequence(['images', 'sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'styles', 'scripts', cb);
 });
 
 // Build Project
 gulp.task('build', ['clean'], function (cb) {
-	sequence(['images', 'sprite'], 'stylus-helpers', 'styles', 'dependence-scripts', 'scripts', 'copy', cb);
+	sequence(['images', 'sprite', 'svg-sprite'], 'stylus-helpers', 'styles', 'dependence-scripts', 'scripts', 'copy', cb);
 });
 
 // Build and serve Builded Project
 gulp.task('build:serve', ['build'], function (cb) {
-	browserSync({
-		notify: false,
-		port: 80,
-		logPrefix: 'BrowserSync',
-		// proxy: 'localhost/my-gulp-template/public/''
-		server: {
-			baseDir: [basePaths.build]
-		}
-	});
+	browserSync(browserSyncConfig);
 });
