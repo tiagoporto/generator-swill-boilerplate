@@ -10,6 +10,9 @@
 	TODO:
 	- Sprite de svg
 	- touch Icons
+	- https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
+	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
+	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
 **/
 'use strict';
 
@@ -117,7 +120,7 @@ gulp.task('sprite', function () {
 							cssName: '_sprite.styl',
 							imgPath: '../' + basePaths.images.dest + 'sprite.png',
 							padding: 2,
-							algorithmOpts: { sort: false}
+							algorithm: 'top-down'
 						})
 					);
 
@@ -139,15 +142,15 @@ gulp.task('svg-sprite', function() {
 			mode : {
 				css : {
 					dest : './',
-					sprite: paths.images.dest + "svg-sprite.svg",
+					sprite: '../' + basePaths.images. dest + 'svg-sprite.svg',
 					bust : false,
 					render : {
-						styl : {dest: paths.styles.src + 'helpers/_svg-sprite.styl'}
+						styl : {dest: '../../' + paths.styles.src + 'helpers/_svg-sprite.styl'}
 					}
 				}
 			}
 		}))
-		.pipe(gulp.dest('./'));
+		.pipe(gulp.dest(paths.images.dest));
 });
 
 // Optimize Images
@@ -353,11 +356,14 @@ gulp.task('bower', function() {
 	    				.pipe(replace(/@charset 'UTF-8';/g, ''))
 	      				.pipe(gulp.dest(paths.styles.src + 'dependencies'))
 
-    var    grid    = gulp.src(basePaths.bower + 'semantic.gs/stylesheets/styl/grid.styl')
+    var    font    = gulp.src(basePaths.bower + 'bootstrap/dist/fonts/*')
+						.pipe(gulp.dest(basePaths.dest + 'fonts'));
+
+	var    grid    = gulp.src(basePaths.bower + 'semantic.gs/stylesheets/styl/grid.styl')
 						.pipe(rename({prefix: '_'}))
 						.pipe(gulp.dest(paths.styles.src + 'dependencies'));
 
-    return merge(frameworks, lib, plugins, css, grid);
+    return merge(frameworks, lib, plugins, css, font, grid);
 });
 
 // Compile, watch and serve project
