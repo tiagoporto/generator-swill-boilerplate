@@ -34,6 +34,10 @@
     "retina.js": "latest",
     "animate.css": "latest",
     "normalize.css": "latest",
-    "semantic.gs": "*"
+    "semantic.gs": "*",
+    "font-awesome": "~4.3.0",
+    "ionicons": "~2.0.1",
+    "foundation": "~5.5.0",
+    "foundation-icon-fonts": "*"
   }
 }
