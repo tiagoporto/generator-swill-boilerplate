@@ -307,7 +307,7 @@ gulp.task('copy', function () {
 						.pipe(gulp.dest(basePaths.build));
 });
 
-//================= Utility Tasks =================//
+//*************************** Utility Tasks ******************************//
 
 // Clean Directories
 gulp.task('clean', function (cb) {
@@ -386,7 +386,7 @@ gulp.task('bower', function() {
     return merge(frameworks, lib, plugins, css, font, grid);
 });
 
-//================= Main Tasks =================//
+//***************************** Main Tasks *******************************//
 
 // Compile, watch and serve project
 gulp.task('default', ['clean'], function (cb) {

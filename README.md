@@ -87,7 +87,9 @@ Just remove what you will not use or include in specific directories: `src/scrip
 │   │   │
 │   │   ├─ crossdomain.xml //Permission to handle data across multiple domains
 │   │   │
-│   │   ├─ manifest.webapp //Provides information about an app
+│   │   ├─ manifest.json //Provides information about an Chrome app https://developer.chrome.com/extensions/manifest
+│   │   │
+│   │   ├─ manifest.webapp //Provides information about an Firefox OS app https://developer.mozilla.org/pt-BR/Apps/Manifest
 │   │   │
 │   │   ├─ robots.txt //Give instructions about their site to search engines
 │   │   │
