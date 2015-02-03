@@ -8,13 +8,18 @@
 
 /**
 	TODO:
-	- Sprite de svg
-	- touch Icons
-	- fonts
-	- svg2png
 	- https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
+
+	- fonts
+
+	- Name
+	- https://github.com/jh3y/gulp-boilerplate-v2
+	- https://github.com/rmdias/gulp-web-app-workflow
+	- http://www.ryanbensonmedia.com/harvest
+	- https://github.com/tsevdos/Gulp-boilerplate-for-web-designers
+	- Simple version
 **/
 'use strict';
 
@@ -142,10 +147,16 @@ gulp.task('svg-sprite', function() {
 	return gulp.src('src/images/svg-sprite/*.svg')
 				.pipe(plumber())
 				.pipe(svgSprite({
+					shape : {
+						spacing : {
+							padding : 2
+						}
+					},
 					mode : {
 						css : {
 							dest : './',
 							sprite: '../' + basePaths.images. dest + 'svg-sprite.svg',
+							layout: 'vertical',
 							bust : false,
 							render : {
 								styl : {dest: '../../' + paths.styles.src + 'helpers/_svg-sprite.styl'}
