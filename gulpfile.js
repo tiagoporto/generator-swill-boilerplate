@@ -144,7 +144,7 @@ gulp.task('bitmap-sprite', function () {
 
 // Generate SVG Sprite
 gulp.task('svg-sprite', function() {
-	return gulp.src('src/images/svg-sprite/*.svg')
+	return gulp.src(paths.sprite.svg + '*.svg')
 				.pipe(plumber())
 				.pipe(svgSprite({
 					shape : {
@@ -335,8 +335,8 @@ gulp.task('clean', function (cb) {
 gulp.task('watch', function () {
 	browserSync(browserSyncConfig);
 
-	// Watch .jpg .png .gif and .svg files
-	gulp.watch([paths.images.src + '**/*.{png,jpg,gif,svg}', '!' + paths.sprite.bitmap + '**/*', '!' + paths.sprite.svg + '**/*'], ['images', browserSync.reload]);
+	// Watch .bmp .gif .jpg .jpeg .png and .svg files
+	gulp.watch([paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}', '!' + paths.sprite.bitmap + '**/*', '!' + paths.sprite.svg + '**/*'], ['images', browserSync.reload]);
 
 	// Watch bitmap sprite files
 	gulp.watch(paths.sprite.bitmap + '**/*.{png,jpg,gif}', ['bitmap-sprite', browserSync.reload]);
