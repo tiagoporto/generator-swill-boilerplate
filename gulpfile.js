@@ -256,9 +256,9 @@ gulp.task('scripts', function () {
 							paths.scripts.src + 'settings/google_analytics.js'
 						])
 						.pipe(plumber())
-						.pipe(concat('main.js'))
 						.pipe(jshint())
 						.pipe(jshint.reporter('jshint-stylish'))
+						.pipe(concat('main.js'))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(rename({suffix: '.min'}))
 						.pipe(uglify(

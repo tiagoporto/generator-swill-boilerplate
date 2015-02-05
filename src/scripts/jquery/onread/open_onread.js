@@ -7,4 +7,6 @@
 */
 
 //jQuery Scripts
+/* jshint ignore:start */
 $(document).ready(function(){
+/* jshint ignore:end */
