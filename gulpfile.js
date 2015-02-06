@@ -14,6 +14,8 @@
 
 	- fonts
 
+	- verificar notify
+
 	- Name
 	- https://github.com/jh3y/gulp-boilerplate-v2
 	- https://github.com/rmdias/gulp-web-app-workflow
