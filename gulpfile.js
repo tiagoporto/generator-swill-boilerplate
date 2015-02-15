@@ -12,16 +12,19 @@
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
 
+	- https://github.com/jarnesjo/jquery-logo-downloadtip
+
 	- fonts
 
 	- verificar notify
 
-	- Name
+	- Simple version (light version without images)
+
+	- Template Name (examples)
 	- https://github.com/jh3y/gulp-boilerplate-v2
 	- https://github.com/rmdias/gulp-web-app-workflow
 	- http://www.ryanbensonmedia.com/harvest
 	- https://github.com/tsevdos/Gulp-boilerplate-for-web-designers
-	- Simple version
 **/
 'use strict';
 
