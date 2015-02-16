@@ -13,27 +13,41 @@ html
   box-sizing inherit
 
 
+$normalizeWeight
+	font-weight normal
+
 body
 	body-typography()
 	background-color: $bg-color
 
 h1
 	h1-typography()
+	@extend $normalizeWeight
 
 h2
 	h2-typography()
+	@extend $normalizeWeight
+
 
 h3
 	h3-typography()
+	@extend $normalizeWeight
+
 
 h4
 	h4-typography()
+	@extend $normalizeWeight
+
 
 h5
 	h5-typography()
+	@extend $normalizeWeight
+
 
 h6
 	h6-typography()
+	@extend $normalizeWeight
+
 p
 	p-typography()
 
