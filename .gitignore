@@ -238,7 +238,3 @@ bower_components/
 #################
 
 build/
-public/css/
-public/images/*
-!public/images/copyright/
-public/js/
