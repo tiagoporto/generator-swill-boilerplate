@@ -3736,6 +3736,14 @@ input[type="button"]:hover,
   background: #ffc0cb;
   color: #008000;
 }
+.code-terminal {
+  padding: 0.625em;
+  background: #000;
+  display: inline-block;
+  width: 100%;
+  color: #0f0;
+  border-radius: 10px;
+}
 /* ==================================================================
    Main Styles
    ================================================================== */
