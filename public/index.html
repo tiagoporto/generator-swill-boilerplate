@@ -8,8 +8,8 @@
 		<meta name="keywords" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="logo" type="image/svg" href="logo.svg" data-title="Vector file (.svg)" />
-		<link rel="logo" type="image/png" href="logo.png" data-title="Bitmap file (.png)" />
+		<link rel="logo" type="image/svg" href="images/logo.svg" data-title="Vector file (.svg)" />
+		<link rel="logo" type="image/png" href="images/logo.png" data-title="Bitmap file (.png)" />
 
 		<!-- Add to homescreen for Chrome on Android -->
 		<meta name="mobile-web-app-capable" content="yes">
@@ -43,7 +43,7 @@
 		<div id="outdated"></div>
 		<!-- ============================================ -->
 
-		<h1>My gulp.js Template</h1>
+		<h1><img id="logo" src="images/logo.svg" alt="My gulp.js template logo">My gulp.js Template</h1>
 
 		<div ng-app>
 			<!-- AngularJS App -->
@@ -54,5 +54,11 @@
 		<script src="js/dependencies.js"></script>
 		<script src="js/main.js"></script>
 		<!-- endbuild -->
+
+		<script>
+            $(document).ready(function(){
+               $('#logo').downloadTip({ "position": "right" });
+            });
+        </script>
 	</body>
 </html>

@@ -3644,6 +3644,91 @@ Copyright (c) 2013 Daniel Eden
   -webkit-animation-name: zoomOutUp;
   animation-name: zoomOutUp;
 }
+#logo-downloadtip {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: none;
+  padding: 1px;
+  text-align: left;
+  white-space: normal;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1010;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+}
+#logo-downloadtip h3 {
+  background: #f7f7f7;
+  border-bottom: 1px solid #ebebeb;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 5px 5px 0 0;
+}
+#logo-downloadtip a {
+  color: #555;
+  display: block;
+  text-decoration: none;
+}
+#logo-downloadtip .content {
+  background: #fff;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 9px 14px;
+  border-radius: 0 0 5px 5px;
+}
+#logo-downloadtip .arrow,
+#logo-downloadtip .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+#logo-downloadtip .arrow {
+  border-width: 11px;
+}
+#logo-downloadtip .arrow:after {
+  border-width: 10px;
+  content: "";
+}
+#logo-downloadtip.right .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999;
+  border-right-color: rgba(0, 0, 0, 0.25);
+  border-left-width: 0;
+}
+#logo-downloadtip.right .arrow:after {
+  bottom: -10px;
+  left: 1px;
+  border-right-color: #ffffff;
+  border-left-width: 0;
+}
+#logo-downloadtip.bottom .arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-bottom-color: #f7f7f7;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  border-top-width: 0;
+}
+#logo-downloadtip.bottom .arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  border-bottom-color: #f7f7f7;
+  border-top-width: 0;
+}
+
 /* ==================================================================
    Placeholders
    ================================================================== */
