@@ -1,30 +1,19 @@
 {
-  "name": "my-gulp.js-template",
-  "version": "3.0.0beta",
-  "description": "Gulp.js template",
+  "name": "your-project",
+  "version": "0.0.1",
+  "description": "Description of your project",
   "keywords": [
-    "template",
-    "gulp",
-    "automation",
-    "stylus",
-    "stylus mixins",
-    "stylus functions",
-    "image optimization",
-    "live browser reloading",
-    "scripts concatenation",
-    "cross-device synchronization",
-    "boilerplate"
   ],
-  "homepage": "https://github.com/tiagoporto/my-gulp-template",
+  "homepage": "",
   "author": {
-    "name": "Tiago Porto",
-    "url": "http://tiagoporto.com/"
+    "name": "",
+    "url": ""
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com:tiagoporto/my-gulp-template.git"
+    "url": ""
   },
-  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "browser-sync": "^1.9.0",
     "del": "^1.1.1",

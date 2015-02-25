@@ -1,6 +1,6 @@
 {
-  "name": "my-gulp-template",
-  "description": "Gulp.js template",
+  "name": "swill-boilerplate",
+  "description": "Boilerplate for Gulp.js to quick multi-device development",
   "keywords": [
     "template",
     "gulp",
@@ -14,7 +14,7 @@
     "cross-device synchronization",
     "boilerplate"
   ],
-  "homepage": "https://github.com/tiagoporto/my-gulp-template",
+  "homepage": "https://github.com/tiagoporto/swill-boilerplate",
   "authors": [
     "Tiago Porto - http://tiagoporto.com/"
   ],

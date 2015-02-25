@@ -1,15 +1,20 @@
-# My Gulp.js Template
-# Version: 3.0.0beta
-# Author: Tiago Porto - http://www.tiagoporto.com
-# https://github.com/tiagoporto/my-gulp-template
-# Contact: me@tiagoporto.com
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+# editorconfig.org
 
 root = true
 
 [*]
-indent_style = tab
-indent_size = 4
+
+# Change these settings to your own preference
+indent_style = space
+indent_size = 2
+
+# We recommend you to keep these unchanged
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
-insert_final_newline = true
+insert_final_newline = false
+
+[*.md]
+trim_trailing_whitespace = false

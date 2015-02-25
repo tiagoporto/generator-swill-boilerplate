@@ -1,13 +1,12 @@
 /*
-	My Gulp.js Template
-	Version: 3.0.0beta
-	Author: Tiago Porto - http://www.tiagoporto.com
-	https://github.com/tiagoporto/my-gulp-template
-	Contact: me@tiagoporto.com
+*	Swill Boilerplate v3.0.0beta
+*	https://github.com/tiagoporto/swill-boilerplate
+*	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
+*	Released under the MIT license
 */
 
 /**
-	TODO:
+	TO-DO:
 	- https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
@@ -18,10 +17,11 @@
 
 	- Simple version (light version without images)
 
-	- Template Name (examples)
+	- http://hosseinkarami.com/fastshell/
+	- http://www.ryanbensonmedia.com/harvest
+	- https://developers.google.com/web/starter-kit/
 	- https://github.com/jh3y/gulp-boilerplate-v2
 	- https://github.com/rmdias/gulp-web-app-workflow
-	- http://www.ryanbensonmedia.com/harvest
 	- https://github.com/tsevdos/Gulp-boilerplate-for-web-designers
 **/
 'use strict';
@@ -114,7 +114,7 @@ var		   gulp = require('gulp'),
 		port: 80,
 		logPrefix: 'BrowserSync',
 		// To use with dinamic files
-		// proxy: 'localhost/my-gulp-template/public/'
+		// proxy: 'localhost/swill-boilerplate/public/'
 		server: {
 			baseDir: [basePaths.src, basePaths.dest]
 		}

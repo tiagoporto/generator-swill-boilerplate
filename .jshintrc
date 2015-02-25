@@ -1,9 +1,8 @@
 {
-  // My Gulp.js Template
-  // Version: 3.0.0beta
-  // Author: Tiago Porto - http://www.tiagoporto.com
-  // https://github.com/tiagoporto/my-gulp-template
-  // Contact: me@tiagoporto.com
+  // Swill Boilerplate v3.0.0beta
+  // https://github.com/tiagoporto/swill-boilerplate
+  // Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
+  // Released under the MIT license
 
   "bitwise": true,
   "browser": true,

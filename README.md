@@ -1,4 +1,4 @@
-# My Gulp.js Template
+# Swill Boilerplate
 
 ![gulp.js Logo](https://raw.githubusercontent.com/gulpjs/artwork/master/gulp.png)
 
@@ -207,7 +207,7 @@ $ gem install sass
 
 Go to the local folder
 ```sh
-$ cd my-gulp-template
+$ cd swill-boilerplate
 ```
 
 Install dependences of npm
@@ -228,7 +228,7 @@ Look if your text editor is supported, and make the download
 Go to the local folder
 
 ```sh
-$ cd my-gulp-template
+$ cd swill-boilerplate
 ```
 
 Execute to development
@@ -255,7 +255,7 @@ server: {
 ```
 Set the url to the server
 ```
-proxy: "localhost/my-gulp-template/public/"
+proxy: "localhost/swill-boilerplate/public/"
 ```
 
 ### Sprites
