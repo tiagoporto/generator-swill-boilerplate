@@ -1,10 +1,9 @@
 $svg-common 
-	background-repeat no-repeat
-	background-image url(../images/svg-sprite.svg)
+	background url(../images/svg-sprite.svg) no-repeat
 
 .svg-ic
-	background-position 0 0
 	@extend $svg-common
+	background-position 0 0
 
 .svg-ic-dims
 	width 104px
@@ -12,8 +11,8 @@ $svg-common
 
 .svg-icon,
 .svg-icon\\:regular
-	background-position 0 50%
 	@extend $svg-common
+	background-position 0 50%
 
 .svg-icon-dims
 	width 104px
@@ -21,8 +20,8 @@ $svg-common
 
 .svg-icon:hover,
 .svg-icon\\:hover
-	background-position 0 100%
 	@extend $svg-common
+	background-position 0 100%
 
 .svg-icon-dims:hover,
 .svg-icon\\:hover-dims

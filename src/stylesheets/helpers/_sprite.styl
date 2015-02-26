@@ -11,32 +11,32 @@ $icon_home = x y offset_x offset_y width height total_width total_height image_p
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet = width height image $spritesheet_sprites;
 */
-$left-arrow_name = 'left-arrow';
-$left-arrow_x = 0px;
-$left-arrow_y = 0px;
-$left-arrow_offset_x = 0px;
-$left-arrow_offset_y = 0px;
-$left-arrow_width = 32px;
-$left-arrow_height = 32px;
-$left-arrow_total_width = 32px;
-$left-arrow_total_height = 66px;
-$left-arrow_image = '../images/sprite.png';
-$left-arrow = 0px 0px 0px 0px 32px 32px 32px 66px '../images/sprite.png' 'left-arrow';
-$right-arrow_name = 'right-arrow';
-$right-arrow_x = 0px;
-$right-arrow_y = 34px;
-$right-arrow_offset_x = 0px;
-$right-arrow_offset_y = -34px;
-$right-arrow_width = 32px;
-$right-arrow_height = 32px;
-$right-arrow_total_width = 32px;
-$right-arrow_total_height = 66px;
-$right-arrow_image = '../images/sprite.png';
-$right-arrow = 0px 34px 0px -34px 32px 32px 32px 66px '../images/sprite.png' 'right-arrow';
+$left_arrow_name = 'left-arrow';
+$left_arrow_x = 0px;
+$left_arrow_y = 0px;
+$left_arrow_offset_x = 0px;
+$left_arrow_offset_y = 0px;
+$left_arrow_width = 32px;
+$left_arrow_height = 32px;
+$left_arrow_total_width = 32px;
+$left_arrow_total_height = 66px;
+$left_arrow_image = '../images/sprite.png';
+$left_arrow = 0px 0px 0px 0px 32px 32px 32px 66px '../images/sprite.png' 'left-arrow';
+$right_arrow_name = 'right-arrow';
+$right_arrow_x = 0px;
+$right_arrow_y = 34px;
+$right_arrow_offset_x = 0px;
+$right_arrow_offset_y = -34px;
+$right_arrow_width = 32px;
+$right_arrow_height = 32px;
+$right_arrow_total_width = 32px;
+$right_arrow_total_height = 66px;
+$right_arrow_image = '../images/sprite.png';
+$right_arrow = 0px 34px 0px -34px 32px 32px 32px 66px '../images/sprite.png' 'right-arrow';
 $spritesheet_width = 32px;
 $spritesheet_height = 66px;
 $spritesheet_image = '../images/sprite.png';
-$spritesheet_sprites = $left-arrow $right-arrow;
+$spritesheet_sprites = $left_arrow $right_arrow;
 $spritesheet = 32px 66px '../images/sprite.png' $spritesheet_sprites;
 
 /*
@@ -76,6 +76,9 @@ sprite($sprite) {
 /*
 The `sprites` mixin generates identical output to the CSS template
   but can be overridden inside of Stylus
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
 
 sprites($spritesheet_sprites);
 */

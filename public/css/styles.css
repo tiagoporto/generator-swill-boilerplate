@@ -10,8 +10,7 @@
 .svg-icon\:regular,
 .svg-icon:hover,
 .svg-icon\:hover {
-  background-repeat: no-repeat;
-  background-image: url("../images/svg-sprite.svg");
+  background: url("../images/svg-sprite.svg") no-repeat;
 }
 .svg-ic {
   background-position: 0 0;
@@ -3765,15 +3764,15 @@ input[type=radio]:focus {
 input[disabled] {
   background: #f2f2f2;
 }
-::-webkit-input-placeholder{
+::-webkit-input-placeholder {
   color: #8c8c8c;
   font-size: 0.875em;
 }
-::-moz-placeholder{
+::-moz-placeholder {
   color: #8c8c8c;
   font-size: 0.875em;
 }
-:-ms-input-placeholder{
+:-ms-input-placeholder {
   color: #8c8c8c;
   font-size: 0.875em;
 }
@@ -4000,7 +3999,7 @@ p {
     page-break-inside: avoid;
   }
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 200dpi), only screen and (min-resolution: 1.25dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (-webkit-min-device-pixel-ratio: 2.0833333333333335), only screen and (min-resolution: 200dpi), only screen and (min-resolution: 1.25dppx) {
   body {
     -webkit-font-smoothing: subpixel-antialiased;
   }

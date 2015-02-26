@@ -10,13 +10,27 @@ I started this template when I start working with Gulp.js. When the google launc
 
 Uses the following technologies:
 
+* [Autoprefixer](https://github.com/postcss/autoprefixer)
+* [Bower](http://bower.io/)
 * [BrowserSync](http://www.browsersync.io/)
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp.js](http://gulpjs.com/)
 * [JSHint](http://www.jshint.com/)
 * [Node.js](http://nodejs.org/)
-* [Ruby](https://www.ruby-lang.org/)
-* [Sass](http://sass-lang.com/)
+* [NPM](https://www.npmjs.com/)
+* [Stylus](http://learnboost.github.io/stylus/)
+
+
+## Table of Contents
+
+* [Features](#features)
+* [Includes](#includes)
+* [Folder Structure](#folder-structure)
+* [Dependencies](#dependencies)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](license)
+
 
 ## Features
 
@@ -330,3 +344,7 @@ Just use the mixins with the variables as parameters.
 	background-position: 0px -34px;
 }
 ```
+
+## License
+
+Swill Boilerplate is released under the terms of the [MIT license](http://opensource.org/licenses/MIT).
