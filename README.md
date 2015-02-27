@@ -10,15 +10,22 @@ I started this template when I start working with Gulp.js. When the google launc
 
 Uses the following technologies:
 
+* [Angular.js](https://angularjs.org/)
+* [Animate.css](http://daneden.github.io/animate.css/)
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
 * [Bower](http://bower.io/)
 * [BrowserSync](http://www.browsersync.io/)
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp.js](http://gulpjs.com/)
+* [Jquery](http://jquery.com/)
 * [JSHint](http://www.jshint.com/)
 * [Node.js](http://nodejs.org/)
+* [Normalize.css](http://necolas.github.io/normalize.css/)
 * [NPM](https://www.npmjs.com/)
+* [Outdated Browser](http://outdatedbrowser.com/)
+* [Retina.js](http://imulus.github.io/retinajs/)
 * [Stylus](http://learnboost.github.io/stylus/)
+* [Twitter Bootstrap](http://getbootstrap.com/)
 
 
 ## Table of Contents
@@ -67,118 +74,119 @@ Just remove what you will not use or include in specific directories: `src/scrip
 
 ```
 ./
-├───┐
-│   ├── .sass-cache
-│   │   └─ //SASS Cache
-│   │
-│   ├── build //Folder with the build project
-│   │
-│   ├── node-modules //Will appear after installed the NPM modules
-│   │   └─ //All Gulp.js plugins
-│   │
-│   ├── public //Files for deployment
-│   │   ├─ css
-│   │   │  └─ //CSS public css
-│   │   │
-│   │   ├─ fonts
-│   │   │  └─ //Web Fonts
-│   │   │
-│   │   ├─ images
-│   │   │  └─ //public images
-│   │   │
-│   │   ├─ js
-│   │   │  └─ //public scripts
-│   │   │
-│   │   ├─ lang
-│   │   │  │
-│   │   │  ├─ outdated_browser //langs to outdated browser plugin
-│   │   │  │
-│   │   │  └─ //langs to multilingue sites
-│   │   │
-│   │   ├─ .htaccess //Configuration for use on web servers running the Apache Web Serve
-│   │   │
-│   │   │─ apple-touch-icon-precomposed.png //Icon for Safari on iOS
-│   │   │
-│   │   ├─ crossdomain.xml //Permission to handle data across multiple domains
-│   │   │
-│   │   ├─ manifest.json //Provides information about an Chrome app https://developer.chrome.com/extensions/manifest
-│   │   │
-│   │   ├─ manifest.webapp //Provides information about an Firefox OS app https://developer.mozilla.org/pt-BR/Apps/Manifest
-│   │   │
-│   │   ├─ robots.txt //Give instructions about their site to search engines
-│   │   │
-│   │   ├─ favicon.ico //Icon for address bar and bookmark
-│   │   │
-│   │   └─ //HTML or PHP, etc Files
-│   │
-│   └── src //Source files for the projects
-│       ├── images //Original imagens, don't compressed
-│       │   │
-│       │   ├─ sprite //Images to generate the sprite
-│       │   │
-│       │   └─ touch //Icons to Mobile
-│       │  		│
-│       │   	├─ chrome-touch-icon-192x192.png //Icon for Chrome on Android
-│       │  		│
-│       │   	├─ icon-128x128.png //Icon for Firefox on FirefoxOS
-│       │  		│
-│       │   	├─ tile.png //Tile icon for Win8
-│       │   	│
-│       │   	└─ tile-wide.png //Wide tile icon for Win8
+├─┐
+│  ├─ node_modules
+│  │  └─ // NPM packages
+│  │
+│  ├─ build //Folder with the build project
+│  │
+│  ├─ node-modules //Will appear after installed the NPM modules
+│  │  └─ //All Gulp.js plugins
+│  │
+│  ├─ public //Files for deployment
+│  │  ├─ css
+│  │  │  └─ //CSS public css
+│  │  │
+│  │  ├─ fonts
+│  │  │  └─ //Web Fonts
+│  │  │
+│  │  ├─ images
+│  │  │  └─ //public images
+│  │  │
+│  │  ├─ js
+│  │  │  └─ //public scripts
+│  │  │
+│  │  ├─ lang
+│  │  │  │
+│  │  │  ├─ outdated_browser //langs to outdated browser plugin
+│  │  │  │
+│  │  │  └─ //langs to multilingue sites
+│  │  │
+│  │  ├─ .htaccess //Configuration for use on web servers running the Apache Web Serve
+│  │  │
+│  │  ├─ apple-touch-icon-precomposed.png //Icon for Safari on iOS
+│  │  │
+│  │  ├─ crossdomain.xml //Permission to handle data across multiple domain s
+│  │  │
+│  │  ├─ manifest.json //Provides information about an Chrome app https://developer.chrome.com/extensions/manifest
+│  │  │
+│  │  ├─ manifest.webapp //Provides information about an Firefox OS app https://developer.mozilla.org/pt-BR/Apps/Manifest
+│  │  │
+│  │  ├─ robots.txt //Give instructions about their site to search engines
+│  │  │
+│  │  ├─ favicon.ico //Icon for address bar and bookmark
+│  │  │
+│  │  └─ //HTML or PHP, etc Files
+│  │
+│  └─ src //Source files for the projects
+│       ├─ images //Original imagens, don't compressed
+│       │  │
+│       │  ├─ sprite //Images to generate the sprite
+│       │  │
+│       │  └─ touch //Icons to Mobile
+│       │      │
+│       │      ├─ chrome-touch-icon-192x192.png //Icon for Chrome on Android
+│       │      │
+│       │      ├─ icon-128x128.png //Icon for Firefox on FirefoxOS
+│       │      │
+│       │      ├─ tile.png //Tile icon for Win8
+│       │      │
+│       │      └─ tile-wide.png //Wide tile icon for Win8
 │       │
-│       ├── scripts
-│       │   │
-│       │   ├─ angular //Development AngularJS
-│       │   │
-│       │   ├─ dependencies
-│       │   │  │
-│       │   │  ├─ frameworks
-│       │   │  │
-│       │   │  ├─ libs
-│       │   │  │
-│       │   │  └─ plugins
-│       │   │
-│       │   ├─ jquery
-│       │   │  │
-│       │   │  ├─ onread //Open and close elements of Jquery
-│       │   │  │
-│       │   │  └─ //Development JQuery
-│       │   │
-│       │   ├─ settings //Necessary settings to setup plugins, etc.
-│       │   │
-│       │   └─ //Development Javascript files will be concatenated and minify
+│       ├─ scripts
+│       │  │
+│       │  ├─ angular //Development AngularJS
+│       │  │
+│       │  ├─ dependencies
+│       │  │  │
+│       │  │  ├─ frameworks
+│       │  │  │
+│       │  │  ├─ libs
+│       │  │  │
+│       │  │  └─ plugins
+│       │  │
+│       │  ├─ jquery
+│       │  │  │
+│       │  │  ├─ onread //Open and close elements of Jquery
+│       │  │  │
+│       │  │  └─ //Development JQuery
+│       │  │
+│       │  ├─ settings //Necessary settings to setup plugins, etc.
+│       │  │
+│       │  └─ //Development Javascript files will be concatenated and minify
 │       │
-│       └── stylesheets
-│           │
-│           ├─ dependencies //Styles used by external plugins
-│           │
-│           ├─ helpers
-│           │  │
-│           │  ├─ mixins
-│           │  │
-│           │  ├─ _functions.sass
-│           │  │
-│           │  ├─ _mixins.sass
-│           │  │
-│           │  └─ _variables.sass
-│           │
-│           ├─ media_queries
-│           │
-│           ├─ typography
-│           │
-│           ├─ _base.sass //Main Styles
-│           │
-│           ├─ _normalize-x-x-x.sass //Normalize
-│           │
-│           ├─ _sprite.sass //Generated class with use sprite
-│           │
-│           └─ styles.sass //Base SASS with imports
+│       └─ stylesheets
+│            │
+│            ├─ dependencies //Styles used by external plugins
+│            │
+│            ├─ helpers
+│            │  │
+│            │  ├─ mixins
+│            │  │
+│            │  ├─ _functions.sass
+│            │  │
+│            │  ├─ _mixins.sass
+│            │  │
+│            │  └─ _variables.sass
+│            │
+│            ├─ media_queries
+│            │
+│            ├─ typography
+│            │
+│            ├─ _base.sass //Main Styles
+│            │
+│            ├─ normalize.css //Normalize
+│            │
+│            ├─ _sprite.sass //Generated class with use sprite
+│            │
+│            └─ styles.sass //Base SASS with imports
 │
-├── .editorconfig //Settings of editorconfig plugin
-├── .jshintrc //JSHint configuration file
-├── gulpfile.js //Gulp.js configuration file
-├── package.json //NPM dependencies
-└── README.md //Descrition of template
+├─ .editorconfig // Settings of editorconfig plugin
+├─ .jshintrc // JSHint configuration file
+├─ bower.json // Bower dependencies
+├─ gulpfile.js // Gulp.js configuration file
+├─ package.json // NPM dependencies
+└─ README.md // Documentation
 ```
 
 ## Dependencies

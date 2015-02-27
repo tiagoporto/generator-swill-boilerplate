@@ -13,7 +13,7 @@
 
         base.$element = $(element);
         base.element = element;
-    
+
         base.$element.data("downloadTip", base);
 
         base.init = function() {
@@ -27,7 +27,7 @@
                     content = $("<div/>", { "class": "content" }),
                     arrow = $("<div/>", { "class": "arrow" });
                 // Get the logos
-                $("link[rel=logo]").each(function(){
+                $("link[data-title]").each(function(){
                     var title = $(this).data("title"),
                         href = $(this).attr("href"),
                         logo = $("<a/>", { "text": title, "href": href });
