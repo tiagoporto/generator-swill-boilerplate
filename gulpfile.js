@@ -17,6 +17,8 @@
 
 	- Simple version (light version without images)
 
+    - Conferir copyright
+
 	- http://hosseinkarami.com/fastshell/
 	- http://www.ryanbensonmedia.com/harvest
 	- https://developers.google.com/web/starter-kit/
@@ -235,6 +237,7 @@ gulp.task('dependence-scripts', function () {
 	return	gulp.src([
 					paths.scripts.src + 'dependencies/plugins/outdatedbrowser.js',
 					paths.scripts.src + 'dependencies/libs/*',
+                    paths.scripts.src + 'dependencies/modules/*',
 					paths.scripts.src + 'dependencies/frameworks/*',
 					paths.scripts.src + 'dependencies/plugins/**'
 				])

@@ -2,31 +2,21 @@
 
 ![gulp.js Logo](https://raw.githubusercontent.com/gulpjs/artwork/master/gulp.png)
 
-Basic Template Front-End with [Gulp.js](http://gulpjs.com/)
-
-Current version - **3.0.0beta**
+Boilerplate Front-End with [Gulp.js](http://gulpjs.com/)
 
 I started this template when I start working with Gulp.js. When the google launch the [Web Starter Kit](https://developers.google.com/web/starter-kit/). I saw that I'm on the right track.
 
 Uses the following technologies:
 
-* [Angular.js](https://angularjs.org/)
-* [Animate.css](http://daneden.github.io/animate.css/)
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
 * [Bower](http://bower.io/)
 * [BrowserSync](http://www.browsersync.io/)
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp.js](http://gulpjs.com/)
-* [Jquery](http://jquery.com/)
 * [JSHint](http://www.jshint.com/)
 * [Node.js](http://nodejs.org/)
-* [Normalize.css](http://necolas.github.io/normalize.css/)
 * [NPM](https://www.npmjs.com/)
-* [Outdated Browser](http://outdatedbrowser.com/)
-* [Retina.js](http://imulus.github.io/retinajs/)
 * [Stylus](http://learnboost.github.io/stylus/)
-* [Twitter Bootstrap](http://getbootstrap.com/)
-
 
 ## Table of Contents
 
@@ -38,17 +28,16 @@ Uses the following technologies:
 * [Usage](#usage)
 * [License](license)
 
-
 ## Features
 
 * Clean the assets (images, css, js) in the project to maintain the directory organized
 * Compress Images
-* Generate Sprites
-* Concatenate And Minify JavaScript
+* Generate Sprites with .png
+* Generate Sprites with .svg and a fallback .png
+* Concatenate And Minify Scripts
 * Analyze JavaScript with jshint
-* Functions and [mixins](https://github.com/tiagoporto/sass-mixins) to use with Sass
-* Compile Sass
-* Generate sourcemap to help develop with sass
+* Compile Stylus
+* Functions and mixins to use with Stylus
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with [BrowserSync](http://www.browsersync.io/)
 * Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
@@ -58,16 +47,13 @@ Uses the following technologies:
 ## Include
 
 * [AngularJS](http://angularjs.org/)
-* [Animate.css](https://github.com/daneden/animate.css)
-* [Bootstrap](http://getbootstrap.com/)
+* [Animate.css](http://daneden.github.io/animate.css/)
 * [Google Analytics](http://www.google.com/analytics/)
 * [jQuery](http://jquery.com/)
-* [Jquery Mobile](http://jquerymobile.com/)
-* [jQuery UI](http://jqueryui.com/)
+* [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
-* [Underscore.js](http://underscorejs.org/)
-
-Just remove what you will not use or include in specific directories: `src/scripts` and `src/stylesheets`.
+* [Retina.js](http://imulus.github.io/retinajs/)
+* [Twitter Bootstrap](http://getbootstrap.com/)
 
 
 ## Folder Structure
@@ -75,38 +61,42 @@ Just remove what you will not use or include in specific directories: `src/scrip
 ```
 ./
 ├─┐
-│  ├─ node_modules
+│  ├─ node_modules // Will appear after installed the NPM packages
 │  │  └─ // NPM packages
 │  │
-│  ├─ build //Folder with the build project
+│  ├─ build // Folder with the builded project
 │  │
-│  ├─ node-modules //Will appear after installed the NPM modules
-│  │  └─ //All Gulp.js plugins
-│  │
-│  ├─ public //Files for deployment
+│  ├─ public // Files for deployment
 │  │  ├─ css
-│  │  │  └─ //CSS public css
+│  │  │  └─ // Public styles
 │  │  │
 │  │  ├─ fonts
-│  │  │  └─ //Web Fonts
+│  │  │  └─ // Web Fonts
 │  │  │
 │  │  ├─ images
-│  │  │  └─ //public images
+│  │  │  │
+│  │  │  ├─ copyright // Images with copyright metadata
+│  │  │  │
+│  │  │  └─ // Public images
 │  │  │
 │  │  ├─ js
-│  │  │  └─ //public scripts
+│  │  │  └─ // Public scripts
 │  │  │
 │  │  ├─ lang
+│  │  │  ├─ outdated_browser // Langs to outdated browser plugin
 │  │  │  │
-│  │  │  ├─ outdated_browser //langs to outdated browser plugin
 │  │  │  │
-│  │  │  └─ //langs to multilingue sites
+│  │  │  └─ // Langs to multilingue sites
 │  │  │
-│  │  ├─ .htaccess //Configuration for use on web servers running the Apache Web Serve
+│  │  ├─ .htaccess //Configuration for use on web servers running the Apache Web Server
 │  │  │
-│  │  ├─ apple-touch-icon-precomposed.png //Icon for Safari on iOS
+│  │  ├─ 404.html // Page to 404 error
+│  │  │
+│  │  ├─ apple-touch-icon.png // Icon for Safari on iOS
 │  │  │
 │  │  ├─ crossdomain.xml //Permission to handle data across multiple domain s
+│  │  │
+│  │  ├─ favicon.ico //Icon for address bar and bookmark
 │  │  │
 │  │  ├─ manifest.json //Provides information about an Chrome app https://developer.chrome.com/extensions/manifest
 │  │  │
@@ -114,28 +104,30 @@ Just remove what you will not use or include in specific directories: `src/scrip
 │  │  │
 │  │  ├─ robots.txt //Give instructions about their site to search engines
 │  │  │
-│  │  ├─ favicon.ico //Icon for address bar and bookmark
-│  │  │
-│  │  └─ //HTML or PHP, etc Files
+│  │  └─ // HTML, PHP, etc Files
 │  │
-│  └─ src //Source files for the projects
-│       ├─ images //Original imagens, don't compressed
+│  └─ src // Source files for the projects
+│       ├─ images // Original imagens, don't compressed
 │       │  │
-│       │  ├─ sprite //Images to generate the sprite
+│       │  ├─ sprite // Images to generate the sprite
 │       │  │
-│       │  └─ touch //Icons to Mobile
+│       │  ├─ svg-sprite // Svgs to generate the svg-sprite
+│       │  │
+│       │  └─ touch // Icons
 │       │      │
-│       │      ├─ chrome-touch-icon-192x192.png //Icon for Chrome on Android
+│       │      ├─ chrome-touch-icon-192x192.png // Icon for Chrome on Android
 │       │      │
-│       │      ├─ icon-128x128.png //Icon for Firefox on FirefoxOS
+│       │      ├─ icon-128x128.png // Icon for Firefox on FirefoxOS
 │       │      │
-│       │      ├─ tile.png //Tile icon for Win8
+│       │      ├─ tile.png // Tile icon for Win8
 │       │      │
-│       │      └─ tile-wide.png //Wide tile icon for Win8
+│       │      ├─ tile-wide.png // Wide tile icon for Win8
+│       │      │
+│       │      └─ // .jpg, .jpeg, .gif, .svg and .bmp to be compressed
 │       │
 │       ├─ scripts
 │       │  │
-│       │  ├─ angular //Development AngularJS
+│       │  ├─ angular // Development with AngularJS
 │       │  │
 │       │  ├─ dependencies
 │       │  │  │
@@ -143,43 +135,57 @@ Just remove what you will not use or include in specific directories: `src/scrip
 │       │  │  │
 │       │  │  ├─ libs
 │       │  │  │
+│       │  │  ├─ modules
+│       │  │  │
 │       │  │  └─ plugins
 │       │  │
 │       │  ├─ jquery
 │       │  │  │
-│       │  │  ├─ onread //Open and close elements of Jquery
+│       │  │  ├─ onread // Open and close elements of Jquery
 │       │  │  │
-│       │  │  └─ //Development JQuery
+│       │  │  └─ // Development with JQuery
 │       │  │
-│       │  ├─ settings //Necessary settings to setup plugins, etc.
+│       │  ├─ settings
+│       │  │  │
+│       │  │  ├─ google_analytics.js // Settings to Analytics
+│       │  │  │
+│       │  │  └─ outdatedbrowser.js // Settings to Browser Outdated
 │       │  │
-│       │  └─ //Development Javascript files will be concatenated and minify
+│       │  └─ // Development with Pure Javascript, the files
 │       │
 │       └─ stylesheets
+│            │
+│            ├─ components //Styles used by external plugins
 │            │
 │            ├─ dependencies //Styles used by external plugins
 │            │
 │            ├─ helpers
 │            │  │
+│            │  ├─ functions
+│            │  │
 │            │  ├─ mixins
 │            │  │
-│            │  ├─ _functions.sass
+│            │  ├─ _functions.styl
 │            │  │
-│            │  ├─ _mixins.sass
+│            │  ├─ _helpers.styl
 │            │  │
-│            │  └─ _variables.sass
+│            │  ├─ _mixins.styl
+│            │  │
+│            │  ├─ _placeholders.styl
+│            │  │
+│            │  ├─ _sprite.styl
+│            │  │
+│            │  ├─ _svg-sprite.styl
+│            │  │
+│            │  └─ _variables.styl
 │            │
 │            ├─ media_queries
 │            │
 │            ├─ typography
 │            │
-│            ├─ _base.sass //Main Styles
+│            ├─ _base.styl // Main Styles
 │            │
-│            ├─ normalize.css //Normalize
-│            │
-│            ├─ _sprite.sass //Generated class with use sprite
-│            │
-│            └─ styles.sass //Base SASS with imports
+│            └─ styles.styl // Base Stylus file with imports
 │
 ├─ .editorconfig // Settings of editorconfig plugin
 ├─ .jshintrc // JSHint configuration file
@@ -191,53 +197,52 @@ Just remove what you will not use or include in specific directories: `src/scrip
 
 ## Dependencies
 
-1. [Node.js](http://nodejs.org/) installation
+1. Download and install [Node.js](http://nodejs.org/download/)
 
-  `Mark npm package manager`
+    `Select npm package manager`
 
 
 1. Install [Gulp.js](http://gulpjs.com/)
 
-  ```sh
-  $ npm install gulp -g
-  ```
+    * Open command line and execute
 
-  For Mac or Linux User
+    ```sh
+    $ npm install gulp -g
+    ```
 
-  ```sh
-  $ sudo npm install gulp -g
-  ```
+    For Mac or Linux User
 
-1. [gulp-ruby-sass](https://www.npmjs.org/package/gulp-ruby-sass) require ruby and Sass 3.3+
+    ```sh
+    $ sudo npm install gulp -g
+    ```
 
-  For Windows Users is necessary install ruby
+1. Install NPM dependencies
 
-  Download [Ruby](https://www.ruby-lang.org/pt/)
+    * In the command line go to the local folder
 
-  Download Development Kit from [Ruby Installer](http://rubyinstaller.org/downloads/)
+    ```sh
+    $ cd {yourFolderStructure}/swill-boilerplate
+    ```
 
-  * Unzip the zip
-  * Open command-line and go to unzipped folder
-  * `ruby dk.rb init`
-  * `ruby dk.rb install`
-  * `gem install rdiscount --platform=ruby`
+    * Execute
 
-```sh
-$ gem update --system
-$ gem install sass
-```
+    ```sh
+    $ npm install
+    ```
 
-Go to the local folder
-```sh
-$ cd swill-boilerplate
-```
+1. Install Bower Dependencies
 
-Install dependences of npm
-```sh
-$ npm install
-```
+    * Execute
 
-###EditorConfig
+    ```sh
+    $ bower install
+    ```
+
+    ```sh
+    $ gulp bower
+    ```
+
+### EditorConfig
 
 To work with [EditorConfig](http://editorconfig.org/) it's necessary install the plugin on your text editor.
 
@@ -250,14 +255,16 @@ Look if your text editor is supported, and make the download
 Go to the local folder
 
 ```sh
-$ cd swill-boilerplate
+$ cd {yourFolderStructure}/swill-boilerplate
 ```
 
-Execute to development
+Execute the task development
 
 ```sh
 $ gulp
 ```
+
+### Tasks
 
 Execute to build the project
 
@@ -284,11 +291,11 @@ proxy: "localhost/swill-boilerplate/public/"
 
 This template uses [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith) to generate sprites.
 
-When the sprite is generated, a file `_sprite.sass` is created with four mixins and the variables of the parameters of the images, like height and width (the names of the variables is same of the original file before the compilation).
+When the sprite is generated, a file `_sprite.styl` is created with four mixins and the variables of the parameters of the images, like height and width (the names of the variables is same of the original file before the compilation).
 
-**`_sprite.sass` example**
+**`_sprite.styl` example**
 
-```scss
+```styl
 
 $left-arrow-x: 0px;
 $left-arrow-y: 0px;
@@ -331,12 +338,12 @@ Just use the mixins with the variables as parameters.
 
 **Example**
 
-```sass
+```styl
 #arrow
-	+sprite($left-arrow)
+	sprite($left-arrow)
 
 	&:hover
-		+sprite-position($right-arrow)
+		sprite-position($right-arrow)
 ```
 
 **Output**
