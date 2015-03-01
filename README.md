@@ -1,10 +1,25 @@
 # Swill Boilerplate
 
-![gulp.js Logo](https://raw.githubusercontent.com/gulpjs/artwork/master/gulp.png)
+![Swill Boilerplate Logo](src/images/logo.svg)
 
-Boilerplate Front-End with [Gulp.js](http://gulpjs.com/)
+Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start multi-device development for business proposals.
 
-I started this template when I start working with Gulp.js. When the google launch the [Web Starter Kit](https://developers.google.com/web/starter-kit/). I saw that I'm on the right track.
+## Table of Contents
+
+* [Technologies](#technologies)
+* [Includes](#includes)
+* [Features](#features)
+* [Folder Structure](#folder-structure)
+* [Dependencies](#dependencies)
+* [Usage](#usage)
+    * [Tasks](#tasks)
+    * [AngulaJS](#angularjs)
+    * [BrowserSync](#browsersync)
+    * [Bitmap Sprite](#sprite)
+    * [SVG Sprite](#svg-sprite)
+* [License](license)
+
+## Technologies
 
 Uses the following technologies:
 
@@ -18,15 +33,16 @@ Uses the following technologies:
 * [NPM](https://www.npmjs.com/)
 * [Stylus](http://learnboost.github.io/stylus/)
 
-## Table of Contents
+## Includes
 
-* [Features](#features)
-* [Includes](#includes)
-* [Folder Structure](#folder-structure)
-* [Dependencies](#dependencies)
-* [Installation](#installation)
-* [Usage](#usage)
-* [License](license)
+* [AngularJS](http://angularjs.org/)
+* [Animate.css](http://daneden.github.io/animate.css/)
+* [Google Analytics](http://www.google.com/analytics/)
+* [jQuery](http://jquery.com/)
+* [Normalize.css](http://necolas.github.io/normalize.css/)
+* [Outdated Browser](http://outdatedbrowser.com/)
+* [Retina.js](http://imulus.github.io/retinajs/)
+* [Twitter Bootstrap](http://getbootstrap.com/)
 
 ## Features
 
@@ -43,17 +59,6 @@ Uses the following technologies:
 * Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 * Check if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
 * Build the project compressing the HTML and the CSS.
-
-## Include
-
-* [AngularJS](http://angularjs.org/)
-* [Animate.css](http://daneden.github.io/animate.css/)
-* [Google Analytics](http://www.google.com/analytics/)
-* [jQuery](http://jquery.com/)
-* [Normalize.css](http://necolas.github.io/normalize.css/)
-* [Outdated Browser](http://outdatedbrowser.com/)
-* [Retina.js](http://imulus.github.io/retinajs/)
-* [Twitter Bootstrap](http://getbootstrap.com/)
 
 
 ## Folder Structure
@@ -197,6 +202,10 @@ Uses the following technologies:
 
 ## Dependencies
 
+1. Install [EditorConfig](http://editorconfig.org/)
+
+    * Download and install the [EditorConfig plugin](http://editorconfig.org/#download) for you text editor.
+
 1. Download and install [Node.js](http://nodejs.org/download/)
 
     `Select npm package manager`
@@ -216,7 +225,7 @@ Uses the following technologies:
     $ sudo npm install gulp -g
     ```
 
-1. Install NPM dependencies
+1. Install [NPM](https://www.npmjs.com/) dependencies
 
     * In the command line go to the local folder
 
@@ -230,8 +239,27 @@ Uses the following technologies:
     $ npm install
     ```
 
-1. Install Bower Dependencies
+1. Install [Bower](http://bower.io/)
 
+    * Execute
+
+    ```sh
+    $ npm install -g bower
+    ```
+
+## Usage
+
+1. Open the file `bower.json`
+    * Remove the dependencies that you will not use.
+
+1. Open the command line
+    * Go to the local folder
+
+    ```sh
+    $ cd {yourFolderStructure}/swill-boilerplate
+    ```
+
+1. Install Bower Dependencies
     * Execute
 
     ```sh
@@ -242,23 +270,7 @@ Uses the following technologies:
     $ gulp bower
     ```
 
-### EditorConfig
-
-To work with [EditorConfig](http://editorconfig.org/) it's necessary install the plugin on your text editor.
-
-Look if your text editor is supported, and make the download
-
-[http://editorconfig.org/#download](http://editorconfig.org/#download)
-
-## Usage
-
-Go to the local folder
-
-```sh
-$ cd {yourFolderStructure}/swill-boilerplate
-```
-
-Execute the task development
+1. Execute the task development
 
 ```sh
 $ gulp
@@ -269,25 +281,42 @@ $ gulp
 Execute to build the project
 
 ```sh
+$ gulp gulp
+```
+
+```sh
+$ gulp compile
+```
+
+```sh
 $ gulp build
 ```
 
+```sh
+$ gulp build:serve
+```
+
+### AngulaJS
+
+To use Angular go to the `gulpfile.js` uncomment the lines with `mangle: false`.
+
+
 ### BrowserSync
 
-If you will work with dinamic files like .php, it's necessary make changes in gulpfile.js to BrowserSync works
+If you will work with dinamic files like .php, it's necessary make changes in `gulpfile.js` to BrowserSync works
 
 Remove the lines
-```
+```javascript
 server: {
-	baseDir: [basePaths.src, basePaths.dest]
+    baseDir: [basePaths.src, basePaths.dest]
 }
 ```
 Set the url to the server
-```
+```javascript
 proxy: "localhost/swill-boilerplate/public/"
 ```
 
-### Sprites
+### Bitmap Sprite
 
 This template uses [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith) to generate sprites.
 
@@ -340,25 +369,28 @@ Just use the mixins with the variables as parameters.
 
 ```styl
 #arrow
-	sprite($left-arrow)
+    sprite($left-arrow)
 
-	&:hover
-		sprite-position($right-arrow)
+    &:hover
+        sprite-position($right-arrow)
 ```
 
 **Output**
 
 ```css
 #arrow {
-	background-image: url(../images/sprite.png);
-	background-position: 0px 0px;
-	width: 32px;
-	height: 32px;
+    background-image: url(../images/sprite.png);
+    background-position: 0px 0px;
+    width: 32px;
+    height: 32px;
 }
 #arrow:hover {
-	background-position: 0px -34px;
+    background-position: 0px -34px;
 }
 ```
+
+### Svg Sprite
+
 
 ## License
 

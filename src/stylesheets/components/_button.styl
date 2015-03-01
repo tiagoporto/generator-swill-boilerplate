@@ -1,28 +1,27 @@
 $button
-	background #269566
-	background-image linear-gradient(to top, #092606, rgba(0, 0, 0, .5) 130%)
-	border 1px solid #000
-	border-radius 5px
-	box-shadow: inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
-	color #FFF
-	display inline-block
-	padding em(5px) em(15px)
+    background #1BA038
+    background-image linear-gradient(to top, transparent, rgba(0, 0, 0, .5) 130%)
+    border 1px solid #000
+    border-radius 5px
+    box-shadow 0 3px 2px 0 rgba(0,0,0,.2)
+    color #FFF
+    display inline-block
+    padding em(5px) em(15px)
 
 $buttonHover
-	background pink
-	color green
+    background-image linear-gradient(to top, rgba(0, 0, 0, .5), transparent 130%)
 
 button,
 input[type="button"]
-	@extend $button
+    @extend $button
 
-	&:hover
-		@extend $buttonHover
+    &:hover
+        @extend $buttonHover
 
 .file-upload
-	span
-		@extend $button
+    span
+        @extend $button
 
-	&:hover
-		span
-			@extend $buttonHover
+    &:hover
+        span
+            @extend $buttonHover
