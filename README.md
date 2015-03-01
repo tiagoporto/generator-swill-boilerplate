@@ -1,6 +1,6 @@
 # Swill Boilerplate
 
-![Swill Boilerplate Logo](src/images/logo.svg)
+![Swill Boilerplate Logo](https://raw.githubusercontent.com/tiagoporto/swill-boilerplate/stylus-version/src/images/logo.svg)
 
 Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start multi-device development for business proposals.
 
@@ -10,13 +10,13 @@ Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start 
 * [Includes](#includes)
 * [Features](#features)
 * [Folder Structure](#folder-structure)
-* [Dependencies](#dependencies)
+* [Installing Dependencies](#installing-dependencies)
 * [Usage](#usage)
-    * [Tasks](#tasks)
-    * [AngulaJS](#angularjs)
-    * [BrowserSync](#browsersync)
-    * [Bitmap Sprite](#sprite)
-    * [SVG Sprite](#svg-sprite)
+	* [Tasks](#tasks)
+	* [AngulaJS](#angularjs)
+	* [BrowserSync](#browsersync)
+	* [Bitmap Sprite](#sprite)
+	* [SVG Sprite](#svg*sprite)
 * [License](license)
 
 ## Technologies
@@ -65,7 +65,7 @@ Uses the following technologies:
 
 ```
 ./
-├─┐
+├──┐
 │  ├─ node_modules // Will appear after installed the NPM packages
 │  │  └─ // NPM packages
 │  │
@@ -200,75 +200,75 @@ Uses the following technologies:
 └─ README.md // Documentation
 ```
 
-## Dependencies
+## Installing Dependencies
 
 1. Install [EditorConfig](http://editorconfig.org/)
 
-    * Download and install the [EditorConfig plugin](http://editorconfig.org/#download) for you text editor.
+	* Download and install the [EditorConfig plugin](http://editorconfig.org/#download) for you text editor.
 
 1. Download and install [Node.js](http://nodejs.org/download/)
 
-    `Select npm package manager`
+	`Select npm package manager`
 
 
 1. Install [Gulp.js](http://gulpjs.com/)
 
-    * Open command line and execute
+	* Open command line and execute
 
-    ```sh
-    $ npm install gulp -g
-    ```
+	```sh
+	$ npm install gulp -g
+	```
 
-    For Mac or Linux User
+	For Mac or Linux User
 
-    ```sh
-    $ sudo npm install gulp -g
-    ```
+	```sh
+	$ sudo npm install gulp -g
+	```
 
 1. Install [NPM](https://www.npmjs.com/) dependencies
 
-    * In the command line go to the local folder
+	* In the command line go to the local folder
 
-    ```sh
-    $ cd {yourFolderStructure}/swill-boilerplate
-    ```
+	```sh
+	$ cd {yourFolderStructure}/swill-boilerplate
+	```
 
-    * Execute
+	* Execute
 
-    ```sh
-    $ npm install
-    ```
+	```sh
+	$ npm install
+	```
 
 1. Install [Bower](http://bower.io/)
 
-    * Execute
+	* Execute
 
-    ```sh
-    $ npm install -g bower
-    ```
+	```sh
+	$ npm install -g bower
+	```
 
 ## Usage
 
 1. Open the file `bower.json`
-    * Remove the dependencies that you will not use.
+	* Remove the dependencies that you will not use.
 
 1. Open the command line
-    * Go to the local folder
+	* Go to the local folder
 
-    ```sh
-    $ cd {yourFolderStructure}/swill-boilerplate
-    ```
+	```sh
+	$ cd {yourFolderStructure}/swill-boilerplate
+	```
 
 1. Install Bower Dependencies
-    * Execute
+	* Execute
 
-    ```sh
-    $ bower install
-    ```
+	```sh
+	$ bower install
+	```
 
-    ```sh
-    $ gulp bower
-    ```
+	```sh
+	$ gulp bower
+	```
 
 1. Execute the task development
 
@@ -308,7 +308,7 @@ If you will work with dinamic files like .php, it's necessary make changes in `g
 Remove the lines
 ```javascript
 server: {
-    baseDir: [basePaths.src, basePaths.dest]
+	baseDir: [basePaths.src, basePaths.dest]
 }
 ```
 Set the url to the server
@@ -369,23 +369,23 @@ Just use the mixins with the variables as parameters.
 
 ```styl
 #arrow
-    sprite($left-arrow)
+	sprite($left-arrow)
 
-    &:hover
-        sprite-position($right-arrow)
+	&:hover
+		sprite-position($right-arrow)
 ```
 
 **Output**
 
 ```css
 #arrow {
-    background-image: url(../images/sprite.png);
-    background-position: 0px 0px;
-    width: 32px;
-    height: 32px;
+	background-image: url(../images/sprite.png);
+	background-position: 0px 0px;
+	width: 32px;
+	height: 32px;
 }
 #arrow:hover {
-    background-position: 0px -34px;
+	background-position: 0px -34px;
 }
 ```
 
