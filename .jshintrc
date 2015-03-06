@@ -10,11 +10,11 @@
   "eqeqeq": true,
   "esnext": true,
   "globals": {
-	  "$": false,
-	  "console": false,
-	  "ga": false,
-	  "jQuery": false,
-	  "outdatedBrowser": false
+    "$": false,
+    "angular": false,
+    "ga": false,
+    "jQuery": false,
+    "outdatedBrowser": false
    },
   "immed": true,
   "indent": 4,
