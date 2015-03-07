@@ -20,6 +20,7 @@
     "gulp-cached": "^1.0.2",
     "gulp-concat": "^2.5.2",
     "gulp-csso": "^1.0.0",
+    "gulp-file": "^0.2.0",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
     "gulp-jshint": "^1.9.2",

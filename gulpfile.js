@@ -36,6 +36,7 @@ var		   gulp = require('gulp'),
 		 concat = require('gulp-concat'),
 		   csso = require('gulp-csso'),
 			del = require('del'),
+		   file = require('gulp-file'),
 		 gulpif = require('gulp-if'),
 	   imagemin = require('gulp-imagemin'),
 		 jshint = require('gulp-jshint'),
@@ -216,12 +217,43 @@ gulp.task('stylus-helpers', function () {
 
 // Compile and Prefix Stylus Styles
 gulp.task('stylus', function () {
+
 	return	gulp.src([
 					paths.styles.src + '*.styl',
 					'!' + paths.styles.src + '_*.styl',
 				])
-				.pipe(plumber())
-				.pipe(stylus({'include css': true}))
+				.pipe(plumber({
+					errorHandler: (function(err){
+						console.log(err.message);
+
+						function toUnicode(er){
+							var unicodeString = '';
+
+							for (var i=0; i < er.length; i++) {
+
+								var theUnicode = er.charCodeAt(i).toString(16).toUpperCase();
+
+								while (theUnicode.length < 4) {
+								theUnicode = '0' + theUnicode;
+								}
+
+								theUnicode = '\\u' + theUnicode;
+								unicodeString += theUnicode;
+		  					}
+
+		  					return er;
+						};
+
+						return file('styles.css', 'html:before{content: "' + err + '";}body{display: none;}', { src: true }).pipe(gulp.dest(paths.styles.dest));
+					})
+
+				}))
+				.pipe(stylus({'include css': true})
+				//     .on('error', function (err) {
+				// 	file('styles.css', 'html:before{content: "' + err + '";}body{display: none;}')
+				// })
+				)
+
 				.pipe(autoprefixer({
 					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
 				}))
