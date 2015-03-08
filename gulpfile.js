@@ -411,14 +411,20 @@ gulp.task('bower', function() {
 						.pipe(replace(/@charset 'UTF-8';/g, ''))
 							.pipe(gulp.dest(paths.styles.src + 'dependencies'))
 
-	var    font    = gulp.src(basePaths.bower + 'bootstrap/dist/fonts/*')
+	var outdatedBrowserLangs = gulp.src(basePaths.bower + 'outdated-browser/outdatedbrowser/lang/*')
+						.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
+
+	var    font    = gulp.src([
+							basePaths.bower + 'bootstrap/dist/fonts/*',
+							basePaths.bower + 'font-awesome/fonts/*'
+						])
 						.pipe(gulp.dest(basePaths.dest + 'fonts'));
 
 	var    grid    = gulp.src(basePaths.bower + 'semantic.gs/stylesheets/styl/grid.styl')
 						.pipe(rename({prefix: '_'}))
 						.pipe(gulp.dest(paths.styles.src + 'dependencies'));
 
-	return merge(frameworks, lib, plugins, css, font, grid);
+	return merge(frameworks, lib, plugins, css, outdatedBrowserLangs, font, grid);
 });
 
 //***************************** Main Tasks *******************************//
