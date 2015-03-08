@@ -11,8 +11,6 @@
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
 
-	- fonts
-
 	- verificar notify
 
 	- Simple version (light version without images)
@@ -404,6 +402,7 @@ gulp.task('bower', function() {
 	var     css    = gulp.src([
 							basePaths.bower + 'animate.css/animate.css',
 							basePaths.bower + 'bootstrap/dist/css/bootstrap.css',
+							basePaths.bower + 'font-awesome/css/font-awesome.css',
 							basePaths.bower + 'normalize.css/normalize.css',
 							basePaths.bower + 'outdated-browser/outdatedbrowser/outdatedbrowser.css'
 						])
