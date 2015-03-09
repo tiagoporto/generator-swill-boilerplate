@@ -251,8 +251,8 @@ gulp.task('dependence-scripts', function () {
 	return	gulp.src([
 					paths.scripts.src + 'dependencies/plugins/outdatedbrowser.js',
 					paths.scripts.src + 'dependencies/libs/*',
-					paths.scripts.src + 'dependencies/modules/*',
 					paths.scripts.src + 'dependencies/frameworks/*',
+					paths.scripts.src + 'dependencies/modules/*',
 					paths.scripts.src + 'dependencies/plugins/**'
 				])
 				.pipe(concat('dependencies.js'))
@@ -391,6 +391,12 @@ gulp.task('bower', function() {
 
 	var    lib     = gulp.src(basePaths.bower + 'jquery/dist/jquery.js')
 						.pipe(gulp.dest(paths.scripts.src + 'dependencies/libs'))
+
+	var  modules   = gulp.src([
+							basePaths.bower + 'angular-route/angular-route.js',
+							basePaths.bower + 'angular-sanitize/angular-sanitize.js'
+						])
+						.pipe(gulp.dest(paths.scripts.src + 'dependencies/modules'))
 
 	var   plugins  = gulp.src([
 							basePaths.bower + 'bootstrap/dist/js/bootstrap.js',
