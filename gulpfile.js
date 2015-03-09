@@ -15,8 +15,6 @@
 
 	- Simple version (light version without images)
 
-	- Conferir copyright
-
 	- http://hosseinkarami.com/fastshell/
 	- http://www.ryanbensonmedia.com/harvest
 	- https://developers.google.com/web/starter-kit/
@@ -350,6 +348,7 @@ gulp.task('clean', function (cb) {
 			paths.scripts.dest,
 			paths.images.dest + '**/*',
 			'!' + paths.images.dest + 'copyright{,**/*{,**/*}}',
+			'!' + paths.images.dest + 'logos{,**/*{,**/*}}'
 		], cb)
 });
 
