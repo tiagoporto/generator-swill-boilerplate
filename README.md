@@ -37,11 +37,13 @@ Uses the following technologies:
 
 * [AngularJS](http://angularjs.org/)
 * [Animate.css](http://daneden.github.io/animate.css/)
+* [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 * [Google Analytics](http://www.google.com/analytics/)
 * [jQuery](http://jquery.com/)
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
 * [Retina.js](http://imulus.github.io/retinajs/)
+* [Semantic GRID SYSTEM](http://semantic.gs/)
 * [Twitter Bootstrap](http://getbootstrap.com/)
 
 ## Features
@@ -82,6 +84,8 @@ Uses the following technologies:
 │  │  │  │
 │  │  │  ├─ copyright // Images with copyright metadata
 │  │  │  │
+│  │  │  ├─ logos // Logos
+│  │  │  │
 │  │  │  └─ // Public images
 │  │  │
 │  │  ├─ js
@@ -93,15 +97,19 @@ Uses the following technologies:
 │  │  │  │
 │  │  │  └─ // Langs to multilingue sites
 │  │  │
-│  │  ├─ .htaccess //Configuration for use on web servers running the Apache Web Server
+│  │  ├─ .htaccess // Configuration for use on web servers running the Apache Web Server
 │  │  │
 │  │  ├─ 404.html // Page to 404 error
 │  │  │
 │  │  ├─ apple-touch-icon.png // Icon for Safari on iOS
 │  │  │
-│  │  ├─ crossdomain.xml //Permission to handle data across multiple domain s
+│  │  ├─ crossdomain.xml // Permission to handle data across multiple domains
+│  │  │
+│  │  ├─ example.html // Simple page with example of the components
 │  │  │
 │  │  ├─ favicon.ico //Icon for address bar and bookmark
+│  │  │
+│  │  ├─ index.html
 │  │  │
 │  │  ├─ manifest.json //Provides information about an Chrome app https://developer.chrome.com/extensions/manifest
 │  │  │
@@ -167,8 +175,12 @@ Uses the following technologies:
 │            ├─ helpers
 │            │  │
 │            │  ├─ functions
+│            │  │  │
+│            │  │  └ //
 │            │  │
 │            │  ├─ mixins
+│            │  │  │
+│            │  │  └ //
 │            │  │
 │            │  ├─ _functions.styl
 │            │  │
