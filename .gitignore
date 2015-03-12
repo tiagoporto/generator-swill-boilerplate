@@ -213,13 +213,17 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
+#################
+## Cordova
+#################
+platforms/*
+plugins/*
 
 #################
 ## NPM Dependencies
 #################
 
 node_modules/
-
 
 #################
 ## Bower Components
