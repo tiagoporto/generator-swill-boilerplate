@@ -60,7 +60,7 @@ var		   gulp = require('gulp'),
 
 		images: {
 			 src: 'images/',
-			dest: 'images/' // If change this directory remember to modify
+			dest: 'img/' // If change this directory remember to modify
 							// the variable $image-path in
 							// 'src/stylesheets/helpers/_variables.styl'
 		},
@@ -329,7 +329,7 @@ gulp.task('copy', function () {
 						.pipe(gulp.dest(basePaths.build));
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files
-	var AllFiles =	gulp.src([
+	var allFiles =	gulp.src([
 							basePaths.dest + '**/*',
 							'!' + paths.styles.dest + '**/*',
 							'!' + paths.scripts.dest + '**/*',
