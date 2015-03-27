@@ -115,7 +115,7 @@ var		   gulp = require('gulp'),
 		// To use with dinamic files
 		// proxy: 'localhost/swill-boilerplate/public/'
 		server: {
-			baseDir: [basePaths.src, basePaths.dest]
+			baseDir: [basePaths.src, basePaths.dest, basePaths.bower]
 		}
 	}
 
@@ -246,15 +246,9 @@ gulp.task('stylus', function () {
 				.pipe(notify({message: 'Styles task complete', onLast: true}));
 });
 
-// Concatenate libs, frameworks, plugins Scripts and Minify
+// Concatenate dependencies scripts and Minify
 gulp.task('dependence-scripts', function () {
-	return	gulp.src([
-					paths.scripts.src + 'dependencies/plugins/outdatedbrowser.js',
-					paths.scripts.src + 'dependencies/libs/*',
-					paths.scripts.src + 'dependencies/frameworks/*',
-					paths.scripts.src + 'dependencies/modules/*',
-					paths.scripts.src + 'dependencies/plugins/**'
-				])
+	return	gulp.src(paths.scripts.src + 'dependencies/*')
 				.pipe(concat('dependencies.js'))
 				.pipe(gulp.dest(paths.scripts.dest))
 				.pipe(rename('dependencies.min.js'))
@@ -303,7 +297,7 @@ gulp.task('scripts', function () {
 						.pipe(uglify({
 							preserveComments: 'some'
 							// Required to minify angularjs scripts
-							// , mangle: false
+							//, mangle: false
 						}))
 						.pipe(gulp.dest(paths.scripts.dest));
 
@@ -386,49 +380,17 @@ gulp.task('watch', function () {
 
 // Copy Bower dependencies to specific folders
 gulp.task('bower', function() {
-	var frameworks = gulp.src(basePaths.bower + 'angular/angular.js')
-	 					.pipe(gulp.dest(paths.scripts.src + 'dependencies/frameworks'))
-
-	var    lib     = gulp.src(basePaths.bower + 'jquery/dist/jquery.js')
-						.pipe(gulp.dest(paths.scripts.src + 'dependencies/libs'))
-
-	var  modules   = gulp.src([
-							basePaths.bower + 'angular-route/angular-route.js',
-							basePaths.bower + 'angular-sanitize/angular-sanitize.js'
-						])
-						.pipe(gulp.dest(paths.scripts.src + 'dependencies/modules'))
-
-	var   plugins  = gulp.src([
-							basePaths.bower + 'bootstrap/dist/js/bootstrap.js',
-							basePaths.bower + 'outdated-browser/outdatedbrowser/outdatedbrowser.js',
-							basePaths.bower + 'retina.js/dist/retina.js'
-						])
-							.pipe(gulp.dest(paths.scripts.src + 'dependencies/plugins'))
-	var     css    = gulp.src([
-							basePaths.bower + 'animate.css/animate.css',
-							basePaths.bower + 'bootstrap/dist/css/bootstrap.css',
-							basePaths.bower + 'font-awesome/css/font-awesome.css',
-							basePaths.bower + 'normalize.css/normalize.css',
-							basePaths.bower + 'outdated-browser/outdatedbrowser/outdatedbrowser.css'
-						])
-						.pipe(replace(/@charset "UTF-8";/g, ''))
-						.pipe(replace(/@charset 'UTF-8';/g, ''))
-							.pipe(gulp.dest(paths.styles.src + 'dependencies'))
 
 	var outdatedBrowserLangs = gulp.src(basePaths.bower + 'outdated-browser/outdatedbrowser/lang/*')
 						.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
 
-	var    font    = gulp.src([
+	var    fonts    = gulp.src([
 							basePaths.bower + 'bootstrap/dist/fonts/*',
 							basePaths.bower + 'font-awesome/fonts/*'
 						])
 						.pipe(gulp.dest(basePaths.dest + 'fonts'));
 
-	var    grid    = gulp.src(basePaths.bower + 'semantic.gs/stylesheets/styl/grid.styl')
-						.pipe(rename({prefix: '_'}))
-						.pipe(gulp.dest(paths.styles.src + 'dependencies'));
-
-	return merge(frameworks, lib, plugins, css, outdatedBrowserLangs, font, grid);
+	return merge(outdatedBrowserLangs, fonts);
 });
 
 //***************************** Main Tasks *******************************//
@@ -437,6 +399,9 @@ gulp.task('bower', function() {
 gulp.task('default', ['clean'], function (cb) {
 	sequence(['images', 'bitmap-sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', 'stylus', 'scripts', 'watch',  cb);
 });
+
+// Serve the project and watch
+gulp.task('serve', ['watch']);
 
 // Compile project
 gulp.task('compile', ['clean'], function (cb) {
