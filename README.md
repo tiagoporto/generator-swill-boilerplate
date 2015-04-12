@@ -4,6 +4,8 @@
 
 Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start multi-device development for business proposals.
 
+> [Light version](https://github.com/tiagoporto/swill-boilerplate/tree/stylus-version-light)
+
 ## Table of Contents
 
 * [Technologies](#technologies)

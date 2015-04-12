@@ -10,14 +10,18 @@ function addLoadEvent(func) {
         };
     }
 }
-//call plugin function after DOM ready
 addLoadEvent(
+	//call plugins after DOM ready
+
     outdatedBrowser({
         bgColor: '#f25648',
         color: '#ffffff',
         lowerThan: 'transform',
         languagePath: 'lang/outdated_browser/en.html'
-    })
+    }),
+
+
+    $('#logo').downloadTip({ "position": "right" })
 );
 
 // Google Analytics: change UA-XXXXX-X to be your site's ID.
