@@ -15,6 +15,7 @@ Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start 
 * [Installing Dependencies](#installing-dependencies)
 * [Usage](#usage)
 	* [Tasks](#tasks)
+	* [Peculiarities](#peculiarities)
 	* [AngulaJS](#angularjs)
 	* [BrowserSync](#browsersync)
 	* [Bitmap Sprite](#sprite)
@@ -285,19 +286,31 @@ $ gulp
 
 ### Tasks
 
-Execute to build the project
+**Default Task** - compile, watch and serve project.
 
 ```sh
-$ gulp gulp
+$ gulp
 ```
+
+**Compile Task** - just compile project.
 
 ```sh
 $ gulp compile
 ```
 
+**Serve Task** - serve the project and watch.
+
+```sh
+$ gulp serve
+```
+
+**Build Task** - build project.
+
 ```sh
 $ gulp build
 ```
+
+**Build:serve task** - build and serve builded project.
 
 ```sh
 $ gulp build:serve
@@ -410,6 +423,7 @@ Just use the mixins with the variables as parameters.
 
 ### Svg Sprite
 
+To-do
 
 ## License
 
