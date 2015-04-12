@@ -240,6 +240,16 @@ Uses the following technologies:
 	$ sudo npm install gulp -g
 	```
 
+1. Install [Bower](http://bower.io/)
+
+	* Execute
+
+	```sh
+	$ npm install -g bower
+	```
+
+## Usage
+
 1. Install [NPM](https://www.npmjs.com/) dependencies
 
 	* In the command line go to the local folder
@@ -254,16 +264,6 @@ Uses the following technologies:
 	$ npm install
 	```
 
-1. Install [Bower](http://bower.io/)
-
-	* Execute
-
-	```sh
-	$ npm install -g bower
-	```
-
-## Usage
-
 1. Open the file `bower.json`
 	* Remove the dependencies that you will not use.
 
@@ -274,7 +274,7 @@ Uses the following technologies:
 	$ cd {yourFolderStructure}/swill-boilerplate
 	```
 
-1. Install Bower Dependencies
+1. Install [Bower](http://bower.io/) Dependencies
 	* Execute
 
 	```sh
@@ -285,7 +285,7 @@ Uses the following technologies:
 	$ gulp bower
 	```
 
-1. Execute the task development
+1. Execute the task `gulp` to start the development
 
 ```sh
 $ gulp
