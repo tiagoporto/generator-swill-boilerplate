@@ -21,5 +21,5 @@ addLoadEvent(
     }),
 
 
-    $('#logo').downloadTip({ "position": "right" })
+    $('#logo').downloadTip({ 'position': 'right' })
 );

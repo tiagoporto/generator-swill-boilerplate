@@ -21,7 +21,7 @@ addLoadEvent(
     }),
 
 
-    $('#logo').downloadTip({ "position": "right" })
+    $('#logo').downloadTip({ 'position': 'right' })
 );
 
 // Google Analytics: change UA-XXXXX-X to be your site's ID.
@@ -36,40 +36,30 @@ ga('create', 'UA-XXXXXXXX-X', 'auto');
 ga('send', 'pageview');
 
 /*!
-	Project Name
-	Version: x.x.x
-	Author: Name - Site
-	Project Home page
-	Contact: email
+*	Project Name v1.0.0
+*	Project Home page
+*	Copyright (c) initialyear-atualyear Author Name (Site)
+*	Released under the MIT license
 */
 
-// JS Scripts
+// JS
 
 /*!
-	Project Name
-	Version: x.x.x
-	Author: Name - Site
-	Project Home page
-	Contact: email
+*	Project Name v1.0.0
+*	Project Home page
+*	Copyright (c) initialyear-atualyear Author Name (Site)
+*	Released under the MIT license
 */
 
-//jQuery Scripts
-/* jshint ignore:start */
 $(document).ready(function(){
-/* jshint ignore:end */
-
-
-
-/* jshint ignore:start */
+//jQuery Scripts
 });
-/* jshint ignore:end */
 
 /*!
-	Project Name
-	Version: x.x.x
-	Author: Name - Site
-	Project Home page
-	Contact: email
+*	Project Name v1.0.0
+*	Project Home page
+*	Copyright (c) initialyear-atualyear Author Name (Site)
+*	Released under the MIT license
 */
 
-//Angulas.js Scripts
+// Angulas.js Scripts

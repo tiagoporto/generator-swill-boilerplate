@@ -15,6 +15,8 @@
 
 	- Simple version (light version without images)
 
+	- Gh-pages
+
 	- http://hosseinkarami.com/fastshell/
 	- http://www.ryanbensonmedia.com/harvest
 	- https://developers.google.com/web/starter-kit/
@@ -39,7 +41,9 @@ var		   gulp = require('gulp'),
 		  merge = require('merge-stream'),
 	 minifyHTML = require('gulp-minify-html'),
 		 notify = require('gulp-notify'),
+		  newer = require('gulp-newer'),
 		plumber = require('gulp-plumber'),
+	   remember = require('gulp-remember'),
 		replace = require('gulp-replace'),
 		 rename = require('gulp-rename'),
 	   sequence = require('run-sequence'),
@@ -139,7 +143,7 @@ gulp.task('bitmap-sprite', function () {
 		.pipe(gulp.dest(paths.images.dest));
 	sprite.css
 		.pipe(gulp.dest(paths.styles.src + 'helpers'))
-		.pipe(notify({message: 'Sprite task complete'}));
+		.pipe(notify({message: 'Bitmap sprite task complete', onLast: true}));
 
 	return sprite;
 });
@@ -166,7 +170,8 @@ gulp.task('svg-sprite', function() {
 						}
 					}
 				}))
-				.pipe(gulp.dest(paths.images.dest));
+				.pipe(gulp.dest(paths.images.dest))
+				.pipe(notify({message: 'SVG sprite task complete', onLast: true}));
 });
 
 //Convert SVG to PNG
@@ -183,10 +188,9 @@ gulp.task('images', function () {
 					'!' + paths.sprite.bitmap + '**/*',
 					'!' + paths.sprite.svg + '**/*'
 				])
-				.pipe(cache('imagemin'))
+				.pipe(newer(paths.images.dest))
 				.pipe(imagemin({optimizationLevel: 5, progressive: true}))
-				.pipe(gulp.dest(paths.images.dest))
-				.pipe(notify({message: 'Images task complete', onLast: true}));
+				.pipe(gulp.dest(paths.images.dest));
 
 	var svg = gulp.src([
 					paths.images.src + '**/*.svg',
@@ -194,6 +198,7 @@ gulp.task('images', function () {
 				])
 				.pipe(svg2png())
 				.pipe(gulp.dest(paths.images.dest))
+				.pipe(notify({message: 'Images task complete', onLast: true}));
 
 	return merge(images, svg)
 });
@@ -211,7 +216,7 @@ gulp.task('stylus-helpers', function () {
 	return merge(mixins, functions);
 });
 
-// Compile and Prefix Stylus Styles
+// Compile and Prefix Stylus
 gulp.task('stylus', function () {
 
 	return	gulp.src([
@@ -269,6 +274,8 @@ gulp.task('scripts', function () {
 							paths.scripts.src + 'angular/**',
 							paths.scripts.src + 'settings/google_analytics.js'
 						])
+						.pipe(cache('scripts'))
+						.pipe(remember('scripts'))
 						.pipe(plumber())
 						.pipe(jshint())
 						.pipe(jshint.reporter('jshint-stylish'))
@@ -286,6 +293,7 @@ gulp.task('scripts', function () {
 							paths.scripts.src + 'jquery/_*.js',
 							paths.scripts.src + '/_*.js'
 						])
+						.pipe(newer(paths.scripts.dest))
 						.pipe(plumber())
 						.pipe(jshint())
 						.pipe(jshint.reporter('jshint-stylish'))
@@ -299,7 +307,8 @@ gulp.task('scripts', function () {
 							// Required to minify angularjs scripts
 							//, mangle: false
 						}))
-						.pipe(gulp.dest(paths.scripts.dest));
+						.pipe(gulp.dest(paths.scripts.dest))
+						.pipe(notify({message: 'Scripts task complete', onLast: true}));
 
 	return merge(concatenate, copy);
 });
@@ -351,31 +360,73 @@ gulp.task('watch', function () {
 	browserSync(browserSyncConfig);
 
 	// Watch .bmp .gif .jpg .jpeg .png and .svg files
-	gulp.watch([paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}', '!' + paths.sprite.bitmap + '**/*', '!' + paths.sprite.svg + '**/*'], ['images', browserSync.reload]);
+	gulp.watch([
+			paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
+			'!' + paths.sprite.bitmap + '**/*',
+			'!' + paths.sprite.svg + '**/*'],
+
+			['images', browserSync.reload]
+		 );
 
 	// Watch bitmap sprite files
-	gulp.watch(paths.sprite.bitmap + '**/*.{png,jpg,gif}', ['bitmap-sprite', browserSync.reload]);
+	gulp.watch(
+			paths.sprite.bitmap + '**/*.{png,jpg,gif}',
+
+			['bitmap-sprite', browserSync.reload]
+		);
 
 	// Watch svg sprite files
-	gulp.watch(paths.sprite.svg + '**/*.svg', ['svg-sprite', 'stylus', browserSync.reload]);
+	gulp.watch(
+			paths.sprite.svg + '**/*.svg',
+
+			['svg-sprite', 'stylus', browserSync.reload]
+		);
 
 	// Watch svg sprite generate
-	gulp.watch(paths.images.dest + 'svg-sprite.svg', ['svg2png', browserSync.reload]);
+	gulp.watch(
+			paths.images.dest + 'svg-sprite.svg',
+
+			['svg2png', browserSync.reload]
+		);
 
 	// Watch .js files
-	gulp.watch([paths.scripts.src + '**/*.js', '!' + paths.scripts.src + 'dependencies/**/*.js'], ['scripts', browserSync.reload]);
+	gulp.watch([
+			paths.scripts.src + '**/*.js',
+			'!' + paths.scripts.src + 'dependencies/**/*.js'],
+
+			['scripts', browserSync.reload]
+		);
 
 	// Watch dependencies .js files
-	gulp.watch(paths.scripts.src + 'dependencies/**/*.js', ['dependence-scripts', browserSync.reload]);
+	gulp.watch(
+			paths.scripts.src + 'dependencies/**/*.js',
+
+			['dependence-scripts', browserSync.reload]
+		);
 
 	// Watch .styl files
-	gulp.watch([paths.styles.src + '**/*.{styl,css}', '!' + paths.styles.src + 'helpers/mixins/*.styl', '!' + paths.styles.src + 'helpers/functions/*.styl'], ['stylus', browserSync.reload]);
+	gulp.watch([
+			paths.styles.src + '**/*.{styl,css}',
+			'!' + paths.styles.src + 'helpers/mixins/*.styl',
+			'!' + paths.styles.src + 'helpers/functions/*.styl'],
+
+			['stylus', browserSync.reload]
+		);
 
 	// Watch .styl Helpers and Functions files
-	gulp.watch([paths.styles.src + 'helpers/mixins/*.styl', paths.styles.src + 'helpers/functions/*.styl'], ['stylus-helpers']);
+	gulp.watch([
+			paths.styles.src + 'helpers/mixins/*.styl',
+			paths.styles.src + 'helpers/functions/*.styl'],
+
+			['stylus-helpers']
+		);
 
 	//Watch .html and .php Files
-	gulp.watch(basePaths.dest + '**/*.{html,php}', browserSync.reload);
+	gulp.watch(
+			basePaths.dest + '**/*.{html,php}',
+
+			browserSync.reload
+		);
 });
 
 // Copy Bower dependencies to specific folders
@@ -413,7 +464,7 @@ gulp.task('build', ['clean'], function (cb) {
 	sequence(['images', 'bitmap-sprite', 'svg-sprite'], 'svg2png', 'stylus-helpers', 'stylus', 'dependence-scripts', 'scripts', 'copy', cb);
 });
 
-// Build and serve Builded Project
+// Build and serve builded project
 gulp.task('build:serve', ['build'], function (cb) {
 	browserSync(browserSyncConfig);
 });

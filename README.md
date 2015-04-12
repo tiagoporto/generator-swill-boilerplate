@@ -145,29 +145,21 @@ Uses the following technologies:
 │       │  │
 │       │  ├─ angular // Development with AngularJS
 │       │  │
-│       │  ├─ dependencies
-│       │  │  │
-│       │  │  ├─ frameworks
-│       │  │  │
-│       │  │  ├─ libs
-│       │  │  │
-│       │  │  ├─ modules
-│       │  │  │
-│       │  │  └─ plugins
+│       │  ├─ dependencies // External plugins
 │       │  │
 │       │  ├─ jquery
 │       │  │  │
-│       │  │  ├─ onread // Open and close elements of Jquery
+│       │  │  ├─ onread // Open and close on read of Jquery
 │       │  │  │
 │       │  │  └─ // Development with JQuery
 │       │  │
 │       │  ├─ settings
 │       │  │  │
-│       │  │  ├─ google_analytics.js // Settings to Analytics
+│       │  │  ├─ call_plugins.js // Call the plugins after page load
 │       │  │  │
-│       │  │  └─ outdatedbrowser.js // Settings to Browser Outdated
+│       │  │  └─ google_analytics.js // Settings to Analytics
 │       │  │
-│       │  └─ // Development with Pure Javascript, the files
+│       │  └─ // Development with Pure Javascript
 │       │
 │       └─ stylesheets
 │            │
@@ -310,6 +302,13 @@ $ gulp build
 ```sh
 $ gulp build:serve
 ```
+
+### Peculiarities
+
+	* Js Files prefixed with `_` won't be concatenated.
+	* The mix
+
+
 
 ### AngulaJS
 
