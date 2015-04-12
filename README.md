@@ -55,6 +55,7 @@ Uses the following technologies:
 * Concatenate And Minify Scripts
 * Analyze JavaScript with jshint
 * Compile Stylus
+* Catch the stylus error and direct shows on the page, as in sass.
 * Functions and mixins to use with Stylus
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with [BrowserSync](http://www.browsersync.io/)
