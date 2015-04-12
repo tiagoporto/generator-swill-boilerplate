@@ -51,9 +51,14 @@ ga('send', 'pageview');
 *	Released under the MIT license
 */
 
+/* jshint ignore:start */
 $(document).ready(function(){
+/* jshint ignore:end */
+
 //jQuery Scripts
+/* jshint ignore:start */
 });
+/* jshint ignore:end */
 
 /*!
 *	Project Name v1.0.0
