@@ -305,8 +305,13 @@ $ gulp build:serve
 
 ### Peculiarities
 
-	* Js Files prefixed with `_` won't be concatenated.
-	* The mix
+* Js Files prefixed with `_` won't be concatenated.
+
+* The folder `public/img` is clean when the tasks is run, and the images are compressed from `src/images`, but if you work with images with copyright you dont use the compress on this images
+
+* The folder `public/img` is cleared when the task is run, and the images are compressed of ` src/images`, but if you work with copyrighted images you should not use compression, because it removes the data from files. You can place images direct in the `public / src`, they will not be deleted.
+
+> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`. And it's not deleted.
 
 
 

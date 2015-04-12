@@ -1,6 +1,6 @@
 {
-  "name": "Site Name",
-  "short_name": "SN",
+  "name": "App Name",
+  "short_name": "AN",
   "icons": [{
         "src": "img/touch/icon-128x128.png",
         "sizes": "128x128"

@@ -15,8 +15,6 @@
 
 	- Simple version (light version without images)
 
-	- Gh-pages
-
 	- http://hosseinkarami.com/fastshell/
 	- http://www.ryanbensonmedia.com/harvest
 	- https://developers.google.com/web/starter-kit/
@@ -253,7 +251,11 @@ gulp.task('stylus', function () {
 
 // Concatenate dependencies scripts and Minify
 gulp.task('dependence-scripts', function () {
-	return	gulp.src(paths.scripts.src + 'dependencies/*')
+	return	gulp.src([
+					paths.scripts.src + 'dependencies/frameworks_libs/*',
+					paths.scripts.src + 'dependencies/plugins/**'
+
+				])
 				.pipe(concat('dependencies.js'))
 				.pipe(gulp.dest(paths.scripts.dest))
 				.pipe(rename('dependencies.min.js'))
@@ -315,7 +317,7 @@ gulp.task('scripts', function () {
 
 // Copy Files to Build
 gulp.task('copy', function () {
-	var assets   =  useref.assets();
+	var assets   =  useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
 
 	// Minify and Copy HTML
 	var  html    =   gulp.src(basePaths.dest + '**/*.{html,php}')
@@ -350,6 +352,7 @@ gulp.task('clean', function (cb) {
 			paths.styles.dest,
 			paths.scripts.dest,
 			paths.images.dest + '**/*',
+			// Add here the folders that will not be deleted in public/img
 			'!' + paths.images.dest + 'copyright{,**/*{,**/*}}',
 			'!' + paths.images.dest + 'logos{,**/*{,**/*}}'
 		], cb)
@@ -466,5 +469,14 @@ gulp.task('build', ['clean'], function (cb) {
 
 // Build and serve builded project
 gulp.task('build:serve', ['build'], function (cb) {
-	browserSync(browserSyncConfig);
+	browserSync({
+		notify: false,
+		port: 80,
+		logPrefix: 'BrowserSync',
+		// To use with dinamic files
+		// proxy: 'localhost/swill-boilerplate/public/'
+		server: {
+			baseDir: [basePaths.build]
+		}
+	});
 });
