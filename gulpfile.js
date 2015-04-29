@@ -12,8 +12,7 @@
 	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
 
 	- verificar notify
-
-	- Simple version (light version without images)
+	- Components
 
 	- http://hosseinkarami.com/fastshell/
 	- http://www.ryanbensonmedia.com/harvest
