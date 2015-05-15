@@ -20,6 +20,7 @@
 	- https://github.com/jh3y/gulp-boilerplate-v2
 	- https://github.com/rmdias/gulp-web-app-workflow
 	- https://github.com/tsevdos/Gulp-boilerplate-for-web-designers
+	- https://github.com/willianjusten/Fast
 **/
 'use strict';
 
