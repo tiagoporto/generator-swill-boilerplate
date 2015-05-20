@@ -35,6 +35,7 @@ var		   gulp = require('gulp'),
 		   file = require('gulp-file'),
 		 gulpif = require('gulp-if'),
 	   imagemin = require('gulp-imagemin'),
+	   	 insert = require('gulp-insert'),
 		 jshint = require('gulp-jshint'),
 		  merge = require('merge-stream'),
 	 minifyHTML = require('gulp-minify-html'),
@@ -265,6 +266,25 @@ gulp.task('dependence-scripts', function () {
 
 // Concatenate and Minify Main Scripts
 gulp.task('scripts', function () {
+	var concatenateJquery = gulp.src([
+							'!' + paths.scripts.src + '**/_*.js',
+							paths.scripts.src + 'jquery/*'
+						])
+						.pipe(cache('jquery'))
+						.pipe(remember('jquery'))
+						.pipe(plumber())
+						.pipe(jshint())
+						.pipe(jshint.reporter('jshint-stylish'))
+						.pipe(concat('jquery.js'))
+						.pipe(insert.wrap('jQuery(document).ready(function($) {\n', '\n});'))
+						.pipe(gulp.dest(paths.scripts.dest))
+						.pipe(rename({suffix: '.min'}))
+						.pipe(uglify(
+						// Required to minify angularjs scripts
+						// {mangle: false}
+						))
+						.pipe(gulp.dest(paths.scripts.dest));
+
 	var concatenate = gulp.src([
 							'!' + paths.scripts.src + '**/_*.js',
 							paths.scripts.src + 'settings/outdatedbrowser.js',
@@ -312,7 +332,7 @@ gulp.task('scripts', function () {
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(notify({message: 'Scripts task complete', onLast: true}));
 
-	return merge(concatenate, copy);
+	return merge(concatenate, concatenateJquery, copy);
 });
 
 // Copy Files to Build

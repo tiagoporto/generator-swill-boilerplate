@@ -36,7 +36,7 @@ ga('create', 'UA-XXXXXXXX-X', 'auto');
 ga('send', 'pageview');
 
 /*!
-*	Project Name v1.0.0
+*	Project Name v0.0.1
 *	Project Home page
 *	Copyright (c) initialyear-atualyear Author Name (Site)
 *	Released under the MIT license
@@ -45,7 +45,7 @@ ga('send', 'pageview');
 // JS
 
 /*!
-*	Project Name v1.0.0
+*	Project Name v0.0.1
 *	Project Home page
 *	Copyright (c) initialyear-atualyear Author Name (Site)
 *	Released under the MIT license
@@ -61,7 +61,7 @@ $(document).ready(function(){
 /* jshint ignore:end */
 
 /*!
-*	Project Name v1.0.0
+*	Project Name v0.0.1
 *	Project Home page
 *	Copyright (c) initialyear-atualyear Author Name (Site)
 *	Released under the MIT license
