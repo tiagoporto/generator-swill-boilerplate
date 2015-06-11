@@ -13,6 +13,7 @@
 
 	- verificar notify
 	- Components
+	- Separar CSS bower
 
 	- http://hosseinkarami.com/fastshell/
 	- http://www.ryanbensonmedia.com/harvest
