@@ -5,24 +5,6 @@
 *	Released under the MIT license
 */
 
-/**
-	TO-DO:
-	- https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
-	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus/
-	- http://nomadev.com.br/passo-a-passo-como-desenvolver-com-atomic-design-mobile-first-e-stylus-parte-2/
-
-	- verificar notify
-	- Components
-	- Separar CSS bower
-
-	- http://hosseinkarami.com/fastshell/
-	- http://www.ryanbensonmedia.com/harvest
-	- https://developers.google.com/web/starter-kit/
-	- https://github.com/jh3y/gulp-boilerplate-v2
-	- https://github.com/rmdias/gulp-web-app-workflow
-	- https://github.com/tsevdos/Gulp-boilerplate-for-web-designers
-	- https://github.com/willianjusten/Fast
-**/
 'use strict';
 
 //************************* Load dependencies ****************************//
