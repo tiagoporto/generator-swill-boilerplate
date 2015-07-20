@@ -1,6 +1,8 @@
 //Convert SVG to PNG
-gulp.task('svg2png', function () {
-	return gulp.src(paths.images.dest + 'svg-sprite.svg')
-				.pipe(svg2png())
+module.exports = function (gulp, plugins, basePaths, paths) {
+	return function () {
+		gulp.src(paths.images.dest + 'svg-sprite.svg')
+				.pipe(plugins.svg2png())
 				.pipe(gulp.dest(paths.images.dest));
-});
+	};
+};

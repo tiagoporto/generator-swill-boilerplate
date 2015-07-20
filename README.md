@@ -291,6 +291,12 @@ Uses the following technologies:
 	$ gulp bower
 	```
 
+1. Set the CSS preprocessor you will use
+
+```sh
+$gulp setup --preprocessor sass|less|stylus
+```
+
 1. Execute the task `gulp` to start the development
 
 ```sh
