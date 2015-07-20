@@ -18,7 +18,7 @@ var		   gulp = require('gulp'),
 		   file = require('gulp-file'),
 		 gulpif = require('gulp-if'),
 	   imagemin = require('gulp-imagemin'),
-	   	 insert = require('gulp-insert'),
+		 insert = require('gulp-insert'),
 		 jshint = require('gulp-jshint'),
 		  merge = require('merge-stream'),
 	 minifyHTML = require('gulp-minify-html'),
@@ -234,7 +234,7 @@ gulp.task('stylus', function () {
 				])
 				.pipe(plumber())
 				.pipe(stylus({'include css': true})
-				    .on('error', function (err) {
+					.on('error', function (err) {
 
 						console.log(err.message);
 
@@ -274,6 +274,21 @@ gulp.task('sass', function () {
 				.pipe(rename({suffix: '.min'}))
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(notify({message: 'Styles task complete', onLast: true}));
+
+});
+
+// Compile and Prefix Less Styles
+gulp.task('less', function () {
+	return gulp.src(paths.styles.src + '**/*.less')
+		.pipe(plugins.less())
+		.pipe(autoprefixer({
+				browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
+		}))
+		.pipe(gulp.dest(paths.styles.dest))
+		.pipe(csso())
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(paths.styles.dest))
+		.pipe(notify({message: 'Styles task complete', onLast: true}));
 
 });
 
@@ -499,8 +514,8 @@ gulp.task('bower', function() {
 
 gulp.task('set-preprocessor', function(){
 	gulp.src(['gulpfile.js'])
-	    .pipe(replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
-	    .pipe(gulp.dest('./'));
+		.pipe(replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
+		.pipe(gulp.dest('./'));
 });
 
 gulp.task('folder-preprocessor', function(){
