@@ -50,8 +50,8 @@ var		   gulp = require('gulp'),
 		images: {
 			 src: 'images/',
 			dest: 'img/' // If change this directory remember to modify
-							// the variable $image-path in
-							// 'src/stylesheets/helpers/_variables.styl'
+						 // the variable $image-path in
+						 // 'src/stylesheets/helpers/_variables.styl'
 		},
 
 		sprite: {
@@ -96,7 +96,7 @@ var		   gulp = require('gulp'),
 	},
 
 //*********************** Preprocessor Select ***************************//
-	preprocessor = 'stylus';
+	preprocessor = 'stylus',
 
 //************************ browserSync config ***************************//
 
@@ -132,14 +132,6 @@ var		   gulp = require('gulp'),
 //gulp.task('svg-sprite', getTask('svg-sprite'));
 //gulp.task('svg2png', getTask('svg2png'));
 //gulp.task('watch', getTask('watch'));
-
-
-gulp.task('setup', function(){
-	gulp.src(['gulpfile.js'])
-	    .pipe(replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
-	    .pipe(gulp.dest('./'));
-
-});
 
 
 // Generate Bitmap Sprite
@@ -504,6 +496,31 @@ gulp.task('bower', function() {
 	return merge(outdatedBrowserLangs, fonts);
 });
 
+
+gulp.task('set-preprocessor', function(){
+	gulp.src(['gulpfile.js'])
+	    .pipe(replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
+	    .pipe(gulp.dest('./'));
+});
+
+gulp.task('folder-preprocessor', function(){
+	gulp.src(paths.styles.src + args.preprocessor + "/*")
+		.pipe(gulp.dest(paths.styles.src));
+});
+
+gulp.task('remove-preprocessors', function(cb){
+	del([
+		paths.styles.src + "sass",
+		paths.styles.src + "stylus",
+		paths.styles.src + "less"
+		], cb)
+});
+
+
+gulp.task('setup', function(cb){
+	sequence(['set-preprocessor', 'folder-preprocessor', 'remove-preprocessors'], cb);
+});
+
 //***************************** Main Tasks *******************************//
 
 // Compile, watch and serve project
@@ -516,12 +533,12 @@ gulp.task('serve', ['watch']);
 
 // Compile project
 gulp.task('compile', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', 'stylus', 'scripts', cb);
+	sequence(['images', 'bitmap-sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', preprocessor, 'scripts', cb);
 });
 
 // Build Project
 gulp.task('build', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'svg-sprite'], 'svg2png', 'stylus-helpers', 'stylus', 'dependence-scripts', 'scripts', 'copy', cb);
+	sequence(['images', 'bitmap-sprite', 'svg-sprite'], 'svg2png', 'stylus-helpers', preprocessor, 'dependence-scripts', 'scripts', 'copy', cb);
 });
 
 // Build and serve builded project
