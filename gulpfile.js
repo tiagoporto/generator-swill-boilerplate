@@ -95,10 +95,10 @@ var		   gulp = require('gulp'),
 		}
 	},
 
-//*********************** Preprocessor Select ***************************//
+//******************************* settings *******************************//
 	preprocessor = 'stylus',
-
-//************************ browserSync config ***************************//
+	jquery = true,
+	linting = true,
 
 	browserSyncConfig = {
 		notify: false,
@@ -110,28 +110,6 @@ var		   gulp = require('gulp'),
 			baseDir: [basePaths.src, basePaths.dest, basePaths.bower]
 		}
 	}
-
-
-//****************************** Function ********************************//
-//function getTask(task) {
-	//return require('./tasks/' + task)(gulp, plugins, basePaths, paths);
-//}
-
-
-//******************************** Tasks *********************************//
-
-//gulp.task('clean', getTask('clean'));
-//gulp.task('copy-bower-dependencies', getTask('copy-bower-dependencies'));
-//gulp.task('copy', getTask('copy'));
-//gulp.task('dependence-scripts', getTask('dependence-scripts'));
-//gulp.task('images', getTask('images'));
-//gulp.task('png-sprite', getTask('png-sprite'));
-//gulp.task('scripts', getTask('scripts'));
-//gulp.task('styles-helpers', getTask('stylus-helpers'));
-//gulp.task('styles', getTask('stylus'));
-//gulp.task('svg-sprite', getTask('svg-sprite'));
-//gulp.task('svg2png', getTask('svg2png'));
-//gulp.task('watch', getTask('watch'));
 
 
 // Generate Bitmap Sprite
