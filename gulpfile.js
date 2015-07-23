@@ -16,6 +16,7 @@ var		   gulp = require('gulp'),
 		   csso = require('gulp-csso'),
 			del = require('del'),
 		   file = require('gulp-file'),
+		   	 fs = require('fs'),
 		 gulpif = require('gulp-if'),
 	   imagemin = require('gulp-imagemin'),
 	   	 insert = require('gulp-insert'),
@@ -36,6 +37,7 @@ var		   gulp = require('gulp'),
 		 stylus = require('gulp-stylus'),
 		 uglify = require('gulp-uglify'),
 		 useref = require('gulp-useref'),
+		wrapper = require('gulp-wrapper'),
 
 //***************************** Path configs *****************************//
 	basePaths = {
@@ -200,6 +202,7 @@ gulp.task('stylus-helpers', function () {
 
 // Compile and Prefix Stylus
 gulp.task('stylus', function () {
+	var fileContent = fs.readFileSync(paths.styles.src + "header-comments.css", "utf8");
 
 	return	gulp.src([
 					paths.styles.src + '*.styl',
@@ -226,6 +229,7 @@ gulp.task('stylus', function () {
 				.pipe(autoprefixer({
 					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
 				}))
+				.pipe(wrapper({ header: fileContent }))
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(csso())
 				.pipe(rename({suffix: '.min'}))
