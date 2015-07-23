@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v3.0.1
+*	Swill Boilerplate v4.0.0
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -19,7 +19,7 @@ var		   gulp = require('gulp'),
 		   	 fs = require('fs'),
 		 gulpif = require('gulp-if'),
 	   imagemin = require('gulp-imagemin'),
-	   	 insert = require('gulp-insert'),
+		 insert = require('gulp-insert'),
 		 jshint = require('gulp-jshint'),
 		  merge = require('merge-stream'),
 	 minifyHTML = require('gulp-minify-html'),
@@ -30,6 +30,7 @@ var		   gulp = require('gulp'),
 		replace = require('gulp-replace'),
 		 rename = require('gulp-rename'),
 	   sequence = require('run-sequence'),
+	   sass = require('gulp-ruby-sass'),
 	spritesmith = require('gulp.spritesmith'),
 		svg2png = require('gulp-svg2png'),
 	  svgSprite = require('gulp-svg-sprite'),
@@ -38,6 +39,8 @@ var		   gulp = require('gulp'),
 		 uglify = require('gulp-uglify'),
 		 useref = require('gulp-useref'),
 		wrapper = require('gulp-wrapper'),
+		 args   = require('yargs').argv,
+	  plugins = require('gulp-load-plugins')(),
 
 //***************************** Path configs *****************************//
 	basePaths = {
@@ -49,8 +52,8 @@ var		   gulp = require('gulp'),
 		images: {
 			 src: 'images/',
 			dest: 'img/' // If change this directory remember to modify
-							// the variable $image-path in
-							// 'src/stylesheets/helpers/_variables.styl'
+						 // the variable $image-path in
+						 // 'src/stylesheets/helpers/_variables.styl'
 		},
 
 		sprite: {
@@ -94,7 +97,10 @@ var		   gulp = require('gulp'),
 		}
 	},
 
-//************************ browserSync config ***************************//
+//******************************* settings *******************************//
+	preprocessor = 'stylus',
+	jquery = true,
+	linting = true,
 
 	browserSyncConfig = {
 		notify: false,
@@ -107,7 +113,6 @@ var		   gulp = require('gulp'),
 		}
 	}
 
-//******************************** Tasks *********************************//
 
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', function () {
@@ -210,7 +215,7 @@ gulp.task('stylus', function () {
 				])
 				.pipe(plumber())
 				.pipe(stylus({'include css': true})
-				    .on('error', function (err) {
+					.on('error', function (err) {
 
 						console.log(err.message);
 
@@ -235,6 +240,38 @@ gulp.task('stylus', function () {
 				.pipe(rename({suffix: '.min'}))
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(notify({message: 'Styles task complete', onLast: true}));
+});
+
+// Compile and Prefix Sass Styles
+gulp.task('sass', function () {
+	return  sass(paths.styles.src + 'styles.scss', {precision: 3, style: 'expanded'})
+				.pipe(autoprefixer({
+					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
+				}))
+				.on('error', function (err) {
+					console.error('Error', err.message);
+				})
+				.pipe(gulp.dest(paths.styles.dest))
+				.pipe(csso())
+				.pipe(rename({suffix: '.min'}))
+				.pipe(gulp.dest(paths.styles.dest))
+				.pipe(notify({message: 'Styles task complete', onLast: true}));
+
+});
+
+// Compile and Prefix Less Styles
+gulp.task('less', function () {
+	return gulp.src(paths.styles.src + '**/*.less')
+		.pipe(plugins.less())
+		.pipe(autoprefixer({
+				browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
+		}))
+		.pipe(gulp.dest(paths.styles.dest))
+		.pipe(csso())
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(paths.styles.dest))
+		.pipe(notify({message: 'Styles task complete', onLast: true}));
+
 });
 
 // Concatenate dependencies scripts and Minify
@@ -352,6 +389,8 @@ gulp.task('copy', function () {
 
 //*************************** Utility Tasks ******************************//
 
+
+
 // Clean Directories
 gulp.task('clean', function (cb) {
 	del([
@@ -454,11 +493,36 @@ gulp.task('bower', function() {
 	return merge(outdatedBrowserLangs, fonts);
 });
 
+
+gulp.task('set-preprocessor', function(){
+	gulp.src(['gulpfile.js'])
+		.pipe(replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
+		.pipe(gulp.dest('./'));
+});
+
+gulp.task('folder-preprocessor', function(){
+	gulp.src(paths.styles.src + args.preprocessor + "/*")
+		.pipe(gulp.dest(paths.styles.src));
+});
+
+gulp.task('remove-preprocessors', function(cb){
+	del([
+		paths.styles.src + "sass",
+		paths.styles.src + "stylus",
+		paths.styles.src + "less"
+		], cb)
+});
+
+
+gulp.task('setup', function(cb){
+	sequence(['set-preprocessor', 'folder-preprocessor', 'remove-preprocessors'], cb);
+});
+
 //***************************** Main Tasks *******************************//
 
 // Compile, watch and serve project
 gulp.task('default', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', 'stylus', 'scripts', 'watch',  cb);
+	sequence(['images', 'bitmap-sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', preprocessor, 'scripts', 'watch',  cb);
 });
 
 // Serve the project and watch
@@ -466,12 +530,12 @@ gulp.task('serve', ['watch']);
 
 // Compile project
 gulp.task('compile', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', 'stylus', 'scripts', cb);
+	sequence(['images', 'bitmap-sprite', 'svg-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', preprocessor, 'scripts', cb);
 });
 
 // Build Project
 gulp.task('build', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'svg-sprite'], 'svg2png', 'stylus-helpers', 'stylus', 'dependence-scripts', 'scripts', 'copy', cb);
+	sequence(['images', 'bitmap-sprite', 'svg-sprite'], 'svg2png', 'stylus-helpers', preprocessor, 'dependence-scripts', 'scripts', 'copy', cb);
 });
 
 // Build and serve builded project
