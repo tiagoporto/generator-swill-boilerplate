@@ -14,7 +14,6 @@ Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start 
 * [Usage](#usage)
 	* [Tasks](#tasks)
 	* [Peculiarities](#peculiarities)
-	* [AngulaJS](#angularjs)
 	* [BrowserSync](#browsersync)
 	* [Bitmap Sprite](#sprite)
 	* [SVG Sprite](#svg*sprite)
@@ -36,14 +35,12 @@ Uses the following technologies:
 
 ## Includes
 
-* [AngularJS](http://angularjs.org/)
 * [Animate.css](http://daneden.github.io/animate.css/)
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 * [Google Analytics](http://www.google.com/analytics/)
 * [jQuery](http://jquery.com/)
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
-* [Retina.js](http://imulus.github.io/retinajs/)
 * [Semantic GRID SYSTEM](http://semantic.gs/)
 * [Twitter Bootstrap](http://getbootstrap.com/)
 
@@ -141,8 +138,6 @@ Uses the following technologies:
 │       │      └─ // .jpg, .jpeg, .gif, .svg and .bmp to be compressed
 │       │
 │       ├─ scripts
-│       │  │
-│       │  ├─ angular // Development with AngularJS
 │       │  │
 │       │  ├─ dependencies // External plugins
 │       │  │

@@ -26,15 +26,12 @@
     "bower_components"
   ],
   "devDependencies": {
-    "angular": "latest",
-    "angular-route": "latest",
     "animate.css": "latest",
     "bootstrap": "latest",
     "font-awesome": "latest",
     "jquery": "^1.0.0",
     "normalize.css": "latest",
     "outdated-browser": "latest",
-    "retina.js": "latest",
     "semantic.gs": "latest"
   }
 }

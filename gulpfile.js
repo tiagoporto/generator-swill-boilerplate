@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.0.0
+*	Swill Boilerplate v4.0.0beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -100,7 +100,8 @@ var		   gulp = require('gulp'),
 //******************************* settings *******************************//
 	preprocessor = 'stylus',
 	jquery = true,
-	linting = true,
+	lintingCSS = true,
+	lintingJS = true,
 
 	browserSyncConfig = {
 		notify: false,
@@ -317,7 +318,6 @@ gulp.task('scripts', function () {
 							paths.scripts.src + 'jquery/onread/open_onread.js',
 							paths.scripts.src + 'jquery/*',
 							paths.scripts.src + 'jquery/onread/close_onread.js',
-							paths.scripts.src + 'angular/**',
 							paths.scripts.src + 'settings/google_analytics.js'
 						])
 						.pipe(cache('scripts'))
@@ -335,7 +335,6 @@ gulp.task('scripts', function () {
 						.pipe(gulp.dest(paths.scripts.dest));
 
 		   var copy = gulp.src([
-							paths.scripts.src + 'angular/_*.js',
 							paths.scripts.src + 'jquery/_*.js',
 							paths.scripts.src + '/_*.js'
 						])

@@ -12573,7 +12573,7 @@ p {
 @media print {
   * {
     background: transparent !important;
-    color: #000 !important;
+    color: #000 !important /* Black prints faster: h5bp.com/s */;
     text-shadow: none !important;
     -webkit-filter: none !important;
             filter: none !important;
@@ -12667,7 +12667,7 @@ p {
     page-break-inside: avoid;
   }
   thead {
-    display: table-header-group;
+    display: table-header-group /* h5bp.com/t */;
   }
   tr,
   img {
