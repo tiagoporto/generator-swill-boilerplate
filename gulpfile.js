@@ -494,13 +494,13 @@ gulp.task('bower', function() {
 
 
 gulp.task('set-preprocessor', function(){
-	gulp.src(['gulpfile.js'])
+	return gulp.src(['gulpfile.js'])
 		.pipe(replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
 		.pipe(gulp.dest('./'));
 });
 
 gulp.task('folder-preprocessor', function(){
-	gulp.src(paths.styles.src + args.preprocessor + "/*")
+	return gulp.src(paths.styles.src + args.preprocessor + "/**/*")
 		.pipe(gulp.dest(paths.styles.src));
 });
 
@@ -514,7 +514,7 @@ gulp.task('remove-preprocessors', function(cb){
 
 
 gulp.task('setup', function(cb){
-	sequence(['set-preprocessor', 'folder-preprocessor', 'remove-preprocessors'], cb);
+	sequence('set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
 });
 
 //***************************** Main Tasks *******************************//
