@@ -38,10 +38,10 @@ Uses the following technologies:
 * [Animate.css](http://daneden.github.io/animate.css/)
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 * [Google Analytics](http://www.google.com/analytics/)
+* [Jeet](http://jeet.gs/)
 * [jQuery](http://jquery.com/)
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
-* [Semantic GRID SYSTEM](http://semantic.gs/)
 * [Twitter Bootstrap](http://getbootstrap.com/)
 
 ## Features

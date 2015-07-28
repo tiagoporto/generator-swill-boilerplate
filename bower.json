@@ -26,12 +26,12 @@
     "bower_components"
   ],
   "devDependencies": {
-    "animate.css": "latest",
-    "bootstrap": "latest",
-    "font-awesome": "latest",
-    "jquery": "^1.0.0",
-    "normalize.css": "latest",
-    "outdated-browser": "latest",
-    "semantic.gs": "latest"
+    "animate.css": "~3.3.0",
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "jeet": "~6.1.2",
+    "jquery": "~2.1.4",
+    "normalize.css": "~3.0.3",
+    "outdated-browser": "~1.1.0"
   }
 }
