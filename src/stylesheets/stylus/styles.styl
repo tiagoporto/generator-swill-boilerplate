@@ -1,4 +1,26 @@
+// Web Fonts
+@import "typography/_web-fonts"
 
+/*! ==================================================================
+   Reset and normalize
+   ================================================================== */
+/* If you will use bootstrap you can remove this @import */
+@import "../../bower_components/normalize.css/normalize.css"
+
+/*! ==================================================================
+   Grid System
+   ================================================================== */
+/* If you will use bootstrap you can remove this @import */
+@import "../../bower_components/semantic.gs/stylesheets/styl/grid.styl"
+
+/*! ==================================================================
+   Dependencies
+   ================================================================== */
+@import "../../bower_components/font-awesome/css/font-awesome.css"
+@import "../../bower_components/outdated-browser/outdatedbrowser/outdatedbrowser.css"
+@import "../../bower_components/bootstrap/dist/css/bootstrap.css"
+@import "../../bower_components/animate.css/animate.css"
+@import "dependencies/jquery-logo-downloadtip.css"
 
 // Helpers
 @import "helpers/_variables"
@@ -6,39 +28,13 @@
 @import "helpers/_functions"
 @import "helpers/_sprite"
 @import "helpers/_svg-sprite"
-
-//**** If you will use bootstrap you can remove these imports ********
-
-// Typography
-@import "typography/_web-fonts"
-@import "typography/_typography"
-@import "../../bower_components/font-awesome/css/font-awesome.css"
-
-/*! ==================================================================
-   Reset and normalize
-   ================================================================== */
-@import "../../bower_components/normalize.css/normalize.css"
-
-/*! ==================================================================
-   Grid System
-   ================================================================== */
-@import "../../bower_components/semantic.gs/stylesheets/styl/grid.styl"
-
-//********************************************************************
-
-/*! ==================================================================
-   Dependencies
-   ================================================================== */
-@import "../../bower_components/outdated-browser/outdatedbrowser/outdatedbrowser.css"
-@import "../../bower_components/bootstrap/dist/css/bootstrap.css"
-@import "../../bower_components/animate.css/animate.css"
-@import "dependencies/jquery-logo-downloadtip.css"
-
 @import "helpers/_placeholders"
 
 /*! ==================================================================
-   Components
+   Components and settings
    ================================================================== */
+/* If you will use bootstrap you can remove these components */
+@import "typography/_typography"
 @import "components/_form"
 @import "components/_button"
 @import "components/_code"
