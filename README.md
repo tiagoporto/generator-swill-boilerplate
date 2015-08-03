@@ -17,8 +17,8 @@ Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start 
 	* [BrowserSync](#browsersync)
 	* [Bitmap Sprite](#sprite)
 	* [SVG Sprite](#svg*sprite)
-* [Contributing](contributing)
-* [License](license)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Technologies
 
