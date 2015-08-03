@@ -11,7 +11,6 @@
 var		   gulp = require('gulp'),
    autoprefixer = require('gulp-autoprefixer'),
 	browserSync = require('browser-sync'),
-		  cache = require('gulp-cached'),
 		 concat = require('gulp-concat'),
 		   csso = require('gulp-csso'),
 			del = require('del'),
@@ -19,23 +18,19 @@ var		   gulp = require('gulp'),
 		   	 fs = require('fs'),
 		 gulpif = require('gulp-if'),
 	   imagemin = require('gulp-imagemin'),
-		 insert = require('gulp-insert'),
 		 jshint = require('gulp-jshint'),
 		  merge = require('merge-stream'),
 	 minifyHTML = require('gulp-minify-html'),
 		 notify = require('gulp-notify'),
-		  newer = require('gulp-newer'),
 		plumber = require('gulp-plumber'),
 	   remember = require('gulp-remember'),
 		replace = require('gulp-replace'),
 		 rename = require('gulp-rename'),
 	   sequence = require('run-sequence'),
-	   sass = require('gulp-ruby-sass'),
 	spritesmith = require('gulp.spritesmith'),
 		svg2png = require('gulp-svg2png'),
 	  svgSprite = require('gulp-svg-sprite'),
 		stylish = require('jshint-stylish'),
-		 stylus = require('gulp-stylus'),
 		 uglify = require('gulp-uglify'),
 		 useref = require('gulp-useref'),
 		wrapper = require('gulp-wrapper'),
@@ -98,10 +93,11 @@ var		   gulp = require('gulp'),
 	},
 
 //******************************* settings *******************************//
-	preprocessor = 'sass',
+	preprocessor = 'stylus',
 	jquery = true,
 	lintingCSS = true,
 	lintingJS = true,
+	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8"),
 
 	browserSyncConfig = {
 		notify: false,
@@ -198,7 +194,7 @@ gulp.task('images', function () {
 					'!' + paths.sprite.bitmap + '**/*',
 					'!' + paths.sprite.svg + '**/*'
 				])
-				.pipe(newer(paths.images.dest))
+				.pipe(plugins.newer(paths.images.dest))
 				.pipe(imagemin({optimizationLevel: 5, progressive: true}))
 				.pipe(gulp.dest(paths.images.dest));
 
@@ -228,14 +224,13 @@ gulp.task('stylus-helpers', function () {
 
 // Compile and Prefix Stylus
 gulp.task('stylus', function () {
-	var fileContent = fs.readFileSync(paths.styles.src + "header-comments.css", "utf8");
 
 	return	gulp.src([
 					paths.styles.src + '*.styl',
 					'!' + paths.styles.src + '_*.styl',
 				])
 				.pipe(plumber())
-				.pipe(stylus({'include css': true})
+				.pipe(plugins.stylus({'include css': true})
 					.on('error', function (err) {
 
 						console.log(err.message);
@@ -255,7 +250,9 @@ gulp.task('stylus', function () {
 				.pipe(autoprefixer({
 					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
 				}))
-				.pipe(wrapper({ header: fileContent }))
+				.pipe(wrapper({
+					header: headerProject
+				}))
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(csso())
 				.pipe(rename({suffix: '.min'}))
@@ -265,7 +262,7 @@ gulp.task('stylus', function () {
 
 // Compile and Prefix Sass Styles
 gulp.task('sass', function () {
-	return  sass(paths.styles.src + 'styles.scss', {precision: 3, style: 'expanded'})
+	return  plugins.sass(paths.styles.src + 'styles.scss', {precision: 3, style: 'expanded'})
 				.pipe(autoprefixer({
 					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
 				}))
@@ -297,10 +294,11 @@ gulp.task('less', function () {
 
 // Concatenate dependencies scripts and Minify
 gulp.task('dependence-scripts', function () {
-	return	gulp.src([
+	return gulp.src([
+					paths.scripts.src + 'settings/google_analytics.js',
 					paths.scripts.src + 'dependencies/frameworks_libs/*',
-					paths.scripts.src + 'dependencies/plugins/**'
-
+					paths.scripts.src + 'dependencies/plugins/**',
+					paths.scripts.src + 'settings/*.js'
 				])
 				.pipe(concat('dependencies.js'))
 				.pipe(gulp.dest(paths.scripts.dest))
@@ -311,54 +309,36 @@ gulp.task('dependence-scripts', function () {
 
 // Concatenate and Minify Main Scripts
 gulp.task('scripts', function () {
-	var concatenateJquery = gulp.src([
-							'!' + paths.scripts.src + '**/_*.js',
-							paths.scripts.src + 'jquery/*'
-						])
-						.pipe(cache('jquery'))
-						.pipe(remember('jquery'))
-						.pipe(plumber())
-						.pipe(jshint())
-						.pipe(jshint.reporter('jshint-stylish'))
-						.pipe(concat('jquery.js'))
-						.pipe(insert.wrap('jQuery(document).ready(function($) {\n', '\n});'))
-						.pipe(gulp.dest(paths.scripts.dest))
-						.pipe(rename({suffix: '.min'}))
-						.pipe(uglify(
-						// Required to minify angularjs scripts
-						// {mangle: false}
-						))
-						.pipe(gulp.dest(paths.scripts.dest));
 
 	var concatenate = gulp.src([
 							'!' + paths.scripts.src + '**/_*.js',
-							paths.scripts.src + 'settings/outdatedbrowser.js',
-							paths.scripts.src + 'settings/*.js',
-							paths.scripts.src + '*.js',
-							paths.scripts.src + 'jquery/onread/open_onread.js',
-							paths.scripts.src + 'jquery/*',
-							paths.scripts.src + 'jquery/onread/close_onread.js',
-							paths.scripts.src + 'settings/google_analytics.js'
+							paths.scripts.src + '*.js'
 						])
-						.pipe(cache('scripts'))
+						.pipe(plugins.cached('scripts'))
 						.pipe(remember('scripts'))
 						.pipe(plumber())
 						.pipe(jshint())
 						.pipe(jshint.reporter('jshint-stylish'))
 						.pipe(concat('main.js'))
+						.pipe( gulpif(jquery,
+							wrapper({
+								header: 'jQuery(document).ready(function($) {\n\n',
+								footer: '\n});'
+							})
+						))
+						.pipe(wrapper({
+							header: headerProject
+						}))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(rename({suffix: '.min'}))
-						.pipe(uglify(
-						// Required to minify angularjs scripts
-						// {mangle: false}
-						))
+						.pipe(uglify())
 						.pipe(gulp.dest(paths.scripts.dest));
 
+
 		   var copy = gulp.src([
-							paths.scripts.src + 'jquery/_*.js',
 							paths.scripts.src + '/_*.js'
 						])
-						.pipe(newer(paths.scripts.dest))
+						.pipe(plugins.newer(paths.scripts.dest))
 						.pipe(plumber())
 						.pipe(jshint())
 						.pipe(jshint.reporter('jshint-stylish'))
@@ -369,13 +349,11 @@ gulp.task('scripts', function () {
 						.pipe(rename({suffix: '.min'}))
 						.pipe(uglify({
 							preserveComments: 'some'
-							// Required to minify angularjs scripts
-							//, mangle: false
 						}))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(notify({message: 'Scripts task complete', onLast: true}));
 
-	return merge(concatenate, concatenateJquery, copy);
+	return merge(concatenate, copy);
 });
 
 // Copy Files to Build
@@ -385,10 +363,7 @@ gulp.task('copy', function () {
 	// Minify and Copy HTML
 	var  html    =   gulp.src(basePaths.dest + '**/*.{html,php}')
 						.pipe(assets)
-						.pipe(gulpif('*.js', uglify(
-							// Required to minify angularjs scripts
-							// {mangle: false}
-						)))
+						.pipe(gulpif('*.js', uglify()))
 						.pipe(gulpif('*.css', csso()))
 						.pipe(assets.restore())
 						.pipe(useref())
@@ -512,6 +487,12 @@ gulp.task('bower', function() {
 	return merge(outdatedBrowserLangs, fonts);
 });
 
+
+gulp.task('set-jquery', function(){
+	return gulp.src(['gulpfile.js'])
+		.pipe(replace(/jquery\s=\s[a-z]{0,9},/g, "jquery = " + args.jquery))
+		.pipe(gulp.dest('./'));
+});
 
 gulp.task('set-preprocessor', function(){
 	return gulp.src(['gulpfile.js'])
