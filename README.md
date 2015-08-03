@@ -17,6 +17,7 @@ Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start 
 	* [BrowserSync](#browsersync)
 	* [Bitmap Sprite](#sprite)
 	* [SVG Sprite](#svg*sprite)
+* [Contributing](contributing)
 * [License](license)
 
 ## Technologies
@@ -451,6 +452,16 @@ Just use the mixins with the variables as parameters.
 To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) as fallback all the SVG sprites are converted to .png with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
 
 To-do
+
+## Contributing
+
+If you have time to contribute or give some suggestions, please help me to make this a good tool for everyone.
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
 ## License
 
