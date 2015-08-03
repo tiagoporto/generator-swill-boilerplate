@@ -7,19 +7,18 @@
 
 'use strict';
 
-//************************* Load dependencies ****************************//
-var		   gulp = require('gulp'),
-	browserSync = require('browser-sync'),
-			del = require('del'),
-		   	 fs = require('fs'),
-		  merge = require('merge-stream'),
-	 minifyHTML = require('gulp-minify-html'),
-	   sequence = require('run-sequence'),
-	spritesmith = require('gulp.spritesmith'),
-	  svgSprite = require('gulp-svg-sprite'),
-		stylish = require('jshint-stylish'),
-		wrapper = require('gulp-wrapper'),
-		 args   = require('yargs').argv,
+var		 gulp = require('gulp'),
+  browserSync = require('browser-sync'),
+		  del = require('del'),
+		   fs = require('fs'),
+		merge = require('merge-stream'),
+   minifyHTML = require('gulp-minify-html'),
+	 sequence = require('run-sequence'),
+  spritesmith = require('gulp.spritesmith'),
+	svgSprite = require('gulp-svg-sprite'),
+	  stylish = require('jshint-stylish'),
+	  wrapper = require('gulp-wrapper'),
+		 args = require('yargs').argv,
 	  plugins = require('gulp-load-plugins')(),
 
 //***************************** Path configs *****************************//
@@ -78,10 +77,10 @@ var		   gulp = require('gulp'),
 	},
 
 //******************************* Settings *******************************//
-	preprocessor = 'stylus',
-	jquery = true,
-	lintCSS = true,
-	lintJS = true,
+	 preprocessor = 'stylus',
+		   jquery = true,
+		  lintCSS = false,
+		   lintJS = true,
 	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8"),
 
 	browserSyncConfig = {
@@ -376,34 +375,44 @@ gulp.task('copy', function () {
 });
 
 gulp.task('set-preprocessor', function(){
-	return gulp.src(['gulpfile.js'])
-		.pipe(plugins.replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
-		.pipe(gulp.dest('./'));
+	if(args.preprocessor){
+		return gulp.src(['gulpfile.js'])
+			.pipe(plugins.replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
+			.pipe(gulp.dest('./'));
+	}
 });
 
 gulp.task('folder-preprocessor', function(){
-	return gulp.src(paths.styles.src + args.preprocessor + "/**/*")
-		.pipe(gulp.dest(paths.styles.src));
+	if(args.preprocessor){
+		return gulp.src(paths.styles.src + args.preprocessor + "/**/*")
+			.pipe(gulp.dest(paths.styles.src));
+	}
 });
 
 gulp.task('remove-preprocessors', function(cb){
-	del([
-		paths.styles.src + "sass",
-		paths.styles.src + "stylus",
-		paths.styles.src + "less"
-		], cb)
+	if(args.preprocessor){
+		del([
+			paths.styles.src + "sass",
+			paths.styles.src + "stylus",
+			paths.styles.src + "less"
+			], cb)
+	}
 });
 
 gulp.task('set-jquery', function(){
-	return gulp.src(['gulpfile.js'])
-		.pipe(plugins.replace(/jquery\s=\s[a-z]{0,9},/g, "jquery = " + args.jquery + ","))
-		.pipe(gulp.dest('./'));
+	if(args.jquery){
+		return gulp.src(['gulpfile.js'])
+			.pipe(plugins.replace(/jquery\s=\s[a-z]{0,9},/g, "jquery = " + args.jquery + ","))
+			.pipe(gulp.dest('./'));
+	}
 });
 
 gulp.task('set-lintJS', function(){
-	return gulp.src(['gulpfile.js'])
-		.pipe(plugins.replace(/lintJS\s=\s[a-z]{0,9},/g, "jquery = " + args.lintJS + ","))
-		.pipe(gulp.dest('./'));
+	if(args.lintJS){
+		return gulp.src(['gulpfile.js'])
+			.pipe(plugins.replace(/lintJS\s=\s[a-z]{0,9},/g, "lintJS = " + args.lintJS + ","))
+			.pipe(gulp.dest('./'));
+	}
 });
 
 //*************************** Utility Tasks ******************************//
@@ -505,7 +514,7 @@ gulp.task('bower', function() {
 
 
 gulp.task('setup', function(cb){
-	sequence('set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', 'set-jquery', 'set-lintJS', cb);
+	sequence('set-jquery', 'set-lintJS', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
 });
 
 //***************************** Main Tasks *******************************//
