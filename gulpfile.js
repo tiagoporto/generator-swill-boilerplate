@@ -16,10 +16,8 @@ var		   gulp = require('gulp'),
 	 minifyHTML = require('gulp-minify-html'),
 	   sequence = require('run-sequence'),
 	spritesmith = require('gulp.spritesmith'),
-		svg2png = require('gulp-svg2png'),
 	  svgSprite = require('gulp-svg-sprite'),
 		stylish = require('jshint-stylish'),
-		 useref = require('gulp-useref'),
 		wrapper = require('gulp-wrapper'),
 		 args   = require('yargs').argv,
 	  plugins = require('gulp-load-plugins')(),
@@ -169,7 +167,7 @@ gulp.task('vetor-sprite', function() {
 //Fallback convert SVG to PNG
 gulp.task('svg2png', function () {
 	return gulp.src(paths.images.dest + 'vetor-sprite.svg')
-				.pipe(svg2png())
+				.pipe(plugins.svg2png())
 				.pipe(gulp.dest(paths.images.dest));
 });
 
@@ -188,7 +186,7 @@ gulp.task('images', function () {
 					paths.images.src + '**/*.svg',
 					'!' + paths.sprite.svg + '**/*'
 				])
-				.pipe(svg2png())
+				.pipe(plugins.svg2png())
 				.pipe(gulp.dest(paths.images.dest))
 				.pipe(plugins.notify({message: 'Images task complete', onLast: true}));
 
@@ -354,7 +352,7 @@ gulp.task('scripts', function () {
 
 // Copy Files to Build
 gulp.task('copy', function () {
-	var assets   =  useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
+	var assets   =  plugins.useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
 
 	// Minify and Copy HTML
 	var  html    =   gulp.src(basePaths.dest + '**/*.{html,php}')
@@ -362,7 +360,7 @@ gulp.task('copy', function () {
 						.pipe(plugins.if('*.js', plugins.uglify()))
 						.pipe(plugins.if('*.css', plugins.csso()))
 						.pipe(assets.restore())
-						.pipe(useref())
+						.pipe(plugins.useref())
 						.pipe(plugins.if('*.html', minifyHTML({spare:true, empty: true})))
 						.pipe(plugins.if('*.php', minifyHTML({spare:true, empty: true})))
 						.pipe(gulp.dest(basePaths.build));
@@ -375,18 +373,6 @@ gulp.task('copy', function () {
 							'!' + basePaths.dest + '**/*.{html,php}'
 						], {dot: true})
 						.pipe(gulp.dest(basePaths.build));
-});
-
-gulp.task('set-lintJS', function(){
-	return gulp.src(['gulpfile.js'])
-		.pipe(plugins.replace(/lintJS\s=\s[a-z]{0,9},/g, "jquery = " + args.lintJS + ","))
-		.pipe(gulp.dest('./'));
-});
-
-gulp.task('set-jquery', function(){
-	return gulp.src(['gulpfile.js'])
-		.pipe(plugins.replace(/jquery\s=\s[a-z]{0,9},/g, "jquery = " + args.jquery + ","))
-		.pipe(gulp.dest('./'));
 });
 
 gulp.task('set-preprocessor', function(){
@@ -406,6 +392,18 @@ gulp.task('remove-preprocessors', function(cb){
 		paths.styles.src + "stylus",
 		paths.styles.src + "less"
 		], cb)
+});
+
+gulp.task('set-jquery', function(){
+	return gulp.src(['gulpfile.js'])
+		.pipe(plugins.replace(/jquery\s=\s[a-z]{0,9},/g, "jquery = " + args.jquery + ","))
+		.pipe(gulp.dest('./'));
+});
+
+gulp.task('set-lintJS', function(){
+	return gulp.src(['gulpfile.js'])
+		.pipe(plugins.replace(/lintJS\s=\s[a-z]{0,9},/g, "jquery = " + args.lintJS + ","))
+		.pipe(gulp.dest('./'));
 });
 
 //*************************** Utility Tasks ******************************//
