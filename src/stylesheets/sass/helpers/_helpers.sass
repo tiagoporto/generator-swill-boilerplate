@@ -1,6 +1,10 @@
-// *********** ESCAPE VAR *************** //
+// ************* VARIABLE **************** //
+$color: #FFF
 
-{$myVar}
+// ******* ESCAPE CONCAT VAR ************ //
+
+.test
+	background: url(#{$path + 'file.jpg'})
 
 // ********** COLOR FUNCTIONS *********** //
 
@@ -13,32 +17,20 @@ shade(#fd0cc7, 10%) //Mix the given color with black.
 rgba(#ffcc00, .7) //Return RGBA from the r,g,b,a channels
 
 
-// **** Getting image width & height **** //
-
-image-size("../images/header-bg.jpg")[0] //width
-
-image-size("../images/header-bg.jpg")[1] //height
-
-
 // ********** This is a mixin *********** //
 
-inline()
+=inline
 	display: inline
 	float: left
-
-// ******* This is a placeholder ******** //
-
-$inline
-	inline() //Include a mixin
-
 
 // ************ Using mixin ************* //
 
 .using-mixin-1
-	inline()
+	+inline
 
 .using-mixin-2
-	inline()
+	+inline
+
 
 // CSS Output
 .using-mixin-1 {
@@ -52,13 +44,18 @@ $inline
 }
 // End CSS Output
 
+
+// ******** This is a placeholder ******** //
+%inline
+	+inline //Include a mixin
+
 // ********* Using placeholder ********** //
 
 .extend-placeholder-1
-	@extend $inline
+	@extend %inline
 
 .extend-placeholder-2
-	@extend $inline
+	@extend %inline
 
 // CSS Output
 .extend-placeholder-1,

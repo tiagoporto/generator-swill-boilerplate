@@ -98,7 +98,7 @@ var		   gulp = require('gulp'),
 	},
 
 //******************************* settings *******************************//
-	preprocessor = 'stylus',
+	preprocessor = 'sass',
 	jquery = true,
 	lintingCSS = true,
 	lintingJS = true,
@@ -117,11 +117,18 @@ var		   gulp = require('gulp'),
 
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', function () {
+	if(preprocessor === "sass"){
+		var outputFile = "_sprite.sass";
+	}else if(preprocessor === "stylus"){
+		var outputFile = "_sprite.styl";
+	}else if(preprocessor === "less"){
+		var outputFile = "_sprite.less";
+	};
 	var sprite = gulp.src(paths.sprite.bitmap + '**/*.png')
 					.pipe(
 						spritesmith({
 							imgName: 'sprite.png',
-							cssName: '_sprite.styl',
+							cssName: outputFile,
 							imgPath: '../' + basePaths.images.dest + 'sprite.png',
 							padding: 2,
 							algorithm: 'top-down'
@@ -140,9 +147,16 @@ gulp.task('bitmap-sprite', function () {
 
 // Generate SVG Sprite
 gulp.task('svg-sprite', function() {
-	return gulp.src(paths.sprite.svg + '*.svg')
-				.pipe(plumber())
-				.pipe(svgSprite({
+	if(preprocessor === "sass"){
+		var output = "scss";
+	}else if(preprocessor === "stylus"){
+		var output = "styl";
+	}else if(preprocessor === "less"){
+		var output = "less";
+	};
+
+
+	var spriteOptions = {
 					shape : {
 						spacing : {
 							padding : 2
@@ -154,12 +168,18 @@ gulp.task('svg-sprite', function() {
 							sprite: '../' + basePaths.images. dest + 'svg-sprite.svg',
 							layout: 'vertical',
 							bust : false,
-							render : {
-								styl : {dest: '../../' + paths.styles.src + 'helpers/_svg-sprite.styl'}
-							}
-						}
+							render : {	}
+						},
 					}
-				}))
+				};
+
+	spriteOptions.mode.css.render[output] =  {};
+
+	spriteOptions.mode.css.render[output].dest =  '../../' + paths.styles.src + 'helpers/_svg-sprite.' + output;
+
+	return gulp.src(paths.sprite.svg + '*.svg')
+				.pipe(plumber())
+				.pipe(svgSprite(spriteOptions))
 				.pipe(gulp.dest(paths.images.dest))
 				.pipe(notify({message: 'SVG sprite task complete', onLast: true}));
 });
