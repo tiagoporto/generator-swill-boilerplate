@@ -417,6 +417,18 @@ gulp.task('set-lintJS', function(){
 
 //*************************** Utility Tasks ******************************//
 
+gulp.task('combine-assets', function () {
+	var assets   =  plugins.useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
+
+	// Minify and Copy HTML
+	return  gulp.src(basePaths.dest + '**/*.{html,php}')
+					.pipe(assets)
+					.pipe(plugins.if('*.js', plugins.uglify()))
+					.pipe(plugins.if('*.css', plugins.csso()))
+					.pipe(assets.restore())
+					.pipe(plugins.useref())
+					.pipe(gulp.dest(basePaths.dest));
+});
 
 // Clean Directories
 gulp.task('clean', function (cb) {
