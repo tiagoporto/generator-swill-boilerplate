@@ -314,7 +314,7 @@ gulp.task('scripts', function () {
 						.pipe(plugins.plumber())
 						.pipe(plugins.if(lintJS, plugins.jshint()))
 						.pipe(plugins.if(lintJS, plugins.jshint.reporter('jshint-stylish')))
-						.pipe(plugins.concat('main.js'))
+						.pipe(plugins.concat('scripts.js'))
 						.pipe( plugins.if(jquery,
 							wrapper({
 								header: 'jQuery(document).ready(function($) {\n\n',
