@@ -19,6 +19,7 @@
     "gulp-autoprefixer": "^2.3.1",
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
+    "gulp-csslint": "^0.1.5",
     "gulp-csso": "^1.0.0",
     "gulp-file": "^0.2.0",
     "gulp-if": "^1.2.5",

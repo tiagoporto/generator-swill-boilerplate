@@ -238,6 +238,8 @@ gulp.task('stylus', function () {
 				.pipe(wrapper({
 					header: headerProject
 				}))
+				.pipe(plugins.csslint())
+				.pipe(plugins.csslint.reporter())
 				.pipe(gulp.dest(paths.styles.dest))
 				.pipe(plugins.csso())
 				.pipe(plugins.rename({suffix: '.min'}))
