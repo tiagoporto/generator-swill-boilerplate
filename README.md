@@ -68,8 +68,6 @@ Uses the following technologies:
 ```
 ./
 ├──┐
-│  ├─ node_modules // Will appear after installed the NPM packages
-│  │  └─ // NPM packages
 │  │
 │  ├─ build // Folder with the builded project
 │  │
@@ -80,7 +78,7 @@ Uses the following technologies:
 │  │  ├─ fonts
 │  │  │  └─ // Web Fonts
 │  │  │
-│  │  ├─ images
+│  │  ├─ img
 │  │  │  │
 │  │  │  ├─ copyright // Images with copyright metadata
 │  │  │  │
@@ -104,8 +102,6 @@ Uses the following technologies:
 │  │  ├─ apple-touch-icon.png // Icon for Safari on iOS
 │  │  │
 │  │  ├─ crossdomain.xml // Permission to handle data across multiple domains
-│  │  │
-│  │  ├─ example.html // Simple page with example of the components
 │  │  │
 │  │  ├─ favicon.ico //Icon for address bar and bookmark
 │  │  │
@@ -134,18 +130,11 @@ Uses the following technologies:
 │       │  │   │
 │       │  │   └─ tile-wide.png // Wide tile icon for Win8
 │       │  │
-│       │  │
 │       │  └─ // .jpg, .jpeg, .gif, .svg and .bmp to be compressed
 │       │
 │       ├─ scripts
 │       │  │
 │       │  ├─ dependencies // External plugins
-│       │  │
-│       │  ├─ jquery
-│       │  │  │
-│       │  │  ├─ onread // Open and close on read of Jquery
-│       │  │  │
-│       │  │  └─ // Development with JQuery
 │       │  │
 │       │  ├─ settings
 │       │  │  │
@@ -153,7 +142,7 @@ Uses the following technologies:
 │       │  │  │
 │       │  │  └─ google_analytics.js // Settings to Analytics
 │       │  │
-│       │  └─ // Development with Pure Javascript
+│       │  └─ // Scripts
 │       │
 │       └─ stylesheets
 │       │    │
