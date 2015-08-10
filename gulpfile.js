@@ -17,7 +17,6 @@ var		 gulp = require('gulp'),
   spritesmith = require('gulp.spritesmith'),
 	svgSprite = require('gulp-svg-sprite'),
 	  stylish = require('jshint-stylish'),
-	  wrapper = require('gulp-wrapper'),
 		 args = require('yargs').argv,
 	  plugins = require('gulp-load-plugins')(),
 
@@ -36,8 +35,7 @@ var		 gulp = require('gulp'),
 		},
 
 		sprite: {
-			bitmap: 'png-sprite/',
-			   svg: 'svg-sprite/'
+			src: 'sprite/'
 		},
 
 		scripts: {
@@ -59,8 +57,7 @@ var		 gulp = require('gulp'),
 		},
 
 		sprite: {
-			  bitmap: basePaths.src + basePaths.images.src + basePaths.sprite.bitmap,
-			 svg: basePaths.src + basePaths.images.src + basePaths.sprite.svg
+			src: basePaths.src + basePaths.images.src + basePaths.sprite.src
 		},
 
 		scripts: {
@@ -104,7 +101,7 @@ gulp.task('bitmap-sprite', function () {
 	}else if(preprocessor === "less"){
 		var outputFile = "less";
 	};
-	var sprite = gulp.src(paths.sprite.bitmap + '**/*.png')
+	var sprite = gulp.src(paths.sprite.src + '**/*.png')
 					.pipe(
 						spritesmith({
 							imgName: 'bitmap-sprite.png',
@@ -156,7 +153,7 @@ gulp.task('vetor-sprite', function() {
 
 	spriteOptions.mode.css.render[output].dest =  '../../' + paths.styles.src + 'helpers/_vetor-sprite.' + output;
 
-	return gulp.src(paths.sprite.svg + '*.svg')
+	return gulp.src(paths.sprite.src + '*.svg')
 				.pipe(plugins.plumber())
 				.pipe(svgSprite(spriteOptions))
 				.pipe(gulp.dest(paths.images.dest))
@@ -172,10 +169,9 @@ gulp.task('svg2png', function () {
 
 // Optimize Images
 gulp.task('images', function () {
-	var images =	gulp.src([
+	var images = gulp.src([
 					paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
-					'!' + paths.sprite.bitmap + '**/*',
-					'!' + paths.sprite.svg + '**/*'
+					'!' + paths.sprite.src + '**/*',
 				])
 				.pipe(plugins.newer(paths.images.dest))
 				.pipe(plugins.imagemin({optimizationLevel: 5, progressive: true}))
@@ -183,7 +179,7 @@ gulp.task('images', function () {
 
 	var svg = gulp.src([
 					paths.images.src + '**/*.svg',
-					'!' + paths.sprite.svg + '**/*'
+					'!' + paths.sprite.src + '**/*'
 				])
 				.pipe(plugins.svg2png())
 				.pipe(gulp.dest(paths.images.dest))
@@ -235,7 +231,7 @@ gulp.task('stylus', function () {
 				.pipe(plugins.autoprefixer({
 					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
 				}))
-				.pipe(wrapper({
+				.pipe(plugins.wrapper({
 					header: headerProject
 				}))
 				.pipe(plugins.csslint())
@@ -253,7 +249,7 @@ gulp.task('sass', function () {
 				.pipe(plugins.autoprefixer({
 					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
 				}))
-				.pipe(wrapper({
+				.pipe(plugins.wrapper({
 					header: headerProject
 				}))
 				.on('error', function (err) {
@@ -274,7 +270,7 @@ gulp.task('less', function () {
 		.pipe(plugins.autoprefixer({
 				browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
 		}))
-		.pipe(wrapper({
+		.pipe(plugins.wrapper({
 			header: headerProject
 		}))
 		.pipe(gulp.dest(paths.styles.dest))
@@ -315,13 +311,14 @@ gulp.task('scripts', function () {
 						.pipe(plugins.if(lintJS, plugins.jshint()))
 						.pipe(plugins.if(lintJS, plugins.jshint.reporter('jshint-stylish')))
 						.pipe(plugins.concat('scripts.js'))
-						.pipe( plugins.if(jquery,
-							wrapper({
+						.pipe( plugins.if(
+							jquery,
+							plugins.wrapper({
 								header: 'jQuery(document).ready(function($) {\n\n',
 								footer: '\n});'
 							})
 						))
-						.pipe(wrapper({
+						.pipe(plugins.wrapper({
 							header: headerProject
 						}))
 						.pipe(gulp.dest(paths.scripts.dest))
@@ -450,21 +447,21 @@ gulp.task('watch', function () {
 	browserSync(browserSyncConfig);
 
 	gulp.watch([
-			paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
-			'!' + paths.sprite.bitmap + '**/*',
-			'!' + paths.sprite.svg + '**/*'],
+				paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
+				'!' + paths.sprite.src + '**/*'
+			],
 
 			['images', browserSync.reload]
 		 );
 
 	gulp.watch(
-			paths.sprite.bitmap + '**/*.{png,gif}',
+			paths.sprite.src + '**/*.{png,gif}',
 
 			['bitmap-sprite', browserSync.reload]
 		);
 
 	gulp.watch(
-			paths.sprite.svg + '**/*.svg',
+			paths.sprite.src + '**/*.svg',
 
 			['vetor-sprite', preprocessor, browserSync.reload]
 		);

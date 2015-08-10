@@ -124,19 +124,18 @@ Uses the following technologies:
 │       │  │
 │       │  ├─ sprite // Images to generate the sprite
 │       │  │
-│       │  ├─ svg-sprite // Svgs to generate the svg-sprite
-│       │  │
 │       │  └─ touch // Icons
-│       │      │
-│       │      ├─ chrome-touch-icon-192x192.png // Icon for Chrome on Android
-│       │      │
-│       │      ├─ icon-128x128.png // Icon for Firefox on FirefoxOS
-│       │      │
-│       │      ├─ tile.png // Tile icon for Win8
-│       │      │
-│       │      ├─ tile-wide.png // Wide tile icon for Win8
-│       │      │
-│       │      └─ // .jpg, .jpeg, .gif, .svg and .bmp to be compressed
+│       │  │   │
+│       │  │   ├─ chrome-touch-icon-192x192.png // Icon for Chrome on Android
+│       │  │   │
+│       │  │   ├─ icon-128x128.png // Icon for Firefox on FirefoxOS
+│       │  │   │
+│       │  │   ├─ tile.png // Tile icon for Win8
+│       │  │   │
+│       │  │   └─ tile-wide.png // Wide tile icon for Win8
+│       │  │
+│       │  │
+│       │  └─ // .jpg, .jpeg, .gif, .svg and .bmp to be compressed
 │       │
 │       ├─ scripts
 │       │  │
@@ -157,42 +156,40 @@ Uses the following technologies:
 │       │  └─ // Development with Pure Javascript
 │       │
 │       └─ stylesheets
-│            │
-│            ├─ components //Styles used by external plugins
-│            │
-│            ├─ dependencies //Styles used by external plugins
-│            │
-│            ├─ helpers
-│            │  │
-│            │  ├─ functions
-│            │  │  │
-│            │  │  └ //
-│            │  │
-│            │  ├─ mixins
-│            │  │  │
-│            │  │  └ //
-│            │  │
-│            │  ├─ _functions.{sass, styl}
-│            │  │
-│            │  ├─ _helpers.{sass, styl}
-│            │  │
-│            │  ├─ _mixins.{sass, styl}
-│            │  │
-│            │  ├─ _placeholders.{sass, styl}
-│            │  │
-│            │  ├─ _sprite.{sass, styl}
-│            │  │
-│            │  ├─ _svg-sprite.{sass, styl}
-│            │  │
-│            │  └─ _variables.{sass, styl}
-│            │
-│            ├─ media_queries
-│            │
-│            ├─ typography
-│            │
-│            ├─ _base.{sass, styl} // Main Styles
-│            │
-│            └─ styles.{sass, styl} // Base file with imports
+│       │    │
+│       │    ├─ components
+│       │    │
+│       │    ├─ dependencies //Styles used by external plugins
+│       │    │
+│       │    ├─ helpers
+│       │    │  │
+│       │    │  ├─ functions
+│       │    │  │
+│       │    │  ├─ mixins
+│       │    │  │
+│       │    │  ├─ _bitmap-sprite.{sass, styl, less}
+│       │    │  │
+│       │    │  ├─ _functions.{sass, styl}
+│       │    │  │
+│       │    │  ├─ _helpers.{sass, styl}
+│       │    │  │
+│       │    │  ├─ _mixins.{sass, styl}
+│       │    │  │
+│       │    │  ├─ _placeholders.{sass, styl}
+│       │    │  │
+│       │    │  ├─ _variables.{sass, styl, less}
+│       │    │  │
+│       │    │  └─ _vetor-sprite.{sass, styl, less}
+│       │    │
+│       │    ├─ media_queries
+│       │    │
+│       │    ├─ typography
+│       │    │
+│       │    ├─ _base.{sass, styl, less} // Main Styles
+│       │    │
+│       │    └─ styles.{sass, styl, less} // Base file with imports
+│       │
+│       └─ header-comments.txt
 │
 ├─ .editorconfig // Settings of editorconfig plugin
 ├─ .jshintrc // JSHint configuration file
