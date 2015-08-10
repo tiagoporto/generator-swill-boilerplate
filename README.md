@@ -16,7 +16,7 @@ Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start 
 	* [Peculiarities](#peculiarities)
 	* [BrowserSync](#browsersync)
 	* [Bitmap Sprite](#bitmap-sprite)
-	* [SVG Sprite](#svg-sprite)
+	* [Vetor Sprite](#svg-sprite)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -427,10 +427,10 @@ Just use the mixins with the variables as parameters.
 
 ```styl
 #arrow
-	sprite($left-arrow)
+	sprite($left_arrow)
 
 	&:hover
-		sprite-position($right-arrow)
+		spritePosition($right_arrow)
 ```
 
 **Output**
@@ -447,11 +447,21 @@ Just use the mixins with the variables as parameters.
 }
 ```
 
-### Svg Sprite
+### Vetor Sprite
 
 To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) as fallback all the SVG sprites are converted to .png with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
 
-To-do
+* Put the icon in `src/images/svg-sprite`.
+* In HTML put the class in elements
+	```html
+	<i class="svg-icon-dims svg-icon"><i>
+	```
+	The class `-dims` get the dimensions and the other the position of the iconin sprite
+
+	The classname is defined by the .svg filename, example
+	* moon.svg the classname use the prefix `svg-` and the filename of the svg `moon`
+	* If you want use a hover, just name the file, `moon~hover.svg` and use the sgv-moon.
+
 
 ## Contributing
 
