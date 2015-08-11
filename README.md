@@ -31,12 +31,13 @@ Uses the following technologies:
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
 * [Bower](http://bower.io/)
 * [BrowserSync](http://www.browsersync.io/)
+* [CSSLint](http://csslint.net/)
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp](http://gulpjs.com/)
 * [JSHint](http://www.jshint.com/)
 * [Node.js](http://nodejs.org/)
 * [NPM](https://www.npmjs.com/)
-* [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
+* [Less](http://lesscss.org/), [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 
 ## Includes
 
@@ -55,16 +56,17 @@ Uses the following technologies:
 * Compress Images
 * Generate Sprites with .png
 * Generate Sprites with .svg and a fallback .png
+* Analyze CSS with csslint
 * Concatenate And Minify Scripts
 * Analyze JavaScript with jshint
-* Compile Sass or Stylus
-* Catch the stylus error and direct shows on the page, as in sass.
+* Compile Less, Sass or Stylus
+* Catch the Stylus error and direct shows on the page, as in Sass.
 * Functions and mixins to use with Sass or Stylus
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with [BrowserSync](http://www.browsersync.io/)
 * Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 * Check if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
-* Build the project compressing the HTML and the CSS.
+* Build the project compressing HTML, CSS and JS.
 
 
 ## Folder Structure
@@ -75,7 +77,7 @@ Uses the following technologies:
 │  │
 │  ├─ build // Folder with the builded project
 │  │
-│  ├─ public // Files for deployment
+│  ├─ public // Public files
 │  │  ├─ css
 │  │  │  └─ // Public styles
 │  │  │
@@ -225,30 +227,30 @@ Uses the following technologies:
 	$ npm install -g bower
 	```
 
-> Necessary just to sass-version and mobile-version.
+1. __Necessary just to use with Sass.__
 
-1. In Windows is necessary install [Ruby](https://www.ruby-lang.org/)
+	1. In Windows is necessary install [Ruby](https://www.ruby-lang.org/)
 
-	* Download and install [Ruby](http://rubyinstaller.org/).
+		- Download and install [Ruby](http://rubyinstaller.org/).
 
-1. Install Gem [Sass](http://sass-lang.com/)
+	1. Install Gem [Sass](http://sass-lang.com/)
 
-	* Open command line and execute
+		- Open command line and execute
 
-	```sh
-	$ gem install sass
-	```
+		```sh
+		$ gem install sass
+		```
 
 
 ## Usage
 
-1. Install [NPM](https://www.npmjs.com/) dependencies
-
-	* In the command line go to the local folder
+1. Open the terminal and go to the local folder
 
 	```sh
 	$ cd {yourFolderStructure}/swill-boilerplate
 	```
+
+1. Install [NPM](https://www.npmjs.com/) dependencies
 
 	* Execute
 
@@ -258,13 +260,6 @@ Uses the following technologies:
 
 1. Open the file `bower.json`
 	* Remove the dependencies that you will not use.
-
-1. Open the command line
-	* Go to the local folder
-
-	```sh
-	$ cd {yourFolderStructure}/swill-boilerplate
-	```
 
 1. Install [Bower](http://bower.io/) Dependencies
 	* Execute
@@ -277,7 +272,7 @@ Uses the following technologies:
 	$ gulp bower
 	```
 
-1. Set the CSS preprocessor you will use
+1. Set the CSS preprocessor you will use, necessary just once
 
 ```sh
 $gulp setup --preprocessor sass|less|stylus
@@ -325,28 +320,23 @@ $ gulp build:serve
 
 * Js Files prefixed with `_` won't be concatenated.
 
-* The folder `public/img` is clean when the task is run, and the images are compressed and come from ` src/images`, but if you work with copyrighted images you should not use compression, because it removes the metadatas from files. You can place images direct in the `public/src/copyright`, they won't be deleted.
+* The folder `public/img` is clean when the task is run, and the images are compressed and come from ` src/images`, but if you work with copyrighted images you should not use compression, because it removes the metadatas from files. You can place images direct in the `public/img/copyright`, they won't be deleted.
 
-> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
+	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
 
 * To use bower components just link the file on the HTML inside of the especifics comments. This way all the files will be concatenated and minified to build.
 
 **Example**
 
 ```html
-	<!-- build:js js/scripts.min.js -->
+	<!-- build:js js/scripts.combined.min.js -->
 	<script src="angular/angular.js"></script>
-	<script src="angular-route/angular-route.js"></script>
-	<script src="js/main.js"></script>
+	<script src="jquery/dist/jquery.js"></script>
+	<script src="bootstrap/dist/js/bootstrap.js"></script>
 	<!-- endbuild -->
 ```
 
 *The link to file start inside of the `bower_components`, the application won't work out of the serve.*
-
-
-### AngulaJS
-
-To use Angular go to the `gulpfile.js` uncomment the lines with `mangle: false`.
 
 
 ### BrowserSync
@@ -359,7 +349,7 @@ server: {
 	baseDir: [basePaths.src, basePaths.dest]
 }
 ```
-Set the url to the server
+Set the url server
 ```javascript
 proxy: "localhost/swill-boilerplate/public/"
 ```
@@ -368,48 +358,7 @@ proxy: "localhost/swill-boilerplate/public/"
 
 This boilerplate uses [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith) to generate bitmap sprites.
 
-When the sprite is generated, a file `_sprite.styl` or `_sprite.sass` is created with four mixins and the variables of the parameters of the images, like height and width (the names of the variables is the same of the original filename before the compilation).
-
-**Sprite file example**
-
-```styl
-
-$left-arrow-x: 0px;
-$left-arrow-y: 0px;
-$left-arrow-offset-x: 0px;
-$left-arrow-offset-y: 0px;
-$left-arrow-width: 32px;
-$left-arrow-height: 32px;
-$left-arrow-total-width: 32px;
-$left-arrow-total-height: 66px;
-$left-arrow-image: '../images/sprite.png';
-
-@mixin sprite-width($sprite) {
-  width: nth($sprite, 5);
-}
-
-@mixin sprite-height($sprite) {
-  height: nth($sprite, 6);
-}
-
-@mixin sprite-position($sprite) {
-  $sprite-offset-x: nth($sprite, 3);
-  $sprite-offset-y: nth($sprite, 4);
-  background-position: $sprite-offset-x  $sprite-offset-y;
-}
-
-@mixin sprite-image($sprite) {
-  $sprite-image: nth($sprite, 9);
-  background-image: url(#{$sprite-image});
-}
-
-@mixin sprite($sprite) {
-  @include sprite-image($sprite);
-  @include sprite-position($sprite);
-  @include sprite-width($sprite);
-  @include sprite-height($sprite);
-}
-```
+When the sprite is generated, a file `_bitmap-sprite.{styl,scss,less}` is created with four mixins and the variables of the parameters of the images, like height and width (the names of the variables is the same of the original filename before the compilation).
 
 Just use the mixins with the variables as parameters.
 
@@ -439,7 +388,7 @@ Just use the mixins with the variables as parameters.
 
 ### Vetor Sprite
 
-To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) as fallback all the SVG sprites are converted to `.png` with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
+To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite), as fallback all the SVG sprites are converted to `.png` with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
 
 * Put the icon in `src/images/sprite`.
 * In HTML put the class in elements
