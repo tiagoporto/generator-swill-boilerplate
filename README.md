@@ -1,8 +1,10 @@
 # Swill Boilerplate
 
-![Swill Boilerplate Logo](https://raw.githubusercontent.com/tiagoporto/swill-boilerplate/stylus-version/src/images/touch/chrome-touch-icon-192x192.png)
+<img align="center" src="public/img/touch/chrome-touch-icon-192x192.png" alt="Swill Boilerplate Logo">
 
-Boilerplate Front-End with [Gulp.js](http://gulpjs.com/), all you need to start multi-device development for business proposals, easy to customize.
+->![Swill Boilerplate Logo](public/img/touch/chrome-touch-icon-192x192.png)<-
+
+Boilerplate Front-End with [Gulp](http://gulpjs.com/), all you need to start multi-device development, easy to customize.
 
 ## Table of Contents
 
@@ -28,7 +30,7 @@ Uses the following technologies:
 * [Bower](http://bower.io/)
 * [BrowserSync](http://www.browsersync.io/)
 * [EditorConfig](http://editorconfig.org/)
-* [Gulp.js](http://gulpjs.com/)
+* [Gulp](http://gulpjs.com/)
 * [JSHint](http://www.jshint.com/)
 * [Node.js](http://nodejs.org/)
 * [NPM](https://www.npmjs.com/)
@@ -183,7 +185,7 @@ Uses the following technologies:
 ├─ .editorconfig // Settings of editorconfig plugin
 ├─ .jshintrc // JSHint configuration file
 ├─ bower.json // Bower dependencies
-├─ gulpfile.js // Gulp.js configuration file
+├─ gulpfile.js // Gulp configuration file
 ├─ package.json // NPM dependencies
 └─ README.md // Documentation
 ```
@@ -199,7 +201,7 @@ Uses the following technologies:
 	`Select npm package manager`
 
 
-1. Install [Gulp.js](http://gulpjs.com/)
+1. Install [Gulp](http://gulpjs.com/)
 
 	* Open command line and execute
 
