@@ -1,7 +1,7 @@
 # Swill Boilerplate
 
 <p align="center">
-	<img src="img/logos/logo.png" alt="Swill Boilerplate Logo">
+	<img src="http://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
 </p>
 
 Boilerplate Front-End with [Gulp](http://gulpjs.com/), all you need to start multi-device development, easy to customize.
