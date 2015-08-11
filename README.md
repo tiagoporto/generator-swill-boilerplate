@@ -1,8 +1,8 @@
 # Swill Boilerplate
 
-<img align="center" src="public/img/touch/chrome-touch-icon-192x192.png" alt="Swill Boilerplate Logo">
-
-->![Swill Boilerplate Logo](public/img/touch/chrome-touch-icon-192x192.png)<-
+<p align="center">
+	<img src="public/img/touch/chrome-touch-icon-192x192.png" alt="Swill Boilerplate Logo">
+</p>
 
 Boilerplate Front-End with [Gulp](http://gulpjs.com/), all you need to start multi-device development, easy to customize.
 
@@ -437,29 +437,26 @@ Just use the mixins with the variables as parameters.
 
 ### Vetor Sprite
 
-To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) as fallback all the SVG sprites are converted to .png with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
+To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) as fallback all the SVG sprites are converted to `.png` with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
 
-* Put the icon in `src/images/svg-sprite`.
+* Put the icon in `src/images/sprite`.
 * In HTML put the class in elements
+
 	```html
 	<i class="svg-icon-dims svg-icon"><i>
 	```
-	The class `-dims` get the dimensions and the other the position of the iconin sprite
 
-	The classname is defined by the .svg filename, example
-	* moon.svg the classname use the prefix `svg-` and the filename of the svg `moon`
-	* If you want use a hover, just name the file, `moon~hover.svg` and use the sgv-moon.
+	The class `-dims` get the dimensions and the other the position of the icon in sprite.
+
+	The classname is defined by the `.svg` filename, example:
+
+	* `moon.svg` the classname use the prefix `svg-` and the filename of the svg `moon`.
+	* If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
 
 
 ## Contributing
 
-If you have time to contribute or give some suggestions, please help me to make this a good tool for everyone.
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+If you have time to contribute, giving some suggestions, improving the documentation, correcting bugs or anything else, please help me to make this a good tool for everyone.
 
 ## License
 
