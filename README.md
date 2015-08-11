@@ -1,10 +1,12 @@
 # Swill Boilerplate
 
 <p align="center">
-	<img src="public/img/touch/chrome-touch-icon-192x192.png" alt="Swill Boilerplate Logo">
+	<img src="img/logos/logo.png" alt="Swill Boilerplate Logo">
 </p>
 
 Boilerplate Front-End with [Gulp](http://gulpjs.com/), all you need to start multi-device development, easy to customize.
+
+Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 
 ## Table of Contents
 
