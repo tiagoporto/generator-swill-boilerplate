@@ -80,6 +80,18 @@ var		 gulp = require('gulp'),
 		   lintJS = true,
 	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8"),
 
+	autoprefixerBrowsers = [
+		'ie >= 8',
+		'ie_mob >= 10',
+		'Firefox > 24',
+		'last 10 Chrome versions',
+		'safari >= 6',
+		'opera >= 24',
+		'ios >= 6',
+		'android >= 4',
+		'bb >= 10'
+	],
+
 	browserSyncConfig = {
 		notify: false,
 		port: 80,
@@ -90,6 +102,12 @@ var		 gulp = require('gulp'),
 			baseDir: [basePaths.src, basePaths.dest, basePaths.bower]
 		}
 	}
+
+
+gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
+
+gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, autoprefixerBrowsers));
+
 
 
 // Generate Bitmap Sprite
@@ -187,101 +205,6 @@ gulp.task('images', function () {
 
 	return merge(images, svg)
 });
-
-
-
-// Concatenate Stylus Mixins and Functions
-gulp.task('stylus-helpers', function () {
-	   var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.styl')
-						.pipe(plugins.concat('_mixins.styl'))
-						.pipe(gulp.dest(paths.styles.src + 'helpers'));
-
-	var functions = gulp.src(paths.styles.src + 'helpers/functions/*.styl')
-						.pipe(plugins.concat('_functions.styl'))
-						.pipe(gulp.dest(paths.styles.src + 'helpers'));
-
-	return merge(mixins, functions);
-});
-
-// Compile and Prefix Stylus
-gulp.task('stylus', function () {
-
-	return	gulp.src([
-					paths.styles.src + '*.styl',
-					'!' + paths.styles.src + '_*.styl',
-				])
-				.pipe(plugins.plumber())
-				.pipe(plugins.stylus({'include css': true})
-					.on('error', function (err) {
-
-						console.log(err.message);
-
-						// If rename the stylus file change here
-						plugins.file('styles.css', 'body:before{white-space: pre; font-family: monospace; content: "' + err.message + '";}', { src: true })
-							.pipe(plugins.replace("\\",'/'))
-							.pipe(plugins.replace(/(\r\n|\n|\r)/gm,'\\A '))
-							.pipe(plugins.replace("\"",'\''))
-							.pipe(plugins.replace("content: '",'content: "'))
-							.pipe(plugins.replace("';}",'";}'))
-							.pipe(gulp.dest(paths.styles.dest))
-							.pipe(plugins.rename({suffix: '.min'}))
-							.pipe(gulp.dest(paths.styles.dest));
-					})
-				)
-				.pipe(plugins.autoprefixer({
-					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
-				}))
-				.pipe(plugins.wrapper({
-					header: headerProject
-				}))
-				.pipe(plugins.csslint())
-				.pipe(plugins.csslint.reporter())
-				.pipe(gulp.dest(paths.styles.dest))
-				.pipe(plugins.csso())
-				.pipe(plugins.rename({suffix: '.min'}))
-				.pipe(gulp.dest(paths.styles.dest))
-				.pipe(plugins.notify({message: 'Styles task complete', onLast: true}));
-});
-
-// Compile and Prefix Sass Styles
-gulp.task('sass', function () {
-	return  plugins.sass(paths.styles.src + 'styles.scss', {precision: 3, style: 'expanded'})
-				.pipe(plugins.autoprefixer({
-					browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
-				}))
-				.pipe(plugins.wrapper({
-					header: headerProject
-				}))
-				.on('error', function (err) {
-					console.error('Error', err.message);
-				})
-				.pipe(gulp.dest(paths.styles.dest))
-				.pipe(plugins.csso())
-				.pipe(plugins.rename({suffix: '.min'}))
-				.pipe(gulp.dest(paths.styles.dest))
-				.pipe(plugins.notify({message: 'Styles task complete', onLast: true}));
-
-});
-
-// Compile and Prefix Less Styles
-gulp.task('less', function () {
-	return gulp.src(paths.styles.src + '**/*.less')
-		.pipe(plugins.less())
-		.pipe(plugins.autoprefixer({
-				browsers: ['ie >= 8', 'ie_mob >= 10', 'Firefox > 24', 'last 10 Chrome versions', 'safari >= 6', 'opera >= 24', 'ios >= 6',  'android >= 4', 'bb >= 10']
-		}))
-		.pipe(plugins.wrapper({
-			header: headerProject
-		}))
-		.pipe(gulp.dest(paths.styles.dest))
-		.pipe(plugins.csso())
-		.pipe(plugins.rename({suffix: '.min'}))
-		.pipe(gulp.dest(paths.styles.dest))
-		.pipe(plugins.notify({message: 'Styles task complete', onLast: true}));
-
-});
-
-
 
 
 // Concatenate dependencies scripts and Minify
@@ -463,7 +386,7 @@ gulp.task('watch', function () {
 	gulp.watch(
 			paths.sprite.src + '**/*.svg',
 
-			['vetor-sprite', preprocessor, browserSync.reload]
+			['vetor-sprite', 'styles', browserSync.reload]
 		);
 
 	gulp.watch(
@@ -491,14 +414,14 @@ gulp.task('watch', function () {
 			'!' + paths.styles.src + 'helpers/mixins/*.{styl,scss,sass,less}',
 			'!' + paths.styles.src + 'helpers/functions/*.{styl,scss,sass,less}'],
 
-			[preprocessor, browserSync.reload]
+			['styles', browserSync.reload]
 		);
 
 	gulp.watch([
 			paths.styles.src + 'helpers/mixins/*.{styl,scss,sass,less}',
 			paths.styles.src + 'helpers/functions/*.{styl,scss,sass,less}'],
 
-			['stylus-helpers']
+			['styles-helpers']
 		);
 
 	gulp.watch(
@@ -532,7 +455,7 @@ gulp.task('setup', function(cb){
 
 // Compile, watch and serve project
 gulp.task('default', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', preprocessor, 'scripts', 'watch',  cb);
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'watch',  cb);
 });
 
 // Serve the project and watch
@@ -540,12 +463,12 @@ gulp.task('serve', ['watch']);
 
 // Compile project
 gulp.task('compile', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', preprocessor, 'scripts', cb);
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', cb);
 });
 
 // Build Project
 gulp.task('build', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'stylus-helpers', 'dependence-scripts'], 'svg2png', preprocessor, 'scripts', 'copy', cb);
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'copy', cb);
 });
 
 // Build and serve builded project
