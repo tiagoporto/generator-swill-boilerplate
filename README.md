@@ -14,8 +14,9 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 * [Includes](#includes)
 * [Features](#features)
 * [Folder Structure](#folder-structure)
-* [Installing Dependencies](#installing-dependencies)
+* [Dependencies](#dependencies)
 * [Usage](#usage)
+	* [Config](#config)
 	* [Tasks](#tasks)
 	* [Peculiarities](#peculiarities)
 	* [BrowserSync](#browsersync)
@@ -194,7 +195,7 @@ Uses the following technologies:
 └─ README.md // Documentation
 ```
 
-## Installing Dependencies
+## Dependencies
 
 1. Install [EditorConfig](http://editorconfig.org/)
 
@@ -203,7 +204,6 @@ Uses the following technologies:
 1. Download and install [Node.js](http://nodejs.org/download/)
 
 	`Select npm package manager`
-
 
 1. Install [Gulp](http://gulpjs.com/)
 
@@ -244,33 +244,13 @@ Uses the following technologies:
 
 ## Usage
 
-1. Open the terminal and go to the local folder
+### Config
 
-	```sh
-	$ cd {yourFolderStructure}/swill-boilerplate
-	```
-
-1. Install [NPM](https://www.npmjs.com/) dependencies
-
-	* Execute
-
-	```sh
-	$ npm install
-	```
+1. Open the file `config.json` to setting config.
+	* If change the directory `basePaths.images.dest`, remember to modify the variable $image-path in 'src/stylesheets/helpers/_variables'.
 
 1. Open the file `bower.json`
 	* Remove the dependencies that you will not use.
-
-1. Install [Bower](http://bower.io/) Dependencies
-	* Execute
-
-	```sh
-	$ bower install
-	```
-
-	```sh
-	$ gulp bower
-	```
 
 1. Set the CSS preprocessor you will use, necessary just once
 
@@ -283,6 +263,36 @@ $gulp setup --preprocessor sass|less|stylus
 ```sh
 $ gulp
 ```
+
+1. Open the terminal and go to the local folder
+
+	```sh
+	$ cd {yourFolderStructure}/swill-boilerplate
+	```
+
+### Start
+
+1. Install [NPM](https://www.npmjs.com/) dependencies
+
+	* Execute
+
+	```sh
+	$ npm install
+	```
+
+
+1. Install [Bower](http://bower.io/) Dependencies
+	* Execute
+
+	```sh
+	$ bower install
+	```
+
+	```sh
+	$ gulp bower
+	```
+
+
 
 ### Tasks
 

@@ -20,37 +20,13 @@ var		 gulp = require('gulp'),
 	  stylish = require('jshint-stylish'),
 		 args = require('yargs').argv,
 	  plugins = require('gulp-load-plugins')(),
+	   config = require('./config.json'),
 
 //***************************** Path configs *****************************//
-	basePaths = {
-		   src: 'src/',
-		  dest: 'public/',
-		 build: 'build/',
-		 bower: 'bower_components/',
 
-		images: {
-			 src: 'images/',
-			dest: 'img/' // If change this directory remember to modify
-						 // the variable $image-path in
-						 // 'src/stylesheets/helpers/_variables'
-		},
+basePaths = config.basePaths,
 
-		sprite: {
-			src: 'sprite/'
-		},
-
-		scripts: {
-			 src: 'scripts/',
-			dest: 'js/'
-		},
-
-		styles: {
-			 src: 'stylesheets/',
-			dest: 'css/'
-		}
-	},
-
-	paths = {
+paths = {
 		images: {
 			  src: basePaths.src + basePaths.images.src ,
 			 dest: basePaths.dest + basePaths.images.dest,
@@ -76,23 +52,8 @@ var		 gulp = require('gulp'),
 
 //******************************* Settings *******************************//
 	 preprocessor = 'stylus',
-		   jquery = true,
-		  lintCSS = false,
-		   lintJS = true,
    extensionStyle = '',
 	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8"),
-
-	autoprefixerBrowsers = [
-		'ie >= 8',
-		'ie_mob >= 10',
-		'Firefox > 24',
-		'last 10 Chrome versions',
-		'safari >= 6',
-		'opera >= 24',
-		'ios >= 6',
-		'android >= 4',
-		'bb >= 10'
-	],
 
 	browserSyncConfig = {
 		notify: false,
@@ -118,7 +79,7 @@ var		 gulp = require('gulp'),
 
 gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
 
-gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, autoprefixerBrowsers, sass));
+gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, config.autoprefixerBrowsers, config.lintCSS, sass));
 
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', function () {
@@ -228,11 +189,11 @@ gulp.task('scripts', function () {
 						.pipe(plugins.cached('scripts'))
 						.pipe(plugins.remember('scripts'))
 						.pipe(plugins.plumber())
-						.pipe(plugins.if(lintJS, plugins.jshint()))
-						.pipe(plugins.if(lintJS, plugins.jshint.reporter('jshint-stylish')))
+						.pipe(plugins.if(config.lintJS, plugins.jshint()))
+						.pipe(plugins.if(config.lintJS, plugins.jshint.reporter('jshint-stylish')))
 						.pipe(plugins.concat('scripts.js'))
 						.pipe( plugins.if(
-							jquery,
+							config.jquery,
 							plugins.wrapper({
 								header: 'jQuery(document).ready(function($) {\n\n',
 								footer: '\n});'
@@ -252,8 +213,8 @@ gulp.task('scripts', function () {
 						])
 						.pipe(plugins.newer(paths.scripts.dest))
 						.pipe(plugins.plumber())
-						.pipe(plugins.if(lintJS, plugins.jshint()))
-						.pipe(plugins.if(lintJS, plugins.jshint.reporter('jshint-stylish')))
+						.pipe(plugins.if(config.lintJS, plugins.jshint()))
+						.pipe(plugins.if(config.lintJS, plugins.jshint.reporter('jshint-stylish')))
 						.pipe(plugins.rename(function(path){
 							path.basename = path.basename.substring(1)
 						}))

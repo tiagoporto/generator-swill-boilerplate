@@ -1,0 +1,43 @@
+{
+	"basePaths": {
+		   "src": "src/",
+		  "dest": "public/",
+		 "build": "build/",
+		 "bower": "bower_components/",
+
+		"images": {
+			 "src": "images/",
+			"dest": "img/"
+		},
+
+		"sprite": {
+			"src": "sprite/"
+		},
+
+		"scripts": {
+			 "src": "scripts/",
+			"dest": "js/"
+		},
+
+		"styles": {
+			 "src": "stylesheets/",
+			"dest": "css/"
+		}
+	},
+
+	"jquery": true,
+	"lintCSS": false,
+	"lintJS": true,
+
+	"autoprefixerBrowsers": [
+		"ie >= 8",
+		"ie_mob >= 10",
+		"Firefox > 24",
+		"last 10 Chrome versions",
+		"safari >= 6",
+		"opera >= 24",
+		"ios >= 6",
+		"android >= 4",
+		"bb >= 10"
+	]
+}

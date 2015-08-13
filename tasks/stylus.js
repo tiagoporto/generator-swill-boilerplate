@@ -1,5 +1,5 @@
 // Compile and Prefix Stylus
-module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrowsers) {
+module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrowsers, lintCSS) {
     return function () {
 
 		return	gulp.src([
@@ -30,8 +30,8 @@ module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrow
 					.pipe(plugins.wrapper({
 						header: headerProject
 					}))
-					.pipe(plugins.csslint('./.csslintrc'))
-					.pipe(plugins.csslint.reporter())
+					.pipe(plugins.if(lintCSS, plugins.csslint('./.csslintrc')))
+					.pipe(plugins.if(lintCSS, plugins.csslint.reporter()))
 					.pipe(gulp.dest(paths.styles.dest))
 					.pipe(plugins.csso())
 					.pipe(plugins.rename({suffix: '.min'}))
