@@ -32,7 +32,7 @@ var		 gulp = require('gulp'),
 			 src: 'images/',
 			dest: 'img/' // If change this directory remember to modify
 						 // the variable $image-path in
-						 // 'src/stylesheets/helpers/_variables.styl'
+						 // 'src/stylesheets/helpers/_variables'
 		},
 
 		sprite: {
@@ -79,6 +79,7 @@ var		 gulp = require('gulp'),
 		   jquery = true,
 		  lintCSS = false,
 		   lintJS = true,
+   extensionStyle = '',
 	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8"),
 
 	autoprefixerBrowsers = [
@@ -104,27 +105,29 @@ var		 gulp = require('gulp'),
 		}
 	}
 
+	if(preprocessor === "sass"){
+		extensionStyle = "scss";
+	}else if(preprocessor === "stylus"){
+		extensionStyle = "styl";
+	}else if(preprocessor === "less"){
+		extensionStyle = preprocessor;
+	}
+
+
+//******************************** Tasks *********************************//
 
 gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
 
 gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, autoprefixerBrowsers, sass));
 
-
-
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', function () {
-	if(preprocessor === "sass"){
-		var outputFile = "scss";
-	}else if(preprocessor === "stylus"){
-		var outputFile = "styl";
-	}else if(preprocessor === "less"){
-		var outputFile = "less";
-	};
+
 	var sprite = gulp.src(paths.sprite.src + '**/*.png')
 					.pipe(
 						spritesmith({
 							imgName: 'bitmap-sprite.png',
-							cssName: "_bitmap-sprite." + outputFile,
+							cssName: "_bitmap-sprite." + extensionStyle,
 							imgPath: '../' + basePaths.images.dest + 'bitmap-sprite.png',
 							padding: 2,
 							algorithm: 'top-down'
@@ -143,13 +146,6 @@ gulp.task('bitmap-sprite', function () {
 
 // Generate SVG Sprite
 gulp.task('vetor-sprite', function() {
-	if(preprocessor === "sass"){
-		var output = "scss";
-	}else if(preprocessor === "stylus"){
-		var output = "styl";
-	}else if(preprocessor === "less"){
-		var output = "less";
-	};
 
 	var spriteOptions = {
 					shape : {
@@ -168,9 +164,9 @@ gulp.task('vetor-sprite', function() {
 					}
 				};
 
-	spriteOptions.mode.css.render[output] =  {};
+	spriteOptions.mode.css.render[extensionStyle] =  {};
 
-	spriteOptions.mode.css.render[output].dest =  '../../' + paths.styles.src + 'helpers/_vetor-sprite.' + output;
+	spriteOptions.mode.css.render[extensionStyle].dest =  '../../' + paths.styles.src + 'helpers/_vetor-sprite.' + extensionStyle;
 
 	return gulp.src(paths.sprite.src + '*.svg')
 				.pipe(plugins.plumber())
@@ -322,22 +318,6 @@ gulp.task('remove-preprocessors', function(cb){
 	}
 });
 
-gulp.task('set-jquery', function(){
-	if(args.jquery){
-		return gulp.src(['gulpfile.js'])
-			.pipe(plugins.replace(/jquery\s=\s[a-z]{0,9},/g, "jquery = " + args.jquery + ","))
-			.pipe(gulp.dest('./'));
-	}
-});
-
-gulp.task('set-lintJS', function(){
-	if(args.lintJS){
-		return gulp.src(['gulpfile.js'])
-			.pipe(plugins.replace(/lintJS\s=\s[a-z]{0,9},/g, "lintJS = " + args.lintJS + ","))
-			.pipe(gulp.dest('./'));
-	}
-});
-
 //*************************** Utility Tasks ******************************//
 
 gulp.task('combine-assets', function () {
@@ -449,7 +429,7 @@ gulp.task('bower', function() {
 
 
 gulp.task('setup', function(cb){
-	sequence('set-jquery', 'set-lintJS', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
+	sequence('set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
 });
 
 //***************************** Main Tasks *******************************//
