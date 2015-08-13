@@ -1,0 +1,6 @@
+// EM function
+// Convert pixel units to rem units
+
+@function rem($pixels, $context: $font-size-base){
+	@return ($pixels/$context) + rem;
+}

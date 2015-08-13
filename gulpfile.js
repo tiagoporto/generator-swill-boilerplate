@@ -14,6 +14,7 @@ var		 gulp = require('gulp'),
 		merge = require('merge-stream'),
    minifyHTML = require('gulp-minify-html'),
 	 sequence = require('run-sequence'),
+		 sass = require('gulp-ruby-sass'),
   spritesmith = require('gulp.spritesmith'),
 	svgSprite = require('gulp-svg-sprite'),
 	  stylish = require('jshint-stylish'),
@@ -106,7 +107,7 @@ var		 gulp = require('gulp'),
 
 gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
 
-gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, autoprefixerBrowsers));
+gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, autoprefixerBrowsers, sass));
 
 
 

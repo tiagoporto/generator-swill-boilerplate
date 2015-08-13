@@ -1,43 +1,51 @@
+// Helpers
+@import "helpers/_variables";
+@import "helpers/_functions";
 
 /*! ==================================================================
    Dependencies
    ================================================================== */
-/* @import "dependencies/jquery-logo-downloadtip"; */
+@import "dependencies/jquery-logo-downloadtip";
 
-/* Sprites */
-// @import "helpers/bitmap-sprite";
-// @import "helpers/vetor-sprite";
+// Sprites
+@import "helpers/bitmap-sprite";
+@import "helpers/vetor-sprite";
 
 
-/* Main Styles */
+// Main Styles
+@import "helpers/_placeholders";
+@import "helpers/_mixins";
 @import "base";
 
 /*! ==================================================================
    Media Queries
    ================================================================== */
-/* Printers */
+// Printers
 @media print{
 	@import "media_queries/_print";
 }
 
-/* 480px */
+// 480px
 @media (max-width: 30em){
 	@import "media_queries/_max_480";
 }
 
-/* 481px - 768px */
+// 481px - 768px
 @media (min-width: 30.063em) and (max-width: 48em){
 	@import "media_queries/_min_481_max_768";
 }
 
-/* 769px - 992px */
+// 769px - 992px
 @media (min-width: 48.063em) and (max-width: 62em){
 	@import "media_queries/_min_769_max_992";
 }
 
-
-/* Better Font Smoothing in Chrome & Safari */
-/* http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x */
+/**
+*
+* Better Font Smoothing in Chrome & Safari
+* http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x
+*
+**/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.25),
 	only screen and ( min-device-pixel-ratio: 1.25),
 	only screen and ( min-resolution: 200dpi),

@@ -1,7 +1,7 @@
 // Compile and Prefix Sass
-module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrowsers) {
+module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrowsers, sass) {
     return function () {
-		return  plugins.sass(paths.styles.src + 'styles.scss', {precision: 3, style: 'expanded'})
+		return  sass(paths.styles.src + 'styles.scss', {precision: 3, style: 'expanded'})
 					.pipe(plugins.autoprefixer({
 						browsers: autoprefixerBrowsers
 					}))
