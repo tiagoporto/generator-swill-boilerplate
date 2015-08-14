@@ -53,18 +53,7 @@ paths = {
 //******************************* Settings *******************************//
 	 preprocessor = 'stylus',
    extensionStyle = '',
-	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8"),
-
-	browserSyncConfig = {
-		notify: false,
-		port: 80,
-		logPrefix: 'BrowserSync',
-		// To use with dinamic files
-		// proxy: 'localhost/swill-boilerplate/public/'
-		server: {
-			baseDir: [basePaths.src, basePaths.dest, basePaths.bower]
-		}
-	}
+	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8")
 
 	if(preprocessor === "sass"){
 		extensionStyle = "scss";
@@ -83,7 +72,6 @@ gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, hea
 
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', function () {
-
 	var sprite = gulp.src(paths.sprite.src + '**/*.png')
 					.pipe(
 						spritesmith({
@@ -107,7 +95,6 @@ gulp.task('bitmap-sprite', function () {
 
 // Generate SVG Sprite
 gulp.task('vetor-sprite', function() {
-
 	var spriteOptions = {
 					shape : {
 						spacing : {
@@ -231,10 +218,10 @@ gulp.task('scripts', function () {
 
 // Copy Files to Build
 gulp.task('copy', function () {
-	var assets   =  plugins.useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
+	var  assets  = plugins.useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
 
 	// Minify and Copy HTML
-	var  html    =   gulp.src(basePaths.dest + '**/*.{html,php}')
+	var  html    = gulp.src(basePaths.dest + '**/*.{html,php}')
 						.pipe(assets)
 						.pipe(plugins.if('*.js', plugins.uglify()))
 						.pipe(plugins.if('*.css', plugins.csso()))
@@ -245,7 +232,7 @@ gulp.task('copy', function () {
 						.pipe(gulp.dest(basePaths.build));
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files
-	var allFiles =	gulp.src([
+	var allFiles = gulp.src([
 							basePaths.dest + '**/*',
 							'!' + paths.styles.dest + '**/*',
 							'!' + paths.scripts.dest + '**/*',
@@ -254,6 +241,21 @@ gulp.task('copy', function () {
 						.pipe(gulp.dest(basePaths.build));
 });
 
+// Copy Bower dependencies to public folder
+gulp.task('bower', function() {
+	var outdatedBrowserLangs = gulp.src(basePaths.bower + 'outdated-browser/outdatedbrowser/lang/*')
+									.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
+
+	var    fonts    = gulp.src([
+							basePaths.bower + 'bootstrap/dist/fonts/*',
+							basePaths.bower + 'font-awesome/fonts/*'
+						])
+						.pipe(gulp.dest(basePaths.dest + 'fonts'));
+
+	return merge(outdatedBrowserLangs, fonts);
+});
+
+//Set the preprocessor in variable
 gulp.task('set-preprocessor', function(){
 	if(args.preprocessor){
 		return gulp.src(['gulpfile.js'])
@@ -262,6 +264,7 @@ gulp.task('set-preprocessor', function(){
 	}
 });
 
+//Copy the files to use
 gulp.task('folder-preprocessor', function(){
 	if(args.preprocessor){
 		return gulp.src(paths.styles.src + args.preprocessor + "/**/*")
@@ -269,6 +272,7 @@ gulp.task('folder-preprocessor', function(){
 	}
 });
 
+//Removes unnecessary folders
 gulp.task('remove-preprocessors', function(cb){
 	if(args.preprocessor){
 		del([
@@ -307,9 +311,15 @@ gulp.task('clean', function (cb) {
 		], cb)
 });
 
-// Watch Files
-gulp.task('watch', function () {
-	browserSync(browserSyncConfig);
+gulp.task('setup', function(cb){
+	sequence('bower', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
+});
+
+//***************************** Main Tasks *******************************//
+
+// Serve the project and watch
+gulp.task('serve', function () {
+	browserSync(config.browserSync);
 
 	gulp.watch([
 				paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
@@ -366,42 +376,13 @@ gulp.task('watch', function () {
 			['styles-helpers']
 		);
 
-	gulp.watch(
-			basePaths.dest + '**/*.{html,php}',
-
-			browserSync.reload
-		);
+	gulp.watch(basePaths.dest + '**/*.{html,php}', browserSync.reload);
 });
-
-// Copy Bower dependencies to public folder
-gulp.task('bower', function() {
-
-	var outdatedBrowserLangs = gulp.src(basePaths.bower + 'outdated-browser/outdatedbrowser/lang/*')
-						.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
-
-	var    fonts    = gulp.src([
-							basePaths.bower + 'bootstrap/dist/fonts/*',
-							basePaths.bower + 'font-awesome/fonts/*'
-						])
-						.pipe(gulp.dest(basePaths.dest + 'fonts'));
-
-	return merge(outdatedBrowserLangs, fonts);
-});
-
-
-gulp.task('setup', function(cb){
-	sequence('set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
-});
-
-//***************************** Main Tasks *******************************//
 
 // Compile, watch and serve project
 gulp.task('default', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'watch',  cb);
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'serve',  cb);
 });
-
-// Serve the project and watch
-gulp.task('serve', ['watch']);
 
 // Compile project
 gulp.task('compile', ['clean'], function (cb) {
@@ -415,14 +396,5 @@ gulp.task('build', ['clean'], function (cb) {
 
 // Build and serve builded project
 gulp.task('build:serve', ['build'], function (cb) {
-	browserSync({
-		notify: false,
-		port: 80,
-		logPrefix: 'BrowserSync',
-		// To use with dinamic files
-		// proxy: 'localhost/swill-boilerplate/public/'
-		server: {
-			baseDir: [basePaths.build]
-		}
-	});
+	browserSync(config.browserSyncBuild);
 });

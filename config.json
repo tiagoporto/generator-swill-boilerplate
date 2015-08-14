@@ -26,8 +26,20 @@
 	},
 
 	"jquery": true,
+
 	"lintCSS": false,
+
 	"lintJS": true,
+
+	"cleanAssets": true,
+
+	"PNGsprite": true,
+
+	"SVGsprite": true,
+
+	"SVG2PNGspriteFallback": true,
+
+	"optimizeImages": true,
 
 	"autoprefixerBrowsers": [
 		"ie >= 8",
@@ -39,5 +51,23 @@
 		"ios >= 6",
 		"android >= 4",
 		"bb >= 10"
-	]
+	],
+
+	"browserSync": {
+		"notify": false,
+		"port": 80,
+		"logPrefix": "BrowserSync",
+		"server": {
+			"baseDir": ["src/", "public/", "bower_components/"]
+		}
+	},
+
+	"browserSyncBuild": {
+		"notify": false,
+		"port": 80,
+		"logPrefix": "BrowserSync",
+		"server": {
+			"baseDir": ["build/"]
+		}
+	}
 }

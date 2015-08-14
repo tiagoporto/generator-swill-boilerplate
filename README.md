@@ -248,29 +248,40 @@ Uses the following technologies:
 
 1. Open the file `config.json` to setting config.
 	* If change the directory `basePaths.images.dest`, remember to modify the variable $image-path in 'src/stylesheets/helpers/_variables'.
+	* In the browserSyncConfig if you will use dinamic files, its necessary replace the server option by proxy.
+	* Example
+```json
+"browserSyncConfig": {
+	"notify": false,
+	"port": 80,
+	"logPrefix": "BrowserSync",
+	"server": {
+		"baseDir": ["src/", "public/", "bower_components/"]
+	}
+}
+```
+
+```json
+"browserSyncConfig": {
+	"notify": false,
+	"port": 80,
+	"logPrefix": "BrowserSync",
+	"proxy": "localhost/swill-boilerplate/public/"
+}
+```
 
 1. Open the file `bower.json`
 	* Remove the dependencies that you will not use.
 
-1. Set the CSS preprocessor you will use, necessary just once
 
-```sh
-$gulp setup --preprocessor sass|less|stylus
-```
 
-1. Execute the task `gulp` to start the development
-
-```sh
-$ gulp
-```
+### Start
 
 1. Open the terminal and go to the local folder
 
 	```sh
 	$ cd {yourFolderStructure}/swill-boilerplate
 	```
-
-### Start
 
 1. Install [NPM](https://www.npmjs.com/) dependencies
 
@@ -288,10 +299,17 @@ $ gulp
 	$ bower install
 	```
 
-	```sh
-	$ gulp bower
-	```
+1. Set the CSS preprocessor you will use, necessary just once
 
+```sh
+$gulp setup --preprocessor sass|less|stylus
+```
+
+1. Execute the task `gulp` to start the development
+
+```sh
+$ gulp
+```
 
 
 ### Tasks
