@@ -144,6 +144,7 @@ gulp.task('images', function () {
 					paths.images.src + '**/*.svg',
 					'!' + paths.sprite.src + '**/*'
 				])
+				.pipe(plugins.newer(paths.images.dest))
 				.pipe(plugins.svg2png())
 				.pipe(gulp.dest(paths.images.dest))
 				.pipe(plugins.notify({message: 'Images task complete', onLast: true}));
