@@ -25,21 +25,13 @@
 		}
 	},
 
+	"components": false,
+
 	"jquery": true,
 
 	"lintCSS": false,
 
 	"lintJS": true,
-
-	"cleanAssets": true,
-
-	"PNGsprite": true,
-
-	"SVGsprite": true,
-
-	"SVG2PNGspriteFallback": true,
-
-	"optimizeImages": true,
 
 	"autoprefixerBrowsers": [
 		"ie >= 8",

@@ -314,16 +314,18 @@ $ gulp
 
 ### Tasks
 
-**Default Task** - compile, watch and serve project.
+**Default Task** - compile the project
 
 ```sh
 $ gulp
 ```
 
-**Compile Task** - just compile project.
+**Compile, watch and serve**
+
+The default task accept the parameter --serve.
 
 ```sh
-$ gulp compile
+$ gulp --serve
 ```
 
 **Serve Task** - serve the project and watch.
@@ -332,16 +334,18 @@ $ gulp compile
 $ gulp serve
 ```
 
-**Build Task** - build project.
+**Build Task**
 
 ```sh
 $ gulp build
 ```
 
-**Build:serve task** - build and serve builded project.
+**Build And Serve**
+
+The build task accept the parameter --serve.
 
 ```sh
-$ gulp build:serve
+$ gulp build --serve
 ```
 
 ### Peculiarities

@@ -381,21 +381,19 @@ gulp.task('serve', function () {
 });
 
 // Compile, watch and serve project
-gulp.task('default', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'serve',  cb);
+gulp.task('default', ['clean'], function () {
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', function(){
+			if(args.serve === true){
+				gulp.start('serve');
+			}
+		});
 });
 
-// Compile project
-gulp.task('compile', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', cb);
-});
-
-// Build Project
-gulp.task('build', ['clean'], function (cb) {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'copy', cb);
-});
-
-// Build and serve builded project
-gulp.task('build:serve', ['build'], function (cb) {
-	browserSync(config.browserSyncBuild);
+// Build Project and serve if pass the parameter --serve
+gulp.task('build', ['clean'], function () {
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'copy', function(){
+			if(args.serve === true){
+				browserSync(config.browserSyncBuild);
+			}
+		});
 });
