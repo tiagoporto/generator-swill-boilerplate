@@ -27,7 +27,7 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 
 ## Technologies
 
-Uses the following technologies:
+This boilerplate uses the following technologies:
 
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
 * [Bower](http://bower.io/)
@@ -36,33 +36,31 @@ Uses the following technologies:
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp](http://gulpjs.com/)
 * [JSHint](http://www.jshint.com/)
+* [Less](http://lesscss.org/), [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 * [Node.js](http://nodejs.org/)
 * [NPM](https://www.npmjs.com/)
-* [Less](http://lesscss.org/), [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 
 ## Includes
 
-* [Animate.css](http://daneden.github.io/animate.css/)
-* [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
+* [Styles to Basic Components](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only to use with stylus
 * [Google Analytics](http://www.google.com/analytics/)
-* [Jeet](http://jeet.gs/)
-* [jQuery](http://jquery.com/)
+* [jQuery Logo Downloadtip](http://demo.jarnesjo.net/jquery-logo-downloadtip)
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
-* [Twitter Bootstrap](http://getbootstrap.com/)
+* [Functions and mixins](http://tiagoporto.github.io/swill-boilerplate/functions-mixins.html) Just to Sass and Stylus
 
 ## Features
 
 * Clean the assets (images, css, js) in the project to maintain the directory organized
 * Compress Images
 * Generate Sprites with .png
-* Generate Sprites with .svg and a fallback .png
+* Generate Sprites with .svg and a .png fallback
 * Analyze CSS with csslint
-* Concatenate And Minify Scripts
-* Analyze JavaScript with jshint
+* Prefixer CSS with Autoprefixer
 * Compile Less, Sass or Stylus
 * Catch the Stylus error and direct shows on the page, as in Sass.
-* Functions and mixins to use with Sass or Stylus
+* Concatenate And Minify Scripts
+* Analyze JavaScript with jshint
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with [BrowserSync](http://www.browsersync.io/)
 * Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)

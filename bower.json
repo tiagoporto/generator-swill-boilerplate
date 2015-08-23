@@ -1,36 +1,32 @@
 {
   "name": "swill-boilerplate",
-  "description": "Boilerplate for Gulp.js to quick multi-device development",
+  "description": "Customizable front-end boilerplate for Gulp to quick multi-device development.",
   "keywords": [
     "template",
     "gulp",
+    "boilerplate",
+    "customizable",
     "automation",
     "stylus",
-    "stylus mixins",
-    "stylus functions",
+    "sass",
+    "less",
     "image optimization",
-    "live browser reloading",
     "scripts concatenation",
-    "cross-device synchronization",
-    "boilerplate"
+    "live browser reloading",
+    "cross-device synchronization"
   ],
   "homepage": "https://github.com/tiagoporto/swill-boilerplate",
-  "authors": [
-    "Tiago Porto - http://tiagoporto.com/"
-  ],
+  "authors": [{
+    "name": "Tiago Porto",
+    "homepage": "http://tiagoporto.com/"
+  }],
   "license": "MIT",
   "private": true,
   "ignore": [
-    "**/.*",
     "node_modules",
     "bower_components"
   ],
   "devDependencies": {
-    "animate.css": "~3.3.0",
-    "bootstrap": "~3.3.5",
-    "font-awesome": "~4.4.0",
-    "jeet": "~6.1.2",
-    "jquery": "~2.1.4",
     "normalize.css": "~3.0.3",
     "outdated-browser": "~1.1.0"
   }

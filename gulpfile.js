@@ -20,6 +20,7 @@ var		 gulp = require('gulp'),
 	  stylish = require('jshint-stylish'),
 		 args = require('yargs').argv,
 	  plugins = require('gulp-load-plugins')(),
+   vinylPaths = require('vinyl-paths'),
 	   config = require('./config.json'),
 
 //***************************** Path configs *****************************//
@@ -156,6 +157,7 @@ gulp.task('images', function () {
 // Concatenate dependencies scripts and Minify
 gulp.task('dependence-scripts', function () {
 	return gulp.src([
+					'!' + paths.scripts.src + '**/*_IGNORE.js',
 					paths.scripts.src + 'settings/google_analytics.js',
 					paths.scripts.src + 'dependencies/frameworks_libs/*',
 					paths.scripts.src + 'dependencies/plugins/**',
@@ -171,7 +173,8 @@ gulp.task('dependence-scripts', function () {
 // Concatenate and Minify Main Scripts
 gulp.task('scripts', function () {
 	var concatenate = gulp.src([
-							'!' + paths.scripts.src + '**/_*.js',
+							'!' + paths.scripts.src + '**/*_SEPARATE.js',
+							'!' + paths.scripts.src + '**/*_IGNORE.js',
 							paths.scripts.src + '*.js'
 						])
 						.pipe(plugins.cached('scripts'))
@@ -197,14 +200,14 @@ gulp.task('scripts', function () {
 
 
 		   var copy = gulp.src([
-							paths.scripts.src + '/_*.js'
+							paths.scripts.src + '/*_SEPARATE.js'
 						])
 						.pipe(plugins.newer(paths.scripts.dest))
 						.pipe(plugins.plumber())
 						.pipe(plugins.if(config.lintJS, plugins.jshint()))
 						.pipe(plugins.if(config.lintJS, plugins.jshint.reporter('jshint-stylish')))
 						.pipe(plugins.rename(function(path){
-							path.basename = path.basename.substring(1)
+							path.basename = path.basename.substring(0,  path.basename.length -9)
 						}))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(plugins.rename({suffix: '.min'}))
@@ -255,6 +258,35 @@ gulp.task('bower', function() {
 
 	return merge(outdatedBrowserLangs, fonts);
 });
+
+//Set the use of components
+gulp.task('set-dependencies', function(){
+	var styles = gulp.src([
+							paths.styles.src + '**/styles.{styl,sass,scss,less}'
+						])
+						.pipe(plugins.if(config.components, plugins.replace(/\/\/ @import\s"components/g, "@import \"components")))
+						.pipe(plugins.if(config.jquery, plugins.replace(/\/\/ @import\s"dependencies\/jquery-logo-downloadtip/g, "@import \"dependencies/jquery-logo-downloadtip")))
+						.pipe(gulp.dest(paths.styles.src));
+
+		if(config.components){
+			var component_scritp = gulp.src(paths.scripts.src + '**/custom-input-file_IGNORE.js')
+									.pipe(vinylPaths(del))
+									.pipe(plugins.rename(function(path){
+											path.basename = path.basename.substring(0,  path.basename.length -7)
+										}))
+									.pipe(gulp.dest(paths.scripts.src));
+		}
+
+		if(config.jquery){
+			var jquery_dependence = gulp.src(paths.scripts.src + '**/jquery-logo-downloadtip_IGNORE.js')
+							.pipe(vinylPaths(del))
+							.pipe(plugins.rename(function(path){
+									path.basename = path.basename.substring(0,  path.basename.length -7)
+								}))
+							.pipe(gulp.dest(paths.scripts.src));
+		}
+});
+
 
 //Set the preprocessor in variable
 gulp.task('set-preprocessor', function(){
@@ -313,7 +345,7 @@ gulp.task('clean', function (cb) {
 });
 
 gulp.task('setup', function(cb){
-	sequence('bower', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
+	sequence('bower', 'set-dependencies', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
 });
 
 //***************************** Main Tasks *******************************//
