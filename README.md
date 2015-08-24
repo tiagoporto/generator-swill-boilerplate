@@ -119,70 +119,72 @@ This boilerplate uses the following technologies:
 │  │  │
 │  │  └─ // HTML, PHP, etc Files
 │  │
-│  └─ src // Source files for the projects
-│       ├─ images // Original imagens, don't compressed
-│       │  │
-│       │  ├─ sprite // Images to generate the sprite
-│       │  │
-│       │  └─ touch // Icons
-│       │  │   │
-│       │  │   ├─ chrome-touch-icon-192x192.png // Icon for Chrome on Android
-│       │  │   │
-│       │  │   ├─ icon-128x128.png // Icon for Firefox on FirefoxOS
-│       │  │   │
-│       │  │   ├─ tile.png // Tile icon for Win8
-│       │  │   │
-│       │  │   └─ tile-wide.png // Wide tile icon for Win8
-│       │  │
-│       │  └─ // .jpg, .jpeg, .gif, .svg and .bmp to be compressed
-│       │
-│       ├─ scripts
-│       │  │
-│       │  ├─ dependencies // External plugins
-│       │  │
-│       │  ├─ settings
-│       │  │  │
-│       │  │  ├─ call_plugins.js // Call the plugins after page load
-│       │  │  │
-│       │  │  └─ google_analytics.js // Settings to Analytics
-│       │  │
-│       │  └─ // Scripts
-│       │
-│       └─ stylesheets
-│       │    │
-│       │    ├─ components
-│       │    │
-│       │    ├─ dependencies //Styles used by external plugins
-│       │    │
-│       │    ├─ helpers
-│       │    │  │
-│       │    │  ├─ functions
-│       │    │  │
-│       │    │  ├─ mixins
-│       │    │  │
-│       │    │  ├─ _bitmap-sprite.{sass, styl, less}
-│       │    │  │
-│       │    │  ├─ _functions.{sass, styl}
-│       │    │  │
-│       │    │  ├─ _helpers.{sass, styl}
-│       │    │  │
-│       │    │  ├─ _mixins.{sass, styl}
-│       │    │  │
-│       │    │  ├─ _placeholders.{sass, styl}
-│       │    │  │
-│       │    │  ├─ _variables.{sass, styl, less}
-│       │    │  │
-│       │    │  └─ _vetor-sprite.{sass, styl, less}
-│       │    │
-│       │    ├─ media_queries
-│       │    │
-│       │    ├─ typography
-│       │    │
-│       │    ├─ _base.{sass, styl, less} // Main Styles
-│       │    │
-│       │    └─ styles.{sass, styl, less} // Base file with imports
-│       │
-│       └─ header-comments.txt
+│  ├─ src // Source files for the projects
+│  │    ├─ images // Original imagens, don't compressed
+│  │    │  │
+│  │    │  ├─ sprite // Images to generate the sprite
+│  │    │  │
+│  │    │  └─ touch // Icons
+│  │    │  │   │
+│  │    │  │   ├─ chrome-touch-icon-192x192.png // Icon for Chrome on Android
+│  │    │  │   │
+│  │    │  │   ├─ icon-128x128.png // Icon for Firefox on FirefoxOS
+│  │    │  │   │
+│  │    │  │   ├─ tile.png // Tile icon for Win8
+│  │    │  │   │
+│  │    │  │   └─ tile-wide.png // Wide tile icon for Win8
+│  │    │  │
+│  │    │  └─ // .jpg, .jpeg, .gif, .svg and .bmp to be compressed
+│  │    │
+│  │    ├─ scripts
+│  │    │  │
+│  │    │  ├─ dependencies // External plugins
+│  │    │  │
+│  │    │  ├─ settings
+│  │    │  │  │
+│  │    │  │  ├─ call_plugins.js // Call the plugins after page load
+│  │    │  │  │
+│  │    │  │  └─ google_analytics.js
+│  │    │  │
+│  │    │  └─ // Scripts
+│  │    │
+│  │    ├─ stylesheets
+│  │    │    │
+│  │    │    ├─ components
+│  │    │    │
+│  │    │    ├─ dependencies //Styles used by external plugins
+│  │    │    │
+│  │    │    ├─ helpers
+│  │    │    │  │
+│  │    │    │  ├─ functions // All files here will be concatenated to ../functions.{sass, styl, less}
+│  │    │    │  │
+│  │    │    │  ├─ mixins // All files here will be concatenated to ../mixins.{sass, styl, less}
+│  │    │    │  │
+│  │    │    │  ├─ _bitmap-sprite.{sass, styl, less}
+│  │    │    │  │
+│  │    │    │  ├─ _functions.{sass, styl}
+│  │    │    │  │
+│  │    │    │  ├─ _helpers.{sass, styl} // Only a helper to preprocessor syntax
+│  │    │    │  │
+│  │    │    │  ├─ _mixins.{sass, styl}
+│  │    │    │  │
+│  │    │    │  ├─ _placeholders.{sass, styl}
+│  │    │    │  │
+│  │    │    │  ├─ _variables.{sass, styl, less}
+│  │    │    │  │
+│  │    │    │  └─ _vetor-sprite.{sass, styl, less}
+│  │    │    │
+│  │    │    ├─ media_queries
+│  │    │    │
+│  │    │    ├─ typography
+│  │    │    │
+│  │    │    ├─ _base.{sass, styl, less} // Main Styles
+│  │    │    │
+│  │    │    └─ styles.{sass, styl, less} // Base file with imports
+│  │    │
+│  │    └─ header-comments.txt // Header to styles and Scripts
+│  │
+│  └─ Tasks // Specific Gulp tasks to preprocessors
 │
 ├─ .csslintrc // CSSLint configuration file
 ├─ .editorconfig // Editorconfig configuration file
@@ -433,6 +435,8 @@ to-do
 ## Contributing
 
 If you have time to contribute, giving some suggestions, improving the documentation, correcting bugs or anything else, please help me to make this a good tool for everyone.
+
+Please, send pull requests to [Develop Branch](https://github.com/tiagoporto/swill-boilerplate/tree/develop).
 
 ## License
 
