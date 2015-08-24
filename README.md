@@ -16,12 +16,12 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 * [Folder Structure](#folder-structure)
 * [Dependencies](#dependencies)
 * [Usage](#usage)
-	* [Config](#config)
-	* [Tasks](#tasks)
-	* [Peculiarities](#peculiarities)
-	* [BrowserSync](#browsersync)
-	* [Bitmap Sprite](#bitmap-sprite)
-	* [Vetor Sprite](#svg-sprite)
+	* [Settings](#setting)
+	* [Developing](#developing)
++ [Tasks](#tasks)
++ [Peculiarities](#peculiarities)
++ [Bitmap Sprite](#bitmap-sprite)
++ [Vetor Sprite](#svg-sprite)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -42,21 +42,21 @@ This boilerplate uses the following technologies:
 
 ## Includes
 
-* [Styles to Basic Components](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only to use with stylus
+* [Functions and mixins](http://tiagoporto.github.io/swill-boilerplate/functions-mixins.html) - Just to Sass and Stylus
 * [Google Analytics](http://www.google.com/analytics/)
-* [jQuery Logo Downloadtip](http://demo.jarnesjo.net/jquery-logo-downloadtip)
+* [jQuery Logo Downloadtip](http://demo.jarnesjo.net/jquery-logo-downloadtip) - Only if Jquey is used
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
-* [Functions and mixins](http://tiagoporto.github.io/swill-boilerplate/functions-mixins.html) Just to Sass and Stylus
+* [Styles to Basic Components](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only to use with stylus
 
 ## Features
 
 * Clean the assets (images, css, js) in the project to maintain the directory organized
 * Compress Images
 * Generate Sprites with .png
-* Generate Sprites with .svg and a .png fallback
+* Generate Sprites with .svg and a .png to fallback
 * Analyze CSS with csslint
-* Prefixer CSS with Autoprefixer
+* Prefix CSS with Autoprefixer
 * Compile Less, Sass or Stylus
 * Catch the Stylus error and direct shows on the page, as in Sass.
 * Concatenate And Minify Scripts
@@ -66,7 +66,6 @@ This boilerplate uses the following technologies:
 * Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 * Check if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
 * Build the project compressing HTML, CSS and JS.
-
 
 ## Folder Structure
 
@@ -185,10 +184,12 @@ This boilerplate uses the following technologies:
 │       │
 │       └─ header-comments.txt
 │
-├─ .editorconfig // Settings of editorconfig plugin
+├─ .csslintrc // CSSLint configuration file
+├─ .editorconfig // Editorconfig configuration file
 ├─ .jshintrc // JSHint configuration file
 ├─ bower.json // Bower dependencies
-├─ gulpfile.js // Gulp configuration file
+├─ config.json // Swill configuration file
+├─ gulpfile.js // Gulp file
 ├─ package.json // NPM dependencies
 └─ README.md // Documentation
 ```
@@ -197,7 +198,7 @@ This boilerplate uses the following technologies:
 
 1. Install [EditorConfig](http://editorconfig.org/)
 
-	* Download and install the [EditorConfig plugin](http://editorconfig.org/#download) for you text editor.
+	* Download and install the [EditorConfig plugin](http://editorconfig.org/#download) for your text editor.
 
 1. Download and install [Node.js](http://nodejs.org/download/)
 
@@ -208,13 +209,13 @@ This boilerplate uses the following technologies:
 	* Open command line and execute
 
 	```sh
-	$ npm install gulp -g
+	$ npm install -g gulp
 	```
 
 	For Mac or Linux User
 
 	```sh
-	$ sudo npm install gulp -g
+	$ sudo npm install -g gulp
 	```
 
 1. Install [Bower](http://bower.io/)
@@ -239,46 +240,43 @@ This boilerplate uses the following technologies:
 		$ gem install sass
 		```
 
-
 ## Usage
 
-### Config
+### Setting
 
-1. Open the file `config.json` to setting config.
-	* If change the directory `basePaths.images.dest`, remember to modify the variable $image-path in 'src/stylesheets/helpers/_variables'.
-	* In the browserSyncConfig if you will use dinamic files, its necessary replace the server option by proxy.
+1. Open the file `config.json` and setting as needed.
+	* If change the directory `basePaths.images.dest`, remember to modify the variable $image-path in `src/stylesheets/helpers/_variables`.
+	* In the browserSyncConfig if you will use dinamic files, it's necessary replace the server option by proxy.
 	* Example
-```json
-"browserSyncConfig": {
-	"notify": false,
-	"port": 80,
-	"logPrefix": "BrowserSync",
-	"server": {
-		"baseDir": ["src/", "public/", "bower_components/"]
+
+	```json
+	"browserSyncConfig": {
+		"notify": false,
+		"port": 80,
+		"logPrefix": "BrowserSync",
+		"server": {
+			"baseDir": ["src/", "public/", "bower_components/"]
+		}
 	}
-}
-```
+	```
 
-```json
-"browserSyncConfig": {
-	"notify": false,
-	"port": 80,
-	"logPrefix": "BrowserSync",
-	"proxy": "localhost/swill-boilerplate/public/"
-}
-```
+	```json
+	"browserSyncConfig": {
+		"notify": false,
+		"port": 80,
+		"logPrefix": "BrowserSync",
+		"proxy": "localhost/swill-boilerplate/public/"
+	}
+	```
 
-1. Open the file `bower.json`
-	* Remove the dependencies that you will not use.
+1. Open the files `.csslintrc`, `.editorconfig`, and `jshintrc` and set your configs to CSSLint, EditorConfig and JSHint respectively.
 
-
-
-### Start
+1. Open the file `src/header-comments.txt` and set your header project.
 
 1. Open the terminal and go to the local folder
 
 	```sh
-	$ cd {yourFolderStructure}/swill-boilerplate
+	$ cd {your-folder-structure}/swill-boilerplate
 	```
 
 1. Install [NPM](https://www.npmjs.com/) dependencies
@@ -289,28 +287,38 @@ This boilerplate uses the following technologies:
 	$ npm install
 	```
 
+### Developing
 
-1. Install [Bower](http://bower.io/) Dependencies
+1. Install [Bower](http://bower.io/) dependencies
+
 	* Execute
 
 	```sh
 	$ bower install
 	```
 
-1. Set the CSS preprocessor you will use, necessary just once
+1. Install other Bower dependencies that will be used, like jQuery, Twitter Bootstrap, Font Awesome, Animate.css, Jeet Grid System, etc.
+
+	* Execute
+
+	```sh
+		$ bower install {dependence-name}
+	```
+
+1. Set the CSS preprocessor you will use, execute only once
 
 ```sh
 $gulp setup --preprocessor sass|less|stylus
 ```
 
-1. Execute the task `gulp` to start the development
+1. Execute the task `gulp` and start the development
 
 ```sh
-$ gulp
+$ gulp --serve
 ```
 
 
-### Tasks
+## Tasks
 
 **Default Task** - compile the project
 
@@ -318,9 +326,7 @@ $ gulp
 $ gulp
 ```
 
-**Compile, watch and serve**
-
-The default task accept the parameter --serve.
+**Default Task (the default task accept the parameter --serve)** - clean assets, compile, watch and serve the project.
 
 ```sh
 $ gulp --serve
@@ -338,19 +344,19 @@ $ gulp serve
 $ gulp build
 ```
 
-**Build And Serve**
-
-The build task accept the parameter --serve.
+**Build Task (the build task accept the parameter --serve)** - build the project and serve builded project.
 
 ```sh
 $ gulp build --serve
 ```
 
-### Peculiarities
+## Peculiarities
 
-* Js Files prefixed with `_` won't be concatenated.
+* JavaScripts files in `src/scripts` named with `*_IGNORE.js` will be ignored and won't be published, named with `*_SEPARATE.js` won't be concatenated and will be generated separated.
+	- example
+	`myplugin_SEPARATE.js` will be published as `myplugin.js`.
 
-* The folder `public/img` is clean when the task is run, and the images are compressed and come from ` src/images`, but if you work with copyrighted images you should not use compression, because it removes the metadatas from files. You can place images direct in the `public/img/copyright`, they won't be deleted.
+* The folder `public/img` is clean when some tasks are executed, the images come from ` src/images`, but if you work with copyrighted images you shouldn't use compression, because it removes the metadatas from files. You can place images direct in the `public/img/copyright`, they won't be deleted.
 
 	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
 
@@ -369,22 +375,7 @@ $ gulp build --serve
 *The link to file start inside of the `bower_components`, the application won't work out of the serve.*
 
 
-### BrowserSync
-
-If you will work with dinamic files like .php, it's necessary make changes in `gulpfile.js` to BrowserSync works
-
-Remove the lines
-```javascript
-server: {
-	baseDir: [basePaths.src, basePaths.dest]
-}
-```
-Set the url server
-```javascript
-proxy: "localhost/swill-boilerplate/public/"
-```
-
-### Bitmap Sprite
+## Bitmap Sprite
 
 This boilerplate uses [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith) to generate bitmap sprites.
 
@@ -416,7 +407,7 @@ Just use the mixins with the variables as parameters.
 }
 ```
 
-### Vetor Sprite
+## Vetor Sprite
 
 To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite), as fallback all the SVG sprites are converted to `.png` with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
 
@@ -434,6 +425,10 @@ To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-
 	* `moon.svg` the classname use the prefix `svg-` and the filename of the svg `moon`.
 	* If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
 
+
+## Config.js
+
+to-do
 
 ## Contributing
 
