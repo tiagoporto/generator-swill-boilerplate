@@ -1,7 +1,4 @@
-$weidth
-	font-weight $header-weight
-
-body-typography()
+body()
 	font normal normal  $font-size-base\/1.3 $font-family-base
 	background-color $bg-color
 	color $color-text
@@ -11,41 +8,35 @@ body-typography()
 	font-smoothing auto
 	font-feature-settings "liga", "kern"
 
-h1-typography()
+h1()
 	font-size em($font-size-h1)
 	line-height em(($font-size-h1 + 3), $font-size-h1)
-	@extend $weidth
 
-h2-typography()
+h2()
 	font-size em($font-size-h2)
 	line-height em(($font-size-h2 + 3), $font-size-h2)
-	@extend $weidth
 
-h3-typography()
+h3()
 	font-size em($font-size-h3)
 	line-height em(($font-size-h3 + 3), $font-size-h3)
-	@extend $weidth
 
-h4-typography()
+h4()
 	font-size em($font-size-h4)
 	line-height em(($font-size-h4 + 3), $font-size-h4)
-	@extend $weidth
 
-h5-typography()
+h5()
 	font-size em($font-size-h5)
 	line-height em(($font-size-h5 + 3), $font-size-h5)
-	@extend $weidth
 
-h6-typography()
+h6()
 	font-size em($font-size-h6)
 	line-height em(($font-size-h6 + 3), $font-size-h6)
-	@extend $weidth
 
-p-typography()
+p()
 	hyphens auto
 	max-width ($font-size-base * 30)
 
-blockquote
+blockquote()
 	font-style italic
 	padding-left em(10px)
 	border-left 5px solid lighten(#000, 60%)

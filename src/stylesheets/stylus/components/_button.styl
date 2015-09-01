@@ -1,4 +1,4 @@
-$button
+basicButton()
 	border none
 	border-radius 5px
 	display inline-block
@@ -12,36 +12,18 @@ $button
 	vertical-align middle
 	-webkit-tap-highlight-color transparent
 
-$button-main
+styleButton()
 	box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
 	color #fff
 	background-color #3FAA96
 	transition .2s ease-out
 	cursor pointer
 
-$buttonHover
+buttonHover()
 	background-color #2bbbad
 	box-shadow 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
 
-button:not(:disabled)
-input[type="button"]
-	@extend $button
-	@extend $button-main
-
-	&:hover
-		@extend $buttonHover
-
-button:disabled
-	@extend $button
+disabledButton()
 	background-color #DFDFDF
 	color #9F9F9F
 	cursor default
-
-.file-upload
-	span
-		@extend $button
-		@extend $button-main
-
-	&:hover
-		span
-			@extend $buttonHover

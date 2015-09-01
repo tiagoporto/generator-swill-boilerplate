@@ -18,8 +18,8 @@ addLoadEvent(
         color: '#ffffff',
         lowerThan: 'transform',
         languagePath: 'lang/outdated_browser/en.html'
-    }),
+    })//,
 
 
-    $('#logo').downloadTip({ 'position': 'right' })
+    //$('#logo').downloadTip({ 'position': 'right' })
 );

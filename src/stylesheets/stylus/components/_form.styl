@@ -1,9 +1,4 @@
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-textarea,
-select
+inputTextareaSelect()
 	border 1px solid lighten(#000, 60%)
 	border-radius 5px
 	color lighten(#000, 35%)
@@ -16,17 +11,14 @@ select
 		box-shadow inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
 
 
-input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus
-	outline none
-
-input[disabled]
+inputDisabled()
 	background lighten(#000, 95%)
 
-::placeholder
+placeholder()
 	color lighten(#000, 55%)
 	font-size em($font-size-base - 2)
 
-.file-upload
+fileInput()
 	position relative
 	margin 10px
 	display inline-block

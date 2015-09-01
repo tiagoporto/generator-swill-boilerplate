@@ -1,45 +1,85 @@
-/*! ==================================================================
-   Main Styles
-   ================================================================== */
-
-//If you will use bootstrap you can remove this imports
-
-/**
+/*!
+*
 * Box model reset
 * http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
-**/
+*
+*/
+
 html
 	box-sizing border-box
 
 *, *:before, *:after
 	box-sizing inherit
 
-
+/*
 body
-	body-typography()
+	body()
+
+h1, h2, h3, h4, h5, h6
+	font-weight $header-weight
 
 h1
-	h1-typography()
+	h1()
 
 h2
-	h2-typography()
+	h2()
 
 h3
-	h3-typography()
+	h3()
 
 h4
-	h4-typography()
+	h4()
 
 h5
-	h5-typography()
+	h5()
 
 h6
-	h6-typography()
+	h6()
 
 p
-	p-typography()
+	p()
 
-//======================================//
+blockquote
+	blockquote()
+
+code
+	code()
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select
+	inputTextareaSelect()
+
+input[disabled]
+	inputDisabled()
+
+::placeholder
+	placeholder()
+
+.input-file span,
+button:not(:disabled),
+input[type="button"],
+button:disabled
+	basicButton()
+
+.input-file span,
+button:not(:disabled),
+input[type="button"]
+	styleButton()
+
+
+.input-file:hover span,
+button:not(:disabled):hover,
+input[type="button"]:hover
+	buttonHover()
+
+
+button:disabled
+	disabledButton()
+*/
 
 
 // Used to svg sprite

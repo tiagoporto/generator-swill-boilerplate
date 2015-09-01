@@ -5,32 +5,30 @@
 // Web Fonts
 @import "helpers/_web-fonts"
 
-// Grid System
-// @import "../../bower_components/"
-
 /*! ==================================================================
    Dependencies
    ================================================================== */
 // @import "dependencies/jquery-logo-downloadtip.css"
 
+
 // Sprites
-@import "helpers/_bitmap-sprite"
-@import "helpers/_vetor-sprite"
+// @import "helpers/_bitmap-sprite"
+// @import "helpers/_vetor-sprite"
+
+
+// Grid
+// @import "../../bower_components/"
 
 /*! ==================================================================
-   Components
+   Main Styles
    ================================================================== */
-/* If you will use bootstrap you can remove these components */
 @import "components/_typography"
-// @import "components/_form"
-// @import "components/_button"
-// @import "components/_code"
-
-// Main Styles
+@import "components/_form"
+@import "components/_button"
+@import "components/_code"
 @import "helpers/_placeholders"
 @import "helpers/_mixins"
 @import "_base"
-
 
 /*! ==================================================================
    Media Queries
@@ -51,12 +49,12 @@
 @media (min-width: 48.063em) and (max-width: 62em)
 	@import "media_queries/_min_769_max_992"
 
-/**
+/*!
 *
 * Better Font Smoothing in Chrome & Safari
 * http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x
 *
-**/
+*/
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.25),\
 	only screen and ( min-device-pixel-ratio: 1.25),\
