@@ -337,6 +337,8 @@ gulp.task('clean', function (cb) {
 			basePaths.build,
 			paths.styles.dest,
 			paths.scripts.dest,
+			paths.styles.src + 'helpers/_bitmap-sprite.{styl,scss,less}',
+			paths.styles.src + 'helpers/_vetor-sprite.{styl,scss,less}',
 			paths.images.dest + '**/*',
 			// Add here the folders that will not be deleted in public/img
 			'!' + paths.images.dest + 'copyright{,**/*{,**/*}}',

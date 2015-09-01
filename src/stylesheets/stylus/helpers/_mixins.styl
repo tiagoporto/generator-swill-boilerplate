@@ -42,6 +42,24 @@ arrow($width = 20px, $height = 20px, $direction = up, $color = red)
 
 /**
 *
+* Circle Stylus Mixin
+* Author: Tiago Porto - tiagoporto.com
+*
+**/
+
+/**
+ * [Circle description]
+ * @param width : px, em
+ */
+
+
+circle($width = 20px)
+
+	border-radius floor($width/2)
+	width $width
+	height $width
+/**
+*
 * Clearfix Stylus Mixin
 * Author: Tiago Porto - tiagoporto.com
 *
@@ -76,15 +94,13 @@ clearfix()
 opacity($value)
 
 	opacity: $value
-	filter unquote('alpha(opacity=' + round($value * 100) + ')') //IE8 and earlier
+	filter: unquote('alpha(opacity=' + round($value * 100) + ')') //IE8 and earlier
 
 /**
 *
 * Retina Stylus Mixin
 * Author: Tiago Porto - tiagoporto.com
-* Used on http://www.retinajs.com
 * A helper mixin for applying high-resolution background images
-* This vresion adds the variable $image-path to integrate the gulp.js template
 *
 **/
 
@@ -94,8 +110,9 @@ opacity($value)
  * @param  width  : Image width
  * @param  height : Image height
  */
+
 at2x($path, $width = auto, $height = auto)
-	background-image: url($path)
+	background-image url($image-path + $path)
 
 	@media (-webkit-min-device-pixel-ratio: 1.5),\
 	       (-o-min-device-pixel-ratio: 3 / 2),\
@@ -103,5 +120,5 @@ at2x($path, $width = auto, $height = auto)
 	       (min-device-pixel-ratio: 1.5),
 	       (min-resolution: 1.5dppx)
 
-		background-image: url($image-path + replace('\.', '@2x.', $path))
-		background-size: $width $height
+		background-image url($image-path + replace('\.', '@2x.', $path))
+		background-size $width $height

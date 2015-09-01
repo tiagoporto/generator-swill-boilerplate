@@ -2,4 +2,4 @@
 //Convert pixel units to rem units
 
 rem($pixels, $context = $font-size-base)
-	($pixels/$context)rem
+	(floor($pixels/$context, 3))rem
