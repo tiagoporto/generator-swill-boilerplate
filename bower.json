@@ -16,10 +16,12 @@
     "cross-device synchronization"
   ],
   "homepage": "https://github.com/tiagoporto/swill-boilerplate",
-  "authors": [{
-    "name": "Tiago Porto",
-    "homepage": "http://tiagoporto.com/"
-  }],
+  "authors": [
+    {
+      "name": "Tiago Porto",
+      "homepage": "http://tiagoporto.com/"
+    }
+  ],
   "license": "MIT",
   "private": true,
   "ignore": [
