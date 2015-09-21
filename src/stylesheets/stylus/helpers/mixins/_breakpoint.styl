@@ -1,0 +1,7 @@
+breakpoint($minWidth, $maxWidth = 0)
+	if $maxWidth > 0
+		@media (min-width: em($minWidth)) and (max-width: em($maxWidth))
+			{block}
+	else
+		@media (min-width: em($minWidth))
+			{block}
