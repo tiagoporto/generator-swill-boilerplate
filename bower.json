@@ -30,6 +30,6 @@
   ],
   "devDependencies": {
     "normalize.css": "~3.0.3",
-    "outdated-browser": "~1.1.0"
+    "outdated-browser": "~1.1.2"
   }
 }
