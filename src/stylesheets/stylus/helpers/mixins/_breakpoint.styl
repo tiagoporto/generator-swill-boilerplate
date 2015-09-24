@@ -1,7 +1,26 @@
-breakpoint($minWidth, $maxWidth = 0)
-	if $maxWidth > 0
-		@media (min-width: em($minWidth)) and (max-width: em($maxWidth))
+/**
+*
+* Breakpoint Stylus Mixin
+* Author: Tiago Porto - tiagoporto.com
+*
+**/
+
+breakpoint($min, $max = 0px)
+	if unit($min) == 'px'
+		$minWidth = em($min)
+	else
+		$minWidth = $min
+
+	if unit($max) == 'px'
+		$maxWidth = em($max)
+	else
+		$maxWidth = $max
+
+
+
+	if $maxWidth > 0px
+		@media (min-width: $minWidth) and (max-width: $maxWidth)
 			{block}
 	else
-		@media (min-width: em($minWidth))
+		@media (min-width: $minWidth)
 			{block}

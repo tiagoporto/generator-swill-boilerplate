@@ -40,6 +40,25 @@ arrow($width = 20px, $height = 20px, $direction = up, $color = red)
 		border-right: ($width/2) solid transparent
 		border-top: $height solid $color
 
+breakpoint($min, $max = 0px)
+	if unit($min) == 'px'
+		$minWidth = em($min)
+	else
+		$minWidth = $min
+
+	if unit($max) == 'px'
+		$maxWidth = em($max)
+	else
+		$maxWidth = $max
+
+
+
+	if $maxWidth > 0px
+		@media (min-width: $minWidth) and (max-width: $maxWidth)
+			{block}
+	else
+		@media (min-width: $minWidth)
+			{block}
 /**
 *
 * Circle Stylus Mixin

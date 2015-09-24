@@ -3,11 +3,9 @@
 @import "helpers/_functions"
 
 // Web Fonts
-@import "helpers/_web-fonts"
+// @import "helpers/_web-fonts"
 
-/*! ==================================================================
-   Dependencies
-   ================================================================== */
+// Dependencies
 // @import "dependencies/jquery-logo-downloadtip.css"
 
 
@@ -30,24 +28,14 @@
 @import "helpers/_mixins"
 @import "_base"
 
+
+
 /*! ==================================================================
    Media Queries
    ================================================================== */
-// Printers
+
 @media print
 	@import "media_queries/_print"
-
-// 480px
-@media (max-width: 30em)
-	@import "media_queries/_max_480"
-
-// 481px - 768px
-@media (min-width: 30.063em) and (max-width: 48em)
-	@import "media_queries/_min_481_max_768"
-
-// 769px - 992px
-@media (min-width: 48.063em) and (max-width: 62em)
-	@import "media_queries/_min_769_max_992"
 
 /*!
 *
@@ -55,7 +43,6 @@
 * http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x
 *
 */
-
 @media only screen and (-webkit-min-device-pixel-ratio: 1.25),\
 	only screen and ( min-device-pixel-ratio: 1.25),\
 	only screen and ( min-resolution: 200dpi),\
