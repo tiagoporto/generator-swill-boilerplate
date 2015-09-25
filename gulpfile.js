@@ -74,6 +74,7 @@ gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, hea
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', function () {
 	var sprite = gulp.src(paths.sprite.src + '**/*.png')
+					.pipe(plugins.plumber())
 					.pipe(
 						spritesmith({
 							imgName: 'bitmap-sprite.png',
@@ -127,6 +128,7 @@ gulp.task('vetor-sprite', function() {
 //Fallback convert SVG to PNG
 gulp.task('svg2png', function () {
 	return gulp.src(paths.images.dest + 'vetor-sprite.svg')
+				.pipe(plugins.plumber())
 				.pipe(plugins.svg2png())
 				.pipe(gulp.dest(paths.images.dest));
 });
@@ -137,6 +139,7 @@ gulp.task('images', function () {
 					paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
 					'!' + paths.sprite.src + '**/*',
 				])
+				.pipe(plugins.plumber())
 				.pipe(plugins.newer(paths.images.dest))
 				.pipe(plugins.imagemin({optimizationLevel: 5, progressive: true}))
 				.pipe(gulp.dest(paths.images.dest));
@@ -145,6 +148,7 @@ gulp.task('images', function () {
 					paths.images.src + '**/*.svg',
 					'!' + paths.sprite.src + '**/*'
 				])
+				.pipe(plugins.plumber())
 				.pipe(plugins.newer(paths.images.dest))
 				.pipe(plugins.svg2png())
 				.pipe(gulp.dest(paths.images.dest))
@@ -163,6 +167,7 @@ gulp.task('dependence-scripts', function () {
 					paths.scripts.src + 'dependencies/plugins/**',
 					paths.scripts.src + 'settings/*.js'
 				])
+				.pipe(plugins.plumber())
 				.pipe(plugins.concat('dependencies.js'))
 				.pipe(gulp.dest(paths.scripts.dest))
 				.pipe(plugins.rename('dependencies.min.js'))
@@ -177,6 +182,7 @@ gulp.task('scripts', function () {
 							'!' + paths.scripts.src + '**/*_IGNORE.js',
 							paths.scripts.src + '*.js'
 						])
+						.pipe(plugins.plumber())
 						.pipe(plugins.cached('scripts'))
 						.pipe(plugins.remember('scripts'))
 						.pipe(plugins.plumber())
@@ -202,6 +208,7 @@ gulp.task('scripts', function () {
 		   var copy = gulp.src([
 							paths.scripts.src + '/*_SEPARATE.js'
 						])
+						.pipe(plugins.plumber())
 						.pipe(plugins.newer(paths.scripts.dest))
 						.pipe(plugins.plumber())
 						.pipe(plugins.if(config.lintJS, plugins.jshint()))
@@ -262,14 +269,16 @@ gulp.task('bower', function() {
 //Set the use of components
 gulp.task('set-dependencies', function(){
 	var styles = gulp.src([
-							paths.styles.src + '**/styles.{styl,sass,scss,less}'
+							paths.styles.src + '**/styles.{styl,sass,scss,less}',
+							paths.styles.src + '**/_base.{styl,sass,scss,less}'
 						])
-						.pipe(plugins.if(config.components, plugins.replace(/\/\/ @import\s"components/g, "@import \"components")))
+						.pipe(plugins.if(config.components, plugins.replace(/\/*body/g, "body")))
+						.pipe(plugins.if(config.components, plugins.replace(/disabledButton()*\//g, "disabledButton()")))
 						.pipe(plugins.if(config.jquery, plugins.replace(/\/\/ @import\s"dependencies\/jquery-logo-downloadtip/g, "@import \"dependencies/jquery-logo-downloadtip")))
 						.pipe(gulp.dest(paths.styles.src));
 
 		if(config.components){
-			var component_scritp = gulp.src(paths.scripts.src + '**/custom-input-file_IGNORE.js')
+			var component_script = gulp.src(paths.scripts.src + '**/custom-input-file_IGNORE.js')
 									.pipe(vinylPaths(del))
 									.pipe(plugins.rename(function(path){
 											path.basename = path.basename.substring(0,  path.basename.length -7)
@@ -279,14 +288,18 @@ gulp.task('set-dependencies', function(){
 
 		if(config.jquery){
 			var jquery_dependence = gulp.src(paths.scripts.src + '**/jquery-logo-downloadtip_IGNORE.js')
-							.pipe(vinylPaths(del))
-							.pipe(plugins.rename(function(path){
-									path.basename = path.basename.substring(0,  path.basename.length -7)
-								}))
-							.pipe(gulp.dest(paths.scripts.src));
+										.pipe(vinylPaths(del))
+										.pipe(plugins.rename(function(path){
+												path.basename = path.basename.substring(0,  path.basename.length -7)
+											}))
+										.pipe(gulp.dest(paths.scripts.src));
+
+
+			var jquery_jshint = gulp.src(['./.jshintrc'])
+									.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, "jquery\"\s\s\s\s\s\s\s\s:\strue"))
+									.pipe(gulp.dest('./'));
 		}
 });
-
 
 //Set the preprocessor in variable
 gulp.task('set-preprocessor', function(){
@@ -318,6 +331,10 @@ gulp.task('remove-preprocessors', function(cb){
 
 //*************************** Utility Tasks ******************************//
 
+gulp.task('setup', function(cb){
+	sequence('bower', 'set-dependencies', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
+});
+
 gulp.task('combine-assets', function () {
 	var assets   =  plugins.useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
 
@@ -344,10 +361,6 @@ gulp.task('clean', function (cb) {
 			'!' + paths.images.dest + 'copyright{,**/*{,**/*}}',
 			'!' + paths.images.dest + 'logos{,**/*{,**/*}}'
 		], cb)
-});
-
-gulp.task('setup', function(cb){
-	sequence('bower', 'set-dependencies', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
 });
 
 //***************************** Main Tasks *******************************//
