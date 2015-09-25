@@ -53,7 +53,7 @@ paths = {
 
 //******************************* Settings *******************************//
 	 argProcessor = '',
-	 preprocessor = '',
+	 preprocessor = 'stylus',
    extensionStyle = '',
 	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8")
 
@@ -313,7 +313,7 @@ gulp.task('set-dependencies', function(){
 						])
 						.pipe(plugins.if(config.components, plugins.replace(/\/*body/g, "body")))
 						.pipe(plugins.if(config.components, plugins.replace(/disabledButton()*\//g, "disabledButton()")))
-						.pipe(plugins.if(config.jquery, plugins.replace(/\/\/ @import\s"dependencies\/jquery-logo-downloadtip/g, "@import \"dependencies/jquery-logo-downloadtip")))
+						.pipe(plugins.if(config.jquery, plugins.replace(/\/\/\s@import\s\"dependencies\/jquery-logo-downloadtip/g, "@import \"dependencies/jquery-logo-downloadtip")))
 						.pipe(gulp.dest(paths.styles.src));
 
 		if(config.components){
