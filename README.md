@@ -310,7 +310,7 @@ This boilerplate uses the following technologies:
 1. Set the CSS preprocessor you will use, execute only once
 
 ```sh
-$gulp setup --preprocessor sass|less|stylus
+$gulp setup --sass|less|stylus
 ```
 
 1. Execute the task `gulp` and start the development

@@ -52,7 +52,8 @@ paths = {
 	},
 
 //******************************* Settings *******************************//
-	 preprocessor = 'stylus',
+	 argProcessor = '',
+	 preprocessor = '',
    extensionStyle = '',
 	headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8")
 
@@ -266,6 +267,44 @@ gulp.task('bower', function() {
 	return merge(outdatedBrowserLangs, fonts);
 });
 
+gulp.task('get-preprocessor', function(){
+	if(args.sass == true){
+		argProcessor = 'sass';
+	}else if(args.stylus == true){
+		argProcessor = 'stylus';
+	}else if(args.less == true){
+		argProcessor = 'less';
+	}
+});
+
+//Set the preprocessor in variable
+gulp.task('set-preprocessor', function(){
+	if(args.sass || args.less || args.stylus){
+		return gulp.src(['gulpfile.js'])
+			.pipe(plugins.replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + argProcessor))
+			.pipe(gulp.dest('./'));
+	}
+});
+
+//Copy the files to use
+gulp.task('folder-preprocessor', function(){
+	if(args.sass || args.less || args.stylus){
+		return gulp.src(paths.styles.src + argProcessor + "/**/*")
+			.pipe(gulp.dest(paths.styles.src));
+	}
+});
+
+//Removes unnecessary folders
+gulp.task('remove-preprocessors', function(cb){
+	if(args.sass || args.less || args.stylus){
+		del([
+			paths.styles.src + "sass",
+			paths.styles.src + "stylus",
+			paths.styles.src + "less"
+			], cb)
+	}
+});
+
 //Set the use of components
 gulp.task('set-dependencies', function(){
 	var styles = gulp.src([
@@ -296,43 +335,15 @@ gulp.task('set-dependencies', function(){
 
 
 			var jquery_jshint = gulp.src(['./.jshintrc'])
-									.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, "jquery\"\s\s\s\s\s\s\s\s:\strue"))
+									.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, "jquery\"        : true"))
 									.pipe(gulp.dest('./'));
 		}
-});
-
-//Set the preprocessor in variable
-gulp.task('set-preprocessor', function(){
-	if(args.preprocessor){
-		return gulp.src(['gulpfile.js'])
-			.pipe(plugins.replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + args.preprocessor))
-			.pipe(gulp.dest('./'));
-	}
-});
-
-//Copy the files to use
-gulp.task('folder-preprocessor', function(){
-	if(args.preprocessor){
-		return gulp.src(paths.styles.src + args.preprocessor + "/**/*")
-			.pipe(gulp.dest(paths.styles.src));
-	}
-});
-
-//Removes unnecessary folders
-gulp.task('remove-preprocessors', function(cb){
-	if(args.preprocessor){
-		del([
-			paths.styles.src + "sass",
-			paths.styles.src + "stylus",
-			paths.styles.src + "less"
-			], cb)
-	}
 });
 
 //*************************** Utility Tasks ******************************//
 
 gulp.task('setup', function(cb){
-	sequence('bower', 'set-dependencies', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', cb);
+	sequence('bower',  'get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', 'set-dependencies', cb);
 });
 
 gulp.task('combine-assets', function () {
