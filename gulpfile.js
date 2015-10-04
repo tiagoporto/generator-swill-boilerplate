@@ -307,37 +307,41 @@ gulp.task('remove-preprocessors', function(cb){
 
 //Set the use of components
 gulp.task('set-dependencies', function(){
-	var styles = gulp.src([
+	if(config.components){
+		var styles = gulp.src([
 							paths.styles.src + '**/styles.{styl,sass,scss,less}',
 							paths.styles.src + '**/_base.{styl,sass,scss,less}'
 						])
-						.pipe(plugins.if(config.components, plugins.replace(/\/*body/g, "body")))
-						.pipe(plugins.if(config.components, plugins.replace(/disabledButton()*\//g, "disabledButton()")))
-						.pipe(plugins.if(config.jquery, plugins.replace(/\/\/\s@import\s\"dependencies\/jquery-logo-downloadtip/g, "@import \"dependencies/jquery-logo-downloadtip")))
+						.pipe(plugins.replace(/\/*body/g, "body"))
+						.pipe(plugins.replace(/disabledButton()*\//g, "disabledButton()"))
 						.pipe(gulp.dest(paths.styles.src));
+	}
 
-		if(config.components){
-			var component_script = gulp.src(paths.scripts.src + '**/custom-input-file_IGNORE.js')
-									.pipe(vinylPaths(del))
-									.pipe(plugins.rename(function(path){
-											path.basename = path.basename.substring(0,  path.basename.length -7)
-										}))
+	if(config.components){
+		var component_script = gulp.src(paths.scripts.src + '**/custom-input-file_IGNORE.js')
+								.pipe(vinylPaths(del))
+								.pipe(plugins.rename(function(path){
+										path.basename = path.basename.substring(0,  path.basename.length -7)
+									}))
+								.pipe(gulp.dest(paths.scripts.src));
+	}
+
+	if(config.jquery){
+		var jquery_indexcalls = gulp.src(basePaths.dest + 'index.html')
+									.pipe(plugins.replace(/(\r\n?|\n)\t\t<link\srel=\"stylesheet\"\shref=\"jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css\">/g, ""))
+									.pipe(plugins.replace(/(\r\n?|\n)\t\t<script\ssrc=\"jquery\/dist\/jquery.js\"><\/script>/g, ""))
+									.pipe(plugins.replace(/(\r\n?|\n)\t\t<script\ssrc=\"jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js\"><\/script>/g, ""))
+									.pipe(gulp.dest(basePaths.dest));
+
+		var jquery_jscalls = gulp.src(paths.scripts.src + '**/call_plugins.js')
+									.pipe(plugins.replace(/\/\/,/g, ","))
+									.pipe(plugins.replace(/\/\/\$\('#logo'\)/g, "$('#logo')"))
 									.pipe(gulp.dest(paths.scripts.src));
-		}
 
-		if(config.jquery){
-			var jquery_dependence = gulp.src(paths.scripts.src + '**/jquery-logo-downloadtip_IGNORE.js')
-										.pipe(vinylPaths(del))
-										.pipe(plugins.rename(function(path){
-												path.basename = path.basename.substring(0,  path.basename.length -7)
-											}))
-										.pipe(gulp.dest(paths.scripts.src));
-
-
-			var jquery_jshint = gulp.src(['./.jshintrc'])
-									.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, "jquery\"        : true"))
-									.pipe(gulp.dest('./'));
-		}
+		var jquery_jshint = gulp.src('./.jshintrc')
+								.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, "jquery\"        : true"))
+								.pipe(gulp.dest('./'));
+	}
 });
 
 //*************************** Utility Tasks ******************************//
