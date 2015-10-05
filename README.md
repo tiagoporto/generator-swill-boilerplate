@@ -44,7 +44,7 @@ This boilerplate uses the following technologies:
 
 * [Functions and mixins](http://tiagoporto.github.io/swill-boilerplate/functions-mixins.html) - Just to Sass and Stylus
 * [Google Analytics](http://www.google.com/analytics/)
-* [jQuery Logo Downloadtip](http://demo.jarnesjo.net/jquery-logo-downloadtip) - Only if Jquey is used
+* [jQuery Logo Downloadtip](http://tiagoporto.github.io/jquery-logo-downloadtip/) - Only if jQuery is used
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
 * [Styles to Basic Components](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only to use with stylus
