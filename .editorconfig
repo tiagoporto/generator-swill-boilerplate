@@ -10,6 +10,11 @@ root = true
 indent_style = tab
 indent_size = 4
 
+# Matches the exact files either package.json or bower.json
+[{package.json,bower.json}]
+indent_style = space
+indent_size = 2
+
 # We recommend you to keep these unchanged
 end_of_line = lf
 charset = utf-8
