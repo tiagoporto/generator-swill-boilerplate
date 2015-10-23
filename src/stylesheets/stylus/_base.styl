@@ -11,8 +11,11 @@ html
 *, *:before, *:after
 	box-sizing inherit
 
-/*body
-	body()
+body
+	if($debug-vertical-rhythm == true)
+		background: url('http://basehold.it/i/' remove-unit($line-height-base, 'px'))
+
+	//body()
 
 h1, h2, h3, h4, h5, h6
 	font-weight $header-weight
@@ -37,6 +40,8 @@ h6
 
 p
 	p()
+
+/*
 
 blockquote
 	blockquote()

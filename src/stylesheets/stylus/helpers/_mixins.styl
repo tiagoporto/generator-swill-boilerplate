@@ -40,6 +40,13 @@ arrow($width = 20px, $height = 20px, $direction = up, $color = red)
 		border-right: ($width/2) solid transparent
 		border-top: $height solid $color
 
+/**
+*
+* Breakpoint Stylus Mixin
+* Author: Tiago Porto - tiagoporto.com
+*
+**/
+
 breakpoint($min, $max = 0px)
 	if unit($min) == 'px'
 		$minWidth = em($min)
