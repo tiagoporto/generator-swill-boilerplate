@@ -326,18 +326,24 @@ gulp.task('set-dependencies', function(){
 
 	if(config.jquery){
 		var jquery_indexcalls = gulp.src(basePaths.dest + 'index.html')
-									.pipe(plugins.replace(/(\r\n?|\n)\t\t<link\srel=\"stylesheet\"\shref=\"jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css\">/g, ""))
-									.pipe(plugins.replace(/(\r\n?|\n)\t\t<script\ssrc=\"jquery\/dist\/jquery.js\"><\/script>/g, ""))
-									.pipe(plugins.replace(/(\r\n?|\n)\t\t<script\ssrc=\"jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js\"><\/script>/g, ""))
+									.pipe(plugins.replace(
+											/(<link\srel=\"stylesheet\"\shref=\"css\/styles.css\">)/g,
+											'<link rel="stylesheet" href="jquery-logo-downloadtip/css/jquery-logo-downloadtip.css">\r\n\t\t$1'))
+									.pipe(plugins.replace(
+										/(<script\ssrc=\"js\/dependencies.js\"><\/script>)/g,
+										'<script src="jquery/dist/jquery.js"></script>\r\n\t\t$1'))
+									.pipe(plugins.replace(
+										/(<script\ssrc=\"js\/dependencies.js\"><\/script>)/g,
+										'<script src="jquery-logo-downloadtip/js/jquery-logo-downloadtip.min.js"></script>\r\n\t\t$1'))
 									.pipe(gulp.dest(basePaths.dest));
 
 		var jquery_jscalls = gulp.src(paths.scripts.src + '**/call_plugins.js')
-									.pipe(plugins.replace(/\/\/,/g, ","))
+									.pipe(plugins.replace(/\}\)/g, "}),\r\n\r\n\t$('#logo').downloadTip({ 'position': 'right' })"))
 									.pipe(plugins.replace(/\/\/\$\('#logo'\)/g, "$('#logo')"))
 									.pipe(gulp.dest(paths.scripts.src));
 
 		var jquery_jshint = gulp.src('./.jshintrc')
-								.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, "jquery\"        : true"))
+								.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, 'jquery"        : true'))
 								.pipe(gulp.dest('./'));
 	}
 });
