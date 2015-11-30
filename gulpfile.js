@@ -329,18 +329,15 @@ gulp.task('set-dependencies', function(){
 	if(config.jquery){
 		var jquery_indexcalls = gulp.src(basePaths.dest + 'index.html')
 									.pipe(plugins.replace(
-											/(<link\srel=\"stylesheet\"\shref=\"css\/styles.css\">)/g,
-											'<link rel="stylesheet" href="jquery-logo-downloadtip/css/jquery-logo-downloadtip.css">\r\n\t\t$1'))
+											/<!-- (<link rel="stylesheet" href="jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">) -->/g, '$1'))
 									.pipe(plugins.replace(
-										/(<script\ssrc=\"js\/dependencies.js\"><\/script>)/g,
-										'<script src="jquery/dist/jquery.js"></script>\r\n\t\t$1'))
+										/<!-- (<script src="jquery\/dist\/jquery.js"><\/script>) -->/g, '$1'))
 									.pipe(plugins.replace(
-										/(<script\ssrc=\"js\/dependencies.js\"><\/script>)/g,
-										'<script src="jquery-logo-downloadtip/js/jquery-logo-downloadtip.min.js"></script>\r\n\t\t$1'))
+										/<!-- (<script src="jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js"><\/script>) -->/g,  '$1'))
 									.pipe(gulp.dest(basePaths.dest));
 
 		var jquery_jscalls = gulp.src(paths.scripts.src + '**/call_plugins.js')
-									.pipe(plugins.replace(/\}\)/g, "}),\r\n\r\n\t$('#logo').downloadTip({ 'position': 'right' })"))
+									.pipe(plugins.replace(/\/\/,/g, ","))
 									.pipe(plugins.replace(/\/\/\$\('#logo'\)/g, "$('#logo')"))
 									.pipe(gulp.dest(paths.scripts.src));
 
