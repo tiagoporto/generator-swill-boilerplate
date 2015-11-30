@@ -161,19 +161,19 @@ gulp.task('images', function () {
 });
 
 
-// Concatenate dependencies scripts and Minify
-gulp.task('dependence-scripts', function () {
+// Concatenate vendor scripts and Minify
+gulp.task('vendor-scripts', function () {
 	return gulp.src([
 					'!' + paths.scripts.src + '**/*_IGNORE.js',
 					paths.scripts.src + 'settings/google_analytics.js',
-					paths.scripts.src + 'dependencies/frameworks_libs/*',
-					paths.scripts.src + 'dependencies/plugins/**',
+					paths.scripts.src + 'vendor/frameworks_libs/*',
+					paths.scripts.src + 'vendor/plugins/**',
 					paths.scripts.src + 'settings/*.js'
 				])
 				.pipe(plugins.plumber())
-				.pipe(plugins.concat('dependencies.js'))
+				.pipe(plugins.concat('vendors.js'))
 				.pipe(gulp.dest(paths.scripts.dest))
-				.pipe(plugins.rename('dependencies.min.js'))
+				.pipe(plugins.rename('vendors.min.js'))
 				.pipe(plugins.uglify())
 				.pipe(gulp.dest(paths.scripts.dest));
 });
@@ -418,11 +418,11 @@ gulp.task('serve', function () {
 		);
 
 	gulp.watch([
-				paths.scripts.src + 'dependencies/**/*.js',
+				paths.scripts.src + 'vendor/**/*.js',
 				paths.scripts.src + 'settings/**/*.js'
 			],
 
-			['dependence-scripts', browserSync.reload]
+			['vendor-scripts', browserSync.reload]
 		);
 
 	gulp.watch([
@@ -445,7 +445,7 @@ gulp.task('serve', function () {
 
 // Compile, watch and serve project
 gulp.task('default', ['clean'], function () {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', function(){
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', function(){
 			if(args.serve === true){
 				gulp.start('serve');
 			}
@@ -454,7 +454,7 @@ gulp.task('default', ['clean'], function () {
 
 // Build Project and serve if pass the parameter --serve
 gulp.task('build', ['clean'], function () {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'dependence-scripts'], 'svg2png', 'styles', 'scripts', 'copy', function(){
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', function(){
 			if(args.serve === true){
 				browserSync(config.browserSyncBuild);
 			}
