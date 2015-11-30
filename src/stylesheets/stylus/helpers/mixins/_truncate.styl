@@ -4,10 +4,10 @@
  *
  * Where `$truncation-width` is a united measurement.
  */
-truncate($truncation-width: null)
-  if($truncation-width)
-    max-width: $truncation-width
+truncate($truncation-width = null)
+	if($truncation-width)
+		max-width: $truncation-width
 
-  white-space: nowrap
-  overflow: hidden
-  text-overflow: ellipsis
+	white-space: nowrap
+	overflow: hidden
+	text-overflow: ellipsis

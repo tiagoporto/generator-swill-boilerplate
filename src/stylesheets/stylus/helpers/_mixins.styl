@@ -42,32 +42,6 @@ arrow($width = 20px, $height = 20px, $direction = up, $color = red)
 
 /**
 *
-* Breakpoint Stylus Mixin
-* Author: Tiago Porto - tiagoporto.com
-*
-**/
-
-breakpoint($min, $max = 0px)
-	if unit($min) == 'px'
-		$minWidth = em($min)
-	else
-		$minWidth = $min
-
-	if unit($max) == 'px'
-		$maxWidth = em($max)
-	else
-		$maxWidth = $max
-
-
-
-	if $maxWidth > 0px
-		@media (min-width: $minWidth) and (max-width: $maxWidth)
-			{block}
-	else
-		@media (min-width: $minWidth)
-			{block}
-/**
-*
 * Circle Stylus Mixin
 * Author: Tiago Porto - tiagoporto.com
 *
@@ -148,3 +122,17 @@ at2x($path, $width = auto, $height = auto)
 
 		background-image url($image-path + replace('\.', '@2x.', $path))
 		background-size $width $height
+
+/**
+ * Force overly long spans of text to truncate, e.g.:
+ *
+ *
+ * Where `$truncation-width` is a united measurement.
+ */
+truncate($truncation-width = null)
+	if($truncation-width)
+		max-width: $truncation-width
+
+	white-space: nowrap
+	overflow: hidden
+	text-overflow: ellipsis

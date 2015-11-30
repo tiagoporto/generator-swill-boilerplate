@@ -230,15 +230,13 @@ gulp.task('scripts', function () {
 
 // Copy Files to Build
 gulp.task('copy', function () {
-	var  assets  = plugins.useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
+	var  assets  = {searchPath: [basePaths.bower, basePaths.dest]};
 
 	// Minify and Copy HTML
 	var  html    = gulp.src(basePaths.dest + '**/*.{html,php}')
-						.pipe(assets)
+						.pipe(plugins.useref(assets))
 						.pipe(plugins.if('*.js', plugins.uglify()))
 						.pipe(plugins.if('*.css', plugins.csso()))
-						.pipe(assets.restore())
-						.pipe(plugins.useref())
 						.pipe(plugins.if('*.html', minifyHTML({spare:true, empty: true})))
 						.pipe(plugins.if('*.php', minifyHTML({spare:true, empty: true})))
 						.pipe(gulp.dest(basePaths.build));
@@ -351,15 +349,13 @@ gulp.task('setup', function(cb){
 });
 
 gulp.task('combine-assets', function () {
-	var assets   =  plugins.useref.assets({searchPath: [basePaths.bower, basePaths.dest]});
+	var assets   =  {searchPath: [basePaths.bower, basePaths.dest]};
 
 	// Minify and Copy HTML
 	return  gulp.src(basePaths.dest + '**/*.{html,php}')
-					.pipe(assets)
+					.pipe(plugins.useref(assets))
 					.pipe(plugins.if('*.js', plugins.uglify()))
 					.pipe(plugins.if('*.css', plugins.csso()))
-					.pipe(assets.restore())
-					.pipe(plugins.useref())
 					.pipe(gulp.dest(basePaths.dest));
 });
 
