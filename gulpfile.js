@@ -20,6 +20,7 @@ var		 gulp = require('gulp'),
 	  stylish = require('jshint-stylish'),
 		 args = require('yargs').argv,
 	  plugins = require('gulp-load-plugins')(),
+   	   buffer = require('vinyl-buffer'),
    vinylPaths = require('vinyl-paths'),
 	   config = require('./config.json'),
 
@@ -87,6 +88,7 @@ gulp.task('bitmap-sprite', function () {
 					);
 
 	sprite.img
+		.pipe(buffer())
 		.pipe(plugins.imagemin())
 		.pipe(gulp.dest(paths.images.dest));
 	sprite.css
@@ -367,7 +369,7 @@ gulp.task('combine-assets', function () {
 
 // Clean Directories
 gulp.task('clean', function (cb) {
-	del([
+	return del([
 			basePaths.build,
 			paths.styles.dest,
 			paths.scripts.dest,

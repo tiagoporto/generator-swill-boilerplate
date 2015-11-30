@@ -47,6 +47,7 @@
     "merge-stream": "^1.0.0",
     "rf": "0.0.1",
     "run-sequence": "^1.1.5",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^2.1.0",
     "yargs": "^3.30.0"
   }

@@ -354,6 +354,8 @@ $ gulp build --serve
 
 ## Peculiarities
 
+* On `index.html` you can easily find necessary items to setup just searching by `{Title}` and `{-}`
+
 * JavaScripts files in `src/scripts` named with `*_IGNORE.js` will be ignored and won't be published, named with `*_SEPARATE.js` won't be concatenated and will be generated separated.
 	- example
 	`myplugin_SEPARATE.js` will be published as `myplugin.js`.
