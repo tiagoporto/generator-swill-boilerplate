@@ -12,39 +12,22 @@ html
 	box-sizing inherit
 
 body
-	if($debug-vertical-rhythm == true)
-		background: url('http://basehold.it/i/' remove-unit($line-height-base, 'px'))
+	if $debug-vertical-rhythm == true
+		background-image: linear-gradient(to top, rgba($debug-color-line, 0.2) 1px, rgba(0, 0, 0, 0) 1px)
+		background-size: 100% em($line-height-base, $font-size-base)
+		background-position: left top
 
-	//body()
+	font normal normal  $font-size-base\/$line-height-base $font-family-base
+	background-color $bg-color
+	color $color-text
+	text-rendering optimizeLegibility
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+	font-smoothing auto
+	font-feature-settings "liga", "kern"
 
-h1, h2, h3, h4, h5, h6
-	font-weight $header-weight
-
-h1
-	h1()
-
-h2
-	h2()
-
-h3
-	h3()
-
-h4
-	h4()
-
-h5
-	h5()
-
-h6
-	h6()
-
-p
-	p()
 
 /*
-
-blockquote
-	blockquote()
 
 code
 	code()

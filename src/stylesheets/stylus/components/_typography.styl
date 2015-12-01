@@ -1,61 +1,17 @@
-body()
-	font normal normal  $font-size-base\/$line-height-base $font-family-base
-	background-color $bg-color
-	color $color-text
-	text-rendering optimizeLegibility
-	-webkit-font-smoothing antialiased
-	-moz-osx-font-smoothing grayscale
-	font-smoothing auto
-	font-feature-settings "liga", "kern"
+h1, h2, h3, h4, h5, h6
+	font-weight $header-weight
 
-h1()
-	font-size em($font-size-h1)
-	margin-top: em($line-height-base, $font-size-h1)
-	margin-bottom: em($line-height-base, $font-size-h1)
-	line-height: em($line-height-base * 2, $font-size-h1)
+h1
+	adjust-font-size-to($font-size-h5)
+	rhythm-margins(1)
 
-
-h2()
-	font-size em($font-size-h2)
-	margin-top: em($line-height-base, $font-size-h2)
-	margin-bottom: em($line-height-base, $font-size-h2)
-	line-height: em($line-height-base * 2, $font-size-h2)
-
-h3()
-	font-size em($font-size-h3)
-	margin-top: em($line-height-base, $font-size-h3)
-	margin-bottom: em($line-height-base, $font-size-h3)
-	line-height: em($line-height-base * 2, $font-size-h3)
-
-h4()
-	font-size em($font-size-h4)
-	margin-top: em($line-height-base / 2, $font-size-h4)
-	margin-bottom: em($line-height-base, $font-size-h4)
-	line-height: em($line-height-base * 1.5, $font-size-h4)
-
-
-h5()
-	font-size em($font-size-h5)
-	margin-top: em($line-height-base / 2, $font-size-h5)
-	margin-bottom: em($line-height-base, $font-size-h5)
-	line-height: em($line-height-base * 1.5, $font-size-h5)
-
-
-h6()
-	font-size em($font-size-h6)
-	margin-top: em($line-height-base / 2, $font-size-h6)
-	margin-bottom: em($line-height-base, $font-size-h6)
-	line-height: em($line-height-base, $font-size-h6)
-
-
-p()
+p
+	rhythm-margins(1, 1)
+	adjust-font-size-to($font-size-base)
 	hyphens auto
 	// max-width ($font-size-base * 30)
-	line-height $line-height-base
-	margin-top 0
-	margin-bottom $line-height-base
 
-blockquote()
+blockquote
 	font-style italic
 	padding-left em(10px)
 	border-left 5px solid lighten(#000, 60%)
