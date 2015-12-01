@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.0.0beta
+*	Swill Boilerplate v4.1.0beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -232,7 +232,7 @@ gulp.task('scripts', function () {
 
 // Copy Files to Build
 gulp.task('copy', function () {
-	var  assets  = {searchPath: [basePaths.bower, basePaths.dest]};
+	var  assets  = {searchPath: basePaths.dest};
 
 	// Minify and Copy HTML
 	var  html    = gulp.src(basePaths.dest + '**/*.{html,php}')
@@ -354,7 +354,7 @@ gulp.task('setup', function(cb){
 });
 
 gulp.task('combine-assets', function () {
-	var assets   =  {searchPath: [basePaths.bower, basePaths.dest]};
+	var assets   =  {searchPath: basePaths.dest};
 
 	// Minify and Copy HTML
 	return  gulp.src(basePaths.dest + '**/*.{html,php}')
@@ -444,12 +444,13 @@ gulp.task('serve', function () {
 });
 
 // Compile, watch and serve project
-gulp.task('default', ['clean'], function () {
-	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', function(){
-			if(args.serve === true){
-				gulp.start('serve');
-			}
-		});
+gulp.task('default', function () {
+	if(args.compile === true){
+		sequence('clean', ['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'serve');
+
+	}else{
+		gulp.start('serve');
+	}
 });
 
 // Build Project and serve if pass the parameter --serve

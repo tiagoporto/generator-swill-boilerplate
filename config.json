@@ -3,7 +3,7 @@
 		   "src": "src/",
 		  "dest": "public/",
 		 "build": "build/",
-		 "bower": "bower_components/",
+		 "bower": "src/bower_components/",
 
 		"images": {
 			 "src": "images/",
@@ -50,7 +50,7 @@
 		"port": 80,
 		"logPrefix": "BrowserSync",
 		"server": {
-			"baseDir": ["src/", "public/", "bower_components/"]
+			"baseDir": ["public/"]
 		}
 	},
 
