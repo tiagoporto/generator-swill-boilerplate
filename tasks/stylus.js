@@ -7,7 +7,10 @@ module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrow
 						'!' + paths.styles.src + '_*.styl',
 					])
 					.pipe(plugins.plumber())
-					.pipe(plugins.stylus({'include css': true})
+					.pipe(plugins.stylus({
+							'include css': true
+							//,use:[koutoSwiss(), rupture()]
+						})
 						.on('error', function (err) {
 
 							console.log(err.message);

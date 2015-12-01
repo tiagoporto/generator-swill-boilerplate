@@ -3,8 +3,8 @@
 
 em($pixels, $context = $font-size-base)
 	(floor($pixels/$context, 10))em
-/* EM function */
+/* REM function */
 //Convert pixel units to rem units
 
-rem($pixels, $context = $font-size-base)
-	(floor($pixels/$context, 3))rem
+rem($pixels)
+	(floor($pixels/$font-size-base, 10))rem
