@@ -235,7 +235,10 @@ gulp.task('copy', function () {
 	var  assets  = {searchPath: basePaths.dest};
 
 	// Minify and Copy HTML
-	var  html    = gulp.src(basePaths.dest + '**/*.{html,php}')
+	var  html    = gulp.src([
+						basePaths.dest + '**/*.{html,php}',
+						'!public/bower_components{,/**}'
+					])
 						.pipe(plugins.useref(assets))
 						.pipe(plugins.if('*.js', plugins.uglify()))
 						.pipe(plugins.if('*.css', plugins.csso()))
@@ -245,6 +248,7 @@ gulp.task('copy', function () {
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files
 	var allFiles = gulp.src([
+							'!public/bower_components{,/**}',
 							basePaths.dest + '**/*',
 							'!' + paths.styles.dest + '**/*',
 							'!' + paths.scripts.dest + '**/*',
@@ -255,12 +259,12 @@ gulp.task('copy', function () {
 
 // Copy Bower dependencies to public folder
 gulp.task('bower', function() {
-	var outdatedBrowserLangs = gulp.src(basePaths.bower + 'outdated-browser/outdatedbrowser/lang/*')
+	var outdatedBrowserLangs = gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
 									.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
 
 	var    fonts    = gulp.src([
-							basePaths.bower + 'bootstrap/dist/fonts/*',
-							basePaths.bower + 'font-awesome/fonts/*'
+							basePaths.bower + '/bootstrap/dist/fonts/*',
+							basePaths.bower + '/font-awesome/fonts/*'
 						])
 						.pipe(gulp.dest(basePaths.dest + 'fonts'));
 

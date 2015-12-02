@@ -23,8 +23,93 @@ html {
   -moz-box-sizing: inherit;
        box-sizing: inherit;
 }
+body {
+  font: normal normal 16px/24px Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
+  -webkit-font-feature-settings: "liga", "kern";
+     -moz-font-feature-settings: "liga", "kern";
+          font-feature-settings: "liga", "kern";
+}
 i {
   display: inline-block;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}
+h1 {
+  font-size: 2.25em;
+  line-height: 1.333333333333333em;
+  margin-top: 0.666666666666667em;
+  margin-bottom: 0.666666666666667em;
+}
+h2 {
+  font-size: 2em;
+  line-height: 1.5em;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+h3 {
+  font-size: 1.875em;
+  line-height: 1.6em;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+h4 {
+  font-size: 1.75em;
+  line-height: 1.714285714285714em;
+  margin-top: 0.857142857142857em;
+  margin-bottom: 0.857142857142857em;
+}
+h5 {
+  font-size: 1.5em;
+  line-height: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+h6 {
+  font-size: 1.25em;
+  line-height: 1.2em;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+p {
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+}
+blockquote {
+  font-style: italic;
+  padding-left: 0.625em;
+  border-left: 0.3125em solid #999;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+code {
+  color: #0f0;
+  background: #242424;
+  padding: 0 0.75em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  width: 100%;
+  display: inline-block;
+  border-radius: 6px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 /* ==================================================================
    Media Queries

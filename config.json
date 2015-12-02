@@ -3,7 +3,7 @@
 		   "src": "src/",
 		  "dest": "public/",
 		 "build": "build/",
-		 "bower": "src/bower_components/",
+		 "bower": "public/bower_components",
 
 		"images": {
 			 "src": "images/",
