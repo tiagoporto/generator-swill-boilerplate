@@ -151,6 +151,11 @@ rhythm-margins(leader = 1, trailer = leader, font-size = base-font-size)
 	margin-top $rhythm(leader, font-size)
 	margin-bottom $rhythm(trailer, font-size)
 
+// Shorthand mixin to apply whitespace for top and bottom padding.
+rhythm-padding(padding-leader = 1, padding-trailer = padding-leader, font-size = base-font-size)
+	padding-top $rhythm(padding-leader, font-size)
+	padding-bottom $rhythm(padding-trailer, font-size)
+
 // Apply a border and whitespace to any side without destroying the vertical
 // rhythm. The whitespace must be greater than the width of the border.
 apply-side-rhythm-border(side, width = 1px, lines = 1, font-size = base-font-size, border-style = default-rhythm-border-style)
