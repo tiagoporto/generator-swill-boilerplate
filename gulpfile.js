@@ -312,16 +312,6 @@ gulp.task('remove-preprocessors', function(cb){
 //Set the use of components
 gulp.task('set-dependencies', function(){
 	if(config.components){
-		var styles = gulp.src([
-							paths.styles.src + '**/styles.{styl,sass,scss,less}',
-							paths.styles.src + '**/_base.{styl,sass,scss,less}'
-						])
-						.pipe(plugins.replace(/\/*body/g, "body"))
-						.pipe(plugins.replace(/disabledButton()*\//g, "disabledButton()"))
-						.pipe(gulp.dest(paths.styles.src));
-	}
-
-	if(config.components){
 		var component_script = gulp.src(paths.scripts.src + '**/custom-input-file_IGNORE.js')
 								.pipe(vinylPaths(del))
 								.pipe(plugins.rename(function(path){
