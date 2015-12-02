@@ -1,8 +1,8 @@
-h1, h2, h3, h4, h5, h6
+.h1, .h2, .h3, .h4, .h5, .h6
 	font-weight $header-weight
 
 for num in (1..6)
-	h{num}
+	.h{num}
 		adjust-font-size-to($font-size-h + num)
 		rhythm-margins(1, 1, $font-size-h + num)
 
@@ -12,7 +12,7 @@ p
 	hyphens auto
 	// max-width ($font-size-base * 30)
 
-blockquote
+.blockquote
 	font-style italic
 	padding-left em(10px)
 	border-left em(5px) solid lighten(#000, 60%)

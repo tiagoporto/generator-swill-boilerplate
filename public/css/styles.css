@@ -35,48 +35,92 @@ body {
      -moz-font-feature-settings: "liga", "kern";
           font-feature-settings: "liga", "kern";
 }
-i {
+.button,
+.disabled-button {
+  font-size: 0.875em;
+  line-height: 1.714285714285714em;
+  border: none;
+  border-radius: 5px;
   display: inline-block;
+  padding: 0 1.25em;
+  overflow: hidden;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  vertical-align: bottom;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
+  color: #fff;
+  background-color: #3faa96;
+  -webkit-transition: 0.15s ease-out;
+  transition: 0.15s ease-out;
+  cursor: pointer;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.button:hover {
+  background-color: #2bbbad;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.15);
+}
+.disabled-button {
+  background-color: #dfdfdf;
+  color: #9f9f9f;
+  cursor: default;
+}
+.code {
+  color: #0f0;
+  background: #242424;
+  padding: 0 0.75em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  width: 100%;
+  display: inline-block;
+  border-radius: 6px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-weight: bold;
 }
-h1 {
+.h1 {
   font-size: 2.25em;
   line-height: 1.333333333333333em;
   margin-top: 0.666666666666667em;
   margin-bottom: 0.666666666666667em;
 }
-h2 {
+.h2 {
   font-size: 2em;
   line-height: 1.5em;
   margin-top: 0.75em;
   margin-bottom: 0.75em;
 }
-h3 {
+.h3 {
   font-size: 1.875em;
   line-height: 1.6em;
   margin-top: 0.8em;
   margin-bottom: 0.8em;
 }
-h4 {
+.h4 {
   font-size: 1.75em;
   line-height: 1.714285714285714em;
   margin-top: 0.857142857142857em;
   margin-bottom: 0.857142857142857em;
 }
-h5 {
+.h5 {
   font-size: 1.5em;
   line-height: 2em;
   margin-top: 1em;
   margin-bottom: 1em;
 }
-h6 {
+.h6 {
   font-size: 1.25em;
   line-height: 1.2em;
   margin-top: 1.2em;
@@ -92,22 +136,10 @@ p {
       -ms-hyphens: auto;
           hyphens: auto;
 }
-blockquote {
+.blockquote {
   font-style: italic;
   padding-left: 0.625em;
   border-left: 0.3125em solid #999;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-}
-code {
-  color: #0f0;
-  background: #242424;
-  padding: 0 0.75em;
-  padding-top: 0.75em;
-  padding-bottom: 0.75em;
-  width: 100%;
-  display: inline-block;
-  border-radius: 6px;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
