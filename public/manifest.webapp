@@ -1,14 +1,14 @@
 {
   "version": "0.0.1",
-  "name": "App name",
+  "name": "{Title}",
   "launch_path": "/index.html",
-  "description": "App description",
+  "description": "{-}",
   "icons": {
     "128": "img/touch/icon-128x128.png"
   },
   "developer": {
-    "name": "Developer Name",
-    "url": "developer Site"
+    "name": "{-}",
+    "url": "http://{-}"
   },
   "installs_allowed_from": [
     "*"
@@ -18,8 +18,8 @@
   },
   "locales": {
     "en": {
-      "name": "App name",
-      "description": "App description in English."
+      "name": "{Title}",
+      "description": "{-} in English."
     }
   }
 }

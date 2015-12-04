@@ -161,7 +161,8 @@ rhythm-padding(padding-leader = 1, padding-trailer = padding-leader, font-size =
 apply-side-rhythm-border(side, width = 1px, lines = 1, font-size = base-font-size, border-style = default-rhythm-border-style)
   if (not relative-font-sizing) and (font-size is not base-font-size)
     warn('relative-font-sizing is false but a relative font size was passed to apply-side-rhythm-border')
-  border-{side}-style border-style
+  border-{side}-color border-style[1]
+  border-{side}-style border-style[0]
   border-{side}-width font-unit * (width / font-size)
   padding-{side} $rhythm(lines, font-size, offset = width)
 
@@ -169,7 +170,8 @@ apply-side-rhythm-border(side, width = 1px, lines = 1, font-size = base-font-siz
 rhythm-borders(width = 1px, lines = 1, font-size = base-font-size, border-style = default-rhythm-border-style)
   if (not relative-font-sizing) and (font-size is not base-font-size)
     warn('relative-font-sizing is false but a relative font size was passed to rhythm-borders')
-  border-style border-style
+  border-color border-style[1]
+  border-style border-style[0]
   border-width font-unit * (width / font-size)
   padding $rhythm(lines, font-size, offset = width)
 
