@@ -22,6 +22,7 @@ var		 gulp = require('gulp'),
 	  plugins = require('gulp-load-plugins')(),
    	   buffer = require('vinyl-buffer'),
    vinylPaths = require('vinyl-paths'),
+	  ghPages = require('gulp-gh-pages'),
 	   config = require('./config.json'),
 
 //***************************** Path configs *****************************//
@@ -445,6 +446,14 @@ gulp.task('default', function () {
 	}else{
 		gulp.start('serve');
 	}
+});
+gulp.task('gh', function() {
+  return gulp.src( basePaths.build + '**/*')
+    .pipe(ghPages());
+});
+
+gulp.task('ghpages', function() {
+	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', 'gh');
 });
 
 // Build Project and serve if pass the parameter --serve

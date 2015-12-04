@@ -57,8 +57,7 @@ This boilerplate uses the following technologies:
 * Generate Sprites with .svg and a .png to fallback
 * Analyze CSS with csslint
 * Prefix CSS with Autoprefixer
-* Compile Less, Sass or Stylus
-* Catch the Stylus error and direct shows on the page, as in Sass.
+* Compile Less, Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
 * Concatenate And Minify Scripts
 * Analyze JavaScript with jshint
 * Notify when tasks are complete
@@ -66,6 +65,7 @@ This boilerplate uses the following technologies:
 * Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
 * Check if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
 * Build the project compressing HTML, CSS and JS.
+* Push the build folder to gh-pages branch
 
 ## Folder Structure
 
@@ -186,6 +186,7 @@ This boilerplate uses the following technologies:
 │  │
 │  └─ Tasks // Specific Gulp tasks to preprocessors
 │
+├─ .bowerrc // Bower configuration file
 ├─ .csslintrc // CSSLint configuration file
 ├─ .editorconfig // Editorconfig configuration file
 ├─ .jshintrc // JSHint configuration file
@@ -273,7 +274,9 @@ This boilerplate uses the following technologies:
 
 1. Open the files `.csslintrc`, `.editorconfig`, and `jshintrc` and set your configs to CSSLint, EditorConfig and JSHint respectively.
 
-1. Open the file `src/header-comments.txt` and set your header project.
+1. Make a search in the folder project by `{Title}` and `{-}`, and replace by the corrected informations.
+
+1. Open the file `src/header-comments.txt` and set your project header.
 
 1. Open the terminal and go to the local folder
 
@@ -289,8 +292,6 @@ This boilerplate uses the following technologies:
 	$ npm install
 	```
 
-### Developing
-
 1. Install [Bower](http://bower.io/) dependencies
 
 	* Execute
@@ -299,24 +300,18 @@ This boilerplate uses the following technologies:
 	$ bower install
 	```
 
-1. Install other Bower dependencies that will be used, like jQuery, Twitter Bootstrap, Font Awesome, Animate.css, Jeet Grid System, etc.
-
-	* Execute
-
-	```sh
-		$ bower install {dependence-name}
-	```
-
-1. Set the CSS preprocessor you will use, execute only once
+1. Set the CSS preprocessor you will use, execute only once (execute this after install bower dependencies)
 
 ```sh
 $gulp setup --sass|less|stylus
 ```
 
-1. Execute the task `gulp` and start the development
+### Developing
+
+1. At the first time run the task `gulp` with parameter `compile` and start the development
 
 ```sh
-$ gulp --serve
+$ gulp --compile
 ```
 
 
@@ -328,7 +323,7 @@ $ gulp --serve
 $ gulp
 ```
 
-**Default Task (the default task accept the parameter --compile)** - clean assets, compile, watch and serve the project.
+**Default Task**  (the default task accept the parameter --compile) - clean assets, compile, watch and serve the project.
 
 ```sh
 $ gulp --compile
@@ -340,37 +335,28 @@ $ gulp --compile
 $ gulp build
 ```
 
-**Build Task (the build task accept the parameter --serve)** - build the project and serve builded project.
+**Build Task** (the build task accept the parameter --serve) - build the project and serve builded project.
 
 ```sh
 $ gulp build --serve
 ```
 
+**Gh-pages Task** - build the project and push the builded project to gh-pages branch
+
+```sh
+$ gulp ghpages
+```
+
 ## Peculiarities
 
-* On `index.html` you can easily find necessary items to setup just searching by `{Title}` and `{-}`
 
 * JavaScripts files in `src/scripts` named with `*_IGNORE.js` will be ignored and won't be published, named with `*_SEPARATE.js` won't be concatenated and will be generated separated.
-	- example
+	- Example
 	`myplugin_SEPARATE.js` will be published as `myplugin.js`.
 
 * The folder `public/img` is clean when some tasks are executed, the images come from ` src/images`, but if you work with copyrighted images you shouldn't use compression, because it removes the metadatas from files. You can place images direct in the `public/img/copyright`, they won't be deleted.
 
 	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
-
-* To use bower components just link the file on the HTML inside of the especifics comments. This way all the files will be concatenated and minified to build.
-
-**Example**
-
-```html
-	<!-- build:js js/scripts.combined.min.js -->
-	<script src="angular/angular.js"></script>
-	<script src="jquery/dist/jquery.js"></script>
-	<script src="bootstrap/dist/js/bootstrap.js"></script>
-	<!-- endbuild -->
-```
-
-*The link to file start inside of the `bower_components`, the application won't work out of the serve.*
 
 
 ## Bitmap Sprite
