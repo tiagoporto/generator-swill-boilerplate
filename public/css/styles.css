@@ -1,4 +1,4 @@
-/*!	Project Name v0.0.1
+/*!	{Title} v0.0.1
 *	Project Home page
 *	Copyright (c) initialyear-atualyear Author Name (Site)
 *	Released under the MIT license
@@ -24,10 +24,6 @@ html {
        box-sizing: inherit;
 }
 body {
-  background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.2) 1px, rgba(0,0,0,0) 1px);
-  background-image: linear-gradient(to top, rgba(0,0,0,0.2) 1px, rgba(0,0,0,0) 1px);
-  background-size: 100% 1.5em;
-  background-position: left top;
   font: normal normal 16px/24px Helvetica, Arial, sans-serif;
   background-color: #fff;
   color: #000;

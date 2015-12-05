@@ -1,10 +1,10 @@
 /* EM function */
 //Convert pixel units to em units
 
-em($pixels, $context = $font-size-base)
+em($pixels, $context = $base-font-size)
 	(floor($pixels/$context, 10))em
 /* REM function */
 //Convert pixel units to rem units
 
 rem($pixels)
-	(floor($pixels/$font-size-base, 10))rem
+	(floor($pixels/$base-font-size, 10))rem

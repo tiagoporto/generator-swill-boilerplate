@@ -14,12 +14,12 @@ html
 body
 	if $debug-vertical-rhythm == true
 		background-image: linear-gradient(to top, rgba($debug-color-line, 0.2) 1px, rgba(0, 0, 0, 0) 1px)
-		background-size: 100% em($line-height-base, $font-size-base)
+		background-size: 100% em($base-line-height, $base-font-size)
 		background-position: left top
 
-	font normal normal  $font-size-base\/$line-height-base $font-family-base
+	font normal normal  $base-font-size\/$base-line-height $font-family-base
 	background-color $bg-color
-	color $color-text
+	color $base-text-color
 	text-rendering optimizeLegibility
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale

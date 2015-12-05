@@ -1,6 +1,6 @@
 $input
-	adjust-font-size-to($font-size-base)
-	rhythm-borders(1px, .25, $font-size-base, solid lighten(#000, 60%))
+	adjust-font-size-to($base-font-size)
+	rhythm-borders(1px, .25, $base-font-size, solid lighten(#000, 60%))
 	border-radius 5px
 	color lighten(#000, 35%)
 	width 100%
@@ -14,11 +14,11 @@ $input
 
 .fieldset
 	margin: 0
-	rhythm-borders(1px, 1, $font-size-base, solid lighten(#000, 60%))
+	rhythm-borders(1px, 1, $base-font-size, solid lighten(#000, 60%))
 
 .input
 	@extend $input
-	height: em($line-height-base / 2 * 3)
+	height: em($base-line-height / 2 * 3)
 
 .textarea
 	@extend $input
@@ -28,4 +28,4 @@ $input
 
 ::placeholder
 	color lighten(#000, 55%)
-	font-size em($font-size-base - 2)
+	font-size em($base-font-size - 2)

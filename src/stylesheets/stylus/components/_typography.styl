@@ -7,13 +7,13 @@ for num in (1..6)
 		rhythm-margins(1, 1, $font-size-h + num)
 
 p
-	adjust-font-size-to($font-size-base)
-	rhythm-margins(1, 1, $font-size-base)
+	adjust-font-size-to($base-font-size)
+	rhythm-margins(1, 1, $base-font-size)
 	hyphens auto
-	// max-width ($font-size-base * 30)
+	// max-width ($base-font-size * 30)
 
 .blockquote
 	font-style italic
 	padding-left em(10px)
 	border-left em(5px) solid lighten(#000, 60%)
-	rhythm-margins(1, 1, $font-size-base)
+	rhythm-margins(1, 1, $base-font-size)
