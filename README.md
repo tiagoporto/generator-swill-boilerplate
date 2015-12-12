@@ -323,25 +323,31 @@ $ gulp --compile
 $ gulp
 ```
 
-**Default Task**  (the default task accept the parameter --compile) - clean assets, compile, watch and serve the project.
+**Default Task** (the default task accepts the parameter --compile) - clean assets, compile, watch and serve the project.
 
 ```sh
 $ gulp --compile
 ```
 
-**Build Task**
+**Compile Task** - clean assets and compile the project.
+
+```sh
+$ gulp compile
+```
+
+**Build Task** - build the project
 
 ```sh
 $ gulp build
 ```
 
-**Build Task** (the build task accept the parameter --serve) - build the project and serve builded project.
+**Build Task** (the build task accepts the parameter --serve) - build the project and serve builded project.
 
 ```sh
 $ gulp build --serve
 ```
 
-**Gh-pages Task** - build the project and push the builded project to gh-pages branch
+**Gh-pages Task** - build the project and push the builded folder to gh-pages branch
 
 ```sh
 $ gulp ghpages

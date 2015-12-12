@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.1.0beta
+*	Swill Boilerplate v4.2.0beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -8,22 +8,22 @@
 'use strict';
 
 var		 gulp = require('gulp'),
+		 args = require('yargs').argv,
   browserSync = require('browser-sync'),
+   	   buffer = require('vinyl-buffer'),
+	   config = require('./config.json'),
 		  del = require('del'),
 		   fs = require('fs'),
+	  ghPages = require('gulp-gh-pages'),
 		merge = require('merge-stream'),
    minifyHTML = require('gulp-minify-html'),
+	  plugins = require('gulp-load-plugins')(),
 	 sequence = require('run-sequence'),
 		 sass = require('gulp-ruby-sass'),
   spritesmith = require('gulp.spritesmith'),
-	svgSprite = require('gulp-svg-sprite'),
 	  stylish = require('jshint-stylish'),
-		 args = require('yargs').argv,
-	  plugins = require('gulp-load-plugins')(),
-   	   buffer = require('vinyl-buffer'),
+	svgSprite = require('gulp-svg-sprite'),
    vinylPaths = require('vinyl-paths'),
-	  ghPages = require('gulp-gh-pages'),
-	   config = require('./config.json'),
 
 //***************************** Path configs *****************************//
 
@@ -438,7 +438,7 @@ gulp.task('serve', function () {
 	gulp.watch(basePaths.dest + '**/*.{html,php}', browserSync.reload);
 });
 
-// Compile, watch and serve project
+// Clean, compile, watch and serve project
 gulp.task('default', function () {
 	if(args.compile === true){
 		sequence('clean', ['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'serve');
@@ -447,11 +447,18 @@ gulp.task('default', function () {
 		gulp.start('serve');
 	}
 });
-gulp.task('gh', function() {
-  return gulp.src( basePaths.build + '**/*')
-    .pipe(ghPages());
+
+// Clean and compile the project
+gulp.task('compile', function () {
+	sequence('clean', ['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts');
 });
 
+gulp.task('gh', function() {
+ return gulp.src( basePaths.build + '**/*')
+   .pipe(ghPages());
+});
+
+// Build the project and push the builded folder to gh-pages branch
 gulp.task('ghpages', function() {
 	sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', 'gh');
 });
