@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.1.1beta
+*	Swill Boilerplate v4.2.0beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -23,6 +23,8 @@ var		 gulp = require('gulp'),
    	   buffer = require('vinyl-buffer'),
    vinylPaths = require('vinyl-paths'),
 	  ghPages = require('gulp-gh-pages'),
+		Karma = require('karma').Server,
+	  jasmine = require('gulp-jasmine'),
 	   config = require('./config.json'),
 
 //***************************** Path configs *****************************//
@@ -69,6 +71,21 @@ paths = {
 
 
 //******************************** Tasks *********************************//
+
+gulp.task('coverall', function(){
+	gulp.src('coverage/**/lcov.info')
+		.pipe(plugins.coveralls());
+});
+
+gulp.task('karma', function (done) {
+	new Karma({
+		configFile: __dirname + '/karma.conf.js'
+	}, done).start();
+});
+
+gulp.task('test', function(){
+	sequence('karma', 'coverall');
+});
 
 gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
 
