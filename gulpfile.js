@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.2.0beta
+*	Swill Boilerplate v4.2.1beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -167,8 +167,8 @@ gulp.task('vendor-scripts', function () {
 	return gulp.src([
 					'!' + paths.scripts.src + '**/*_IGNORE.js',
 					paths.scripts.src + 'settings/google_analytics.js',
-					paths.scripts.src + 'vendor/frameworks_libs/*',
-					paths.scripts.src + 'vendor/plugins/**',
+					paths.scripts.src + 'vendor/frameworks_libs/**/*.js',
+					paths.scripts.src + 'vendor/plugins/**/*.js',
 					paths.scripts.src + 'settings/*.js'
 				])
 				.pipe(plugins.plumber())
