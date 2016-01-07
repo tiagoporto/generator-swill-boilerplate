@@ -24,6 +24,10 @@ var		 gulp = require('gulp'),
 	  stylish = require('jshint-stylish'),
 	svgSprite = require('gulp-svg-sprite'),
    vinylPaths = require('vinyl-paths'),
+	  ghPages = require('gulp-gh-pages'),
+		Karma = require('karma').Server,
+	  jasmine = require('gulp-jasmine'),
+	   config = require('./config.json'),
 
 //***************************** Path configs *****************************//
 
@@ -69,6 +73,21 @@ paths = {
 
 
 //******************************** Tasks *********************************//
+
+gulp.task('coverall', function(){
+	gulp.src('coverage/**/lcov.info')
+		.pipe(plugins.coveralls());
+});
+
+gulp.task('karma', function (done) {
+	new Karma({
+		configFile: __dirname + '/karma.conf.js'
+	}, done).start();
+});
+
+gulp.task('test', function(){
+	sequence('karma', 'coverall');
+});
 
 gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
 
@@ -201,7 +220,7 @@ gulp.task('scripts', function () {
 							})
 						))
 						.pipe(plugins.wrapper({
-							header: headerProject
+							header: headerProject + '\r\n'
 						}))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(plugins.rename({suffix: '.min'}))
