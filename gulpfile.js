@@ -20,7 +20,6 @@ var		 gulp = require('gulp'),
 	 sequence = require('run-sequence'),
 		 sass = require('gulp-ruby-sass'),
   spritesmith = require('gulp.spritesmith'),
-	  stylish = require('jshint-stylish'),
 	svgSprite = require('gulp-svg-sprite'),
    vinylPaths = require('vinyl-paths'),
 	  ghPages = require('gulp-gh-pages'),
@@ -208,8 +207,8 @@ gulp.task('scripts', function () {
 						.pipe(plugins.cached('scripts'))
 						.pipe(plugins.remember('scripts'))
 						.pipe(plugins.plumber())
-						.pipe(plugins.if(config.lintJS, plugins.jshint()))
-						.pipe(plugins.if(config.lintJS, plugins.jshint.reporter('jshint-stylish')))
+						.pipe(plugins.if(config.lintJS, plugins.eslint()))
+						.pipe(plugins.if(config.lintJS, plugins.eslint.format()))
 						.pipe(plugins.concat('scripts.js'))
 						.pipe( plugins.if(
 							config.jquery,
@@ -233,8 +232,8 @@ gulp.task('scripts', function () {
 						.pipe(plugins.plumber())
 						.pipe(plugins.newer(paths.scripts.dest))
 						.pipe(plugins.plumber())
-						.pipe(plugins.if(config.lintJS, plugins.jshint()))
-						.pipe(plugins.if(config.lintJS, plugins.jshint.reporter('jshint-stylish')))
+						.pipe(plugins.if(config.lintJS, plugins.eslint()))
+						.pipe(plugins.if(config.lintJS, plugins.eslint.format()))
 						.pipe(plugins.rename(function(path){
 							path.basename = path.basename.substring(0,  path.basename.length -9)
 						}))
