@@ -1,4 +1,3 @@
-
 //event listener: DOM ready
 function addLoadEvent(func) {
     var oldonload = window.onload;

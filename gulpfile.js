@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.2.1beta
+*	Swill Boilerplate v4.2.2beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -16,7 +16,6 @@ var		 gulp = require('gulp'),
 		   fs = require('fs'),
 	  ghPages = require('gulp-gh-pages'),
 		merge = require('merge-stream'),
-   minifyHTML = require('gulp-minify-html'),
 	  plugins = require('gulp-load-plugins')(),
 	 sequence = require('run-sequence'),
 		 sass = require('gulp-ruby-sass'),
@@ -262,8 +261,8 @@ gulp.task('copy', function () {
 						.pipe(plugins.useref(assets))
 						.pipe(plugins.if('*.js', plugins.uglify()))
 						.pipe(plugins.if('*.css', plugins.csso()))
-						.pipe(plugins.if('*.html', minifyHTML({spare:true, empty: true})))
-						.pipe(plugins.if('*.php', minifyHTML({spare:true, empty: true})))
+						.pipe(plugins.if('*.html', plugins.htmlmin({collapseWhitespace: true, spare:true, empty: true, conditionals: true})))
+						.pipe(plugins.if('*.php', plugins.htmlmin({collapseWhitespace: true, spare:true, empty: true, conditionals: true})))
 						.pipe(gulp.dest(basePaths.build));
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files

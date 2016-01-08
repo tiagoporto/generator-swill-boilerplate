@@ -4,6 +4,7 @@
 *	Released under the MIT license
 */
 
+
 /* ==================================================================
    Main Styles
    ================================================================== */
@@ -61,12 +62,6 @@ body {
   transition: 0.15s ease-out;
   cursor: pointer;
 }
-.button {
-  border-top-color: #000;
-  border-top-style: solid;
-  border-top-width: 0.05em;
-  padding-top: 1.15em;
-}
 .button:hover {
   background-color: #2bbbad;
   box-shadow: 0 1px 4px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.15);
@@ -99,7 +94,7 @@ body {
   border-radius: 5px;
   color: #595959;
   width: 100%;
-  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }
 .input:focus,
 .textarea:focus {
