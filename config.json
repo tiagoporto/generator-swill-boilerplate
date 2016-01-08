@@ -27,7 +27,7 @@
 
 	"components": false,
 
-	"jquery": false,
+	"jQuery": false,
 
 	"lintCSS": false,
 

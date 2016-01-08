@@ -211,7 +211,7 @@ gulp.task('scripts', function () {
 						.pipe(plugins.if(config.lintJS, plugins.eslint.format()))
 						.pipe(plugins.concat('scripts.js'))
 						.pipe( plugins.if(
-							config.jquery,
+							config.jQuery,
 							plugins.wrapper({
 								header: 'jQuery(document).ready(function($) {\n\n',
 								footer: '\n});'
@@ -338,7 +338,7 @@ gulp.task('set-dependencies', function(){
 								.pipe(gulp.dest(paths.scripts.src));
 	}
 
-	if(config.jquery){
+	if(config.jQuery){
 		var jquery_indexcalls = gulp.src(basePaths.dest + 'index.html')
 									.pipe(plugins.replace(
 											/<!-- (<link rel="stylesheet" href="jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">) -->/g, '$1'))
@@ -353,8 +353,8 @@ gulp.task('set-dependencies', function(){
 									.pipe(plugins.replace(/\/\/\$\('#logo'\)/g, "$('#logo')"))
 									.pipe(gulp.dest(paths.scripts.src));
 
-		var jquery_jshint = gulp.src('./.jshintrc')
-								.pipe(plugins.replace(/jquery"[\s]{1,10}:\sfalse/g, 'jquery"        : true'))
+		var jquery_eslint = gulp.src('./.eslintrc')
+								.pipe(plugins.replace(/jquery":\sfalse/g, 'jquery": true'))
 								.pipe(gulp.dest('./'));
 	}
 });
@@ -362,7 +362,7 @@ gulp.task('set-dependencies', function(){
 //*************************** Utility Tasks ******************************//
 
 gulp.task('setup', function(cb){
-	sequence('bower',  'get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'remove-preprocessors', 'set-dependencies', cb);
+	sequence('bower',  'get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'remove-preprocessors', cb);
 });
 
 gulp.task('combine-assets', function () {

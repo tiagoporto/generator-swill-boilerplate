@@ -40,7 +40,7 @@ This boilerplate uses the following technologies:
 * [CSSLint](http://csslint.net/)
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp](http://gulpjs.com/)
-* [JSHint](http://www.jshint.com/)
+* [ESLint](http://eslint.org/)
 * [Less](http://lesscss.org/), [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 * [Node.js](http://nodejs.org/)
 * [NPM](https://www.npmjs.com/)
@@ -64,7 +64,7 @@ This boilerplate uses the following technologies:
 * Prefix CSS with Autoprefixer
 * Compile Less, Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
 * Concatenate And Minify Scripts
-* Analyze JavaScript with jshint
+* Analyze JavaScript with ESLint
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with [BrowserSync](http://www.browsersync.io/)
 * Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
@@ -194,7 +194,7 @@ This boilerplate uses the following technologies:
 ├─ .bowerrc // Bower configuration file
 ├─ .csslintrc // CSSLint configuration file
 ├─ .editorconfig // Editorconfig configuration file
-├─ .jshintrc // JSHint configuration file
+├─ .eslintrc // ESLint configuration file
 ├─ bower.json // Bower dependencies
 ├─ config.json // Swill configuration file
 ├─ gulpfile.js // Gulp file
@@ -277,7 +277,7 @@ This boilerplate uses the following technologies:
 	}
 	```
 
-1. Open the files `.csslintrc`, `.editorconfig`, and `jshintrc` and set your configs to CSSLint, EditorConfig and JSHint respectively.
+1. Open the files `.csslintrc`, `.editorconfig`, and `.eslintrc` and set your configs to CSSLint, EditorConfig and ESLint respectively.
 
 1. Make a search in the folder project by `{Title}` and `{-}`, and replace by the corrected informations.
 
@@ -423,7 +423,57 @@ To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-
 
 ## Config.js
 
+### basePaths
+
+Type: `Object`
+
+Application paths.
+
+
+### components
+
+Type: `Boolean`
+
 to-do
+
+
+### jquery
+
+Type: `Boolean`
+
+If the application will use jQuery.
+
+
+### lintCSS
+
+Type: `Boolean`
+
+If use lint CSS.
+
+### lintJS
+
+Type: `Boolean`
+
+If use lint JS.
+
+### autoprefixerBrowsers
+
+Type: `Array`
+
+to-do
+
+### browserSync
+
+Type: `Object`
+
+to-do
+
+### browserSyncBuild
+
+Type: `Object`
+
+to-do
+
 
 ## Contributing
 
