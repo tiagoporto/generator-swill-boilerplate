@@ -365,12 +365,23 @@ Type: `Boolean`
 
 to-do
 
+#### outdatedBrowser
+
+Type: `Boolean`
+
+If use outdatedBrowser.
+
+#### logodownloadtip
+
+Type: `Boolean`
+
+If use jQuery Logo Downloadtip.
 
 #### jquery
 
 Type: `Boolean`
 
-If the application will use jQuery.
+If use jQuery.
 
 
 #### lintCSS

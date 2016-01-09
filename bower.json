@@ -30,6 +30,7 @@
   "devDependencies": {
     "normalize.css": "~3.0.3",
     "outdated-browser": "~1.1.2",
-    "jquery-logo-downloadtip": "~2.0.0"
+    "jquery-logo-downloadtip": "~2.0.0",
+    "jquery": "~2.2.0"
   }
 }
