@@ -20,14 +20,14 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 * [Features](#features)
 * [Folder Structure](#folder-structure)
 * [Dependencies](#dependencies)
-* [Usage](#usage)
-	* [Settings](#setting)
-	* [Developing](#developing)
-* [Tasks](#tasks)
-* [Peculiarities](#peculiarities)
+* [Boilerplate](#boilerplate)
+	* [Config.json](#configjson)
+	- [Usage](#usage)
+		- [Settings](#setting)
+		- [Developing](#developing)
+	* [Tasks](#tasks)
 	* [Bitmap Sprite](#bitmap-sprite)
 	* [Vetor Sprite](#svg-sprite)
-	* [Config.js](#configjs)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -42,8 +42,10 @@ This boilerplate uses the following technologies:
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp](http://gulpjs.com/)
 * [ESLint](http://eslint.org/)
-* [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
+* [Jasmine](http://jasmine.github.io/)
+* [Karma](http://karma-runner.github.io/0.13/index.html)
 * [Node.js](http://nodejs.org/)
+* [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 * [NPM](https://www.npmjs.com/)
 
 ## Includes
@@ -53,7 +55,7 @@ This boilerplate uses the following technologies:
 * [jQuery Logo Downloadtip](http://tiagoporto.github.io/jquery-logo-downloadtip/) - Only if jQuery is used
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
-* [Styles to Basic Components](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only to use with stylus
+* [Styles to Basic Components](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only available with stylus
 
 ## Features
 
@@ -67,11 +69,11 @@ This boilerplate uses the following technologies:
 * Concatenate And Minify Scripts
 * Analyze JavaScript with ESLint
 * Notify when tasks are complete
-* Monitors changes in the files and reload browser with [BrowserSync](http://www.browsersync.io/)
-* Configs from [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate)
-* Check if the browser is outdated with [Outdated Browser](http://outdatedbrowser.com/)
+* Monitors changes in the files and reload browser with BrowserSync
+* Check if the browser is outdated with Outdated Browser
+* Javascript tests with Jasmine and Karma
 * Build the project compressing HTML, CSS and JS.
-* Push the build folder to gh-pages branch
+* Push the `build` folder to gh-pages branch
 
 ## Folder Structure
 
@@ -99,12 +101,6 @@ This boilerplate uses the following technologies:
 │  │  ├─ js
 │  │  │  └─ // Public scripts
 │  │  │
-│  │  ├─ lang
-│  │  │  ├─ outdated_browser // Langs to outdated browser plugin
-│  │  │  │
-│  │  │  │
-│  │  │  └─ // Langs to multilingue sites
-│  │  │
 │  │  ├─ .htaccess // Configuration for use on web servers running the Apache Web Server
 │  │  │
 │  │  ├─ 404.html // Page to 404 error
@@ -125,6 +121,8 @@ This boilerplate uses the following technologies:
 │  │  │
 │  │  └─ // HTML, PHP, etc Files
 │  │
+│  ├─ spec // Scripts test
+│  │
 │  ├─ src // Source files for the projects
 │  │    ├─ images // Original imagens, don't compressed
 │  │    │  │
@@ -144,8 +142,6 @@ This boilerplate uses the following technologies:
 │  │    │
 │  │    ├─ scripts
 │  │    │  │
-│  │    │  ├─ dependencies // External plugins
-│  │    │  │
 │  │    │  ├─ settings
 │  │    │  │  │
 │  │    │  │  ├─ call_plugins.js // Call the plugins after page load
@@ -158,31 +154,27 @@ This boilerplate uses the following technologies:
 │  │    │    │
 │  │    │    ├─ components
 │  │    │    │
-│  │    │    ├─ dependencies //Styles used by external plugins
-│  │    │    │
 │  │    │    ├─ helpers
 │  │    │    │  │
 │  │    │    │  ├─ functions // All files here will be concatenated to ../functions.{sass, styl}
 │  │    │    │  │
 │  │    │    │  ├─ mixins // All files here will be concatenated to ../mixins.{sass, styl}
 │  │    │    │  │
-│  │    │    │  ├─ _bitmap-sprite.{sass, styl}
-│  │    │    │  │
 │  │    │    │  ├─ _functions.{sass, styl}
 │  │    │    │  │
-│  │    │    │  ├─ _helpers.{sass, styl} // Only a helper to preprocessor syntax
+│  │    │    │  ├─ _helpers.{sass, styl} // Helper tips to preprocessor syntax
 │  │    │    │  │
-│  │    │    │  ├─ _mixins.{sass, styl}
+│  │    │    │  └─ _mixins.{sass, styl}
+│  │    │    │
+│  │    │    ├─ media_queries
+│  │    │    │
+│  │    │    ├─ settings
 │  │    │    │  │
 │  │    │    │  ├─ _placeholders.{sass, styl}
 │  │    │    │  │
 │  │    │    │  ├─ _variables.{sass, styl}
 │  │    │    │  │
-│  │    │    │  └─ _vetor-sprite.{sass, styl}
-│  │    │    │
-│  │    │    ├─ media_queries
-│  │    │    │
-│  │    │    ├─ typography
+│  │    │    │  └─ _web-fonts.{sass, styl}
 │  │    │    │
 │  │    │    ├─ _base.{sass, styl} // Main Styles
 │  │    │    │
@@ -199,6 +191,8 @@ This boilerplate uses the following technologies:
 ├─ bower.json // Bower dependencies
 ├─ config.json // Swill configuration file
 ├─ gulpfile.js // Gulp file
+├─ LICENSE.md // Swill License
+├─ karma.conf.js // Karma configuration file
 ├─ package.json // NPM dependencies
 └─ README.md // Documentation
 ```
@@ -249,9 +243,75 @@ This boilerplate uses the following technologies:
 		$ gem install sass
 		```
 
-## Usage
 
-### Setting
+## Boilerplate
+
+* JavaScripts files in `src/scripts` named with `*_IGNORE.js` will be ignored and won't be published, named with `*_SEPARATE.js` won't be concatenated and will be generated separated.
+	- Example
+	`myplugin_SEPARATE.js` will be published as `myplugin.js`.
+
+* The folder `public/img` is clean when some tasks are executed, the images come from ` src/images`, but if you work with copyrighted images you shouldn't use compression, because it removes the metadatas from files. You can place images direct in the `public/img/copyright`, they won't be deleted.
+
+	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
+
+
+### Config.json
+
+#### basePaths
+
+Type: `Object`
+
+Application paths.
+
+
+#### components
+
+Type: `Boolean`
+
+to-do
+
+
+#### jquery
+
+Type: `Boolean`
+
+If the application will use jQuery.
+
+
+#### lintCSS
+
+Type: `Boolean`
+
+If use lint CSS.
+
+#### lintJS
+
+Type: `Boolean`
+
+If use lint JS.
+
+#### autoprefixerBrowsers
+
+Type: `Array`
+
+Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
+
+#### browserSync
+
+Type: `Object`
+
+BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
+
+#### browserSyncBuild
+
+Type: `Object`
+
+BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
+
+
+### Usage
+
+#### Settings
 
 1. Open the file `config.json` and setting as needed.
 	* If change the directory `basePaths.images.dest`, remember to modify the variable $image-path in `src/stylesheets/helpers/_variables`.
@@ -310,7 +370,8 @@ This boilerplate uses the following technologies:
 $gulp setup --sass|stylus
 ```
 
-### Developing
+
+#### Developing
 
 1. At the first time run the task `gulp` with parameter `compile` and start the development
 
@@ -319,7 +380,7 @@ $ gulp --compile
 ```
 
 
-## Tasks
+### Tasks
 
 **Default Task** - serve the project and watch (Alias to `gulp serve`)
 
@@ -356,17 +417,6 @@ $ gulp build --serve
 ```sh
 $ gulp ghpages
 ```
-
-## Peculiarities
-
-
-* JavaScripts files in `src/scripts` named with `*_IGNORE.js` will be ignored and won't be published, named with `*_SEPARATE.js` won't be concatenated and will be generated separated.
-	- Example
-	`myplugin_SEPARATE.js` will be published as `myplugin.js`.
-
-* The folder `public/img` is clean when some tasks are executed, the images come from ` src/images`, but if you work with copyrighted images you shouldn't use compression, because it removes the metadatas from files. You can place images direct in the `public/img/copyright`, they won't be deleted.
-
-	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
 
 
 ### Bitmap Sprite
@@ -419,59 +469,6 @@ To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-
 	* `moon.svg` the classname use the prefix `svg-` and the filename of the svg `moon`.
 	* If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
 
-
-### Config.js
-
-#### basePaths
-
-Type: `Object`
-
-Application paths.
-
-
-#### components
-
-Type: `Boolean`
-
-to-do
-
-
-#### jquery
-
-Type: `Boolean`
-
-If the application will use jQuery.
-
-
-#### lintCSS
-
-Type: `Boolean`
-
-If use lint CSS.
-
-#### lintJS
-
-Type: `Boolean`
-
-If use lint JS.
-
-#### autoprefixerBrowsers
-
-Type: `Array`
-
-Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
-
-#### browserSync
-
-Type: `Object`
-
-BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
-
-#### browserSyncBuild
-
-Type: `Object`
-
-BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
 
 
 ## Contributing
