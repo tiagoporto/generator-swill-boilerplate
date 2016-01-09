@@ -10,6 +10,10 @@
 			"dest": "img/"
 		},
 
+		"fonts": {
+			"dest": "fonts/"
+		},
+
 		"sprite": {
 			"src": "sprite/"
 		},
@@ -26,6 +30,10 @@
 	},
 
 	"components": false,
+
+	"outdatedBrowser": true,
+
+	"logoDownloadtip": false,
 
 	"jQuery": false,
 

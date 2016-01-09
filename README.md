@@ -21,11 +21,9 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 * [Folder Structure](#folder-structure)
 * [Dependencies](#dependencies)
 * [Boilerplate](#boilerplate)
-	* [Config.json](#configjson)
-	- [Usage](#usage)
-		- [Settings](#setting)
-		- [Developing](#developing)
+	* [Usage](#usage)
 	* [Tasks](#tasks)
+	* [Config](#config)
 	* [Bitmap Sprite](#bitmap-sprite)
 	* [Vetor Sprite](#svg-sprite)
 * [Contributing](#contributing)
@@ -50,7 +48,7 @@ This boilerplate uses the following technologies:
 
 ## Includes
 
-* [Functions and mixins](http://tiagoporto.github.io/swill-boilerplate/functions-mixins.html) - Just to Sass and Stylus
+* [Functions and mixins](http://tiagoporto.github.io/swill-boilerplate/functions-mixins.html) - CSS preprocessors
 * [Google Analytics](http://www.google.com/analytics/)
 * [jQuery Logo Downloadtip](http://tiagoporto.github.io/jquery-logo-downloadtip/) - Only if jQuery is used
 * [Normalize.css](http://necolas.github.io/normalize.css/)
@@ -59,7 +57,7 @@ This boilerplate uses the following technologies:
 
 ## Features
 
-* Clean the assets (images, css, js) in the project to maintain the directory organized
+* Clean the assets (build, images, css, js) in the project to maintain the directory organized
 * Compress Images
 * Generate Sprites with .png
 * Generate Sprites with .svg and a .png to fallback
@@ -70,7 +68,6 @@ This boilerplate uses the following technologies:
 * Analyze JavaScript with ESLint
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with BrowserSync
-* Check if the browser is outdated with Outdated Browser
 * Javascript tests with Jasmine and Karma
 * Build the project compressing HTML, CSS and JS.
 * Push the `build` folder to gh-pages branch
@@ -255,7 +252,105 @@ This boilerplate uses the following technologies:
 	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
 
 
-### Config.json
+### Usage
+
+1. Open the file [`config.json`](#config) and setting as needed.
+	* In the browserSyncConfig if you will use dinamic files, it's necessary replace the server option by proxy.
+	* Example
+
+	```json
+	"browserSyncConfig": {
+		"notify": false,
+		"logPrefix": "BrowserSync",
+		"server": {
+			"baseDir": ["src/", "public/", "bower_components/"]
+		}
+	}
+	```
+
+	```json
+	"browserSyncConfig": {
+		"notify": false,
+		"logPrefix": "BrowserSync",
+		"proxy": "localhost/swill-boilerplate/public/"
+	}
+	```
+
+1. Open the files `.csslintrc`, `.editorconfig`, and `.eslintrc` and set your configs to CSSLint, EditorConfig and ESLint respectively.
+
+1. Make a search in the folder project by `{Title}` and `{-}`, and replace by the corrected informations.
+
+1. Open the file `src/header-comments.txt` and set your project header.
+
+1. Open the terminal and go to the local folder
+
+	```sh
+	$ cd {your-folder-structure}/swill-boilerplate
+	```
+
+1. Install [NPM](https://www.npmjs.com/) dependencies
+
+	* Execute
+
+	```sh
+	$ npm install
+	```
+
+1. Set the CSS preprocessor you will use, execute only once (execute this after install bower dependencies)
+
+	```sh
+	$gulp setup --sass|stylus
+	```
+
+1. At the first time run the task `gulp` with parameter `compile` and start the development
+
+	```sh
+	$ gulp --compile
+	```
+
+
+### Tasks
+
+**Default Task** - serve the project and watch (Alias to `gulp serve`)
+
+```sh
+$ gulp
+```
+
+**Default Task** (the default task accepts the parameter --compile) - clean assets, compile, watch and serve the project.
+
+```sh
+$ gulp --compile
+```
+
+**Compile Task** - clean assets and compile the project.
+
+```sh
+$ gulp compile
+```
+
+**Build Task** - build the project
+
+```sh
+$ gulp build
+```
+
+**Build Task** (the build task accepts the parameter --serve) - build the project and serve builded project.
+
+```sh
+$ gulp build --serve
+```
+
+**Gh-pages Task** - build the project and push the builded folder to gh-pages branch
+
+```sh
+$ gulp ghpages
+```
+
+
+### Config
+
+All the setting find in `config.json`
 
 #### basePaths
 
@@ -307,116 +402,6 @@ BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/
 Type: `Object`
 
 BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
-
-
-### Usage
-
-#### Settings
-
-1. Open the file `config.json` and setting as needed.
-	* If change the directory `basePaths.images.dest`, remember to modify the variable $image-path in `src/stylesheets/helpers/_variables`.
-	* In the browserSyncConfig if you will use dinamic files, it's necessary replace the server option by proxy.
-	* Example
-
-	```json
-	"browserSyncConfig": {
-		"notify": false,
-		"logPrefix": "BrowserSync",
-		"server": {
-			"baseDir": ["src/", "public/", "bower_components/"]
-		}
-	}
-	```
-
-	```json
-	"browserSyncConfig": {
-		"notify": false,
-		"logPrefix": "BrowserSync",
-		"proxy": "localhost/swill-boilerplate/public/"
-	}
-	```
-
-1. Open the files `.csslintrc`, `.editorconfig`, and `.eslintrc` and set your configs to CSSLint, EditorConfig and ESLint respectively.
-
-1. Make a search in the folder project by `{Title}` and `{-}`, and replace by the corrected informations.
-
-1. Open the file `src/header-comments.txt` and set your project header.
-
-1. Open the terminal and go to the local folder
-
-	```sh
-	$ cd {your-folder-structure}/swill-boilerplate
-	```
-
-1. Install [NPM](https://www.npmjs.com/) dependencies
-
-	* Execute
-
-	```sh
-	$ npm install
-	```
-
-1. Install [Bower](http://bower.io/) dependencies
-
-	* Execute
-
-	```sh
-	$ bower install
-	```
-
-1. Set the CSS preprocessor you will use, execute only once (execute this after install bower dependencies)
-
-```sh
-$gulp setup --sass|stylus
-```
-
-
-#### Developing
-
-1. At the first time run the task `gulp` with parameter `compile` and start the development
-
-```sh
-$ gulp --compile
-```
-
-
-### Tasks
-
-**Default Task** - serve the project and watch (Alias to `gulp serve`)
-
-```sh
-$ gulp
-```
-
-**Default Task** (the default task accepts the parameter --compile) - clean assets, compile, watch and serve the project.
-
-```sh
-$ gulp --compile
-```
-
-**Compile Task** - clean assets and compile the project.
-
-```sh
-$ gulp compile
-```
-
-**Build Task** - build the project
-
-```sh
-$ gulp build
-```
-
-**Build Task** (the build task accepts the parameter --serve) - build the project and serve builded project.
-
-```sh
-$ gulp build --serve
-```
-
-**Gh-pages Task** - build the project and push the builded folder to gh-pages branch
-
-```sh
-$ gulp ghpages
-```
 
 
 ### Bitmap Sprite

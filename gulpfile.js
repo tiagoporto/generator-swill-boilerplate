@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.3.0beta
+*	Swill Boilerplate v4.3.1beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -271,20 +271,6 @@ gulp.task('copy', function () {
 						.pipe(gulp.dest(basePaths.build));
 });
 
-// Copy Bower dependencies to public folder
-gulp.task('bower', function() {
-	var outdatedBrowserLangs = gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
-									.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
-
-	var    fonts    = gulp.src([
-							basePaths.bower + '/bootstrap/dist/fonts/*',
-							basePaths.bower + '/font-awesome/fonts/*'
-						])
-						.pipe(gulp.dest(basePaths.dest + 'fonts'));
-
-	return merge(outdatedBrowserLangs, fonts);
-});
-
 gulp.task('get-preprocessor', function(){
 	if(args.sass == true){
 		argProcessor = 'sass';
@@ -320,6 +306,11 @@ gulp.task('remove-preprocessors', function(cb){
 	}
 });
 
+//Install bower dependencies
+gulp.task('bower', function(){
+	return plugins.bower();
+})
+
 //Set the use of components
 gulp.task('set-dependencies', function(){
 	if(config.components){
@@ -330,6 +321,18 @@ gulp.task('set-dependencies', function(){
 									}))
 								.pipe(gulp.dest(paths.scripts.src));
 	}
+
+	var bower_path = gulp.src('./.bowerrc')
+						.pipe(plugins.replace(/"directory" : "[a-z\/_]+"/g, '"directory" : "' + basePaths.bower + '"'))
+						.pipe(gulp.dest('./'));
+
+	var styles_var = gulp.src(paths.styles.src + '**/*.{styl,sass,scss}')
+						.pipe(plugins.replace(/(image-path[\s=:]+ ")[.\/a-z]+"/g, '$1../' + basePaths.images.dest + '"'))
+						.pipe(plugins.replace(/(font-path[\s=:]+ ")[.\/a-z]+"/g, '$1../' + basePaths.fonts.dest + '"'))
+						.pipe(gulp.dest(paths.styles.src));
+
+	var outdatedBrowser = gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
+									.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
 
 	if(config.jQuery){
 		var jquery_indexcalls = gulp.src(basePaths.dest + 'index.html')
@@ -355,7 +358,7 @@ gulp.task('set-dependencies', function(){
 //*************************** Utility Tasks ******************************//
 
 gulp.task('setup', function(cb){
-	sequence('bower',  'get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'remove-preprocessors', cb);
+	sequence('bower', 'get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'remove-preprocessors', cb);
 });
 
 gulp.task('combine-assets', function () {
