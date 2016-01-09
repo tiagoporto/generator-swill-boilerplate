@@ -251,7 +251,7 @@ gulp.task('copy', function () {
 	// Minify and Copy HTML
 	var  html    = gulp.src([
 						basePaths.dest + '**/*.{html,php}',
-						'!public/bower_components{,/**}'
+						'!' + basePaths.bower + '{,/**}'
 					])
 						.pipe(plugins.useref(assets))
 						.pipe(plugins.if('*.js', plugins.uglify()))
@@ -262,7 +262,7 @@ gulp.task('copy', function () {
 
 	// Copy All Other files except HTML, PHP, CSS e JS Files
 	var allFiles = gulp.src([
-							'!public/bower_components{,/**}',
+							'!' + basePaths.bower + '{,/**}',
 							basePaths.dest + '**/*',
 							'!' + paths.styles.dest + '**/*',
 							'!' + paths.scripts.dest + '**/*',
