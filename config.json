@@ -47,7 +47,6 @@
 
 	"browserSync": {
 		"notify": false,
-		"port": 80,
 		"logPrefix": "BrowserSync",
 		"server": {
 			"baseDir": ["public/"]
@@ -56,7 +55,6 @@
 
 	"browserSyncBuild": {
 		"notify": false,
-		"port": 80,
 		"logPrefix": "BrowserSync",
 		"server": {
 			"baseDir": ["build/"]

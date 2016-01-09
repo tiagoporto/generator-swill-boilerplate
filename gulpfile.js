@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.2.2beta
+*	Swill Boilerplate v4.3.0beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -65,8 +65,6 @@ paths = {
 		extensionStyle = "scss";
 	}else if(preprocessor === "stylus"){
 		extensionStyle = "styl";
-	}else if(preprocessor === "less"){
-		extensionStyle = preprocessor;
 	}
 
 
@@ -184,8 +182,6 @@ gulp.task('vendor-scripts', function () {
 	return gulp.src([
 					'!' + paths.scripts.src + '**/*_IGNORE.js',
 					paths.scripts.src + 'settings/google_analytics.js',
-					paths.scripts.src + 'vendor/frameworks_libs/**/*.js',
-					paths.scripts.src + 'vendor/plugins/**/*.js',
 					paths.scripts.src + 'settings/*.js'
 				])
 				.pipe(plugins.plumber())
@@ -294,14 +290,12 @@ gulp.task('get-preprocessor', function(){
 		argProcessor = 'sass';
 	}else if(args.stylus == true){
 		argProcessor = 'stylus';
-	}else if(args.less == true){
-		argProcessor = 'less';
 	}
 });
 
 //Set the preprocessor in variable
 gulp.task('set-preprocessor', function(){
-	if(args.sass || args.less || args.stylus){
+	if(args.sass || args.stylus){
 		return gulp.src(['gulpfile.js'])
 			.pipe(plugins.replace(/preprocessor\s=\s'[a-z]{4,6}/g, "preprocessor = \'" + argProcessor))
 			.pipe(gulp.dest('./'));
@@ -310,7 +304,7 @@ gulp.task('set-preprocessor', function(){
 
 //Copy the files to use
 gulp.task('folder-preprocessor', function(){
-	if(args.sass || args.less || args.stylus){
+	if(args.sass || args.stylus){
 		return gulp.src(paths.styles.src + argProcessor + "/**/*")
 			.pipe(gulp.dest(paths.styles.src));
 	}
@@ -318,11 +312,10 @@ gulp.task('folder-preprocessor', function(){
 
 //Removes unnecessary folders
 gulp.task('remove-preprocessors', function(cb){
-	if(args.sass || args.less || args.stylus){
+	if(args.sass || args.stylus){
 		del([
 			paths.styles.src + "sass",
-			paths.styles.src + "stylus",
-			paths.styles.src + "less"
+			paths.styles.src + "stylus"
 			], cb)
 	}
 });
@@ -382,8 +375,8 @@ gulp.task('clean', function (cb) {
 			basePaths.build,
 			paths.styles.dest,
 			paths.scripts.dest,
-			paths.styles.src + 'helpers/_bitmap-sprite.{styl,scss,less}',
-			paths.styles.src + 'helpers/_vetor-sprite.{styl,scss,less}',
+			paths.styles.src + 'helpers/_bitmap-sprite.{styl,scss}',
+			paths.styles.src + 'helpers/_vetor-sprite.{styl,scss}',
 			paths.images.dest + '**/*',
 			// Add here the folders that will not be deleted in public/img
 			'!' + paths.images.dest + 'copyright{,**/*{,**/*}}',
@@ -438,16 +431,16 @@ gulp.task('serve', function () {
 		);
 
 	gulp.watch([
-			paths.styles.src + '**/*.{styl,scss,sass,less}',
-			'!' + paths.styles.src + 'helpers/mixins/*.{styl,scss,sass,less}',
-			'!' + paths.styles.src + 'helpers/functions/*.{styl,scss,sass,less}'],
+			paths.styles.src + '**/*.{styl,scss,sass}',
+			'!' + paths.styles.src + 'helpers/mixins/*.{styl,scss,sass}',
+			'!' + paths.styles.src + 'helpers/functions/*.{styl,scss,sass}'],
 
 			['styles', browserSync.reload]
 		);
 
 	gulp.watch([
-			paths.styles.src + 'helpers/mixins/*.{styl,scss,sass,less}',
-			paths.styles.src + 'helpers/functions/*.{styl,scss,sass,less}'],
+			paths.styles.src + 'helpers/mixins/*.{styl,scss,sass}',
+			paths.styles.src + 'helpers/functions/*.{styl,scss,sass}'],
 
 			['styles-helpers']
 		);

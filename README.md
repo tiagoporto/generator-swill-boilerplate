@@ -41,7 +41,7 @@ This boilerplate uses the following technologies:
 * [EditorConfig](http://editorconfig.org/)
 * [Gulp](http://gulpjs.com/)
 * [ESLint](http://eslint.org/)
-* [Less](http://lesscss.org/), [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
+* [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 * [Node.js](http://nodejs.org/)
 * [NPM](https://www.npmjs.com/)
 
@@ -62,7 +62,7 @@ This boilerplate uses the following technologies:
 * Generate Sprites with .svg and a .png to fallback
 * Analyze CSS with csslint
 * Prefix CSS with Autoprefixer
-* Compile Less, Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
+* Compile Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
 * Concatenate And Minify Scripts
 * Analyze JavaScript with ESLint
 * Notify when tasks are complete
@@ -161,11 +161,11 @@ This boilerplate uses the following technologies:
 │  │    │    │
 │  │    │    ├─ helpers
 │  │    │    │  │
-│  │    │    │  ├─ functions // All files here will be concatenated to ../functions.{sass, styl, less}
+│  │    │    │  ├─ functions // All files here will be concatenated to ../functions.{sass, styl}
 │  │    │    │  │
-│  │    │    │  ├─ mixins // All files here will be concatenated to ../mixins.{sass, styl, less}
+│  │    │    │  ├─ mixins // All files here will be concatenated to ../mixins.{sass, styl}
 │  │    │    │  │
-│  │    │    │  ├─ _bitmap-sprite.{sass, styl, less}
+│  │    │    │  ├─ _bitmap-sprite.{sass, styl}
 │  │    │    │  │
 │  │    │    │  ├─ _functions.{sass, styl}
 │  │    │    │  │
@@ -175,17 +175,17 @@ This boilerplate uses the following technologies:
 │  │    │    │  │
 │  │    │    │  ├─ _placeholders.{sass, styl}
 │  │    │    │  │
-│  │    │    │  ├─ _variables.{sass, styl, less}
+│  │    │    │  ├─ _variables.{sass, styl}
 │  │    │    │  │
-│  │    │    │  └─ _vetor-sprite.{sass, styl, less}
+│  │    │    │  └─ _vetor-sprite.{sass, styl}
 │  │    │    │
 │  │    │    ├─ media_queries
 │  │    │    │
 │  │    │    ├─ typography
 │  │    │    │
-│  │    │    ├─ _base.{sass, styl, less} // Main Styles
+│  │    │    ├─ _base.{sass, styl} // Main Styles
 │  │    │    │
-│  │    │    └─ styles.{sass, styl, less} // Base file with imports
+│  │    │    └─ styles.{sass, styl} // Base file with imports
 │  │    │
 │  │    └─ header-comments.txt // Header to styles and Scripts
 │  │
@@ -260,7 +260,6 @@ This boilerplate uses the following technologies:
 	```json
 	"browserSyncConfig": {
 		"notify": false,
-		"port": 80,
 		"logPrefix": "BrowserSync",
 		"server": {
 			"baseDir": ["src/", "public/", "bower_components/"]
@@ -271,7 +270,6 @@ This boilerplate uses the following technologies:
 	```json
 	"browserSyncConfig": {
 		"notify": false,
-		"port": 80,
 		"logPrefix": "BrowserSync",
 		"proxy": "localhost/swill-boilerplate/public/"
 	}
@@ -308,7 +306,7 @@ This boilerplate uses the following technologies:
 1. Set the CSS preprocessor you will use, execute only once (execute this after install bower dependencies)
 
 ```sh
-$gulp setup --sass|less|stylus
+$gulp setup --sass|stylus
 ```
 
 ### Developing
@@ -374,7 +372,7 @@ $ gulp ghpages
 
 This boilerplate uses [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith) to generate bitmap sprites.
 
-When the sprite is generated, a file `_bitmap-sprite.{styl,scss,less}` is created with four mixins and the variables of the parameters of the images, like height and width (the names of the variables is the same of the original filename before the compilation).
+When the sprite is generated, a file `_bitmap-sprite.{styl,scss}` is created with four mixins and the variables of the parameters of the images, like height and width (the names of the variables is the same of the original filename before the compilation).
 
 Just use the mixins with the variables as parameters.
 
@@ -460,19 +458,19 @@ If use lint JS.
 
 Type: `Array`
 
-to-do
+Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
 
 ### browserSync
 
 Type: `Object`
 
-to-do
+BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
 
 ### browserSyncBuild
 
 Type: `Object`
 
-to-do
+BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
 
 
 ## Contributing
