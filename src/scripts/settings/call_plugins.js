@@ -18,7 +18,7 @@ addLoadEvent(
         color: '#ffffff',
         lowerThan: 'transform',
         languagePath: 'lang/outdated_browser/{-}.html'
-    })//,
+    }),
 
-	//$('#logo').downloadTip({ 'position': 'right' })
+	$('#logo').downloadTip({ 'position': 'right' })
 );
