@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.3.2beta
+*	Swill Boilerplate v4.2.0beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -314,48 +314,78 @@ gulp.task('bower', function(){
 	return plugins.bower();
 })
 
+gulp.task('logodownload', ['outdatedbrowser'], function(){
+	if((config.logoDownloadtip && !config.jQuery) || !config.logoDownloadtip){
+		return gulp.src(basePaths.dest + 'index.html')
+					.pipe(plugins.replace(
+						/\t\t<script src="jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js"><\/script>\r\n/g, ''))
+					.pipe(plugins.replace(
+						/\t\t<link rel="stylesheet" href="jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">\r\n/g, ''))
+					.pipe(plugins.replace(
+						/\t\t<!-- Logos[\w\W]+.eps\)\" \/>\r\n\r\n/g, ''))
+					.pipe(gulp.dest(basePaths.dest));
+	}
+})
+
+gulp.task('outdatedbrowser', function(){
+	if(!config.outdatedBrowser){
+		return gulp.src(basePaths.dest + '*.html')
+						.pipe(plugins.replace(/\t\t<link rel="stylesheet" href="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.css">\r\n/g, ''))
+						.pipe(plugins.replace(/\t\t<script src="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.js"><\/script>\r\n/g, ''))
+						.pipe(plugins.replace(/\t\t<!-- [=]+ Outdated Browser[\s=\-\>\<a-zA-Z"\/!]+-->\r\n\r\n/g, ''))
+						.pipe(gulp.dest(basePaths.dest));
+
+
+	}else{
+		return gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
+										.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
+
+	}
+})
+
 //Set the use of components
-gulp.task('set-dependencies', function(){
-	if(config.components){
-		var component_script = gulp.src(paths.scripts.src + '**/custom-input-file_IGNORE.js')
-								.pipe(vinylPaths(del))
-								.pipe(plugins.rename(function(path){
-										path.basename = path.basename.substring(0,  path.basename.length -7)
-									}))
-								.pipe(gulp.dest(paths.scripts.src));
+gulp.task('set-dependencies', ['logodownload'], function(){
+
+	//Remove outdated and leave logo
+	if(!config.outdatedBrowser && (config.logoDownloadtip && config.jQuery)){
+		var outdatedTrue = gulp.src(paths.scripts.src + 'settings/call_plugins.js')
+						.pipe(plugins.replace(/\toutdatedBrowser[\W\w]+,\r\n\r\n/g, ''))
+						.pipe(gulp.dest(paths.scripts.src + 'settings/'));
+
+	//Remove logo and leave outdated
+	}else if(config.outdatedBrowser && (!config.jQuery || !config.outdatedBrowser)){
+		var outdatedFalse = gulp.src(paths.scripts.src + 'settings/call_plugins.js')
+						.pipe(plugins.replace(/,\r\n\r\n\t[\W\w]+\}\)/g, ''))
+						.pipe(gulp.dest(paths.scripts.src + 'settings/'));
+
+	//Remove both
+	}else if(!config.outdatedBrowser && (!config.jQuery || !config.outdatedBrowser)){
+		var allFalse = gulp.src(paths.scripts.src + 'settings/call_plugins.js')
+						.pipe(plugins.replace(/\toutdatedBrowser[\W\w]+\);/g, ');'))
+						.pipe(gulp.dest(paths.scripts.src + 'settings/'));
+	}
+
+	if(!config.jQuery){
+		var indexcalls = gulp.src(basePaths.dest + 'index.html')
+									.pipe(plugins.replace(
+										/\t\t<script src="jquery\/dist\/jquery.js"><\/script>\r\n/g, ''))
+									.pipe(gulp.dest(basePaths.dest));
+
+		var eslint = gulp.src('./.eslintrc')
+								.pipe(plugins.replace(/jquery":\strue/g, 'jquery": false'))
+								.pipe(gulp.dest('./'));
 	}
 
 	var bower_path = gulp.src('./.bowerrc')
 						.pipe(plugins.replace(/"directory" : "[a-z\/_]+"/g, '"directory" : "' + basePaths.bower + '"'))
 						.pipe(gulp.dest('./'));
 
+
 	var styles_var = gulp.src(paths.styles.src + '**/*.{styl,sass,scss}')
 						.pipe(plugins.replace(/(image-path[\s=:]+ ")[.\/a-z]+"/g, '$1../' + basePaths.images.dest + '"'))
 						.pipe(plugins.replace(/(font-path[\s=:]+ ")[.\/a-z]+"/g, '$1../' + basePaths.fonts.dest + '"'))
 						.pipe(gulp.dest(paths.styles.src));
 
-	var outdatedBrowser = gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
-									.pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
-
-	if(config.jQuery){
-		var jquery_indexcalls = gulp.src(basePaths.dest + 'index.html')
-									.pipe(plugins.replace(
-											/<!-- (<link rel="stylesheet" href="jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">) -->/g, '$1'))
-									.pipe(plugins.replace(
-										/<!-- (<script src="jquery\/dist\/jquery.js"><\/script>) -->/g, '$1'))
-									.pipe(plugins.replace(
-										/<!-- (<script src="jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js"><\/script>) -->/g,  '$1'))
-									.pipe(gulp.dest(basePaths.dest));
-
-		var jquery_jscalls = gulp.src(paths.scripts.src + '**/call_plugins.js')
-									.pipe(plugins.replace(/\/\/,/g, ","))
-									.pipe(plugins.replace(/\/\/\$\('#logo'\)/g, "$('#logo')"))
-									.pipe(gulp.dest(paths.scripts.src));
-
-		var jquery_eslint = gulp.src('./.eslintrc')
-								.pipe(plugins.replace(/jquery":\sfalse/g, 'jquery": true'))
-								.pipe(gulp.dest('./'));
-	}
 });
 
 //*************************** Utility Tasks ******************************//

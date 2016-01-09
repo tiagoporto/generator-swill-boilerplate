@@ -33,9 +33,9 @@
 
 	"outdatedBrowser": true,
 
-	"logoDownloadtip": false,
+	"logoDownloadtip": true,
 
-	"jQuery": false,
+	"jQuery": true,
 
 	"lintCSS": false,
 
