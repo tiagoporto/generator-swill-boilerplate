@@ -23,10 +23,11 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 * [Usage](#usage)
 	* [Settings](#setting)
 	* [Developing](#developing)
-+ [Tasks](#tasks)
-+ [Peculiarities](#peculiarities)
-+ [Bitmap Sprite](#bitmap-sprite)
-+ [Vetor Sprite](#svg-sprite)
+* [Tasks](#tasks)
+* [Peculiarities](#peculiarities)
+	* [Bitmap Sprite](#bitmap-sprite)
+	* [Vetor Sprite](#svg-sprite)
+	* [Config.js](#configjs)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -368,7 +369,7 @@ $ gulp ghpages
 	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
 
 
-## Bitmap Sprite
+### Bitmap Sprite
 
 This boilerplate uses [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith) to generate bitmap sprites.
 
@@ -400,7 +401,7 @@ Just use the mixins with the variables as parameters.
 }
 ```
 
-## Vetor Sprite
+### Vetor Sprite
 
 To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite), as fallback all the SVG sprites are converted to `.png` with [gulp-svg2png](https://github.com/akoenig/gulp-svg2png)
 
@@ -419,54 +420,54 @@ To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-
 	* If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
 
 
-## Config.js
+### Config.js
 
-### basePaths
+#### basePaths
 
 Type: `Object`
 
 Application paths.
 
 
-### components
+#### components
 
 Type: `Boolean`
 
 to-do
 
 
-### jquery
+#### jquery
 
 Type: `Boolean`
 
 If the application will use jQuery.
 
 
-### lintCSS
+#### lintCSS
 
 Type: `Boolean`
 
 If use lint CSS.
 
-### lintJS
+#### lintJS
 
 Type: `Boolean`
 
 If use lint JS.
 
-### autoprefixerBrowsers
+#### autoprefixerBrowsers
 
 Type: `Array`
 
 Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
 
-### browserSync
+#### browserSync
 
 Type: `Object`
 
 BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
 
-### browserSyncBuild
+#### browserSyncBuild
 
 Type: `Object`
 
@@ -477,7 +478,12 @@ BrowserSync options to builded project, see the browsersync [docs](https://www.b
 
 If you have time to contribute, giving some suggestions, improving the documentation, correcting bugs or anything else, please help me to make this a good tool for everyone.
 
-Please, send pull requests to [Develop Branch](https://github.com/tiagoporto/swill-boilerplate/tree/develop).
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
+
 
 ## License
 
