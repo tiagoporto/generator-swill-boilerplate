@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.3.1beta
+*	Swill Boilerplate v4.3.2beta
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -232,6 +232,9 @@ gulp.task('scripts', function () {
 						.pipe(plugins.if(config.lintJS, plugins.eslint.format()))
 						.pipe(plugins.rename(function(path){
 							path.basename = path.basename.substring(0,  path.basename.length -9)
+						}))
+						.pipe(plugins.wrapper({
+							header: headerProject + '\r\n'
 						}))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(plugins.rename({suffix: '.min'}))
