@@ -6,6 +6,7 @@
 */
 
 html
+	font-size: 100%
 	box-sizing border-box
 
 *, *:before, *:after
@@ -17,11 +18,17 @@ body
 		background-size: 100% em($base-line-height, $base-font-size)
 		background-position: left top
 
-	font normal normal  $base-font-size\/$base-line-height $font-family-base
-	background-color $bg-color
-	color $base-text-color
-	text-rendering optimizeLegibility
-	-webkit-font-smoothing antialiased
-	-moz-osx-font-smoothing grayscale
-	font-smoothing auto
-	font-feature-settings "liga", "kern"
+	font: normal normal  $base-font-size\/em($base-line-height) $font-family-base
+	background-color: $bg-color
+	color: $base-text-color
+	text-rendering: optimizeLegibility
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+	font-smoothing: auto
+	font-feature-settings: "liga", "kern"
+
+p
+	adjust-font-size-to($base-font-size)
+	rhythm-margins(1, 1, $base-font-size)
+	hyphens auto
+	// max-width ($base-font-size * 30)

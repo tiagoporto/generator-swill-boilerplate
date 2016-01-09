@@ -1,18 +1,28 @@
 // Helpers
-@import "helpers/_variables";
-@import "helpers/_functions";
+@import "settings/variables";
+@import "helpers/functions";
+@import "helpers/mixins";
 
-// Dependencies
+// Web Fonts
+// @import "settings/web_fonts";
+
 
 // Sprites
-@import "helpers/bitmap-sprite";
-@import "helpers/vetor-sprite";
+// @import "helpers/bitmap-sprite";
+// @import "helpers/vetor-sprite";
 
+// Vendors
+// @import "../../public/bower_components/";
 
-// Main Styles
-@import "helpers/_placeholders";
-@import "helpers/_mixins";
+/*! ==================================================================
+   Main Styles
+   ================================================================== */
 @import "base";
+
+
+
+
+
 
 /*! ==================================================================
    Media Queries

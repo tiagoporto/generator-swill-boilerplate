@@ -4,4 +4,8 @@
 *	Released under the MIT license
 */
 
+jQuery(document).ready(function($) {
+
 // JS
+
+});

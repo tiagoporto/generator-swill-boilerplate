@@ -11,17 +11,9 @@ $input
 		outline 0
 		box-shadow inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
 
-
-.fieldset
-	margin: 0
-	rhythm-borders(1px, 1, $base-font-size, solid lighten(#000, 60%))
-
 .input
 	@extend $input
 	height: em($base-line-height / 2 * 3)
-
-.textarea
-	@extend $input
 
 .input-disabled
 	background lighten(#000, 95%)
