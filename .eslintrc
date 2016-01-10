@@ -40,9 +40,9 @@
 	},
 
 	"globals": {
-		"angular": false,
-		"ga": false,
-		"outdatedBrowser": false
+		"angular": true,
+		"ga": true,
+		"outdatedBrowser": true
 
 		// additional predefined global variables
 	},
@@ -91,12 +91,12 @@
 		"block-scoped-var": 0,      // treat var statements as if they were block scoped (off by default)
 		"complexity": [0, 11],            // specify the maximum cyclomatic complexity allowed in a program (off by default)
 		"consistent-return": 0,     // require return statements to either always or never specify values
-		"curly": [0, "all"],                 // specify curly brace conventions for all control statements
+		"curly": [2, "all"],                 // specify curly brace conventions for all control statements
 		"default-case": 0,          // require default case in switch statements (off by default)
 		"dot-notation": [0, { "allowKeywords": true }],          // encourages use of dot notation whenever possible
 		"dot-location": 0,          // enforces consistent newlines before or after dots (off by default)
-		"eqeqeq": 0,                // require the use of === and !==
-		"guard-for-in": 0,          // make sure for-in loops have an if statement (off by default)
+		"eqeqeq": 2,                // require the use of === and !==
+		"guard-for-in": 2,          // make sure for-in loops have an if statement (off by default)
 		"no-alert": 0,              // disallow the use of alert, confirm, and prompt
 		"no-caller": 0,             // disallow use of arguments.caller or arguments.callee
 		"no-div-regex": 0,          // disallow division operators explicitly at beginning of regular expression (off by default)
@@ -142,7 +142,7 @@
 
 		////////// Strict Mode //////////
 
-		"strict": 0,          // controls location of Use Strict Directives
+		"strict": 2,          // controls location of Use Strict Directives
 
 
 		////////// Variables //////////
@@ -174,7 +174,7 @@
 
 		"array-bracket-spacing": [0, "never"],       // enforce spacing inside array brackets (off by default)
 		"brace-style": [0, "1tbs"],                 // enforce one true brace style (off by default)
-		"camelcase": 0,                   // require camel case names
+		"camelcase": 1,                   // require camel case names
 		"comma-spacing": 0,               // enforce spacing before and after comma
 		"comma-style": 0,                 // enforce one true comma style (off by default)
 		"computed-property-spacing": [0, "never"],   // require or disallow padding inside computed properties (off by default)
@@ -182,12 +182,12 @@
 		"eol-last": 0,                    // enforce newline at the end of file, with no multiple empty lines
 		"func-names": 0,                  // require function expressions to have a name (off by default)
 		"func-style": [0, "declaration"],                  // enforces use of function declarations or expressions (off by default)
-		"indent": 0,                      // this option sets a specific tab width for your code (off by default)
+		"indent": [1, "tab"],                      // this option sets a specific tab width for your code (off by default)
 		"key-spacing": [0, { "beforeColon": false, "afterColon": true }],                 // enforces spacing between keys and values in object literal properties
 		"lines-around-comment": 0,        // enforces empty lines around comments (off by default)
 		"linebreak-style": [0, "unix"],             // disallow mixed 'LF' and 'CRLF' as linebreaks (off by default)
 		"max-nested-callbacks": [0, 2],        // specify the maximum depth callbacks can be nested (off by default)
-		"new-cap": 0,                     // require a capital letter for constructors
+		"new-cap": 2,                     // require a capital letter for constructors
 		"new-parens": 0,                  // disallow the omission of parentheses when invoking a constructor with no arguments
 		"new-parens": 0,                  // disallow the omission of parentheses when invoking a constructor with no arguments
 		"newline-after-var": 0,           // allow/disallow an empty newline after var statement (off by default)
@@ -208,7 +208,7 @@
 		"operator-linebreak": 0,          // enforce operators to be placed before or after line breaks (off by default)
 		"padded-blocks": 0,               // enforce padding within blocks (off by default)
 		"quote-props": 0,                 // require quotes around object literal property names (off by default)
-		"quotes": [0, "single", "avoid-escape"],                      // specify whether double or single quotes should be used
+		"quotes": [1, "single", "avoid-escape"],                      // specify whether double or single quotes should be used
 		"semi-spacing": [0, {"before": false, "after": true}],                // enforce spacing before and after semicolons
 		"semi": 0,                        // require or disallow use of semicolons instead of ASI
 		"sort-vars": 0,                   // sort variables within the same declaration block (off by default)
@@ -239,7 +239,7 @@
 		"max-len": [0, 80, 4],         // specify the maximum length of a line in your program (off by default)
 		"max-params": [0, 3],      // limits the number of parameters that can be used in the function declaration. (off by default)
 		"max-statements": [0, 10],  // specify the maximum number of statement allowed in a function (off by default)
-		"no-bitwise": 0,      // disallow use of bitwise operators (off by default)
+		"no-bitwise": 2,      // disallow use of bitwise operators (off by default)
 		"no-plusplus": 0      // disallow use of unary operators, ++ and -- (off by default)
 	}
 }
