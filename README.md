@@ -1,6 +1,6 @@
 # Swill Boilerplate
 
-[![devDependencies Status](https://img.shields.io/david/dev/tiagoporto/swill-boilerplate.svg)](https://github.com/tiagoporto/swill-boilerplate)
+[![devDependencies Status](https://img.shields.io/david/dev/tiagoporto/swill-boilerplate.svg)](https://david-dm.org/tiagoporto/swill-boilerplate#info=devDependencies)
 [![Github Release](https://img.shields.io/github/release/tiagoporto/swill-boilerplate.svg)](https://github.com/tiagoporto/swill-boilerplate)
 [![Github Issues](https://img.shields.io/github/issues/tiagoporto/swill-boilerplate.svg)](https://github.com/tiagoporto/swill-boilerplate/issues)
 [![Github License](https://img.shields.io/github/license/tiagoporto/swill-boilerplate.svg)](http://opensource.org/licenses/MIT)
