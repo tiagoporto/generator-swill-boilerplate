@@ -326,7 +326,7 @@ gulp.task('logodownload', ['outdatedbrowser'], function(){
 					.pipe(gulp.dest(basePaths.dest));
 
 		var bowerLogo = gulp.src('bower.json')
-								.pipe(plugins.replace(/\t\t"jquery-logo-downloadtip[0-9\s:"~.]+,/g, ''))
+								.pipe(plugins.replace(/\s{4}"jquery-logo-downloadtip[0-9\s:"~.]+,/g, ''))
 								.pipe(gulp.dest('./'));
 
 		return merge(htmlLogo, bowerLogo);
@@ -343,7 +343,7 @@ gulp.task('outdatedbrowser', function(){
 
 
 		var bowerOut = gulp.src('bower.json')
-								.pipe(plugins.replace(/\t\t"outdated-browser[0-9\s:"~.]+,/g, ''))
+								.pipe(plugins.replace(/\s{4}"outdated-browser[0-9\s:"~.]+,/g, ''))
 								.pipe(gulp.dest('./'));
 
 		return merge(htmlOut, bowerOut);
@@ -389,7 +389,7 @@ gulp.task('set-dependencies', ['logodownload'], function(){
 								.pipe(gulp.dest('./'));
 
 		var bowerJquery = gulp.src('bower.json')
-								.pipe(plugins.replace(/\t\t"jquery"[0-9\s:"~.]+,/g, ''))
+								.pipe(plugins.replace(/\s{4}"jquery"[0-9\s:"~.]+,/g, ''))
 								.pipe(gulp.dest('./'));
 	}
 
