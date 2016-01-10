@@ -11,12 +11,13 @@ $input
 		outline 0
 		box-shadow inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
 
-.input
+input[type="text"]
+input[type="search"]
 	@extend $input
 	height: em($base-line-height / 2 * 3)
 
-.input-disabled
-	background lighten(#000, 95%)
+	&:disabled
+		background lighten(#000, 95%)
 
 ::placeholder
 	color lighten(#000, 55%)
