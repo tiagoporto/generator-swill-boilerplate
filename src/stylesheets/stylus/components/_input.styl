@@ -13,11 +13,18 @@ $input
 
 input[type="text"]
 input[type="search"]
+input[type="email"]
+input[type="number"]
+input[type="password"]
+select
 	@extend $input
 	height: em($base-line-height / 2 * 3)
 
 	&:disabled
 		background lighten(#000, 95%)
+
+select
+	width: auto
 
 ::placeholder
 	color lighten(#000, 55%)
