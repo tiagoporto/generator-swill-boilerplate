@@ -1,9 +1,7 @@
-/*!
-*
-* Box model reset
-* http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
-*
-*/
+//
+// Box model reset
+// http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+//
 
 html
 	font-size: 100%
@@ -13,7 +11,7 @@ html
 	box-sizing: inherit
 
 body
-	font: normal normal  $base-font-size\/em($base-line-height) $font-family-base
+	font: normal normal  #{$base-font-size}/#{em($base-line-height)} $font-family-base
 	background-color: $bg-color
 	color: $base-text-color
 	text-rendering: optimizeLegibility
