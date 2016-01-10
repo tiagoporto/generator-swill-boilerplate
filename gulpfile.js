@@ -318,9 +318,9 @@ gulp.task('logodownload', ['outdatedbrowser'], function(){
 	if((config.logoDownloadtip && !config.jQuery) || !config.logoDownloadtip){
 		return gulp.src(basePaths.dest + 'index.html')
 					.pipe(plugins.replace(
-						/\t\t<script src="jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js"><\/script>\r\n/g, ''))
+						/\t\t<link rel="stylesheet" href="bower_components\/jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">\r\n/g, ''))
 					.pipe(plugins.replace(
-						/\t\t<link rel="stylesheet" href="jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">\r\n/g, ''))
+						/\t\t<script src="bower_components\/jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js"><\/script>\r\n/g, ''))
 					.pipe(plugins.replace(
 						/\t\t<!-- Logos[\w\W]+.eps\)\" \/>\r\n\r\n/g, ''))
 					.pipe(gulp.dest(basePaths.dest));
@@ -368,7 +368,7 @@ gulp.task('set-dependencies', ['logodownload'], function(){
 	if(!config.jQuery){
 		var indexcalls = gulp.src(basePaths.dest + 'index.html')
 									.pipe(plugins.replace(
-										/\t\t<script src="jquery\/dist\/jquery.js"><\/script>\r\n/g, ''))
+										/\t\t<script src="bower_components\/jquery\/dist\/jquery.js"><\/script>\r\n/g, ''))
 									.pipe(gulp.dest(basePaths.dest));
 
 		var eslint = gulp.src('./.eslintrc')
