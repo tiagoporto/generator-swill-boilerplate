@@ -316,7 +316,7 @@ gulp.task('bower', function(){
 
 gulp.task('logodownload', ['outdatedbrowser'], function(){
 	if((config.logoDownloadtip && !config.jQuery) || !config.logoDownloadtip){
-		return gulp.src(basePaths.dest + 'index.html')
+		var htmlLogo = gulp.src(basePaths.dest + 'index.html')
 					.pipe(plugins.replace(
 						/\t\t<link rel="stylesheet" href="bower_components\/jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">\r\n/g, ''))
 					.pipe(plugins.replace(
@@ -324,16 +324,29 @@ gulp.task('logodownload', ['outdatedbrowser'], function(){
 					.pipe(plugins.replace(
 						/\t\t<!-- Logos[\w\W]+.eps\)\" \/>\r\n\r\n/g, ''))
 					.pipe(gulp.dest(basePaths.dest));
+
+		var bowerLogo = gulp.src('bower.json')
+								.pipe(plugins.replace(/\t\t"jquery-logo-downloadtip[0-9\s:"~.]+,/g, ''))
+								.pipe(gulp.dest('./'));
+
+		return merge(htmlLogo, bowerLogo);
 	}
 })
 
 gulp.task('outdatedbrowser', function(){
 	if(!config.outdatedBrowser){
-		return gulp.src(basePaths.dest + '*.html')
+		var htmlOut =  gulp.src(basePaths.dest + '*.html')
 						.pipe(plugins.replace(/\t\t<link rel="stylesheet" href="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.css">\r\n/g, ''))
 						.pipe(plugins.replace(/\t\t<script src="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.js"><\/script>\r\n/g, ''))
 						.pipe(plugins.replace(/\t\t<!-- [=]+ Outdated Browser[\s=\-\>\<a-zA-Z"\/!]+-->\r\n\r\n/g, ''))
 						.pipe(gulp.dest(basePaths.dest));
+
+
+		var bowerOut = gulp.src('bower.json')
+								.pipe(plugins.replace(/\t\t"outdated-browser[0-9\s:"~.]+,/g, ''))
+								.pipe(gulp.dest('./'));
+
+		return merge(htmlOut, bowerOut);
 
 
 	}else{
@@ -374,6 +387,10 @@ gulp.task('set-dependencies', ['logodownload'], function(){
 		var eslint = gulp.src('./.eslintrc')
 								.pipe(plugins.replace(/jquery":\strue/g, 'jquery": false'))
 								.pipe(gulp.dest('./'));
+
+		var bowerJquery = gulp.src('bower.json')
+								.pipe(plugins.replace(/\t\t"jquery"[0-9\s:"~.]+,/g, ''))
+								.pipe(gulp.dest('./'));
 	}
 
 	var bower_path = gulp.src('./.bowerrc')
@@ -391,7 +408,7 @@ gulp.task('set-dependencies', ['logodownload'], function(){
 //*************************** Utility Tasks ******************************//
 
 gulp.task('setup', function(cb){
-	sequence('bower', 'get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'remove-preprocessors', cb);
+	sequence('get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'bower', 'remove-preprocessors', cb);
 });
 
 gulp.task('combine-assets', function () {
