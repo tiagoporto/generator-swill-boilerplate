@@ -29,7 +29,7 @@
 		}
 	},
 
-	"components": false,
+	"components": true,
 
 	"outdatedBrowser": true,
 

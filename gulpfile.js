@@ -314,6 +314,14 @@ gulp.task('bower', function(){
 	return plugins.bower();
 })
 
+gulp.task('components', ['logodownload'], function(cb){
+	if(!config.components){
+		return del([
+					paths.styles.src + "**/components"
+					], cb);
+	}
+})
+
 gulp.task('logodownload', ['outdatedbrowser'], function(){
 	if((config.logoDownloadtip && !config.jQuery) || !config.logoDownloadtip){
 		var htmlLogo = gulp.src(basePaths.dest + 'index.html')
@@ -357,7 +365,14 @@ gulp.task('outdatedbrowser', function(){
 })
 
 //Set the use of components
-gulp.task('set-dependencies', ['logodownload'], function(){
+gulp.task('set-dependencies', ['components'], function(){
+
+	if(!config.components){
+		console.log('tert')
+			var stylesComponents = gulp.src(paths.styles.src + '**/*.{styl,sass,scss}')
+						.pipe(plugins.replace(/@import "compo[\w\W]+area"/g, ''))
+						.pipe(gulp.dest(paths.styles.src));
+	}
 
 	//Remove outdated and leave logo
 	if(!config.outdatedBrowser && (config.logoDownloadtip && config.jQuery)){
