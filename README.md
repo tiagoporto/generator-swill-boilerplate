@@ -176,6 +176,8 @@ This boilerplate uses the following technologies:
 │  │    │    │
 │  │    │    └─ styles.{sass, styl} // Base file with imports
 │  │    │
+│  │    ├─ vendors // Third-party code
+│  │    │
 │  │    └─ header-comments.txt // Header to styles and Scripts
 │  │
 │  └─ Tasks // Specific Gulp tasks to preprocessors
