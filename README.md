@@ -23,7 +23,6 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 * [Boilerplate](#boilerplate)
 	* [Usage](#usage)
 	* [Tasks](#tasks)
-	* [Config](#config)
 	* [Bitmap Sprite](#bitmap-sprite)
 	* [Vetor Sprite](#svg-sprite)
 * [Contributing](#contributing)
@@ -78,9 +77,8 @@ This boilerplate uses the following technologies:
 ./
 ├──┐
 │  │
-│  ├─ build // Folder with the builded project
-│  │
 │  ├─ public // Public files
+│  │  │
 │  │  ├─ css
 │  │  │  └─ // Public styles
 │  │  │
@@ -121,6 +119,7 @@ This boilerplate uses the following technologies:
 │  ├─ spec // Scripts test
 │  │
 │  ├─ src // Source files for the projects
+│  │    │
 │  │    ├─ images // Original imagens, don't compressed
 │  │    │  │
 │  │    │  ├─ sprite // Images to generate the sprite
@@ -212,11 +211,6 @@ This boilerplate uses the following technologies:
 	$ npm install -g gulp
 	```
 
-	For Mac or Linux User
-
-	```sh
-	$ sudo npm install -g gulp
-	```
 
 1. Install [Bower](http://bower.io/)
 
@@ -228,11 +222,11 @@ This boilerplate uses the following technologies:
 
 1. __Necessary just to use with Sass.__
 
-	1. In Windows is necessary install [Ruby](https://www.ruby-lang.org/)
+	* In Windows is necessary install [Ruby](https://www.ruby-lang.org/)
 
 		- Download and install [Ruby](http://rubyinstaller.org/).
 
-	1. Install Gem [Sass](http://sass-lang.com/)
+	* Install Gem [Sass](http://sass-lang.com/)
 
 		- Open command line and execute
 
@@ -255,7 +249,64 @@ This boilerplate uses the following technologies:
 ### Usage
 
 1. Open the file [`config.json`](#config) and setting as needed.
-	* In the browserSyncConfig if you will use dinamic files, it's necessary replace the server option by proxy.
+
+	#### basePaths
+
+	Type: `Object`
+
+	Application paths.
+
+
+	#### components
+
+	Type: `Boolean`
+
+	Basic styles to [components](http://tiagoporto.github.io/swill-boilerplate/components.html), only available with Stylus.
+
+	#### outdatedBrowser
+
+	Type: `Boolean`
+
+	If use outdatedBrowser.
+
+	#### logodownloadtip
+
+	Type: `Boolean`
+
+	If use jQuery Logo Downloadtip.
+
+	#### jquery
+
+	Type: `Boolean`
+
+	If use jQuery.
+
+	#### lintCSS
+
+	Type: `Boolean`
+
+	If use lint CSS.
+
+	#### lintJS
+
+	Type: `Boolean`
+
+	If use lint JS.
+
+	#### autoprefixerBrowsers
+
+	Type: `Array`
+
+	Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
+
+	#### browserSync
+
+	Type: `Object`
+
+	BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
+
+	If you will use dinamic files, it's necessary replace the server option by proxy.
+
 	* Example
 
 	```json
@@ -276,19 +327,24 @@ This boilerplate uses the following technologies:
 	}
 	```
 
+
+	#### browserSyncBuild
+
+	Type: `Object`
+
+	BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
+
+
+
 1. Open the files `.csslintrc`, `.editorconfig`, and `.eslintrc` and set your configs to CSSLint, EditorConfig and ESLint respectively.
 
 1. Make a search in the folder project by `{Title}` and `{-}`, and replace by the corrected informations.
 
 1. Open the file `src/header-comments.txt` and set your project header.
 
-1. Open the terminal and go to the local folder
+1. Open the terminal and go to the local folder.
 
-	```sh
-	$ cd {your-folder-structure}/swill-boilerplate
-	```
-
-1. Install [NPM](https://www.npmjs.com/) dependencies
+1. Install [NPM](https://www.npmjs.com/) dependencies.
 
 	* Execute
 
@@ -296,7 +352,8 @@ This boilerplate uses the following technologies:
 	$ npm install
 	```
 
-1. Set the CSS preprocessor you will use, execute only once (execute this after install bower dependencies)
+1. Run all the settings and choose the CSS preprocessor that you will use(execute only once).
+	* Run the task `setup` and pass the parameter the preprocessor.
 
 	```sh
 	$gulp setup --sass|stylus
@@ -347,72 +404,11 @@ $ gulp build --serve
 $ gulp ghpages
 ```
 
+**Test Task** - run the unit testing
 
-### Config
-
-All the setting find in `config.json`
-
-#### basePaths
-
-Type: `Object`
-
-Application paths.
-
-
-#### components
-
-Type: `Boolean`
-
-to-do
-
-#### outdatedBrowser
-
-Type: `Boolean`
-
-If use outdatedBrowser.
-
-#### logodownloadtip
-
-Type: `Boolean`
-
-If use jQuery Logo Downloadtip.
-
-#### jquery
-
-Type: `Boolean`
-
-If use jQuery.
-
-
-#### lintCSS
-
-Type: `Boolean`
-
-If use lint CSS.
-
-#### lintJS
-
-Type: `Boolean`
-
-If use lint JS.
-
-#### autoprefixerBrowsers
-
-Type: `Array`
-
-Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
-
-#### browserSync
-
-Type: `Object`
-
-BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
-
-#### browserSyncBuild
-
-Type: `Object`
-
-BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
+```sh
+$ gulp test
+```
 
 
 ### Bitmap Sprite
