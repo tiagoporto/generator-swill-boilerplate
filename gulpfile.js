@@ -214,7 +214,7 @@ gulp.task('scripts', function () {
 							})
 						))
 						.pipe(plugins.wrapper({
-							header: headerProject + '\r\n'
+							header: headerProject + '\n'
 						}))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(plugins.rename({suffix: '.min'}))
@@ -234,7 +234,7 @@ gulp.task('scripts', function () {
 							path.basename = path.basename.substring(0,  path.basename.length -9)
 						}))
 						.pipe(plugins.wrapper({
-							header: headerProject + '\r\n'
+							header: headerProject + '\n'
 						}))
 						.pipe(gulp.dest(paths.scripts.dest))
 						.pipe(plugins.rename({suffix: '.min'}))
@@ -326,15 +326,15 @@ gulp.task('logodownload', ['outdatedbrowser'], function(){
 	if((config.logoDownloadtip && !config.jQuery) || !config.logoDownloadtip){
 		var htmlLogo = gulp.src(basePaths.dest + 'index.html')
 					.pipe(plugins.replace(
-						/\t\t<link rel="stylesheet" href="bower_components\/jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">\r\n/g, ''))
+						/\t\t<link rel="stylesheet" href="bower_components\/jquery-logo-downloadtip\/css\/jquery-logo-downloadtip.css">\n/g, ''))
 					.pipe(plugins.replace(
-						/\t\t<script src="bower_components\/jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js"><\/script>\r\n/g, ''))
+						/\t\t<script src="bower_components\/jquery-logo-downloadtip\/js\/jquery-logo-downloadtip.min.js"><\/script>\n/g, ''))
 					.pipe(plugins.replace(
-						/\t\t<!-- Logos[\w\W]+.eps\)\" \/>\r\n\r\n/g, ''))
+						/\t\t<!-- Logos[\w\W]+.eps\)\" \/>\n\n/g, ''))
 					.pipe(gulp.dest(basePaths.dest));
 
 		var bowerLogo = gulp.src('bower.json')
-								.pipe(plugins.replace(/\s{4}"jquery-logo-downloadtip[0-9\s:"~.]+,/g, ''))
+								.pipe(plugins.replace(/\s{4}"jquery-logo-downloadtip[0-9\s:"~.]+,\n/g, ''))
 								.pipe(gulp.dest('./'));
 
 		return merge(htmlLogo, bowerLogo);
@@ -344,14 +344,14 @@ gulp.task('logodownload', ['outdatedbrowser'], function(){
 gulp.task('outdatedbrowser', function(){
 	if(!config.outdatedBrowser){
 		var htmlOut =  gulp.src(basePaths.dest + '*.html')
-						.pipe(plugins.replace(/\t\t<link rel="stylesheet" href="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.css">\r\n/g, ''))
-						.pipe(plugins.replace(/\t\t<script src="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.js"><\/script>\r\n/g, ''))
-						.pipe(plugins.replace(/\t\t<!-- [=]+ Outdated Browser[\s=\-\>\<a-zA-Z"\/!]+-->\r\n\r\n/g, ''))
+						.pipe(plugins.replace(/\t\t<link rel="stylesheet" href="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.css">\n/g, ''))
+						.pipe(plugins.replace(/\t\t<script src="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.js"><\/script>\n/g, ''))
+						.pipe(plugins.replace(/\t\t<!-- [=]+ Outdated Browser[\s=\-\>\<a-zA-Z"\/!]+-->\n\n/g, ''))
 						.pipe(gulp.dest(basePaths.dest));
 
 
 		var bowerOut = gulp.src('bower.json')
-								.pipe(plugins.replace(/\s{4}"outdated-browser[0-9\s:"~.]+,/g, ''))
+								.pipe(plugins.replace(/\s{4}"outdated-browser[0-9\s:"~.]+,\n/g, ''))
 								.pipe(gulp.dest('./'));
 
 		return merge(htmlOut, bowerOut);
@@ -377,13 +377,13 @@ gulp.task('set-dependencies', ['components'], function(){
 	//Remove outdated and leave logo
 	if(!config.outdatedBrowser && (config.logoDownloadtip && config.jQuery)){
 		var outdatedTrue = gulp.src(paths.scripts.src + 'settings/call_plugins.js')
-						.pipe(plugins.replace(/\toutdatedBrowser[\W\w]+,\r\n\r\n/g, ''))
+						.pipe(plugins.replace(/\toutdatedBrowser[\W\w]+,\n\n/g, ''))
 						.pipe(gulp.dest(paths.scripts.src + 'settings/'));
 
 	//Remove logo and leave outdated
 	}else if(config.outdatedBrowser && (!config.jQuery || !config.outdatedBrowser)){
 		var outdatedFalse = gulp.src(paths.scripts.src + 'settings/call_plugins.js')
-						.pipe(plugins.replace(/,\r\n\r\n\t[\W\w]+\}\)/g, ''))
+						.pipe(plugins.replace(/,\n\n\t[\W\w]+\}\)/g, ''))
 						.pipe(gulp.dest(paths.scripts.src + 'settings/'));
 
 	//Remove both
@@ -396,7 +396,7 @@ gulp.task('set-dependencies', ['components'], function(){
 	if(!config.jQuery){
 		var indexcalls = gulp.src(basePaths.dest + 'index.html')
 									.pipe(plugins.replace(
-										/\t\t<script src="bower_components\/jquery\/dist\/jquery.js"><\/script>\r\n/g, ''))
+										/\t\t<script src="bower_components\/jquery\/dist\/jquery.js"><\/script>\n/g, ''))
 									.pipe(gulp.dest(basePaths.dest));
 
 		var eslint = gulp.src('./.eslintrc')
@@ -404,7 +404,7 @@ gulp.task('set-dependencies', ['components'], function(){
 								.pipe(gulp.dest('./'));
 
 		var bowerJquery = gulp.src('bower.json')
-								.pipe(plugins.replace(/\s{4}"jquery"[0-9\s:"~.]+,/g, ''))
+								.pipe(plugins.replace(/\s{4}"jquery"[0-9\s:"~.]+,\n/g, ''))
 								.pipe(gulp.dest('./'));
 	}
 
