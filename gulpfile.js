@@ -10,7 +10,7 @@
 var		 gulp = require('gulp'),
 		 args = require('yargs').argv,
   browserSync = require('browser-sync'),
-   	   buffer = require('vinyl-buffer'),
+	   buffer = require('vinyl-buffer'),
 	   config = require('./config.json'),
 		  del = require('del'),
 		   fs = require('fs'),
@@ -302,10 +302,10 @@ gulp.task('folder-preprocessor', function(){
 //Removes unnecessary folders
 gulp.task('remove-preprocessors', function(cb){
 	if(args.sass || args.stylus){
-		del([
-			paths.styles.src + "sass",
-			paths.styles.src + "stylus"
-			], cb)
+		return del([
+				paths.styles.src + "sass",
+				paths.styles.src + "stylus"
+				], cb)
 	}
 });
 
@@ -314,7 +314,7 @@ gulp.task('bower', function(){
 	return plugins.bower();
 })
 
-gulp.task('components', ['logodownload'], function(cb){
+gulp.task('components', function(cb){
 	if(!config.components){
 		return del([
 					paths.styles.src + "**/components"
@@ -341,7 +341,7 @@ gulp.task('logodownload', ['outdatedbrowser'], function(){
 	}
 })
 
-gulp.task('outdatedbrowser', function(){
+gulp.task('outdatedbrowser', ['jquery'], function(){
 	if(!config.outdatedBrowser){
 		var htmlOut =  gulp.src(basePaths.dest + '*.html')
 						.pipe(plugins.replace(/\t\t<link rel="stylesheet" href="bower_components\/outdated-browser\/outdatedbrowser\/outdatedbrowser.css">\n/g, ''))
@@ -364,8 +364,27 @@ gulp.task('outdatedbrowser', function(){
 	}
 })
 
+gulp.task('jquery', function() {
+	if(!config.jQuery){
+		var indexCalls = gulp.src(basePaths.dest + 'index.html')
+									.pipe(plugins.replace(
+										/\t\t<script src="bower_components\/jquery\/dist\/jquery.js"><\/script>\n/g, ''))
+									.pipe(gulp.dest(basePaths.dest));
+
+		var eslint = gulp.src('./.eslintrc')
+								.pipe(plugins.replace(/jquery":\strue/g, 'jquery": false'))
+								.pipe(gulp.dest('./'));
+
+		var bowerJquery = gulp.src('bower.json')
+								.pipe(plugins.replace(/\s{4}"jquery"[0-9\s:"~.]+,\n/g, ''))
+								.pipe(gulp.dest('./'));
+
+		return merge(indexCalls, eslint, bowerJquery);
+	}
+});
+
 //Set the use of components
-gulp.task('set-dependencies', ['components'], function(){
+gulp.task('set-dependencies', ['logodownload'], function(){
 
 	if(!config.components){
 			var stylesComponents = gulp.src(paths.styles.src + '**/*.{styl,sass,scss}')
@@ -392,21 +411,6 @@ gulp.task('set-dependencies', ['components'], function(){
 						.pipe(gulp.dest(paths.scripts.src + 'settings/'));
 	}
 
-	if(!config.jQuery){
-		var indexcalls = gulp.src(basePaths.dest + 'index.html')
-									.pipe(plugins.replace(
-										/\t\t<script src="bower_components\/jquery\/dist\/jquery.js"><\/script>\n/g, ''))
-									.pipe(gulp.dest(basePaths.dest));
-
-		var eslint = gulp.src('./.eslintrc')
-								.pipe(plugins.replace(/jquery":\strue/g, 'jquery": false'))
-								.pipe(gulp.dest('./'));
-
-		var bowerJquery = gulp.src('bower.json')
-								.pipe(plugins.replace(/\s{4}"jquery"[0-9\s:"~.]+,\n/g, ''))
-								.pipe(gulp.dest('./'));
-	}
-
 	var bower_path = gulp.src('./.bowerrc')
 						.pipe(plugins.replace(/"directory" : "[a-z\/_]+"/g, '"directory" : "' + basePaths.bower + '"'))
 						.pipe(gulp.dest('./'));
@@ -422,7 +426,7 @@ gulp.task('set-dependencies', ['components'], function(){
 //*************************** Utility Tasks ******************************//
 
 gulp.task('setup', function(cb){
-	sequence('get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'bower', 'remove-preprocessors', cb);
+	sequence('get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'bower', 'components', 'remove-preprocessors', cb);
 });
 
 gulp.task('combine-assets', function () {
