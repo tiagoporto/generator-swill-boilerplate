@@ -368,7 +368,6 @@ gulp.task('outdatedbrowser', function(){
 gulp.task('set-dependencies', ['components'], function(){
 
 	if(!config.components){
-		console.log('tert')
 			var stylesComponents = gulp.src(paths.styles.src + '**/*.{styl,sass,scss}')
 						.pipe(plugins.replace(/@import "compo[\w\W]+area"/g, ''))
 						.pipe(gulp.dest(paths.styles.src));
