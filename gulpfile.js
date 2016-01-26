@@ -18,7 +18,6 @@ var		 gulp = require('gulp'),
 		merge = require('merge-stream'),
 	  plugins = require('gulp-load-plugins')(),
 	 sequence = require('run-sequence'),
-		 sass = require('gulp-ruby-sass'),
   spritesmith = require('gulp.spritesmith'),
 	svgSprite = require('gulp-svg-sprite'),
    vinylPaths = require('vinyl-paths'),
@@ -87,7 +86,7 @@ gulp.task('test', function(){
 
 gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
 
-gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, config.autoprefixerBrowsers, config.lintCSS, sass));
+gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, config.autoprefixerBrowsers, config.lintCSS));
 
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', function () {

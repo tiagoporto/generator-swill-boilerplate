@@ -18,7 +18,7 @@ module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrow
 							// If rename the stylus file change here
 							plugins.file('styles.css', 'body:before{white-space: pre; font-family: monospace; content: "' + err.message + '";}', { src: true })
 								.pipe(plugins.replace("\\",'/'))
-								.pipe(plugins.replace(/(\r\n|\n|\r)/gm,'\\A '))
+								.pipe(plugins.replace(/\n/gm,'\\A '))
 								.pipe(plugins.replace("\"",'\''))
 								.pipe(plugins.replace("content: '",'content: "'))
 								.pipe(plugins.replace("';}",'";}'))
@@ -31,7 +31,7 @@ module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrow
 						browsers: autoprefixerBrowsers
 					}))
 					.pipe(plugins.wrapper({
-						header: headerProject + '\r\n'
+						header: headerProject + '\n'
 					}))
 					.pipe(plugins.if(lintCSS, plugins.csslint('./.csslintrc')))
 					.pipe(plugins.if(lintCSS, plugins.csslint.reporter()))

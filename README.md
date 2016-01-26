@@ -222,20 +222,6 @@ This boilerplate uses the following technologies:
 	$ npm install -g bower
 	```
 
-1. __Necessary just to use with Sass.__
-
-	* In Windows is necessary install [Ruby](https://www.ruby-lang.org/)
-
-		- Download and install [Ruby](http://rubyinstaller.org/).
-
-	* Install Gem [Sass](http://sass-lang.com/)
-
-		- Open command line and execute
-
-		```sh
-		$ gem install sass
-		```
-
 
 ## Boilerplate
 
