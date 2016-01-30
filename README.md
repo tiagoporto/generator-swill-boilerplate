@@ -66,7 +66,7 @@ This boilerplate uses the following technologies:
 * Compile Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
 * Concatenate And Minify Scripts
 * Analyze JavaScript with ESLint
-* Compile ES2015
+* Transpile ES6 to ES5
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with BrowserSync
 * Javascript tests with Jasmine and Karma
