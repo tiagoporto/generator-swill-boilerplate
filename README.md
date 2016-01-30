@@ -33,6 +33,7 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 This boilerplate uses the following technologies:
 
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
+* [Babel](https://babeljs.io/)
 * [Bower](http://bower.io/)
 * [BrowserSync](http://www.browsersync.io/)
 * [CSSLint](http://csslint.net/)
@@ -65,6 +66,7 @@ This boilerplate uses the following technologies:
 * Compile Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
 * Concatenate And Minify Scripts
 * Analyze JavaScript with ESLint
+* Compile ES2015
 * Notify when tasks are complete
 * Monitors changes in the files and reload browser with BrowserSync
 * Javascript tests with Jasmine and Karma
@@ -250,6 +252,12 @@ This boilerplate uses the following technologies:
 	Type: `Boolean`
 
 	Basic styles to [components](http://tiagoporto.github.io/swill-boilerplate/components.html), only available with Stylus.
+
+	#### es6
+
+	Type: `Boolean`
+
+	If use ECMAScript 6.
 
 	#### outdatedBrowser
 

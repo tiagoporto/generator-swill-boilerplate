@@ -32,6 +32,8 @@
 
     "components": true,
 
+    "es6": false,
+
     "outdatedBrowser": true,
 
     "logoDownloadtip": true,

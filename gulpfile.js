@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.2.0beta
+*	Swill Boilerplate v4.3.0
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -204,6 +204,12 @@ gulp.task('scripts', function () {
 						.pipe(plugins.plumber())
 						.pipe(plugins.if(config.lintJS, plugins.eslint()))
 						.pipe(plugins.if(config.lintJS, plugins.eslint.format()))
+						.pipe(plugins.if(
+							config.es6,
+							plugins.babel({
+								presets: ['es2015']
+							})
+						))
 						.pipe(plugins.concat('scripts.js'))
 						.pipe( plugins.if(
 							config.jQuery,
