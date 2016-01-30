@@ -300,25 +300,23 @@ gulp.task('folder-preprocessor', function(){
 
 //Removes unnecessary folders
 gulp.task('remove-preprocessors', function(cb){
-	if(args.sass || args.stylus){
-		return del([
-				paths.styles.src + "sass",
-				paths.styles.src + "stylus"
-				], cb)
+
+	var deletePath = [];
+
+	if(!config.components){
+		deletePath.push(paths.styles.src + "**/components");
 	}
+
+	if(args.sass || args.stylus){
+		deletePath.push(paths.styles.src + "sass", paths.styles.src + "stylus");
+	}
+
+	return del(deletePath, cb)
 });
 
 //Install bower dependencies
 gulp.task('bower', function(){
 	return plugins.bower();
-})
-
-gulp.task('components', function(cb){
-	if(!config.components){
-		return del([
-					paths.styles.src + "**/components"
-					], cb);
-	}
 })
 
 gulp.task('logodownload', ['outdatedbrowser'], function(){
@@ -425,7 +423,7 @@ gulp.task('set-dependencies', ['logodownload'], function(){
 //*************************** Utility Tasks ******************************//
 
 gulp.task('setup', function(cb){
-	sequence('get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'bower', 'components', 'remove-preprocessors', cb);
+	sequence('get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'bower', 'remove-preprocessors', cb);
 });
 
 gulp.task('combine-assets', function () {
