@@ -1,5 +1,5 @@
 /*
-*	Swill Boilerplate v4.3.0
+*	Swill Boilerplate v4.3.1
 *	https://github.com/tiagoporto/swill-boilerplate
 *	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
@@ -277,6 +277,8 @@ gulp.task('copy', function () {
 							'!' + basePaths.dest + '**/*.{html,php}'
 						], {dot: true})
 						.pipe(gulp.dest(basePaths.build));
+
+	return merge(html, allFiles);
 });
 
 gulp.task('get-preprocessor', function(){
