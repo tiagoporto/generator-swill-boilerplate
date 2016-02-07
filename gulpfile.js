@@ -96,6 +96,16 @@ gulp.task('bitmap-sprite', function () {
 						spritesmith({
 							imgName: 'bitmap-sprite.png',
 							cssName: "_bitmap-sprite." + extensionStyle,
+							cssOpts: {
+								cssSelector: function (item) {
+									if (item.name.indexOf('~hover') !== -1) {
+										return '.icon-' + item.name.replace('~hover', ':hover');
+									}
+									else {
+										return '.icon-' + item.name;
+									}
+								}
+							},
 							imgPath: '../' + basePaths.images.dest + 'bitmap-sprite.png',
 							padding: 2,
 							algorithm: 'top-down'
@@ -116,18 +126,19 @@ gulp.task('bitmap-sprite', function () {
 // Generate SVG Sprite
 gulp.task('vetor-sprite', function() {
 	var spriteOptions = {
-					shape : {
-						spacing : {
-							padding : 2
+					shape: {
+						spacing: {
+							padding: 2
 						}
 					},
 					mode : {
 						css : {
-							dest : './',
+							prefix: ".icon-%s",
+							dest: './',
 							sprite: '../' + basePaths.images.dest + 'vetor-sprite.svg',
 							layout: 'vertical',
-							bust : false,
-							render : {}
+							bust: false,
+							render: {}
 						},
 					}
 				};
