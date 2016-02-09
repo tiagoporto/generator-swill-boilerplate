@@ -7,24 +7,22 @@
 
 'use strict';
 
-var		 gulp = require('gulp'),
-		 args = require('yargs').argv,
+var		 args = require('yargs').argv,
   browserSync = require('browser-sync'),
 	   buffer = require('vinyl-buffer'),
 	   config = require('./config.json'),
 		  del = require('del'),
 		   fs = require('fs'),
 	  ghPages = require('gulp-gh-pages'),
+		 gulp = require('gulp'),
+	  jasmine = require('gulp-jasmine'),
+		Karma = require('karma').Server,
 		merge = require('merge-stream'),
 	  plugins = require('gulp-load-plugins')(),
 	 sequence = require('run-sequence'),
   spritesmith = require('gulp.spritesmith'),
 	svgSprite = require('gulp-svg-sprite'),
    vinylPaths = require('vinyl-paths'),
-	  ghPages = require('gulp-gh-pages'),
-		Karma = require('karma').Server,
-	  jasmine = require('gulp-jasmine'),
-	   config = require('./config.json'),
 
 //***************************** Path configs *****************************//
 
