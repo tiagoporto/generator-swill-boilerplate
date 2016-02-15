@@ -28,15 +28,29 @@
   },
 
   "env": {
-    "browser": true,      // browser global variables
-    "node": false,        // Node.js global variables and Node.js-specific rules
-    "amd": false,         // defines require() and define() as global variables as per the amd spec
-    "mocha": false,       // adds all of the Mocha testing global variables
-    "jasmine": false,     // adds all of the Jasmine testing global variables for version 1.3 and 2.0
-    "phantomjs": false,   // phantomjs global variables
-    "jquery": true,      // jquery global variables
-    "prototypejs": false, // prototypejs global variables
-    "shelljs": false,     // shelljs global variables
+    "amd": false,             // defines require() and define() as global variables as per the amd spec
+    "applescript": false,     // AppleScript global variables.
+    "browser": true,          // browser global variables
+    "commonjs": false         // CommonJS global variables and CommonJS scoping
+                              // (use this for browser-only code that uses Browserify/WebPack).
+    "embertest": false,       // Ember test helper globals.
+    "es6": false,             // enable all ECMAScript 6 features except for modules.
+    "jasmine": false,         // adds all of the Jasmine testing global variables for version 1.3 and 2.0
+    "jest": false,            // Jest global variables.
+    "jquery": true,           // jquery global variables
+    "meteor": false,          // Meteor global variables.
+    "mocha": false,           // adds all of the Mocha testing global variables
+    "mongo": false,           // MongoDB global variables.
+    "nashorn": false,         // Java 8 Nashorn global variables.
+    "node": false,            // Node.js global variables and Node.js-specific rules
+    "phantomjs": false,       // phantomjs global variables
+    "prototypejs": false,     // Prototype.js global variables.
+    "protractor": false,      // Protractor global variables.
+    "qunit": false,           // QUnit global variables.
+    "serviceworker": false,   // Service Worker global variables.
+    "shelljs": false,         // shelljs global variables
+    "webextensions": false,   // WebExtensions globals.
+    "worker": false,          // web workers global variables.
   },
 
   "globals": {
@@ -59,7 +73,7 @@
     "no-console": 2,               // disallow use of console (off by default in the node environment)
     "no-constant-condition": 2,    // disallow use of constant expressions in conditions
     "no-control-regex": 0,         // disallow control characters in regular expressions
-    "no-debugger": 2,              // disallow use of debugger
+    "no-debugger": 1,              // disallow use of debugger
     "no-dupe-args": 2,             // disallow duplicate arguments in functions
     "no-dupe-keys": 2,             // disallow duplicate keys when creating object literals
     "no-duplicate-case": 2,        // disallow a duplicate case label
@@ -93,40 +107,40 @@
     "consistent-return": 0,     // require return statements to either always or never specify values
     "curly": [2, "all"],                 // specify curly brace conventions for all control statements
     "default-case": 0,          // require default case in switch statements (off by default)
-    "dot-notation": [0, { "allowKeywords": true }],          // encourages use of dot notation whenever possible
+    "dot-notation": [1, { "allowKeywords": true }],          // encourages use of dot notation whenever possible
     "dot-location": 0,          // enforces consistent newlines before or after dots (off by default)
     "eqeqeq": 2,                // require the use of === and !==
     "guard-for-in": 2,          // make sure for-in loops have an if statement (off by default)
     "no-alert": 0,              // disallow the use of alert, confirm, and prompt
-    "no-caller": 0,             // disallow use of arguments.caller or arguments.callee
+    "no-caller": 2,             // disallow use of arguments.caller or arguments.callee
     "no-div-regex": 0,          // disallow division operators explicitly at beginning of regular expression (off by default)
     "no-else-return": 0,        // disallow else after a return in an if (off by default)
     "no-empty-label": 0,        // disallow use of labels for anything other than loops and switches
-    "no-eq-null": 0,            // disallow comparisons to null without a type-checking operator (off by default)
-    "no-eval": 0,               // disallow use of eval()
+    "no-eq-null": 2,            // disallow comparisons to null without a type-checking operator (off by default)
+    "no-eval": 2,               // disallow use of eval()
     "no-extend-native": 0,      // disallow adding to native types
     "no-extra-bind": 0,         // disallow unnecessary function binding
     "no-fallthrough": 2,        // disallow fallthrough of case statements
     "no-floating-decimal": 0,   // disallow the use of leading or trailing decimal points in numeric literals (off by default)
     "no-implied-eval": 0,       // disallow use of eval()-like methods
-    "no-iterator": 0,           // disallow usage of __iterator__ property
+    "no-iterator": 2,           // disallow usage of __iterator__ property
     "no-labels": 0,             // disallow use of labeled statements
     "no-lone-blocks": 0,        // disallow unnecessary nested blocks
-    "no-loop-func": 0,          // disallow creation of functions within loops
-    "no-multi-spaces": 0,       // disallow use of multiple spaces
+    "no-loop-func": 2,          // disallow creation of functions within loops
+    "no-multi-spaces": 1,       // disallow use of multiple spaces
     "no-multi-str": 0,          // disallow use of multiline strings
     "no-native-reassign": 0,    // disallow reassignments of native objects
-    "no-new-func": 0,           // disallow use of new operator for Function object
+    "no-new-func": 1,           // disallow use of new operator for Function object
     "no-new-wrappers": 0,       // disallows creating new instances of String, Number, and Boolean
-    "no-new": 0,                // disallow use of new operator when not part of the assignment or comparison
+    "no-new": 2,                // disallow use of new operator when not part of the assignment or comparison
     "no-octal-escape": 0,       // disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
     "no-octal": 2,              // disallow use of octal literals
     "no-param-reassign": 0,     // disallow reassignment of function parameters (off by default)
     "no-process-env": 0,        // disallow use of process.env (off by default)
-    "no-proto": 0,              // disallow usage of __proto__ property
+    "no-proto": 2,              // disallow usage of __proto__ property
     "no-redeclare": 2,          // disallow declaring the same variable more than once
     "no-return-assign": 0,      // disallow use of assignment in return statement
-    "no-script-url": 0,         // disallow use of javascript: urls
+    "no-script-url": 2,         // disallow use of javascript: urls
     "no-self-compare": 0,       // disallow comparisons where both sides are exactly the same (off by default)
     "no-sequences": 0,          // disallow use of comma operator
     "no-throw-literal": 0,      // restrict what can be thrown as an exception (off by default)
@@ -142,7 +156,7 @@
 
     ////////// Strict Mode //////////
 
-    "strict": 2,          // controls location of Use Strict Directives
+    "strict": [2, "function"],          // controls location of Use Strict Directives
 
 
     ////////// Variables //////////
@@ -155,7 +169,7 @@
     "no-undef": 2,                    // disallow use of undeclared variables unless mentioned in a /*global */ block
     "no-undef-init": 0,               // disallow use of undefined when initializing variables
     "no-undefined": 0,                // disallow use of undefined variable (off by default)
-    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],              // disallow declaration of variables that are not used in the code
+    "no-unused-vars": 2,              // disallow declaration of variables that are not used in the code
     "no-use-before-define": 0,        // disallow use of variables before they are defined
 
 
@@ -176,7 +190,7 @@
     "brace-style": [0, "1tbs"],                 // enforce one true brace style (off by default)
     "camelcase": 1,                   // require camel case names
     "comma-spacing": 0,               // enforce spacing before and after comma
-    "comma-style": 0,                 // enforce one true comma style (off by default)
+    "comma-style": [2, "last"],                 // enforce one true comma style (off by default)
     "computed-property-spacing": [0, "never"],   // require or disallow padding inside computed properties (off by default)
     "consistent-this": [0, "that"],             // enforces consistent naming when capturing the current execution context (off by default)
     "eol-last": 0,                    // enforce newline at the end of file, with no multiple empty lines
@@ -210,7 +224,7 @@
     "quote-props": 0,                 // require quotes around object literal property names (off by default)
     "quotes": [1, "single", "avoid-escape"],                      // specify whether double or single quotes should be used
     "semi-spacing": [0, {"before": false, "after": true}],                // enforce spacing before and after semicolons
-    "semi": 0,                        // require or disallow use of semicolons instead of ASI
+    "semi": 2,                        // require or disallow use of semicolons instead of ASI
     "sort-vars": 0,                   // sort variables within the same declaration block (off by default)
     "space-after-keywords": [0, "always"],        // require a space after certain keywords (off by default)
     "space-before-blocks": [0, "always"],         // require or disallow space before blocks (off by default)
@@ -235,11 +249,11 @@
 
     ////////// Legacy //////////
 
-    "max-depth": [0, 4],       // specify the maximum depth that blocks can be nested (off by default)
-    "max-len": [0, 80, 4],         // specify the maximum length of a line in your program (off by default)
-    "max-params": [0, 3],      // limits the number of parameters that can be used in the function declaration. (off by default)
-    "max-statements": [0, 10],  // specify the maximum number of statement allowed in a function (off by default)
-    "no-bitwise": 2,      // disallow use of bitwise operators (off by default)
-    "no-plusplus": 0      // disallow use of unary operators, ++ and -- (off by default)
+    "max-depth": [1, 4],                                     // specify the maximum depth that blocks can be nested (off by default)
+    "max-len": [0, 80, 4],                                   // specify the maximum length of a line in your program (off by default)
+    "max-params": [0, 3],                                    // limits the number of parameters that can be used in the function declaration. (off by default)
+    "max-statements": [0, 10],                               // specify the maximum number of statement allowed in a function (off by default)
+    "no-bitwise": 2,                                         // disallow use of bitwise operators (off by default)
+    "no-plusplus": [2, { allowForLoopAfterthoughts: true }]  // disallow use of unary operators, ++ and -- (off by default)
   }
 }
