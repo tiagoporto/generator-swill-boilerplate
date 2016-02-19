@@ -82,7 +82,17 @@ gulp.task('test', function(){
 	sequence('karma', 'coverall');
 });
 
-gulp.task('styles-helpers', require('./tasks/' + preprocessor + '-helpers')(gulp, plugins, paths, merge));
+gulp.task('styles-helpers', function(){
+	   var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.{styl,scss}')
+						.pipe(plugins.concat('_mixins.styl'))
+						.pipe(gulp.dest(paths.styles.src + 'helpers'));
+
+	var functions = gulp.src(paths.styles.src + 'helpers/functions/*.{styl,scss}')
+						.pipe(plugins.concat('_functions.styl'))
+						.pipe(gulp.dest(paths.styles.src + 'helpers'));
+
+	return merge(mixins, functions);
+});
 
 gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, config.autoprefixerBrowsers, config.lintCSS));
 
