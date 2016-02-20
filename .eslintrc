@@ -31,7 +31,7 @@
     "amd": false,             // defines require() and define() as global variables as per the amd spec
     "applescript": false,     // AppleScript global variables.
     "browser": true,          // browser global variables
-    "commonjs": false         // CommonJS global variables and CommonJS scoping
+    "commonjs": false,         // CommonJS global variables and CommonJS scoping
                               // (use this for browser-only code that uses Browserify/WebPack).
     "embertest": false,       // Ember test helper globals.
     "es6": false,             // enable all ECMAScript 6 features except for modules.
@@ -202,7 +202,6 @@
     "linebreak-style": [2, "unix"],             // disallow mixed 'LF' and 'CRLF' as linebreaks (off by default)
     "max-nested-callbacks": [0, 2],        // specify the maximum depth callbacks can be nested (off by default)
     "new-cap": 2,                     // require a capital letter for constructors
-    "new-parens": 0,                  // disallow the omission of parentheses when invoking a constructor with no arguments
     "new-parens": 0,                  // disallow the omission of parentheses when invoking a constructor with no arguments
     "newline-after-var": 0,           // allow/disallow an empty newline after var statement (off by default)
     "no-array-constructor": 0,        // disallow use of the Array constructor
