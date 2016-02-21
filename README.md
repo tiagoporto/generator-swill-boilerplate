@@ -5,7 +5,7 @@
 [![Github License](https://img.shields.io/github/license/tiagoporto/swill-boilerplate.svg)](http://opensource.org/licenses/MIT)
 
 <p align="center">
-	<img src="http://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
+    <img src="http://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
 </p>
 
 Boilerplate Front-End with [Gulp](http://gulpjs.com/), all you need to start multi-device development, easy to customize.
@@ -20,10 +20,10 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
 * [Folder Structure](#folder-structure)
 * [Dependencies](#dependencies)
 * [Boilerplate](#boilerplate)
-	* [Usage](#usage)
-	* [Tasks](#tasks)
-	* [Bitmap Sprite](#bitmap-sprite)
-	* [Vetor Sprite](#svg-sprite)
+    * [Usage](#usage)
+    * [Tasks](#tasks)
+    * [Bitmap Sprite](#bitmap-sprite)
+    * [Vetor Sprite](#svg-sprite)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -200,134 +200,134 @@ This boilerplate uses the following technologies:
 
 1. Install [EditorConfig](http://editorconfig.org/)
 
-	* Download and install the [EditorConfig plugin](http://editorconfig.org/#download) for your text editor.
+    * Download and install the [EditorConfig plugin](http://editorconfig.org/#download) for your text editor.
 
 1. Download and install [Node.js](http://nodejs.org/download/)
 
-	`Select npm package manager`
+    `Select npm package manager`
 
 1. Install [Gulp](http://gulpjs.com/)
 
-	* Open command line and execute
+    * Open command line and execute
 
-	```sh
-	$ npm install -g gulp
-	```
+    ```sh
+    $ npm install -g gulp
+    ```
 
 
 1. Install [Bower](http://bower.io/)
 
-	* Execute
+    * Execute
 
-	```sh
-	$ npm install -g bower
-	```
+    ```sh
+    $ npm install -g bower
+    ```
 
 
 ## Boilerplate
 
 * JavaScripts files in `src/scripts` named with `*_IGNORE.js` will be ignored and won't be published, named with `*_SEPARATE.js` won't be concatenated and will be generated separated.
-	- Example
-	`myplugin_SEPARATE.js` will be published as `myplugin.js`.
+    - Example
+    `myplugin_SEPARATE.js` will be published as `myplugin.js`.
 
 * The folder `public/img` is clean when some tasks are executed, the images come from ` src/images`, but if you work with copyrighted images you shouldn't use compression, because it removes the metadatas from files. You can place images direct in the `public/img/copyright`, they won't be deleted.
 
-	> If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
+    > If for some other reason you want to use other folders directly in the `public/img`, add the folder in the task ` clean` on `gulpfile.js`, and it won't be deleted.
 
 
 ### Usage
 
 1. Open the file [`config.json`](#config) and setting as needed.
 
-	#### basePaths
+    #### basePaths
 
-	Type: `Object`
+    Type: `Object`
 
-	Application paths.
-
-
-	#### components
-
-	Type: `Boolean`
-
-	Basic styles to [components](http://tiagoporto.github.io/swill-boilerplate/components.html), only available with Stylus.
-
-	#### es6
-
-	Type: `Boolean`
-
-	If use ECMAScript 6.
-
-	#### outdatedBrowser
-
-	Type: `Boolean`
-
-	If use outdatedBrowser.
-
-	#### logodownloadtip
-
-	Type: `Boolean`
-
-	If use jQuery Logo Downloadtip.
-
-	#### jquery
-
-	Type: `Boolean`
-
-	If use jQuery.
-
-	#### lintCSS
-
-	Type: `Boolean`
-
-	If use lint CSS.
-
-	#### lintJS
-
-	Type: `Boolean`
-
-	If use lint JS.
-
-	#### autoprefixerBrowsers
-
-	Type: `Array`
-
-	Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
-
-	#### browserSync
-
-	Type: `Object`
-
-	BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
-
-	If you will use dinamic files, it's necessary replace the server option by proxy.
-
-	* Example
-
-	```json
-	"browserSyncConfig": {
-		"notify": false,
-		"logPrefix": "BrowserSync",
-		"server": {
-			"baseDir": ["src/", "public/", "bower_components/"]
-		}
-	}
-	```
-
-	```json
-	"browserSyncConfig": {
-		"notify": false,
-		"logPrefix": "BrowserSync",
-		"proxy": "localhost/swill-boilerplate/public/"
-	}
-	```
+    Application paths.
 
 
-	#### browserSyncBuild
+    #### components
 
-	Type: `Object`
+    Type: `Boolean`
 
-	BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
+    Basic styles to [components](http://tiagoporto.github.io/swill-boilerplate/components.html), only available with Stylus.
+
+    #### es6
+
+    Type: `Boolean`
+
+    If use ECMAScript 6.
+
+    #### outdatedBrowser
+
+    Type: `Boolean`
+
+    If use outdatedBrowser.
+
+    #### logodownloadtip
+
+    Type: `Boolean`
+
+    If use jQuery Logo Downloadtip.
+
+    #### jquery
+
+    Type: `Boolean`
+
+    If use jQuery.
+
+    #### lintCSS
+
+    Type: `Boolean`
+
+    If use lint CSS.
+
+    #### lintJS
+
+    Type: `Boolean`
+
+    If use lint JS.
+
+    #### autoprefixerBrowsers
+
+    Type: `Array`
+
+    Autprefixer option, see the autoprefixer [docs](https://github.com/postcss/autoprefixer#options).
+
+    #### browserSync
+
+    Type: `Object`
+
+    BrowserSync options, see the browsersync [docs](https://www.browsersync.io/docs/options/).
+
+    If you will use dinamic files, it's necessary replace the server option by proxy.
+
+    * Example
+
+    ```json
+    "browserSyncConfig": {
+        "notify": false,
+        "logPrefix": "BrowserSync",
+        "server": {
+            "baseDir": ["src/", "public/", "bower_components/"]
+        }
+    }
+    ```
+
+    ```json
+    "browserSyncConfig": {
+        "notify": false,
+        "logPrefix": "BrowserSync",
+        "proxy": "localhost/swill-boilerplate/public/"
+    }
+    ```
+
+
+    #### browserSyncBuild
+
+    Type: `Object`
+
+    BrowserSync options to builded project, see the browsersync [docs](https://www.browsersync.io/docs/options/).
 
 
 
@@ -341,24 +341,24 @@ This boilerplate uses the following technologies:
 
 1. Install [NPM](https://www.npmjs.com/) dependencies.
 
-	* Execute
+    * Execute
 
-	```sh
-	$ npm install
-	```
+    ```sh
+    $ npm install
+    ```
 
 1. Run all the settings and choose the CSS preprocessor that you will use(execute only once).
-	* Run the task `setup` and pass the parameter the preprocessor.
+    * Run the task `setup` and pass the parameter the preprocessor.
 
-	```sh
-	$gulp setup --sass|stylus
-	```
+    ```sh
+    $gulp setup --sass|stylus
+    ```
 
 1. At the first time run the task `gulp` with parameter `compile` and start the development
 
-	```sh
-	$ gulp --compile
-	```
+    ```sh
+    $ gulp --compile
+    ```
 
 
 ### Tasks
@@ -418,23 +418,23 @@ Just use the mixins with the variables as parameters.
 
 ```styl
 #arrow
-	sprite($left_arrow)
+    sprite($left_arrow)
 
-	&:hover
-		spritePosition($right_arrow)
+    &:hover
+        spritePosition($right_arrow)
 ```
 
 **Output**
 
 ```css
 #arrow {
-	background-image: url(../images/sprite.png);
-	background-position: 0px 0px;
-	width: 32px;
-	height: 32px;
+    background-image: url(../images/sprite.png);
+    background-position: 0px 0px;
+    width: 32px;
+    height: 32px;
 }
 #arrow:hover {
-	background-position: 0px -34px;
+    background-position: 0px -34px;
 }
 ```
 
@@ -445,16 +445,16 @@ To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-
 * Put the icon in `src/images/sprite`.
 * In HTML put the class in elements
 
-	```html
-	<i class="svg-icon-dims svg-icon"><i>
-	```
+    ```html
+    <i class="svg-icon-dims svg-icon"><i>
+    ```
 
-	The class `-dims` get the dimensions and the other the position of the icon in sprite.
+    The class `-dims` get the dimensions and the other the position of the icon in sprite.
 
-	The classname is defined by the `.svg` filename, example:
+    The classname is defined by the `.svg` filename, example:
 
-	* `moon.svg` the classname use the prefix `svg-` and the filename of the svg `moon`.
-	* If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
+    * `moon.svg` the classname use the prefix `svg-` and the filename of the svg `moon`.
+    * If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
 
 
 

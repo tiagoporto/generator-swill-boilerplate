@@ -1,7 +1,7 @@
 /*
 *	Swill Boilerplate v4.3.1
 *	https://github.com/tiagoporto/swill-boilerplate
-*	Copyright (c) 2014-2015 Tiago Porto (http://tiagoporto.com)
+*	Copyright (c) 2014-2016 Tiago Porto (http://tiagoporto.com)
 *	Released under the MIT license
 */
 

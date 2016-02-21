@@ -1,74 +1,74 @@
 {
-    "basePaths": {
-             "src": "src/",
-            "dest": "public/",
-         "build": "build/",
-         "bower": "public/bower_components",
+  "basePaths": {
+     "src": "src/",
+    "dest": "public/",
+   "build": "build/",
+   "bower": "public/bower_components",
 
-        "images": {
-                 "src": "images/",
-                "dest": "img/"
-        },
-
-        "fonts": {
-                "dest": "fonts/"
-        },
-
-        "sprite": {
-                "src": "sprite/"
-        },
-
-        "scripts": {
-                 "src": "scripts/",
-                "dest": "js/"
-        },
-
-        "styles": {
-                 "src": "stylesheets/",
-                "dest": "css/"
-        }
+    "images": {
+       "src": "images/",
+      "dest": "img/"
     },
 
-
-    "components": true,
-
-    "es6": false,
-
-    "outdatedBrowser": true,
-
-    "logoDownloadtip": true,
-
-    "jQuery": true,
-
-    "lintCSS": false,
-
-    "lintJS": true,
-
-    "autoprefixerBrowsers": [
-            "ie >= 8",
-            "ie_mob >= 10",
-            "Firefox > 24",
-            "last 10 Chrome versions",
-            "safari >= 6",
-            "opera >= 24",
-            "ios >= 6",
-            "android >= 4",
-            "bb >= 10"
-    ],
-
-    "browserSync": {
-            "notify": false,
-            "logPrefix": "BrowserSync",
-            "server": {
-                    "baseDir": ["public/"]
-            }
+    "fonts": {
+      "dest": "fonts/"
     },
 
-    "browserSyncBuild": {
-            "notify": false,
-            "logPrefix": "BrowserSync",
-            "server": {
-                    "baseDir": ["build/"]
-            }
+    "sprite": {
+      "src": "sprite/"
+    },
+
+    "scripts": {
+       "src": "scripts/",
+      "dest": "js/"
+    },
+
+    "styles": {
+	     "src": "stylesheets/",
+	    "dest": "css/"
     }
+  },
+
+
+  "components": true,
+
+  "es6": false,
+
+  "outdatedBrowser": true,
+
+  "logoDownloadtip": true,
+
+  "jQuery": true,
+
+  "lintCSS": false,
+
+  "lintJS": true,
+
+  "autoprefixerBrowsers": [
+    "ie >= 8",
+    "ie_mob >= 10",
+    "Firefox > 24",
+    "last 10 Chrome versions",
+    "safari >= 6",
+    "opera >= 24",
+    "ios >= 6",
+    "android >= 4",
+    "bb >= 10"
+  ],
+
+  "browserSync": {
+    "notify": false,
+    "logPrefix": "BrowserSync",
+    "server": {
+      "baseDir": ["public/"]
+    }
+  },
+
+  "browserSyncBuild": {
+    "notify": false,
+    "logPrefix": "BrowserSync",
+    "server": {
+      "baseDir": ["build/"]
+    }
+  }
 }
