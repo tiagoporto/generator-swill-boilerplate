@@ -540,7 +540,7 @@ gulp.task('serve', function () {
 			['styles-helpers']
 		);
 
-	gulp.watch(basePaths.dest + '**/*.{html,php}', browserSync.reload);
+	gulp.watch(basePaths.dest + '**/*.{html,php,json}', browserSync.reload);
 });
 
 // Clean, compile, watch and serve project
