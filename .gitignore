@@ -24,13 +24,6 @@ coverage
 .tox
 
 #################
-## Cordova
-#################
-
-platforms/*
-plugins/*
-
-#################
 ## NPM Dependencies
 #################
 
@@ -46,7 +39,7 @@ bower_components/
 ## SASS Cache
 #################
 
-.sass-cache/
+.sass-cache
 
 #################
 ## Gh-pages
