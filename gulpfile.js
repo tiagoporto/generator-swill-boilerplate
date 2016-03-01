@@ -223,13 +223,13 @@ gulp.task('scripts', function () {
 						.pipe(plugins.plumber())
 						.pipe(plugins.if(config.lintJS, plugins.eslint()))
 						.pipe(plugins.if(config.lintJS, plugins.eslint.format()))
+						.pipe(plugins.concat('scripts.js'))
 						.pipe(plugins.if(
 							config.es6,
 							plugins.babel({
 								presets: ['es2015']
 							})
 						))
-						.pipe(plugins.concat('scripts.js'))
 						.pipe( plugins.if(
 							config.jQuery,
 							plugins.wrapper({
