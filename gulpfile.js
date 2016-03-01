@@ -257,6 +257,12 @@ gulp.task('scripts', function () {
 						.pipe(plugins.rename(function(path){
 							path.basename = path.basename.substring(0,  path.basename.length -9)
 						}))
+						.pipe(plugins.if(
+							config.es6,
+							plugins.babel({
+								presets: ['es2015']
+							})
+						))
 						.pipe(plugins.wrapper({
 							header: headerProject + '\n'
 						}))
