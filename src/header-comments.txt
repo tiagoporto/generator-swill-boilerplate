@@ -1,5 +1,5 @@
-/*!	{Title} v0.1.0
-*	Project Home page
-*	Copyright (c) initialyear-atualyear Author Name (Site)
-*	Released under the MIT license
+/*! {Title} v0.1.0
+*   Project Home page
+*   Copyright (c) initialyear-atualyear Author Name (Site)
+*   Released under the MIT license
 */

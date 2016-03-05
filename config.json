@@ -24,8 +24,8 @@
     },
 
     "styles": {
-	     "src": "stylesheets/",
-	    "dest": "css/"
+      "src": "stylesheets/",
+      "dest": "css/"
     }
   },
 
