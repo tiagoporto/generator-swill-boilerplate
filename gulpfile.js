@@ -197,8 +197,6 @@ gulp.task('images', function () {
 gulp.task('vendor-scripts', function () {
     var envProd = (env === 'prod') ? '!' : '';
 
-    console.log(envProd);
-
     return gulp.src([
                         '!' + paths.scripts.src + '**/*_IGNORE.js',
                         paths.scripts.src + 'settings/*.js',
