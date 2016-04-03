@@ -7,63 +7,64 @@
 
 'use strict';
 
-var       args = require('yargs').argv,
-   browserSync = require('browser-sync'),
-        buffer = require('vinyl-buffer'),
-        config = require('./config.json'),
-           del = require('del'),
-            fs = require('fs'),
-       ghPages = require('gulp-gh-pages'),
-          gulp = require('gulp'),
-       jasmine = require('gulp-jasmine'),
-         Karma = require('karma').Server,
-         merge = require('merge-stream'),
-       plugins = require('gulp-load-plugins')(),
-      sequence = require('run-sequence'),
-   spritesmith = require('gulp.spritesmith'),
-     svgSprite = require('gulp-svg-sprite'),
+var args = require('yargs').argv,
+    browserSync = require('browser-sync'),
+    buffer = require('vinyl-buffer'),
+    config = require('./config.json'),
+    del = require('del'),
+    fs = require('fs'),
+    ghPages = require('gulp-gh-pages'),
+    gulp = require('gulp'),
+    jasmine = require('gulp-jasmine'),
+    Karma = require('karma').Server,
+    merge = require('merge-stream'),
+    plugins = require('gulp-load-plugins')(),
+    sequence = require('run-sequence'),
+    spritesmith = require('gulp.spritesmith'),
+    svgSprite = require('gulp-svg-sprite'),
     vinylPaths = require('vinyl-paths'),
 
 //***************************** Path configs *****************************//
 
-basePaths = config.basePaths,
+    basePaths = config.basePaths,
 
-paths = {
-    images: {
-          src: basePaths.src + basePaths.images.src ,
-         dest: basePaths.dest + basePaths.images.dest,
-        build: basePaths.build + basePaths.images.src
+    paths = {
+        images: {
+              src: basePaths.src + basePaths.images.src ,
+             dest: basePaths.dest + basePaths.images.dest,
+            build: basePaths.build + basePaths.images.src
+        },
+
+        sprite: {
+            src: basePaths.src + basePaths.images.src + basePaths.sprite.src
+        },
+
+        scripts: {
+              src: basePaths.src + basePaths.scripts.src,
+             dest: basePaths.dest + basePaths.scripts.dest,
+            build: basePaths.build + basePaths.scripts.dest
+        },
+
+        styles: {
+              src: basePaths.src + basePaths.styles.src,
+             dest: basePaths.dest + basePaths.styles.dest,
+            build: basePaths.build + basePaths.styles.dest
+        }
     },
-
-    sprite: {
-        src: basePaths.src + basePaths.images.src + basePaths.sprite.src
-    },
-
-    scripts: {
-          src: basePaths.src + basePaths.scripts.src,
-         dest: basePaths.dest + basePaths.scripts.dest,
-        build: basePaths.build + basePaths.scripts.dest
-    },
-
-    styles: {
-          src: basePaths.src + basePaths.styles.src,
-         dest: basePaths.dest + basePaths.styles.dest,
-        build: basePaths.build + basePaths.styles.dest
-    }
-  },
 
 //******************************* Settings *******************************//
-  argProcessor = '',
-  preprocessor = 'stylus',
-extensionStyle = '',
- headerProject = fs.readFileSync(basePaths.src + "header-comments.txt", "utf8")
 
-if(preprocessor === "sass"){
-    extensionStyle = "scss";
-}else if(preprocessor === "stylus"){
-    extensionStyle = "styl";
+    env = (args.prod) ? 'prod' : 'dev',
+    argProcessor = '',
+    preprocessor = 'stylus',
+    extensionStyle = '',
+    headerProject = fs.readFileSync(basePaths.src + 'header-comments.txt', 'utf8');
+
+if(preprocessor === 'sass'){
+    extensionStyle = 'scss';
+}else if(preprocessor === 'stylus'){
+    extensionStyle = 'styl';
 }
-
 
 //******************************** Tasks *********************************//
 
@@ -194,10 +195,14 @@ gulp.task('images', function () {
 
 // Concatenate vendor scripts and Minify
 gulp.task('vendor-scripts', function () {
+    var envProd = (env === 'prod') ? '!' : '';
+
+    console.log(envProd);
+
     return gulp.src([
                         '!' + paths.scripts.src + '**/*_IGNORE.js',
-                        paths.scripts.src + 'settings/google_analytics.js',
-                        paths.scripts.src + 'settings/*.js'
+                        paths.scripts.src + 'settings/*.js',
+                        envProd + paths.scripts.src + 'settings/google_analytics.js'
                     ])
                     .pipe(plugins.plumber())
                     .pipe(plugins.concat('vendors.js'))
@@ -531,7 +536,8 @@ gulp.task('gh', function() {
 
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('ghpages', function() {
-    sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', 'gh');
+    env = 'prod';
+    sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts']);
 });
 
 // Build Project and serve if pass the parameter --serve
