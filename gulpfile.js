@@ -195,7 +195,7 @@ gulp.task('images', function () {
 
 // Concatenate vendor scripts and Minify
 gulp.task('vendor-scripts', function () {
-    var envProd = (env === 'prod') ? '!' : '';
+    var envProd = (env === 'prod') ? '' : '!';
 
     return gulp.src([
                         '!' + paths.scripts.src + '**/*_IGNORE.js',
@@ -535,7 +535,7 @@ gulp.task('gh', function() {
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('ghpages', function() {
     env = 'prod';
-    sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts']);
+    sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', 'gh');
 });
 
 // Build Project and serve if pass the parameter --serve
