@@ -36,6 +36,7 @@
     "gulp-load-plugins": "^1.1.0",
     "gulp-newer": "^1.1.0",
     "gulp-notify": "^2.2.0",
+    "gulp-nunjucks": "^2.2.0",
     "gulp-plumber": "^1.0.1",
     "gulp-remember": "^0.3.0",
     "gulp-rename": "^1.2.2",

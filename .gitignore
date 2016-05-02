@@ -24,10 +24,11 @@ coverage
 .tox
 
 #################
-## NPM Dependencies
+## NPM
 #################
 
 node_modules/
+npm-debug.log
 
 #################
 ## Bower Components

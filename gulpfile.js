@@ -83,6 +83,16 @@ gulp.task('test', function(){
     sequence('karma', 'coverall');
 });
 
+
+gulp.task('html', function() {
+    gulp.src([
+            '!src/html/includes/**/*.html',
+            'src/html/**/*.html'
+        ])
+      .pipe(plugins.nunjucks.compile())
+      .pipe(gulp.dest('public/html'));
+});
+
 gulp.task('styles-helpers', function(){
        var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.{styl,scss}')
                         .pipe(plugins.concat('_mixins.styl'))
