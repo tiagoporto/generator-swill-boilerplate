@@ -20,6 +20,7 @@ var args = require('yargs').argv,
     merge = require('merge-stream'),
     plugins = require('gulp-load-plugins')(),
     sequence = require('run-sequence'),
+    spawn = require('child_process').spawn,
     spritesmith = require('gulp.spritesmith'),
     svgSprite = require('gulp-svg-sprite'),
     vinylPaths = require('vinyl-paths'),
@@ -73,7 +74,7 @@ gulp.task('coverall', function(){
         .pipe(plugins.coveralls());
 });
 
-gulp.task('karma', function (done) {
+gulp.task('karma', function(done) {
     new Karma({
         configFile: __dirname + '/karma.conf.js'
     }, done).start();
@@ -86,11 +87,11 @@ gulp.task('test', function(){
 
 gulp.task('html', function() {
     gulp.src([
-            '!src/html/includes/**/*.html',
-            'src/html/**/*.html'
-        ])
-      .pipe(plugins.nunjucks.compile())
-      .pipe(gulp.dest('public/html'));
+        '!src/html/includes/**/*.html',
+        'src/html/**/*.html'
+    ])
+  .pipe(plugins.nunjucks.compile())
+  .pipe(gulp.dest(basePaths.dest));
 });
 
 gulp.task('styles-helpers', function(){
@@ -108,7 +109,7 @@ gulp.task('styles-helpers', function(){
 gulp.task('styles', require('./tasks/' + preprocessor)(gulp, plugins, paths, headerProject, config.autoprefixerBrowsers, config.lintCSS));
 
 // Generate Bitmap Sprite
-gulp.task('bitmap-sprite', function () {
+gulp.task('bitmap-sprite', function() {
     var sprite = gulp.src(paths.sprite.src + '**/*.png')
                     .pipe(plugins.plumber())
                     .pipe(
@@ -116,7 +117,7 @@ gulp.task('bitmap-sprite', function () {
                             imgName: 'bitmap-sprite.png',
                             cssName: "_bitmap-sprite." + extensionStyle,
                             cssOpts: {
-                                cssSelector: function (item) {
+                                cssSelector: function(item) {
                                     if (item.name.indexOf('~hover') !== -1) {
                                        return '.icon-' + item.name.replace('~hover', ':hover');
                                     } else {
@@ -171,7 +172,7 @@ gulp.task('vetor-sprite', function() {
 });
 
 //Fallback convert SVG to PNG
-gulp.task('svg2png', function () {
+gulp.task('svg2png', function() {
     return gulp.src(paths.images.dest + 'vetor-sprite.svg')
                 .pipe(plugins.plumber())
                 .pipe(plugins.svg2png())
@@ -179,7 +180,7 @@ gulp.task('svg2png', function () {
 });
 
 // Optimize Images
-gulp.task('images', function () {
+gulp.task('images', function() {
     var images = gulp.src([
                         paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
                         '!' + paths.sprite.src + '**/*',
@@ -204,13 +205,13 @@ gulp.task('images', function () {
 
 
 // Concatenate vendor scripts and Minify
-gulp.task('vendor-scripts', function () {
+gulp.task('vendor-scripts', function() {
     var envProd = (env === 'prod') ? '' : '!';
 
     return gulp.src([
-                        '!' + paths.scripts.src + '**/*_IGNORE.js',
-                        paths.scripts.src + 'settings/*.js',
-                        envProd + paths.scripts.src + 'settings/google_analytics.js'
+                        // '!' + paths.scripts.src + '**/*_IGNORE.js',
+                        // paths.scripts.src + 'settings/*.js',
+                        // envProd + paths.scripts.src + 'settings/google_analytics.js'
                     ])
                     .pipe(plugins.plumber())
                     .pipe(plugins.concat('vendors.js'))
@@ -221,7 +222,7 @@ gulp.task('vendor-scripts', function () {
 });
 
 // Concatenate and Minify Main Scripts
-gulp.task('scripts', function () {
+gulp.task('scripts', function() {
     var babelOption = { presets: ['es2015'] };
     var headerWrapper = { header: headerProject + '\n' };
     var jQueryWrapper = {
@@ -272,7 +273,7 @@ gulp.task('scripts', function () {
 });
 
 // Copy Files to Build
-gulp.task('copy', function () {
+gulp.task('copy', function() {
       var assets = {searchPath: basePaths.dest};
 
       // Minify and Copy HTML
@@ -447,7 +448,7 @@ gulp.task('setup', function(cb){
     sequence('get-preprocessor', 'set-preprocessor', 'folder-preprocessor', 'set-dependencies', 'bower', 'remove-preprocessors', cb);
 });
 
-gulp.task('combine-assets', function () {
+gulp.task('combine-assets', function() {
     var assets = {searchPath: basePaths.dest};
 
     // Minify and Copy HTML
@@ -459,7 +460,7 @@ gulp.task('combine-assets', function () {
 });
 
 // Clean Directories
-gulp.task('clean', function (cb) {
+gulp.task('clean', function(cb) {
     return del([
         basePaths.build,
         paths.styles.dest,
@@ -473,11 +474,18 @@ gulp.task('clean', function (cb) {
     ], cb)
 });
 
+gulp.task('gulp-reload', function() {
+    process.exit();
+    spawn('gulp', ['default'], {stdio: 'inherit'});
+});
+
 //***************************** Main Tasks *******************************//
 
 // Serve the project and watch
-gulp.task('serve', function () {
+gulp.task('serve', function() {
     browserSync(config.browserSync);
+
+    gulp.watch( './gulpfile.js', ['gulp-reload', browserSync.reload] );
 
     gulp.watch([
                 paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
@@ -524,8 +532,8 @@ gulp.task('serve', function () {
 });
 
 // Clean, compile, watch and serve project
-gulp.task('default', function () {
-    if(args.compile === true){
+gulp.task('default', function() {
+    if(args.compile){
         sequence('clean', ['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'serve');
     } else {
         gulp.start('serve');
@@ -533,7 +541,7 @@ gulp.task('default', function () {
 });
 
 // Clean and compile the project
-gulp.task('compile', function () {
+gulp.task('compile', function() {
     sequence('clean', ['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts');
 });
 
@@ -549,9 +557,9 @@ gulp.task('ghpages', function() {
 });
 
 // Build Project and serve if pass the parameter --serve
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean'], function() {
     sequence(['images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', function(){
-        if(args.serve === true){
+        if(args.serve){
             browserSync(config.browserSyncBuild);
         }
     });
