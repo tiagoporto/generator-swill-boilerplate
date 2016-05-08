@@ -27,13 +27,13 @@ var args = require('yargs').argv,
     spritesmith = require('gulp.spritesmith'),
     svgSprite = require('gulp-svg-sprite'),
 
-//***************************** Path configs *****************************//
+    //***************************** Path configs *****************************//
 
     basePaths = config.basePaths,
 
     paths = {
         html: {
-            src: basePaths.src + basePaths.html.src
+            src: basePaths.src + basePaths.handlebars.src
         },
 
         images: {
@@ -59,7 +59,7 @@ var args = require('yargs').argv,
         }
     },
 
-//******************************* Settings *******************************//
+    //******************************* Settings *******************************//
 
     env = (args.prod) ? 'prod' : 'dev',
     argProcessor = '',
@@ -91,9 +91,20 @@ gulp.task('handlebars', function () {
     return gulp
         .src(paths.html.src + '**/*.html')
         .pipe(handlebars({
-            partials: paths.html.src + 'includes/**/*.hbs'
+            partials: paths.html.src + basePaths.handlebars.partials.src + '**/*.hbs'
         }))
         .pipe(gulp.dest(basePaths.dest));
+});
+
+gulp.task('svg-inline', function () {
+    if(config.inlineSVG){
+        return gulp.src(basePaths.dest + '**/*.html')
+            .pipe(plugins.inline({
+                base: './',
+                disabledTypes: ['css', 'js']
+            }))
+            .pipe(gulp.dest(basePaths.dest));
+    }
 });
 
 ///////////////////////////////////
@@ -497,7 +508,7 @@ gulp.task('serve', function() {
 
     gulp.watch( paths.sprite.src + '**/*.svg', ['vetor-sprite', 'styles', browserSync.reload] );
 
-    gulp.watch( paths.images.dest + 'vetor-sprite.svg', ['svg2png', browserSync.reload] );
+    gulp.watch( paths.images.dest + '**/*.svg', ['svg2png', 'handlebars', browserSync.reload] );
 
     gulp.watch( paths.scripts.src + '*.js', ['scripts', browserSync.reload] );
 
@@ -515,13 +526,13 @@ gulp.task('serve', function() {
 
     gulp.watch( paths.html.src + '**/*.{html,hbs}', ['handlebars'] );
 
-    gulp.watch( basePaths.dest + '**/*.{html,php,json}', browserSync.reload );
+    gulp.watch( basePaths.dest + '**/*.{html,php,json}', ['svg-inline', browserSync.reload]);
 });
 
 // Clean, compile, watch and serve project
 gulp.task('default', function() {
     if(args.compile){
-        sequence('clean', ['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'serve');
+        sequence('clean', ['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'serve');
     } else {
         gulp.start('serve');
     }
@@ -529,7 +540,7 @@ gulp.task('default', function() {
 
 // Clean and compile the project
 gulp.task('compile', function() {
-    sequence('clean', ['handlebars','images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts');
+    sequence('clean', ['handlebars','images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts');
 });
 
 gulp.task('gh', function() {
@@ -540,11 +551,11 @@ gulp.task('gh', function() {
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('ghpages', function() {
     env = 'prod';
-    sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', 'gh');
+    sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', 'gh');
 });
 
 // Build Project and serve if pass the parameter --serve
 gulp.task('build', ['clean'], function() {
-    sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'styles', 'scripts', 'copy', function(){ args.serve && browserSync(config.browserSyncBuild); }
+    sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', function(){ args.serve && browserSync(config.browserSyncBuild); }
     );
 });

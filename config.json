@@ -5,8 +5,11 @@
    "build": "build/",
    "bower": "public/bower_components",
 
-    "html": {
-       "src": "html/"
+    "handlebars": {
+       "src": "html/",
+       "partials": {
+          "src": "includes/"
+        }
     },
 
     "images": {
@@ -46,6 +49,8 @@
   "lintCSS": false,
 
   "lintJS": true,
+
+  "inlineSVG": true,
 
   "autoprefixerBrowsers": [
     "ie >= 8",
