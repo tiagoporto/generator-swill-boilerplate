@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Page Title</title>
-        <meta name="description" content="{-}">
-        <meta name="keywords" content="{-}">
+        <title>{{#if title}}{{title}}{{else}}{-}{{/if}}</title>
+        <meta name="description" content="{{#if description}}{{description}}{{else}}{-}{{/if}}">
+        <meta name="keywords" content="{{#if keywords}}{{keywords}}{{else}}{-}{{/if}}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="author" href="humans.txt" />
 
@@ -53,20 +53,6 @@
         <div id="outdated"></div>
         <!-- ============================================ -->
 
-        <h1>
-            <a href="{-}">
-                <img id="logo" src="img/logos/logo.svg" alt="{-}" width="250">
-            </a>
-        </h1>
+    {{> @partial-block }}
 
-
-        <!-- build:js js/scripts.combined.min.js -->
-        <script src="bower_components/outdated-browser/outdatedbrowser/outdatedbrowser.js"></script>
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/jquery-logo-downloadtip/js/jquery-logo-downloadtip.min.js"></script>
-        <script src="js/vendors.js"></script>
-        <script src="js/scripts.js"></script>
-        <!-- endbuild -->
-    </body>
-</html>
-
+{{> footer}}

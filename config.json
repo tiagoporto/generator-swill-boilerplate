@@ -5,6 +5,10 @@
    "build": "build/",
    "bower": "public/bower_components",
 
+    "html": {
+       "src": "html/"
+    },
+
     "images": {
        "src": "images/",
       "dest": "img/"
