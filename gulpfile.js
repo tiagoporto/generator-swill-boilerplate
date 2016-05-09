@@ -23,7 +23,6 @@ var args = require('yargs').argv,
     merge = require('merge-stream'),
     plugins = require('gulp-load-plugins')(),
     sequence = require('run-sequence'),
-    spawn = require('child_process').spawn,
     spritesmith = require('gulp.spritesmith'),
     svgSprite = require('gulp-svg-sprite'),
 
@@ -106,14 +105,6 @@ gulp.task('svg-inline', function () {
             .pipe(gulp.dest(basePaths.dest));
     }
 });
-
-///////////////////////////////////
-//TODO: implement
-gulp.task('gulp-reload', function() {
-    process.exit();
-    spawn('gulp', ['default'], {stdio: 'inherit'});
-});
-///////////////////////////////////
 
 gulp.task('styles-helpers', function(){
     var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.{styl,scss}')
@@ -493,9 +484,6 @@ gulp.task('clean', function(cb) {
 gulp.task('serve', function() {
     browserSync(config.browserSync);
 
-    //TODO
-    gulp.watch( './gulpfile.js', ['gulp-reload', browserSync.reload] );
-
     gulp.watch([
                 paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
                 '!' + paths.sprite.src + '**/*'
@@ -529,12 +517,12 @@ gulp.task('serve', function() {
     gulp.watch( basePaths.dest + '**/*.{html,php,json}', ['svg-inline', browserSync.reload]);
 });
 
-// Clean, compile, watch and serve project
+// Serve project and clean, compile and watch if pass the parameter --compile
 gulp.task('default', function() {
     if(args.compile){
         sequence('clean', ['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'serve');
     } else {
-        gulp.start('serve');
+        sequence('handlebars', 'serve');
     }
 });
 
@@ -549,7 +537,7 @@ gulp.task('gh', function() {
 });
 
 // Build the project and push the builded folder to gh-pages branch
-gulp.task('ghpages', function() {
+gulp.task('gh-pages', function() {
     env = 'prod';
     sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', 'gh');
 });
