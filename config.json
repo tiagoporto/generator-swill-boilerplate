@@ -50,7 +50,7 @@
 
   "lintJS": true,
 
-  "inlineSVG": true,
+  "inlineSVG": false,
 
   "autoprefixerBrowsers": [
     "ie >= 8",
