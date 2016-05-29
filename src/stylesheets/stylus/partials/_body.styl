@@ -1,4 +1,7 @@
 body
+    background: linear-gradient(to bottom, $bg-color, darken($bg-color, 18%))
+    background-attachment: fixed
+
     if $debug-vertical-rhythm == true
         background-image: linear-gradient(to top, rgba($debug-color-line, 0.2) 1px, rgba(0, 0, 0, 0) 1px)
         background-size: 100% em($base-line-height, $base-font-size)
