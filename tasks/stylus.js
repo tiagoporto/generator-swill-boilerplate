@@ -3,8 +3,8 @@ module.exports = function (gulp, plugins, paths, headerProject, autoprefixerBrow
     return function () {
 
 		return	gulp.src([
-						paths.styles.src + '*.styl',
-						'!' + paths.styles.src + '{index,_*}.styl'
+						paths.styles.src + '**/*.styl',
+                        '!' + paths.styles.src + '**/{index,_*}.styl'
 					])
 					.pipe(plugins.plumber())
 					.pipe(plugins.stylus({
