@@ -37,13 +37,14 @@ This boilerplate uses the following technologies:
 * [BrowserSync](http://www.browsersync.io/)
 * [CSSLint](http://csslint.net/)
 * [EditorConfig](http://editorconfig.org/)
-* [Gulp](http://gulpjs.com/)
 * [ESLint](http://eslint.org/)
+* [Gulp](http://gulpjs.com/)
+* [Handlebars](http://handlebarsjs.com/)
 * [Jasmine](http://jasmine.github.io/)
 * [Karma](http://karma-runner.github.io/0.13/index.html)
 * [Node.js](http://nodejs.org/)
-* [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 * [NPM](https://www.npmjs.com/)
+* [Sass](http://sass-lang.com/) or [Stylus](http://learnboost.github.io/stylus/)
 
 ## Includes
 
@@ -52,7 +53,7 @@ This boilerplate uses the following technologies:
 * [jQuery Logo Downloadtip](http://tiagoporto.github.io/jquery-logo-downloadtip/) - Only if jQuery is used
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Outdated Browser](http://outdatedbrowser.com/)
-* [Styles to Basic Components](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only available with stylus
+* [Styles to Basic HTML elements](http://tiagoporto.github.io/swill-boilerplate/components.html) - Only available with Stylus
 
 ## Features
 
@@ -60,6 +61,8 @@ This boilerplate uses the following technologies:
 * Compress Images
 * Generate Sprites with .png
 * Generate Sprites with .svg and a .png to fallback
+* Put SVG inline
+* HTML templates with handlebars
 * Analyze CSS with csslint
 * Prefix CSS with Autoprefixer
 * Compile Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
@@ -121,11 +124,17 @@ This boilerplate uses the following technologies:
 │  │
 │  ├─ src // Source files for the projects
 │  │    │
+│  │    ├─ html
+│  │    │  │
+│  │    │  ├─ includes // Handlebars partials
+│  │    │  │
+│  │    │  └─ // Handlebars templates
+│  │    │
 │  │    ├─ images // Original imagens, don't compressed
 │  │    │  │
 │  │    │  ├─ sprite // Images to generate the sprite
 │  │    │  │
-│  │    │  └─ touch // Icons
+│  │    │  ├─ touch // Icons
 │  │    │  │   │
 │  │    │  │   ├─ chrome-touch-icon-192x192.png // Icon for Chrome on Android
 │  │    │  │   │
@@ -286,7 +295,17 @@ This boilerplate uses the following technologies:
 
     Type: `Boolean`
 
-    If use lint JS.
+    #### inlineSVG
+
+    Type: `Boolean`
+
+    If put SVG inline.
+
+    #### handlebars
+
+    Type: `Boolean`
+
+    If use handlebars template.
 
     #### autoprefixerBrowsers
 
@@ -309,7 +328,7 @@ This boilerplate uses the following technologies:
         "notify": false,
         "logPrefix": "BrowserSync",
         "server": {
-            "baseDir": ["src/", "public/", "bower_components/"]
+            "baseDir": ["src/", "public/"]
         }
     }
     ```
@@ -396,7 +415,7 @@ $ gulp build --serve
 **Gh-pages Task** - build the project and push the builded folder to gh-pages branch
 
 ```sh
-$ gulp ghpages
+$ gulp gh-pages
 ```
 
 **Test Task** - run the unit testing
