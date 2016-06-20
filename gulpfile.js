@@ -86,12 +86,14 @@ gulp.task('test', function(){
 });
 
 gulp.task('handlebars', function () {
-    return gulp
-        .src(paths.html.src + '**/*.html')
-        .pipe(handlebars({
-            partials: paths.html.src + basePaths.handlebars.partials.src + '**/*.hbs'
-        }))
-        .pipe(gulp.dest(basePaths.dest));
+    if(config.handlebars){
+        return gulp
+            .src(paths.html.src + '**/*.html')
+            .pipe(handlebars({
+                partials: paths.html.src + basePaths.handlebars.partials.src + '**/*.hbs'
+            }))
+            .pipe(gulp.dest(basePaths.dest));
+    }
 });
 
 gulp.task('svg-inline', function () {

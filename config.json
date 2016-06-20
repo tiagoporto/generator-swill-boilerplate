@@ -52,6 +52,9 @@
 
   "inlineSVG": false,
 
+  "handlebars": true,
+
+
   "autoprefixerBrowsers": [
     "ie >= 8",
     "ie_mob >= 10",
