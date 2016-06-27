@@ -85,7 +85,7 @@ gulp.task('test', function(){
     sequence('karma', 'coverall');
 });
 
-gulp.task('handlebars', function () {
+gulp.task('handlebars', function() {
     if(config.handlebars){
         return gulp
             .src(paths.html.src + '**/*.html')
@@ -96,7 +96,7 @@ gulp.task('handlebars', function () {
     }
 });
 
-gulp.task('svg-inline', function () {
+gulp.task('svg-inline', function() {
     if(config.inlineSVG){
         return gulp.src(basePaths.dest + '**/*.html')
             .pipe(plugins.inline({
@@ -195,13 +195,13 @@ gulp.task('svg2png', function() {
 // Optimize Images
 gulp.task('images', function() {
     var images = gulp.src([
-                            paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
-                            '!' + paths.sprite.src + '**/*'
-                        ])
-                        .pipe(plugins.plumber())
-                        .pipe(plugins.newer(paths.images.dest))
-                        .pipe(plugins.imagemin({optimizationLevel: 5, progressive: true}))
-                        .pipe(gulp.dest(paths.images.dest));
+                    paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
+                    '!' + paths.sprite.src + '**/*'
+                ])
+                .pipe(plugins.plumber())
+                .pipe(plugins.newer(paths.images.dest))
+                .pipe(plugins.imagemin({optimizationLevel: 5, progressive: true}))
+                .pipe(gulp.dest(paths.images.dest));
 
     var svg = gulp.src([
                         paths.images.src + '**/*.svg',
@@ -222,16 +222,16 @@ gulp.task('vendor-scripts', function() {
     var envProd = (env === 'prod') ? '' : '!';
 
     return gulp.src([
-                        '!' + paths.scripts.src + '**/*{_SEPARATE,_IGNORE}.js',
-                        paths.scripts.src + 'settings/*.js',
-                        envProd + paths.scripts.src + 'settings/google_analytics.js'
-                    ])
-                    .pipe(plugins.plumber())
-                    .pipe(plugins.concat('vendors.js'))
-                    .pipe(gulp.dest(paths.scripts.dest))
-                    .pipe(plugins.rename('vendors.min.js'))
-                    .pipe(plugins.uglify())
-                    .pipe(gulp.dest(paths.scripts.dest));
+                    '!' + paths.scripts.src + '**/*{_SEPARATE,_IGNORE}.js',
+                    paths.scripts.src + 'settings/*.js',
+                    envProd + paths.scripts.src + 'settings/google_analytics.js'
+                ])
+                .pipe(plugins.plumber())
+                .pipe(plugins.concat('vendors.js'))
+                .pipe(gulp.dest(paths.scripts.dest))
+                .pipe(plugins.rename('vendors.min.js'))
+                .pipe(plugins.uglify())
+                .pipe(gulp.dest(paths.scripts.dest));
 });
 
 // Concatenate and Minify Main Scripts
