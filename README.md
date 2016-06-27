@@ -1,8 +1,15 @@
 # Swill Boilerplate
 
+[![devDependencies Status](https://david-dm.org/tiagoporto/swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/swill-boilerplate#info=devDependencies)
+[![NPM Downloads](https://img.shields.io/npm/dt/swill-boilerplate.svg)](https://www.npmjs.com/package/generator-swill-boilerplate)
+[![Github Release](https://img.shields.io/github/release/tiagoporto/swill-boilerplate.svg)](https://github.com/tiagoporto/swill-boilerplate/releases)
+[![Github Issues](https://img.shields.io/github/issues/tiagoporto/swill-boilerplate.svg)](https://github.com/tiagoporto/swill-boilerplate/issues)
+[![Github License](https://img.shields.io/github/license/tiagoporto/swill-boilerplate.svg)](http://opensource.org/licenses/MIT)
+
+
+
 [![Github Release](https://img.shields.io/github/release/tiagoporto/swill-boilerplate.svg)](https://github.com/tiagoporto/swill-boilerplate/releases)
 [![devDependencies Status](https://img.shields.io/david/dev/tiagoporto/swill-boilerplate.svg)](https://david-dm.org/tiagoporto/swill-boilerplate#info=devDependencies)
-[![Github License](https://img.shields.io/github/license/tiagoporto/swill-boilerplate.svg)](http://opensource.org/licenses/MIT)
 
 <p align="center">
     <img src="http://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
