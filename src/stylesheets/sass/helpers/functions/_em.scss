@@ -1,6 +1,31 @@
-// EM function
-// Convert pixel units to em units
+@import '_clean-unit.scss';
+
+/// Transforms a `px` value into `em` value.
+/// The unit (px) isn't required.
+///
+/// @group   Utilities
+/// @access  public
+///
+/// @param   {number} $pixels                    - Value to be converted
+/// @param   {number} $context [$font-size-base] - Font size used in the convertion
+///
+/// @return  {number} - Converted value expressed in `em`
+/// @require {variable} $font-size-base
+///
+/// @example scss - Usage
+///   .element {
+///     height: em(20px);
+///   }
+///
+/// @example scss - Compiled
+///   .element {
+///     height: 1.25em
+///   }
 
 @function em($pixels, $context: $base-font-size){
-	@return ($pixels/$context) + em;
+  @if type-of($pixels) == 'number' {
+    @return (_clean-unit($pixels) / _clean-unit($context)) * 1em;
+  }  @else {
+    @warn '#{$pixels} is not a number';
+  }
 }
