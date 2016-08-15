@@ -1,6 +1,0 @@
-// EM function
-// Convert pixel units to em units
-
-@function em($pixels, $context: $base-font-size){
-	@return ($pixels/$context) + em;
-}
