@@ -1,0 +1,133 @@
+@@include('includes/header.html', {
+	"title": "Swill Boilerplate - Components",
+	"description": "Boilerplate front-end"
+})
+
+
+			<h1>h1. Swill Boilerplate</h1>
+
+			<h2>h2. Swill Boilerplate</h2>
+
+			<h3>h3. Swill Boilerplate</h3>
+
+			<h4>h4. Swill Boilerplate</h4>
+
+			<h5>h5. Swill Boilerplate</h5>
+
+			<h6>h6. Swill Boilerplate</h6>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam dolore deserunt laboriosam, perferendis quia earum quam accusamus consequuntur explicabo modi debitis placeat eveniet blanditiis esse incidunt commodi assumenda. Enim repellendus vitae eaque distinctio velit quia modi, non maxime reiciendis amet ab temporibus! Aliquid illo natus, architecto minima saepe cupiditate autem dolor, odit! Dolorem beatae est iste incidunt quaerat delectus nobis error dignissimos numquam, voluptatem necessitatibus exercitationem at sunt quidem voluptatibus nam facilis veniam nulla odit dolorum pariatur, laboriosam? Quam nisi non delectus earum itaque quo voluptatum laborum eveniet doloremque rem consectetur id consequatur perspiciatis veritatis harum iure maxime, quae voluptatibus.</p>
+
+			<blockquote>The &lt;blockquote&gt; tag specifies a section that is quoted from another source. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque inventore aspernatur eligendi facere culpa in dolorem, assumenda deserunt omnis provident.</blockquote>
+
+
+			<form action="#" method="POST">
+				<fieldset>
+					<legend>My Semantic Form</legend>
+
+					<p>
+						<label for="username">Username*</label>
+						<input id="username" type="text" name="username" maxlength="10" aria-required="true" required>
+					</p>
+
+					<p>
+						<label for="email">Email*</label>
+						<input id="email" type="email" name="email" required>
+					</p>
+
+					<p>
+						<label for="disabled">Disabled</label>
+						<input id="disabled" type="text" name="disabled" disabled>
+					</p>
+
+					<p>
+						<label for="number">Number</label>
+						<input id="number" type="number" name="number" min="1" max="5">
+					</p>
+
+					<p>
+						<label for="birthday">Birthday</label>
+						<input id="birthday" type="text" maxlength="10" name="birthday" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$">
+					</p>
+
+					<p>
+						<label for="hour">Hour</label>
+						<input id="hour" type="text" maxlength="8" name="hour" pattern="[0-9]{2}:[0-9]{2} [0-9]{2}$">
+					</p>
+
+					<p>
+						<label for="hour">Range</label>
+						<input type="range" name="points" min="0" max="10">
+					</p>
+
+					<p>
+						<label for="phone">Phone</label>
+						<input id="phone" type="text" name="phone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$">
+					</p>
+
+					<p>
+						<label>Sex</label>
+
+						<label><input type="radio" name="sex" value="male" checked>Male</label>
+
+						<label><input type="radio" name="sex" value="female">Female</label>
+					<p>
+
+					<p>
+						<label>Checkbox</label>
+
+						<label><input type="checkbox" name="vehicle" value="Bike"> I have a bike</label>
+
+						<label><input type="checkbox" name="vehicle" value="Car"> I have a car</label>
+					</p>
+
+					<p>
+						<label id="choose2">Drop</label>
+
+						<select name="choose">
+							<optgroup label="Front-end">
+								<option value="html">HTML</option>
+								<option value="css">CSS</option>
+							</optgroup>
+							<optgroup label="Back-end">
+								<option value="ruby">Ruby</option>
+								<option value="python">Python</option>
+								<option value="php">PHP</option>
+							</optgroup>
+						</select>
+					</p>
+
+					<p>
+						<label for="comment">Comment</label>
+
+						<textarea id="comment" name="comment" rows="3" cols="50"></textarea>
+					</p>
+
+
+					<p>
+						<input type="file">
+					</p>
+
+
+					<input type="hidden" name="userID" value="1">
+				</fieldset>
+
+				<fieldset>
+					<p>
+						<label for="password">Password</label>
+						<input id="password" type="password" name="password">
+					</p>
+				</fieldset>
+
+				<button type="button" disabled>cancel</button>
+				<button type="submit">Send</button>
+			</form>
+
+			<pre><code>&lt;div class="file-upload"&gt;
+    &lt;input type="text" placeholder="Choose File..." disabled&gt;
+    &lt;span&gt;Upload&lt;/span&gt;
+    &lt;input type="file"&gt;
+&lt;/div&gt;</code></pre>
+
+
+@@include('./includes/footer.html')
