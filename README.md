@@ -20,7 +20,6 @@ Visit the [website](http://tiagoporto.github.io/swill-boilerplate/).
     * [Tasks](#tasks)
     * [Bitmap Sprite](#bitmap-sprite)
     * [Vetor Sprite](#svg-sprite)
-* [Contributing](#contributing)
 * [License](#license)
 
 ## Technologies
@@ -470,18 +469,6 @@ To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-
 
     * `moon.svg` the classname use the prefix `svg-` and the filename of the svg `moon`.
     * If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
-
-
-
-## Contributing
-
-If you have time to contribute, giving some suggestions, improving the documentation, correcting bugs or anything else, please help me to make this a good tool for everyone.
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
 
 
 ## License
