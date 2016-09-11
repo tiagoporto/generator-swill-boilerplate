@@ -1,7 +1,5 @@
 # Swill Boilerplate
 
-[![devDependencies Status](https://david-dm.org/tiagoporto/swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/swill-boilerplate#info=devDependencies)
-
 <p align="center">
     <img src="http://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
 </p>
