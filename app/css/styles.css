@@ -62,11 +62,11 @@ body {
   }
 }
 ::-moz-selection {
-  background: #3faa96;
+  background: #42ab94;
   color: #fff;
 }
 ::selection {
-  background: #3faa96;
+  background: #42ab94;
   color: #fff;
 }
 h1,
@@ -249,7 +249,7 @@ input[type="submit"]:disabled {
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
   color: #fff;
-  background-color: #3faa96;
+  background-color: #42ab94;
   -webkit-transition: 0.15s ease-out;
   transition: 0.15s ease-out;
   cursor: pointer;
@@ -331,7 +331,7 @@ input[type="submit"]:disabled {
   }
 }
 .header {
-  background: #2f8071;
+  background: #31806f;
   text-align: center;
   color: #fff;
 }
