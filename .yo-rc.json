@@ -11,7 +11,7 @@
     "preprocessor": "stylus",
     "options": [
       "es6",
-      "lintjs"
+      "lintJS"
     ],
     "features": [
       "jquery",

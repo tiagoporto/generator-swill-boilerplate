@@ -38,15 +38,15 @@
 
   "components": true,
 
-  "es6": false,
+  "es6": true,
 
   "jQuery": true,
 
   "lintCSS": false,
 
-  "lintJS": false,
+  "lintJS": true,
 
-  "inlineSVG": false,
+  "inlineSVG": true,
 
   "handlebars": true,
 
