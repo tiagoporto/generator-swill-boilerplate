@@ -19,7 +19,7 @@
     * [Usage](#usage)
     * [Tasks](#tasks)
     * [Bitmap Sprite](#bitmap-sprite)
-    * [Vetor Sprite](#svg-sprite)
+    * [Vetor Sprite](#vetor-sprite)
 * [License](#license)
 
 ## Technologies
