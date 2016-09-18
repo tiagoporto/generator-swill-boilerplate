@@ -1,5 +1,5 @@
-/*!	{Title} v0.0.1
-*	Project Home page
-*	Copyright (c) initialyear-atualyear Author Name (Site)
+/*!	Swill Boilerplate
+*	https://github.com/tiagoporto/generator-swill-boilerplate
+*	Copyright (c) 2014-2016 Tiago Porto (http://www.tiagoporto.com/)
 *	Released under the MIT license
 */
