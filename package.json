@@ -3,7 +3,19 @@
   "version": "0.1.0",
   "description": "The front-end Boilerplate that you need to start multi-device development, easy to customize.",
   "homepage": "https://github.com/tiagoporto/generator-swill-boilerplate",
-  "keywords": [],
+  "keywords": [
+    "template",
+    "gulp",
+    "boilerplate",
+    "customizable",
+    "automation",
+    "stylus",
+    "sass",
+    "image optimization",
+    "scripts concatenation",
+    "live browser reloading",
+    "cross-device synchronization"
+  ],
   "author": {
     "name": "Tiago Porto",
     "url": "http://www.tiagoporto.com/"
