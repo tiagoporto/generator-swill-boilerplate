@@ -440,14 +440,14 @@ To generate SVG sprites is used [gulp-svg-sprite](https://github.com/jkphl/gulp-
 * In HTML put the class in elements
 
     ```html
-    <i class="svg-icon-dims svg-icon"><i>
+    <i class="icon-star-dims icon-star"><i>
     ```
 
     The class `-dims` get the dimensions and the other the position of the icon in sprite.
 
     The classname is defined by the `.svg` filename, example:
 
-    * `moon.svg` the classname use the prefix `svg-` and the filename of the svg `moon`.
+    * `moon.svg` the classname use the prefix `icon-` and the filename of the svg `moon`.
     * If you want use a hover, just name the file, `moon~hover.svg` and use the class `sgv-moon`.
 
 
