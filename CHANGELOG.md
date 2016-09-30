@@ -4,6 +4,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.6beta] - 2016-09-10
+### Changed
+- Lint Rules
+- Update packages
+
+### Fixed
+- Slug name in package.json
+- Keep necessary folders with `.gitkeep`
+- Keep `favicon.ico` and `apple-touch-icon.png`
+- Optional 404
+- Include humans and icons link in HTML
+
+### Added
+- Option to rename handlebars folder
+
 ## [0.2.5beta] - 2016-08-31
 ### Added
 - Check if the folder name is equal to project name, if not the boilerplate will be created inside the project name

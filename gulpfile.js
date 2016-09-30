@@ -1,5 +1,5 @@
-/*eslint-env node */
-/*eslint strict: ["error", "global"]*/
+/* eslint-env node */
+/* eslint strict: ["error", "global"] */
 'use strict';
 var eslint = require('gulp-eslint'),
     excludeGitignore = require('gulp-exclude-gitignore'),
@@ -7,7 +7,7 @@ var eslint = require('gulp-eslint'),
     nsp = require('gulp-nsp'),
     path = require('path');
 
-gulp.task('eslint', function () {
+gulp.task('eslint', function() {
     return gulp.src([
         '**/*.js',
         '!app/templates/gulpfile.js',
@@ -19,7 +19,7 @@ gulp.task('eslint', function () {
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('nsp', function (cb) {
+gulp.task('nsp', function(cb) {
     return nsp({package: path.resolve('package.json')}, cb);
 });
 

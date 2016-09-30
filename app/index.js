@@ -1,13 +1,13 @@
-/*eslint-env node */
-/*eslint strict: ["error", "global"]*/
+/* eslint-env node */
+/* eslint strict: ["error", "global"] */
 'use strict';
 
 var _s = require('underscore.string'),
     chalk = require('chalk'),
     mkdirp = require('mkdirp'),
     path = require('path'),
-    yosay = require('yosay'),
-    yeoman = require('yeoman-generator');
+    yeoman = require('yeoman-generator'),
+    yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
     prompting: function() {
@@ -73,6 +73,13 @@ module.exports = yeoman.Base.extend({
             name: 'fontsDestFolder',
             message: 'Webfonts destination folder??',
             default: 'fonts',
+            when: function(response) {
+                return response.settingFolder === true;
+            }
+        }, {
+            name: 'handlebarsSrcFolder',
+            message: 'Handlebars Source folder??',
+            default: 'handlebars',
             when: function(response) {
                 return response.settingFolder === true;
             }
@@ -234,15 +241,15 @@ module.exports = yeoman.Base.extend({
             }]
         }];
 
-        //================== Get props ==================//
-        return this.prompt(prompts).then(function (props) {
+        // ================== Get props ================== //
+        return this.prompt(prompts).then(function(props) {
             this.prompts = props;
             this.props = {};
 
             this.props.project = {
                 name: (props.projectName) ? _s.clean(props.projectName) : '{Project Name}',
-                sanitizeName: (props.projectName) ? _s.clean(props.projectName) : 'project-name',
-                slugName: (props.projectName) ? _s.slugify(_s.clean(props.projectName)) : '{project-name}',
+                cleanName: (props.projectName) ? _s.clean(props.projectName) : 'project-name',
+                sanitizeName: (props.projectName) ? _s.slugify(_s.clean(props.projectName)) : '{project-name}',
                 description: props.projectDescription,
                 homepage: props.projectHomepage
             };
@@ -265,6 +272,7 @@ module.exports = yeoman.Base.extend({
                 dest: props.destFolder || 'app',
                 build: props.buildFolder || 'build',
                 bower: props.bowerFolder || 'bower_components',
+                handlebars: props.handlebarsSrcFolder || 'handlebars',
                 fonts: props.fontsDestFolder || 'fonts',
                 sprite: props.spriteSrcFolder || 'sprite',
                 images: {
@@ -312,12 +320,12 @@ module.exports = yeoman.Base.extend({
         }.bind(this));
     },
 
-    // ====================== Copy settings files ======================//
-    default: function () {
-        if (path.basename(this.destinationPath()) !== this.props.project.slugName) {
-            this.log( 'The folder ' + this.props.project.slugName + 'will be automatically created!!');
-            mkdirp(this.props.project.slugName);
-            this.destinationRoot(this.destinationPath(this.props.project.slugName));
+    // ====================== Copy settings files ====================== //
+    default: function() {
+        if (path.basename(this.destinationPath()) !== this.props.project.sanitizeName) {
+            this.log('The folder ' + this.props.project.sanitizeName + 'will be automatically created!!');
+            mkdirp(this.props.project.sanitizeName);
+            this.destinationRoot(this.destinationPath(this.props.project.sanitizeName));
         }
     },
     bower: function() {
@@ -374,7 +382,7 @@ module.exports = yeoman.Base.extend({
     package: function() {
         this.fs.copyTpl(
             this.templatePath('_package.json'),
-            this.destinationPath('package.json'),{
+            this.destinationPath('package.json'), {
                 project: this.props.project,
                 author: this.props.author,
                 preprocessor: this.props.preprocessor
@@ -427,17 +435,32 @@ module.exports = yeoman.Base.extend({
             this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/')
         );
 
+        this.write(this.props.folder.src + '/' + this.props.folder.images.src + '/sprite/.gitkeep', '');
+
         this.fs.copy(
             this.templatePath('public/img/**/*'),
             this.destinationPath(this.props.folder.dest + '/' + this.props.folder.images.dest + '/')
         );
+
+        this.write(this.props.folder.dest + '/' + this.props.folder.images.dest + '/copyright/.gitkeep', '');
+
+        this.fs.copy(
+            this.templatePath('public/apple-touch-icon.png'),
+            this.destinationPath(this.props.folder.dest + '/apple-touch-icon.png')
+        );
+
+        this.fs.copy(
+            this.templatePath('public/favicon.ico'),
+            this.destinationPath(this.props.folder.dest + '/favicon.ico')
+        );
     },
     html: function() {
-        if(this.props.use.handlebars){
+        if (this.props.use.handlebars) {
             this.fs.copyTpl(
-                this.templatePath('src/html/**/*'),
-                this.destinationPath(this.props.folder.src + '/html/'), {
-                    use: this.props.use
+                this.templatePath('src/handlebars/**/*'),
+                this.destinationPath(this.props.folder.src + '/handlebars/'), {
+                    use: this.props.use,
+                    include: this.props.include
                 }
             );
         } else {
@@ -474,30 +497,33 @@ module.exports = yeoman.Base.extend({
         );
     },
     vendors: function() {
-        this.fs.copy(
-            this.templatePath('src/vendors/**/*'),
-            this.destinationPath(this.props.folder.src + '/vendors')
-        );
+        if (this.props.preprocessor.name === 'sass') {
+            this.write(this.props.folder.src + '/vendors/.gitkeep', '');
+        } else {
+            this.fs.copy(
+                this.templatePath('src/vendors/**/*'),
+                this.destinationPath(this.props.folder.src + '/vendors')
+            );
+        }
     },
-
+    font: function() {
+        this.write(this.props.folder.dest + '/' + this.props.folder.fonts + '/.gitkeep', '');
+    },
 
     // ====================== Copy optional Files  ======================//
     optionalFiles: function() {
-    //     if(this.props.include.404) {
-    //         this.fs.copy(
-    //             this.templatePath('public/404.html'),
-    //             this.destinationPath(this.props.folder.dest + '/404.html')
-    //         );
-    //     }
-    // },
-        if(this.props.include.htaccess) {
+        if (!this.props.include[404]) {
+            this.fs.delete(this.destinationPath(this.props.folder.dest + '/404.html'));
+            this.fs.delete(this.destinationPath(this.props.folder.src + '/handlebars/404.html'));
+        }
+        if (this.props.include.htaccess) {
             this.fs.copy(
                 this.templatePath('../../node_modules/apache-server-configs/dist/.htaccess'),
                 this.destinationPath(this.props.folder.dest + '/.htaccess')
             );
         }
 
-        if(this.props.include.readme) {
+        if (this.props.include.readme) {
             this.fs.copyTpl(
                 this.templatePath('README.md'),
                 this.destinationPath('README.md'), {
@@ -507,49 +533,49 @@ module.exports = yeoman.Base.extend({
             );
         }
 
-        if(this.props.include.contributing) {
+        if (this.props.include.contributing) {
             this.fs.copy(
                 this.templatePath('CONTRIBUTING.md'),
                 this.destinationPath('CONTRIBUTING.md')
             );
         }
 
-        if(this.props.include.changelog) {
+        if (this.props.include.changelog) {
             this.fs.copy(
                 this.templatePath('CHANGELOG.md'),
                 this.destinationPath('CHANGELOG.md')
             );
         }
 
-        if(this.props.include.crossdomain) {
+        if (this.props.include.crossdomain) {
             this.fs.copy(
                 this.templatePath('public/crossdomain.xml'),
                 this.destinationPath(this.props.folder.dest + '/crossdomain.xml')
             );
         }
 
-        if(this.props.include.manifest.chrome) {
+        if (this.props.include.manifest.chrome) {
             this.fs.copy(
                 this.templatePath('public/manifest.json'),
                 this.destinationPath(this.props.folder.dest + '/manifest.json')
             );
         }
 
-        if(this.props.include.manifest.firefox) {
+        if (this.props.include.manifest.firefox) {
             this.fs.copy(
                 this.templatePath('public/manifest.webapp'),
                 this.destinationPath(this.props.folder.dest + '/manifest.webapp')
             );
         }
 
-        if(this.props.include.robots) {
+        if (this.props.include.robots) {
             this.fs.copy(
                 this.templatePath('public/robots.txt'),
                 this.destinationPath(this.props.folder.dest + '/robots.txt')
             );
         }
 
-        if(this.props.include.humans) {
+        if (this.props.include.humans) {
             this.fs.copy(
                 this.templatePath('public/humans.txt'),
                 this.destinationPath(this.props.folder.dest + '/humans.txt')
@@ -573,6 +599,6 @@ module.exports = yeoman.Base.extend({
     save: function() {
         this.config.set(this.prompts);
         this.config.save();
-        // this.installDependencies();
+        this.installDependencies();
     }
 });

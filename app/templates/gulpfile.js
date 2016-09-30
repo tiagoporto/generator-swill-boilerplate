@@ -150,7 +150,7 @@ gulp.task('styles', function(){<% if (preprocessor.name === "stylus") { %>
           header: headerProject + '\n'
         }))
         .pipe(plugins.if(config.lintCSS, plugins.csslint('./.csslintrc')))
-        .pipe(plugins.if(config.lintCSS, plugins.csslint.reporter()))
+        .pipe(plugins.if(config.lintCSS, plugins.csslint.formatter()))
         .pipe(gulp.dest(paths.styles.dest))
         .pipe(plugins.csso())
         .pipe(plugins.rename({suffix: '.min'}))

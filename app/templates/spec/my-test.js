@@ -1,5 +1,5 @@
-/*eslint-env node, mocha*/
-/*eslint strict: ["error", "global"]*/
+/* eslint-env node, mocha */
+/* eslint strict: ["error", "global"] */
 'use strict';
 
 describe('Name of the group', function() {

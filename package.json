@@ -1,6 +1,6 @@
 {
   "name": "generator-swill-boilerplate",
-  "version": "0.2.5beta",
+  "version": "0.2.6beta",
   "description": "Customizable front-end boilerplate with Gulp to quick multi-device development.",
   "homepage": "http://tiagoporto.github.io/swill-boilerplate/",
   "keywords": [

@@ -1,13 +1,13 @@
 # <%= project.name %>
 
-[![Build Status](https://travis-ci.org/<%= githubUser %>/<%= project.slugName %>.svg)](https://travis-ci.org/<%= githubUser %>/<%= project.slugName %>)
-[![Coverage Status](https://img.shields.io/coveralls/<%= githubUser %>/<%= project.slugName %>.svg)](https://coveralls.io/github/<%= githubUser %>/<%= project.slugName %>)
-[![Dependencies Status](https://david-dm.org/<%= githubUser %>/<%= project.slugName %>.svg)](https://david-dm.org/<%= githubUser %>/<%= project.slugName %>)
-[![devDependencies Status](https://david-dm.org/<%= githubUser %>/<%= project.slugName %>/dev-status.svg)](https://david-dm.org/<%= githubUser %>/<%= project.slugName %>#info=devDependencies)
-[![NPM Downloads](https://img.shields.io/npm/dt/<%= project.slugName %>.svg)](https://www.npmjs.com/package/<%= project.slugName %>)
-[![Github Release](https://img.shields.io/github/release/<%= githubUser %>/<%= project.slugName %>.svg)](https://github.com/<%= githubUser %>/<%= project.slugName %>/releases)
-[![Github Issues](https://img.shields.io/github/issues/<%= githubUser %>/<%= project.slugName %>.svg)](https://github.com/<%= githubUser %>/<%= project.slugName %>/issues)
-[![Github License](https://img.shields.io/github/license/<%= githubUser %>/<%= project.slugName %>.svg)](https://raw.githubusercontent.com/<%= githubUser %>/<%= project.slugName %>/master/LICENSE.md)
+[![Build Status](https://travis-ci.org/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://travis-ci.org/<%= githubUser %>/<%= project.sanitizeName %>)
+[![Coverage Status](https://img.shields.io/coveralls/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://coveralls.io/github/<%= githubUser %>/<%= project.sanitizeName %>)
+[![Dependencies Status](https://david-dm.org/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://david-dm.org/<%= githubUser %>/<%= project.sanitizeName %>)
+[![devDependencies Status](https://david-dm.org/<%= githubUser %>/<%= project.sanitizeName %>/dev-status.svg)](https://david-dm.org/<%= githubUser %>/<%= project.sanitizeName %>#info=devDependencies)
+[![NPM Downloads](https://img.shields.io/npm/dt/<%= project.sanitizeName %>.svg)](https://www.npmjs.com/package/<%= project.sanitizeName %>)
+[![Github Release](https://img.shields.io/github/release/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://github.com/<%= githubUser %>/<%= project.sanitizeName %>/releases)
+[![Github Issues](https://img.shields.io/github/issues/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://github.com/<%= githubUser %>/<%= project.sanitizeName %>/issues)
+[![Github License](https://img.shields.io/github/license/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://raw.githubusercontent.com/<%= githubUser %>/<%= project.sanitizeName %>/master/LICENSE.md)
 
 <%= project.description %>
 

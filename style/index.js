@@ -1,11 +1,11 @@
-/*eslint-env node */
-/*eslint strict: ["error", "global"]*/
+/* eslint-env node */
+/* eslint strict: ["error", "global"] */
 'use strict';
 
 var yeoman = require('yeoman-generator');
 
 module.exports = yeoman.Base.extend({
-    prompting: function () {
+    prompting: function() {
         this.composeWith('swill-boilerplate:style', {});
 
         var prompts = [{
@@ -14,12 +14,12 @@ module.exports = yeoman.Base.extend({
             message: 'Folder and file path'
         }];
 
-        return this.prompt(prompts).then(function (props) {
+        return this.prompt(prompts).then(function(props) {
             this.props = props;
         }.bind(this));
     },
 
-    writing: function () {
+    writing: function() {
         var config = require(this.destinationPath('config.json'));
 
         this.fs.write(this.destinationPath(config.basePaths.styles.src + this.props.folder), '');

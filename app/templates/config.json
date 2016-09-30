@@ -6,7 +6,7 @@
     "bower": "<%= folder.dest %>/<%= folder.bower %>",
 
     "handlebars": {
-       "src": "html/",
+       "src": "<%= folder.handlebars %>/",
        "partials": {
           "src": "includes/"
         }
@@ -48,7 +48,7 @@
 
   "inlineSVG": false,
 
-  "handlebars": true,
+  "handlebars": <%= use.handlebars %>,
 
   "autoprefixerBrowsers": [
     "ie > 7",

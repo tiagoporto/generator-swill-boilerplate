@@ -1,7 +1,7 @@
 // Karma configuration
 
-/*eslint-env node*/
-/*eslint strict: ["error", "global"]*/
+/* eslint-env node */
+/* eslint strict: ["error", "global"] */
 'use strict';
 module.exports = function(config) {
     var configuration = {
@@ -25,13 +25,13 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'scripts/*.js' : ['coverage']
+            'scripts/*.js': ['coverage']
         },
 
         // configure the reporter
         coverageReporter: {
-            type : 'html',
-            dir : 'coverage/'
+            type: 'html',
+            dir: 'coverage/'
         },
 
         // test results reporter to use
