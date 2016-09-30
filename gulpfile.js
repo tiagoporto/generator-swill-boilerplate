@@ -8,7 +8,7 @@ var eslint = require('gulp-eslint'),
     path = require('path');
 
 gulp.task('eslint', function () {
-    return gulp.src('**/*.js')
+    return gulp.src(['**/*.js', '!app/templates/gulpfile.js'])
         .pipe(excludeGitignore())
         .pipe(eslint())
         .pipe(eslint.format())

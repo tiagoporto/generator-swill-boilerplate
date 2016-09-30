@@ -4,13 +4,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.2.1beta] - 2016-07-10
+### Changed
+- Refactored `index.js`
+
+### Fixed
+- Organized YO saved settings
+- Options to generate `scripts/settings/call_plugins.js`
+- Env build task `swill boilerplate`
+
+## [0.2.0beta] - 2016-07-03
 ### Added
 - Save settings.
 - Handlebars template.
-
-### Changed
-- 
 
 ### Fixed
 - Bower settings.

@@ -467,6 +467,7 @@ gulp.task('gh-pages', function() {
 
 // Build Project and serve if pass the parameter --serve
 gulp.task('build', ['clean'], function() {
+    env = 'prod';
     sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', function(){ args.serve && browserSync(config.browserSyncBuild); }
     );
 });

@@ -1,12 +1,12 @@
 {
-  "name": "your-project",
+  "name": "<%= project.sanitizeName %>",
   "version": "0.1.0",
-  "description": "Description of your project",
-  "homepage": "",
+  "description": "<%= project.description %>",
+  "homepage": "<%= project.homepage %>",
   "keywords": [],
   "author": {
-    "name": "",
-    "url": ""
+    "name": "<%= author.name %>",
+    "url": "<%= author.homepage %>"
   },
   "repository": {
     "type": "git",

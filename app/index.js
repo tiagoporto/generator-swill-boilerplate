@@ -15,8 +15,10 @@ module.exports = yeoman.Base.extend({
 
         var prompts = [{
             name: 'projectName',
-            message: 'Your project name',
-            default: 'Project Name'
+            message: 'Your project name'
+        }, {
+            name: 'projectDescription',
+            message: 'Your project description'
         }, {
             name: 'projectHomepage',
             message: 'Project Homepage'
@@ -27,7 +29,7 @@ module.exports = yeoman.Base.extend({
             name: 'authorEmail',
             message: 'Author Email'
         }, {
-            name: 'authorWebsite',
+            name: 'authorHomepage',
             message: 'Author\'s website'
         }, {
             name: 'githubUser',
@@ -121,6 +123,11 @@ module.exports = yeoman.Base.extend({
             when: function(response) {
                 return response.settingFolder === true;
             }
+        }, {
+            type: 'confirm',
+            name: 'handlebars',
+            message: 'Do you want use handlebars Template?',
+            default: true
         }, {
             type: 'list',
             name: 'preprocessor',
@@ -225,109 +232,220 @@ module.exports = yeoman.Base.extend({
             }]
         }];
 
+        //================== Get props ==================//
         return this.prompt(prompts).then(function (props) {
-            this.props = props;
+            this.props = {};
 
             this.props.project = {
-                name: _s.clean(this.props.projectName),
-                slugName: _s.slugify(_s.clean(this.props.projectName)),
-                homepage: this.props.projectHomepage
+                name: (props.projectName) ? _s.clean(props.projectName) : '{Project Name}',
+                sanitizeName: (props.projectName) ? _s.clean(props.projectName) : 'project-name',
+                slugName: (props.projectName) ? _s.slugify(_s.clean(props.projectName)) : '{project-name}',
+                description: props.projectDescription,
+                homepage: props.projectHomepage
             };
+
+            this.props.githubUser = (props.githubUser) ? props.githubUser : '{Github User}';
 
             this.props.author = {
-                name: _s.clean(this.props.authorName),
-                email: _s.clean(this.props.authorEmail),
-                homepage: _s.clean(this.props.authorWebsite)
+                name: _s.clean(props.authorName),
+                email: _s.clean(props.authorEmail),
+                homepage: _s.clean(props.authorHomepage)
             };
 
-            if (props.preprocessor === 'sass') {
-                this.extensionStyle = 'scss';
-            } else {
-                this.extensionStyle = 'styl';
-            }
+            this.props.preprocessor = {
+                name: props.preprocessor,
+                extension: (props.preprocessor === 'sass') ? 'scss' : 'styl'
+            };
 
-            if (!this.props.settingFolder) {
-                this.props.srcFolder = 'src';
-                this.props.destFolder = 'app';
-                this.props.buildFolder = 'build';
-                this.props.bowerFolder = 'bower_components';
-                this.props.fontsDestFolder = 'fonts';
-                this.props.spriteSrcFolder = 'sprite';
-                this.props.imgSrcFolder = 'images';
-                this.props.imgDestFolder = 'img';
-                this.props.stylesSrcFolder = 'stylesheets';
-                this.props.stylesDestFolder = 'css';
-                this.props.scriptsSrcFolder = 'scripts';
-                this.props.scriptsDestFolder = 'js';
-            }
+            this.props.folder = {
+                src: props.srcFolder || 'src',
+                dest: props.destFolder || 'app',
+                build: props.buildFolder || 'build',
+                bower: props.bowerFolder || 'bower_components',
+                fonts: props.fontsDestFolder || 'fonts',
+                sprite: props.spriteSrcFolder || 'sprite',
+                images: {
+                    src: props.imgSrcFolder || 'images',
+                    dest: props.imgDestFolder || 'img'
+                },
+                styles: {
+                    src: props.stylesSrcFolder || 'stylesheets',
+                    dest: props.stylesDestFolder || 'css'
+                },
+                scripts: {
+                    src: props.scriptsSrcFolder || 'scripts',
+                    dest: props.scriptsDestFolder || 'js'
+                }
+            };
 
-            this.includeJquery = props.features.indexOf('jquery') >= 0;
-            this.includeLintCSS = this.props.features.indexOf('lintCSS') >= 0;
-            this.includeLintJS = this.props.features.indexOf('lintJS') >= 0;
-            this.includeES6 = this.props.features.indexOf('es6') >= 0;
-            this.includeOutdatedBrowser = this.props.features.indexOf('outdatedBrowser') >= 0;
-            this.includeNormalize = this.props.features.indexOf('normalize') >= 0;
+            this.props.use = {
+                es6: props.features.indexOf('es6') >= 0,
+                jquery: props.features.indexOf('jquery') >= 0,
+                jqueryLogoDownloadtip: props.jqueryLogoDownloadtip,
+                lint: {
+                    js: props.features.indexOf('lintJS') >= 0,
+                    css: props.features.indexOf('lintCSS') >= 0
+                },
+                normalize: props.features.indexOf('normalize') >= 0,
+                outdatedBrowser: props.features.indexOf('outdatedBrowser') >= 0,
+                handlebars: props.handlebars
+            };
+
+            this.props.include = {
+                htaccess: props.files.indexOf('htaccess') >= 0,
+                404: props.files.indexOf('404') >= 0,
+                readme: props.files.indexOf('readme') >= 0,
+                contributing: props.files.indexOf('contributing') >= 0,
+                changelog: props.files.indexOf('changelog') >= 0,
+                crossdomain: props.files.indexOf('crossdomain') >= 0,
+                manifest: {
+                    chrome: props.files.indexOf('manifestJson') >= 0,
+                    firefox: props.files.indexOf('manifestWebapp') >= 0
+                },
+                robots: props.files.indexOf('robots') >= 0,
+                humans: props.files.indexOf('humans') >= 0
+            };
         }.bind(this));
     },
 
-    config: function() {
-        this.fs.copyTpl(
-            this.templatePath('config.json'),
-            this.destinationPath('config.json'), {
-                folder: {
-                    src: this.props.srcFolder,
-                    dest: this.props.destFolder,
-                    build: this.props.buildFolder,
-                    bower: this.props.bowerFolder,
-                    fonts: this.props.fontsDestFolder,
-                    sprite: this.props.spriteSrcFolder,
-                    images: {
-                        src: this.props.imgSrcFolder,
-                        dest: this.props.imgDestFolder
-                    },
-                    styles: {
-                        src: this.props.stylesSrcFolder,
-                        dest: this.props.stylesDestFolder
-                    },
-                    scripts: {
-                        src: this.props.scriptsSrcFolder,
-                        dest: this.props.scriptsDestFolder
-                    }
-                },
-                jquery: this.includeJquery,
-
-                lintcss: this.includeLintCSS,
-
-                lintjs: this.includeLintJS,
-
-                es6: this.includeES6
-            }
-        );
-    },
-    header: function() {
-        this.fs.copyTpl(
-            this.templatePath('src/header-comments.txt'),
-            this.destinationPath(this.props.srcFolder + '/header-comments.txt'), {project: this.props.project}
-        );
-    },
+    // ====================== Copy settings files ======================//
     bower: function() {
         var bowerJson = require('./templates/_bower.json');
 
-        bowerJson.name = this.props.project.slugName;
+        bowerJson.name = this.props.project.sanitizeName;
+        bowerJson.description = this.props.project.description;
         bowerJson.homepage = this.props.project.homepage;
         bowerJson.author.name = this.props.author.name;
         bowerJson.author.homepage = this.props.author.homepage;
-        this.includeJquery && (bowerJson.devDependencies.jquery = '~2.0.0');
-        this.props.jqueryLogoDownloadtip && (bowerJson.devDependencies['jquery-logo-downloadtip'] = '~2.0.0');
-        this.includeOutdatedBrowser && (bowerJson.devDependencies['outdated-browser'] = '^1.1.3');
-        this.includeNormalize && (bowerJson.devDependencies['normalize-css'] = '^4.2.0');
+
+        this.props.use.jquery && (bowerJson.devDependencies.jquery = '~2.0.0');
+        this.props.use.jqueryLogoDownloadtip && (bowerJson.devDependencies['jquery-logo-downloadtip'] = '~2.0.0');
+        this.props.use.outdatedBrowser && (bowerJson.devDependencies['outdated-browser'] = '^1.1.3');
+        this.props.use.normalize && (bowerJson.devDependencies['normalize-css'] = '^4.2.0');
 
         this.fs.writeJSON('bower.json', bowerJson);
 
         this.fs.copyTpl(
             this.templatePath('bowerrc'),
             this.destinationPath('.bowerrc'), {
-                folder: this.props.destFolder + '/' + this.props.bowerFolder
+                folder: this.props.folder.dest + '/' + this.props.folder.bower
+            }
+        );
+    },
+    editorconfig: function() {
+        this.fs.copy(
+            this.templatePath('../../.editorconfig'),
+            this.destinationPath('.editorconfig')
+        );
+    },
+    git: function() {
+        this.fs.copy(
+            this.templatePath('../../.gitattributes'),
+            this.destinationPath('.gitattributes')
+        );
+
+        this.fs.copy(
+            this.templatePath('../../.gitignore'),
+            this.destinationPath('.gitignore')
+        );
+    },
+    lint: function() {
+        this.fs.copy(
+            this.templatePath('csslintrc'),
+            this.destinationPath('.csslintrc')
+        );
+
+        this.fs.copy(
+            this.templatePath('../../.eslintrc'),
+            this.destinationPath('.eslintrc')
+        );
+    },
+    package: function() {
+        this.fs.copyTpl(
+            this.templatePath('_package.json'),
+            this.destinationPath('package.json'),{
+                project: this.props.project,
+                author: this.props.author,
+                preprocessor: this.props.preprocessor
+            }
+        );
+    },
+
+
+
+    // ====================== Copy boilerplate files ======================//
+    config: function() {
+        this.fs.copyTpl(
+            this.templatePath('config.json'),
+            this.destinationPath('config.json'), {
+                folder: this.props.folder,
+                use: this.props.use
+            }
+        );
+    },
+    gulpfile: function() {
+        this.fs.copyTpl(
+            this.templatePath('gulpfile.js'),
+            this.destinationPath('gulpfile.js'), { preprocessor: this.props.preprocessor }
+        );
+    },
+    styles: function() {
+        // if (this.props.componentsCSS) {
+        //     this.fs.copy(
+        //         this.templatePath('src/stylesheets/' + this.props.preprocessor + '/components/*'),
+        //         this.destinationPath(this.props.folder.src + '/' + this.props.stylesSrcFolder + '/components')
+        //     );
+        // }
+        this.fs.copyTpl(
+            this.templatePath('src/stylesheets/' + this.props.preprocessor.name + '/**/*'),
+            this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'),
+            { bower: this.props.folder.dest + '/' + this.props.folder.bower }
+        );
+    },
+    scripts: function() {
+        this.fs.copyTpl(
+            this.templatePath('src/scripts/**/*'),
+            this.destinationPath(this.props.folder.src + '/' + this.props.folder.scripts.src + '/'), {
+                use: this.props.use
+            }
+        );
+    },
+    images: function() {
+        this.fs.copy(
+            this.templatePath('src/images/**/*'),
+            this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/')
+        );
+
+        this.fs.copy(
+            this.templatePath('public/img/**/*'),
+            this.destinationPath(this.props.folder.dest + '/' + this.props.folder.images.dest + '/')
+        );
+    },
+    html: function() {
+        if(this.props.use.handlebars){
+            this.fs.copy(
+                this.templatePath('src/html/**/*'),
+                this.destinationPath(this.props.folder.src + '/html/')
+            );
+        } else {
+            // this.fs.copyTpl(
+            // this.templatePath('public/index.html'),
+            // this.destinationPath(this.props.folder.dest + '/index.html'), {
+            //     humans: this.props.files.indexOf('humans') >= 0,
+            //     jquery: this.includeJquery,
+            //     outdatedBrowser: this.includeOutdatedBrowser,
+            //     jqueryLogoDownloadtip: this.props.jqueryLogoDownloadtip,
+            //     normalize: this.includeNormalize,
+            //     folder: this.props.folder
+            // });
+        }
+    },
+    header: function() {
+        this.fs.copyTpl(
+            this.templatePath('src/header-comments.txt'),
+            this.destinationPath(this.props.folder.src + '/header-comments.txt'), {
+                author: this.props.author,
+                project: this.props.project
             }
         );
     },
@@ -342,106 +460,31 @@ module.exports = yeoman.Base.extend({
             this.destinationPath('spec/')
         );
     },
-    git: function() {
-        this.fs.copy(
-            this.templatePath('../../.gitattributes'),
-            this.destinationPath('.gitattributes')
-        );
-
-        this.fs.copy(
-            this.templatePath('../../.gitignore'),
-            this.destinationPath('.gitignore')
-        );
-    },
-    gulpfile: function() {
-        this.fs.copyTpl(
-            this.templatePath('gulpfile.js'),
-            this.destinationPath('gulpfile.js'), {
-                preprocessor: {
-                    name: this.props.preprocessor,
-                    extension: this.extensionStyle
-                }
-            }
-        );
-    },
-    styles: function() {
-        // if (this.props.componentsCSS) {
-        //     this.fs.copy(
-        //         this.templatePath('src/stylesheets/' + this.props.preprocessor + '/components/*'),
-        //         this.destinationPath(this.props.srcFolder + '/' + this.props.stylesSrcFolder + '/components')
-        //     );
-        // }
-        this.fs.copyTpl(
-            this.templatePath('src/stylesheets/' + this.props.preprocessor + '/**/*'),
-            this.destinationPath(this.props.srcFolder + '/' + this.props.stylesSrcFolder + '/'),
-            { bower: this.props.destFolder + '/' + this.props.bowerFolder }
-        );
-    },
-    scripts: function() {
-        this.fs.copyTpl(
-            this.templatePath('src/scripts/**/*'),
-            this.destinationPath(this.props.srcFolder + '/' + this.props.scriptsSrcFolder + '/'), {
-                outdatedBrowser: this.includeOutdatedBrowser,
-                jqueryLogoDownloadtip: this.props.jqueryLogoDownloadtip
-            }
-        );
-    },
-    vendor: function() {
+    vendors: function() {
         this.fs.copy(
             this.templatePath('src/vendors/**/*'),
-            this.destinationPath(this.props.srcFolder + '/vendors')
+            this.destinationPath(this.props.folder.src + '/vendors')
         );
     },
-    images: function() {
-        this.fs.copy(
-            this.templatePath('src/images/**/*'),
-            this.destinationPath(this.props.srcFolder + '/' + this.props.imgSrcFolder + '/')
-        );
 
-        this.fs.copy(
-            this.templatePath('public/img/**/*'),
-            this.destinationPath(this.props.destFolder + '/' + this.props.imgDestFolder + '/')
-        );
-    },
-    package: function() {
-        this.fs.copyTpl(
-            this.templatePath('_package.json'),
-            this.destinationPath('package.json'),{
-                preprocessor: {
-                    name: this.props.preprocessor
-                }
-            }
-        );
-    },
-    lint: function() {
-        this.fs.copy(
-            this.templatePath('csslintrc'),
-            this.destinationPath('.csslintrc')
-        );
 
-        this.fs.copyTpl(
-            this.templatePath('../../.eslintrc'),
-            this.destinationPath('.eslintrc'), {
-                jquery: this.includeJquery
-            }
-        );
-    },
-    editorconfig: function() {
-        this.fs.copy(
-            this.templatePath('../../.editorconfig'),
-            this.destinationPath('.editorconfig')
-        );
-    },
-    htaccess: function() {
-        if(this.props.files.indexOf('htaccess') >= 0) {
+    // ====================== Copy optional Files  ======================//
+    optionalFiles: function() {
+    //     if(this.props.include.404) {
+    //         this.fs.copy(
+    //             this.templatePath('public/404.html'),
+    //             this.destinationPath(this.props.folder.dest + '/404.html')
+    //         );
+    //     }
+    // },
+        if(this.props.include.htaccess) {
             this.fs.copy(
                 this.templatePath('../../node_modules/apache-server-configs/dist/.htaccess'),
-                this.destinationPath(this.props.destFolder + '/.htaccess')
+                this.destinationPath(this.props.folder.dest + '/.htaccess')
             );
         }
-    },
-    readme: function() {
-        if(this.props.files.indexOf('readme') >= 0) {
+
+        if(this.props.include.readme) {
             this.fs.copyTpl(
                 this.templatePath('README.md'),
                 this.destinationPath('README.md'), {
@@ -450,101 +493,56 @@ module.exports = yeoman.Base.extend({
                 }
             );
         }
-    },
-    contributing: function() {
-        if(this.props.files.indexOf('contributing') >= 0) {
+
+        if(this.props.include.contributing) {
             this.fs.copy(
                 this.templatePath('CONTRIBUTING.md'),
                 this.destinationPath('CONTRIBUTING.md')
             );
         }
-    },
-    changelog: function() {
-        if(this.props.files.indexOf('changelog') >= 0) {
+
+        if(this.props.include.changelog) {
             this.fs.copy(
                 this.templatePath('CHANGELOG.md'),
                 this.destinationPath('CHANGELOG.md')
             );
         }
-    },
-    // page404: function() {
-    //     if(this.props.files.indexOf('404') >= 0) {
-    //         this.fs.copy(
-    //             this.templatePath('public/404.html'),
-    //             this.destinationPath(this.props.destFolder + '/404.html')
-    //         );
-    //     }
-    // },
-    crossdomain: function() {
-        if(this.props.files.indexOf('crossdomain') >= 0) {
+
+        if(this.props.include.crossdomain) {
             this.fs.copy(
                 this.templatePath('public/crossdomain.xml'),
-                this.destinationPath(this.props.destFolder + '/crossdomain.xml')
+                this.destinationPath(this.props.folder.dest + '/crossdomain.xml')
             );
         }
-    },
-    manifestJson: function() {
-        if(this.props.files.indexOf('manifestJson') >= 0) {
+
+        if(this.props.include.manifest.chrome) {
             this.fs.copy(
                 this.templatePath('public/manifest.json'),
-                this.destinationPath(this.props.destFolder + '/manifest.json')
+                this.destinationPath(this.props.folder.dest + '/manifest.json')
             );
         }
-    },
-    manifestWebapp: function() {
-        if(this.props.files.indexOf('manifestWebapp') >= 0) {
+
+        if(this.props.include.manifest.firefox) {
             this.fs.copy(
                 this.templatePath('public/manifest.webapp'),
-                this.destinationPath(this.props.destFolder + '/manifest.webapp')
+                this.destinationPath(this.props.folder.dest + '/manifest.webapp')
             );
         }
-    },
-    robots: function() {
-        if(this.props.files.indexOf('robots') >= 0) {
+
+        if(this.props.include.robots) {
             this.fs.copy(
                 this.templatePath('public/robots.txt'),
-                this.destinationPath(this.props.destFolder + '/robots.txt')
+                this.destinationPath(this.props.folder.dest + '/robots.txt')
             );
         }
-    },
-    humans: function() {
-        if(this.props.files.indexOf('humans') >= 0) {
+
+        if(this.props.include.humans) {
             this.fs.copy(
                 this.templatePath('public/humans.txt'),
-                this.destinationPath(this.props.destFolder + '/humans.txt')
+                this.destinationPath(this.props.folder.dest + '/humans.txt')
             );
         }
     },
-    handlebars: function() {
-        this.fs.copy(
-            this.templatePath('src/html/**/*'),
-            this.destinationPath(this.props.srcFolder + '/html/')
-        );
-    },
-    // misc: function() {
-    //     this.fs.copyTpl(
-    //     this.templatePath('public/index.html'),
-    //     this.destinationPath(this.props.destFolder + '/index.html'), {
-    //         humans: this.props.files.indexOf('humans') >= 0,
-    //         jquery: this.includeJquery,
-    //         outdatedBrowser: this.includeOutdatedBrowser,
-    //         jqueryLogoDownloadtip: this.props.jqueryLogoDownloadtip,
-    //         normalize: this.includeNormalize,
-    //         folder: {
-    //             dest: this.props.destFolder,
-    //             bower: this.props.bowerFolder,
-    //             images: {
-    //                 dest: this.props.imgDestFolder
-    //             },
-    //             styles: {
-    //                 dest: this.props.stylesDestFolder
-    //             },
-    //             scripts: {
-    //                 dest: this.props.scriptsDestFolder
-    //             }
-    //         }
-    //     });
-    // },
     license: function() {
         this.composeWith('license', {
             options: {
@@ -556,6 +554,9 @@ module.exports = yeoman.Base.extend({
             local: require.resolve('generator-license/app')
         });
     },
+
+
+    // ====================== YO actions ====================== //
     save: function() {
         this.config.set(this.props);
         this.config.save();
