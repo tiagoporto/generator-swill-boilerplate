@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.7beta] - 2016-09-18
+### Changed
+- Fixed boilerplate dependencies
+
+### Fixed
+- Set lint and ES6 options
+- Lint errors boilerplate `gulpfile.js`
+- Links color in Stylus
+
+### Added
+- Language option in Handlebars
+
 ## [0.2.6beta] - 2016-09-10
 ### Changed
 - Lint Rules

@@ -166,7 +166,7 @@ module.exports = yeoman.Base.extend({
                 checked: false
             }, {
                 name: 'Lint JS',
-                value: 'lintjs',
+                value: 'lintJS',
                 checked: true
             }]
         }, {
@@ -290,12 +290,12 @@ module.exports = yeoman.Base.extend({
             };
 
             this.props.use = {
-                es6: props.features.indexOf('es6') >= 0,
+                es6: props.options.indexOf('es6') >= 0,
                 jquery: props.features.indexOf('jquery') >= 0,
                 jqueryLogoDownloadtip: props.jqueryLogoDownloadtip,
                 lint: {
-                    js: props.features.indexOf('lintJS') >= 0,
-                    css: props.features.indexOf('lintCSS') >= 0
+                    js: props.options.indexOf('lintJS') >= 0,
+                    css: props.options.indexOf('lintCSS') >= 0
                 },
                 normalize: props.features.indexOf('normalize') >= 0,
                 outdatedBrowser: props.features.indexOf('outdatedBrowser') >= 0,

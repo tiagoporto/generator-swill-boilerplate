@@ -1,4 +1,4 @@
-//event listener: DOM ready
+// event listener: DOM ready
 function addLoadEvent(func) {
     'use strict';
     var oldonload = window.onload;
@@ -12,7 +12,7 @@ function addLoadEvent(func) {
     }
 }
 addLoadEvent(
-    //call plugins after DOM ready
+    // call plugins after DOM ready
 <% if (use.outdatedBrowser) { %>
     outdatedBrowser({
         bgColor: '#f25648',
