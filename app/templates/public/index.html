@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{Title}</title>
+    <meta name="description" content="{-}">
+    <meta name="keywords" content="{-}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% if (humans) {%><link rel="author" href="humans.txt" /><% } %><% if (jqueryLogoDownloadtip) {%>
+
+    <!-- Logos downloadtip -->
+    <link rel="icon" type="image/png" href="<%= folder.images.dest %>/logos/logo.png" data-title="Screen Bitmap file (.png)" />
+    <link rel="icon" type="image/png" href="<%= folder.images.dest %>/logos/logo-monochrome.png" data-title="Screen Monochrome Bitmap file (.png)" />
+    <link rel="icon" type="image/svg+xml" href="<%= folder.images.dest %>/logos/logo.svg" data-title="Screen Vector file (.svg)" />
+    <link rel="icon" type="image/svg+xml" href="<%= folder.images.dest %>/logos/logo-monochrome.svg" data-title="Screen Monochrome Vector file (.svg)" />
+    <link rel="icon" type="image/eps" href="<%= folder.images.dest %>/logos/logo.eps" data-title="Print file (.eps)" />
+    <link rel="icon" type="image/eps" href="<%= folder.images.dest %>/logos/logo-monochrome.eps" data-title="Print Monochrome file (.eps)" /><% } %>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="theme-color" content="{-}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="{Title}">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 -->
+    <meta name="application-name" content="{Title}"/>
+    <meta name="msapplication-TileColor" content="{-}"/>
+    <meta name="msapplication-square70x70logo" content="<%= folder.images.dest %>/touch/tile.png"/>
+    <meta name="msapplication-square150x150logo" content="<%= folder.images.dest %>/touch/tile.png"/>
+    <meta name="msapplication-wide310x150logo" content="<%= folder.images.dest %>/touch/tile-wide.png"/>
+    <meta name="msapplication-square310x310logo" content="<%= folder.images.dest %>/touch/tile.png"/>
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <!-- build:css <%= folder.styles.dest %>/styles.combined.min.css --><% if (normalize) {%>
+    <link rel="stylesheet" href="<%= folder.bower %>/normalize.css/normalize.css"><% } %><% if (outdatedBrowser) {%>
+    <link rel="stylesheet" href="<%= folder.bower %>/outdated-browser/outdatedbrowser/outdatedbrowser.css"><% } %><% if (jqueryLogoDownloadtip) {%>
+    <link rel="stylesheet" href="<%= folder.bower %>/jquery-logo-downloadtip/css/jquery-logo-downloadtip.css"><% } %>
+    <link rel="stylesheet" href="<%= folder.styles.dest %>/styles.css">
+    <!-- endbuild -->
+  </head>
+  <body><% if (outdatedBrowser) {%>
+    <!-- ============= Outdated Browser ============= -->
+    <div id="outdated"></div>
+    <!-- ============================================ --><% } %>
+
+    <h1>
+      <a href="{-}">
+        <img id="logo" src="<%= folder.images.dest %>/logos/logo.svg" alt="{-}" width="250">
+      </a>
+    </h1>
+
+
+
+
+
+
+
+
+
+    <!-- build:js <%= folder.scripts.dest %>/scripts.combined.min.js --><% if (outdatedBrowser) {%>
+    <script src="<%= folder.bower %>/outdated-browser/outdatedbrowser/outdatedbrowser.js"></script><% } %><% if (jquery) {%>
+    <script src="<%= folder.bower %>/jquery/jquery.js"></script><% } %><% if (jqueryLogoDownloadtip) {%>
+    <script src="<%= folder.bower %>/jquery-logo-downloadtip/js/jquery-logo-downloadtip.min.js"></script><% } %>
+    <script src="<%= folder.scripts.dest %>/vendors.js"></script>
+    <script src="<%= folder.scripts.dest %>/scripts.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

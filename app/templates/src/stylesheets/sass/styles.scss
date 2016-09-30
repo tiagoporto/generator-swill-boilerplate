@@ -1,0 +1,49 @@
+// Helpers
+@import "settings/variables";
+@import "helpers/functions";
+@import "helpers/mixins";
+
+// Web Fonts
+// @import "settings/web_fonts";
+
+
+// Sprites
+// @import "helpers/bitmap-sprite";
+// @import "helpers/vetor-sprite";
+
+// Vendors
+// @import "../../public/bower_components/";
+
+/*! ==================================================================
+   Main Styles
+   ================================================================== */
+@import "base";
+
+
+
+
+
+
+/*! ==================================================================
+   Media Queries
+   ================================================================== */
+// Printers
+@media print{
+	@import "media-queries/_print";
+}
+
+/**
+*
+* Better Font Smoothing in Chrome & Safari
+* http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x
+*
+**/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25),
+	only screen and ( min-device-pixel-ratio: 1.25),
+	only screen and ( min-resolution: 200dpi),
+	only screen and ( min-resolution: 1.25dppx){
+
+	body{
+		-webkit-font-smoothing: subpixel-antialiased;
+	}
+}
