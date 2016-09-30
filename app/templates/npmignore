@@ -2,7 +2,6 @@
 .editorconfig
 .eslintrc
 .gitattributes
-.gitattributes
 .travis.yml
 
 bower.json

@@ -8,11 +8,15 @@ var eslint = require('gulp-eslint'),
     path = require('path');
 
 gulp.task('eslint', function () {
-    return gulp.src(['**/*.js', '!app/templates/gulpfile.js'])
-        .pipe(excludeGitignore())
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+    return gulp.src([
+        '**/*.js',
+        '!app/templates/gulpfile.js',
+        '!app/templates/src/scripts/settings/call_plugins.js'
+    ])
+    .pipe(excludeGitignore())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('nsp', function (cb) {

@@ -4,6 +4,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.2beta] - 2016-07-26
+### Fixed
+- Lint Test
+
+### Added
+- `.npmignore` to cancel ignored files in npm
+
 ## [0.2.1beta] - 2016-07-10
 ### Changed
 - Refactored `index.js`
