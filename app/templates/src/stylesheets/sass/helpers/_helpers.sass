@@ -4,7 +4,7 @@ $color: #FFF
 // ******* ESCAPE CONCAT VAR ************ //
 
 .test
-	background: url(#{$path + 'file.jpg'})
+    background: url(#{$path + 'file.jpg'})
 
 // ********** COLOR FUNCTIONS *********** //
 
@@ -20,47 +20,47 @@ rgba(#ffcc00, .7) //Return RGBA from the r,g,b,a channels
 // ********** This is a mixin *********** //
 
 =inline
-	display: inline
-	float: left
+    display: inline
+    float: left
 
 // ************ Using mixin ************* //
 
 .using-mixin-1
-	+inline
+    +inline
 
 .using-mixin-2
-	+inline
+    +inline
 
 
 // CSS Output
 .using-mixin-1 {
-	display: inline;
-	float: left;
+    display: inline;
+    float: left;
 }
 
 .using-mixin-2 {
-	display: inline;
-	float: left;
+    display: inline;
+    float: left;
 }
 // End CSS Output
 
 
 // ******** This is a placeholder ******** //
 %inline
-	+inline //Include a mixin
+    +inline //Include a mixin
 
 // ********* Using placeholder ********** //
 
 .extend-placeholder-1
-	@extend %inline
+    @extend %inline
 
 .extend-placeholder-2
-	@extend %inline
+    @extend %inline
 
 // CSS Output
 .extend-placeholder-1,
 .extend-placeholder-2 {
-	display: inline;
-	float: left;
+    display: inline;
+    float: left;
 }
 // End CSS Output

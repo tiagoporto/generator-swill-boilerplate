@@ -1,6 +1,29 @@
-// EM function
-// Convert pixel units to rem units
+/// Transforms a `px` value into `rem` value.
+/// The unit (px) isn't required.
+///
+/// @group   Utilities
+/// @access  public
+///
+/// @param   {number} $pixels                    - Value to be converted
+/// @param   {number} $context [$base-font-size] - Font size used in the convertion
+///
+/// @return  {number} - Converted value expressed in `rem`
+/// @require {variable} $base-font-size
+///
+/// @example scss - Usage
+///   .element {
+///     height: rem(20px);
+///   }
+///
+/// @example scss - Compiled
+///   .element {
+///     height: 1.25rem;
+///   }
 
-@function rem($pixels, $context: $base-font-size){
-	@return ($pixels/$context) + rem;
+@function rem($pixels, $context: $base-font-size) {
+  @if type-of($pixels) == 'number' {
+    @return (_clean-unit($pixels) / _clean-unit($base-font-size)) * 1rem;
+  }  @else {
+    @warn '#{$pixels} is not a number';
+  }
 }

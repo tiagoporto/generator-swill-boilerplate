@@ -4,6 +4,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.5beta] - 2016-08-31
+### Added
+- Check if the folder name is equal to project name, if not the boilerplate will be created inside the project name
+
+### Fixed
+- Styles and scripts link on HTML
+- REM Function in Sass
+
+### Changed
+- Updated jQuery dependency
+
 ## [0.2.4beta] - 2016-08-13
 ### Fixed
 - Compile SASS

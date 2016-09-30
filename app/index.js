@@ -4,6 +4,8 @@
 
 var _s = require('underscore.string'),
     chalk = require('chalk'),
+    mkdirp = require('mkdirp'),
+    path = require('path'),
     yosay = require('yosay'),
     yeoman = require('yeoman-generator');
 
@@ -124,11 +126,11 @@ module.exports = yeoman.Base.extend({
                 return response.settingFolder === true;
             }
         }, {
-            type: 'confirm',
-            name: 'handlebars',
-            message: 'Do you want use handlebars Template?',
-            default: true
-        }, {
+        //     type: 'confirm',
+        //     name: 'handlebars',
+        //     message: 'Do you want use handlebars Template?',
+        //     default: true
+        // }, {
             type: 'list',
             name: 'preprocessor',
             message: 'Which CSS preprocessor you will use?',
@@ -234,6 +236,7 @@ module.exports = yeoman.Base.extend({
 
         //================== Get props ==================//
         return this.prompt(prompts).then(function (props) {
+            this.prompts = props;
             this.props = {};
 
             this.props.project = {
@@ -288,7 +291,8 @@ module.exports = yeoman.Base.extend({
                 },
                 normalize: props.features.indexOf('normalize') >= 0,
                 outdatedBrowser: props.features.indexOf('outdatedBrowser') >= 0,
-                handlebars: props.handlebars
+                // handlebars: props.handlebars
+                handlebars: true
             };
 
             this.props.include = {
@@ -309,6 +313,13 @@ module.exports = yeoman.Base.extend({
     },
 
     // ====================== Copy settings files ======================//
+    default: function () {
+        if (path.basename(this.destinationPath()) !== this.props.project.slugName) {
+            this.log( 'The folder ' + this.props.project.slugName + 'will be automatically created!!');
+            mkdirp(this.props.project.slugName);
+            this.destinationRoot(this.destinationPath(this.props.project.slugName));
+        }
+    },
     bower: function() {
         var bowerJson = require('./templates/_bower.json');
 
@@ -318,12 +329,12 @@ module.exports = yeoman.Base.extend({
         bowerJson.author.name = this.props.author.name;
         bowerJson.author.homepage = this.props.author.homepage;
 
-        this.props.use.jquery && (bowerJson.devDependencies.jquery = '~2.0.0');
-        this.props.use.jqueryLogoDownloadtip && (bowerJson.devDependencies['jquery-logo-downloadtip'] = '~2.0.0');
+        this.props.use.jquery && (bowerJson.devDependencies.jquery = '^3.1.0');
+        this.props.use.jqueryLogoDownloadtip && (bowerJson.devDependencies['jquery-logo-downloadtip'] = '^2.0.0');
         this.props.use.outdatedBrowser && (bowerJson.devDependencies['outdated-browser'] = '^1.1.3');
         this.props.use.normalize && (bowerJson.devDependencies['normalize-css'] = '^4.2.0');
 
-        this.fs.writeJSON('bower.json', bowerJson);
+        this.fs.writeJSON(this.destinationPath('bower.json'), bowerJson);
 
         this.fs.copyTpl(
             this.templatePath('bowerrc'),
@@ -423,9 +434,11 @@ module.exports = yeoman.Base.extend({
     },
     html: function() {
         if(this.props.use.handlebars){
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath('src/html/**/*'),
-                this.destinationPath(this.props.folder.src + '/html/')
+                this.destinationPath(this.props.folder.src + '/html/'), {
+                    use: this.props.use
+                }
             );
         } else {
             // this.fs.copyTpl(
@@ -558,7 +571,7 @@ module.exports = yeoman.Base.extend({
 
     // ====================== YO actions ====================== //
     save: function() {
-        this.config.set(this.props);
+        this.config.set(this.prompts);
         this.config.save();
         // this.installDependencies();
     }

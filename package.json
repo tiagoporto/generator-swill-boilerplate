@@ -1,6 +1,6 @@
 {
   "name": "generator-swill-boilerplate",
-  "version": "0.2.4beta",
+  "version": "0.2.5beta",
   "description": "Customizable front-end boilerplate with Gulp to quick multi-device development.",
   "homepage": "http://tiagoporto.github.io/swill-boilerplate/",
   "keywords": [
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://tiagoporto/generator-swill-boilerplate.git"
+    "url": "https://github.com/tiagoporto/generator-swill-boilerplate.git"
   },
   "scripts": {
     "pretest": "gulp test"
@@ -35,8 +35,9 @@
     "apache-server-configs": "^2.14.0",
     "chalk": "^1.0.0",
     "generator-license": "^4.0.0",
+    "mkdirp": "^0.5.1",
     "underscore.string": "^3.2.3",
-    "yeoman-generator": "^0.23.4",
+    "yeoman-generator": "^0.24.1",
     "yosay": "^1.0.2"
   },
   "devDependencies": {
