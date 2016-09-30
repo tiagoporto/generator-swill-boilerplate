@@ -103,11 +103,11 @@ gulp.task('svg-inline', function() {
 
 gulp.task('styles-helpers', function(){
     var mixins = gulp.src(paths.styles.src + 'helpers/mixins/*.{styl,scss}')
-                    .pipe(plugins.concat('_mixins.styl'))
+                    .pipe(plugins.concat('_mixins.' + extensionStyle))
                     .pipe(gulp.dest(paths.styles.src + 'helpers'));
 
     var functions = gulp.src(paths.styles.src + 'helpers/functions/*.{styl,scss}')
-                        .pipe(plugins.concat('_functions.styl'))
+                        .pipe(plugins.concat('_functions.' + extensionStyle))
                         .pipe(gulp.dest(paths.styles.src + 'helpers'));
 
     return merge(mixins, functions);

@@ -1,12 +1,13 @@
-body
-	font: normal normal  #{$base-font-size}/#{em($base-line-height)} $font-family-base
-	background-color: $bg-color
-	color: $base-text-color
-	text-rendering: optimizeLegibility
-	-webkit-font-smoothing: antialiased
-	-moz-osx-font-smoothing: grayscale
-	font-smoothing: auto
-	font-feature-settings: "liga", "kern"
+body {
+	font: normal normal  #{$base-font-size}/#{em($base-line-height)} $font-family-base;
+	background-color: $bg-color;
+	color: $base-text-color;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: auto;
+	font-feature-settings: "liga", "kern";
+}
 
 /**
 *
