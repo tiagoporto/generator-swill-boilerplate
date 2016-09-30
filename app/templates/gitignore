@@ -1,0 +1,59 @@
+#############
+## System files
+#############
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac crap
+.DS_Store
+
+#################
+## Unit test / coverage reports
+#################
+
+coverage
+.coverage
+.tox
+
+#################
+## NPM
+#################
+
+node_modules/
+npm-debug.log
+
+#################
+## Bower Components
+#################
+
+bower_components/
+
+#################
+## SASS Cache
+#################
+
+.sass-cache
+
+#################
+## Gh-pages
+#################
+
+.publish
+
+#################
+## Swill boilerplate
+#################
+
+build/
+app/templates/src/stylesheets/stylus/helpers/_functions.styl
+app/templates/src/stylesheets/stylus/helpers/_mixins.styl
+app/templates/src/stylesheets/sass/helpers/_functions.scss
+app/templates/src/stylesheets/sass/helpers/_mixins.scss

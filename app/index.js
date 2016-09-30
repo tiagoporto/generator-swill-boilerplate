@@ -334,18 +334,18 @@ module.exports = yeoman.Base.extend({
     },
     editorconfig: function() {
         this.fs.copy(
-            this.templatePath('../../.editorconfig'),
+            this.templatePath('editorconfig'),
             this.destinationPath('.editorconfig')
         );
     },
     git: function() {
         this.fs.copy(
-            this.templatePath('../../.gitattributes'),
+            this.templatePath('gitattributes'),
             this.destinationPath('.gitattributes')
         );
 
         this.fs.copy(
-            this.templatePath('../../.gitignore'),
+            this.templatePath('gitignore'),
             this.destinationPath('.gitignore')
         );
     },
@@ -356,7 +356,7 @@ module.exports = yeoman.Base.extend({
         );
 
         this.fs.copy(
-            this.templatePath('../../.eslintrc'),
+            this.templatePath('eslintrc'),
             this.destinationPath('.eslintrc')
         );
     },
