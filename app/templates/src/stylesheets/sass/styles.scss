@@ -6,7 +6,6 @@
 // Web Fonts
 // @import "settings/web_fonts";
 
-
 // Sprites
 // @import "helpers/bitmap-sprite";
 // @import "helpers/vetor-sprite";
@@ -17,9 +16,7 @@
 /*! ==================================================================
    Main Styles
    ================================================================== */
-@import "base";
-
-
+@import "partials/_index";
 
 
 
@@ -29,21 +26,5 @@
    ================================================================== */
 // Printers
 @media print{
-	@import "media-queries/_print";
-}
-
-/**
-*
-* Better Font Smoothing in Chrome & Safari
-* http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x
-*
-**/
-@media only screen and (-webkit-min-device-pixel-ratio: 1.25),
-	only screen and ( min-device-pixel-ratio: 1.25),
-	only screen and ( min-resolution: 200dpi),
-	only screen and ( min-resolution: 1.25dppx){
-
-	body{
-		-webkit-font-smoothing: subpixel-antialiased;
-	}
+	@import "partials/_print";
 }

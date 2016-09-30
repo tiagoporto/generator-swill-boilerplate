@@ -1,11 +1,10 @@
 language: node_js
-node_js:
-  - v5
-  - v4
-  - '0.12'
-  - '0.10'
 
-# whitelist
-branches:
-  only:
-    - yo
+node_js:
+  - "stable"
+
+before_install:
+  - npm install -g gulp
+
+script:
+  - gulp test

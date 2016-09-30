@@ -1,69 +1,80 @@
 {
-    "basePaths": {
-             "src": "<%= folder.src %>/",
-            "dest": "<%= folder.dest %>/",
-         "build": "<%= folder.build %>/",
-         "bower": "<%= folder.dest %>/<%= folder.bower %>",
+  "basePaths": {
+    "src": "<%= folder.src %>/",
+    "dest": "<%= folder.dest %>/",
+    "build": "<%= folder.build %>/",
+    "bower": "<%= folder.dest %>/<%= folder.bower %>",
 
-        "fonts": {
-                "dest": "<%= folder.fonts %>/"
-        },
-
-        "sprite": {
-                "src": "<%= folder.sprite %>/"
-        },
-
-        "images": {
-                 "src": "<%= folder.images.src %>/",
-                "dest": "<%= folder.images.dest %>/"
-        },
-
-        "styles": {
-                 "src": "<%= folder.styles.src %>/",
-                "dest": "<%= folder.styles.dest %>/"
-        },
-
-        "scripts": {
-                 "src": "<%= folder.scripts.src %>/",
-                "dest": "<%= folder.scripts.dest %>/"
+    "handlebars": {
+       "src": "html/",
+       "partials": {
+          "src": "includes/"
         }
     },
 
-    "components": true,
-
-    "es6": <%= lintcss %>,
-
-    "lintCSS": <%= lintcss %>,
-
-    "lintJS": <%= lintjs %>,
-
-    "jQuery": <%= jquery %>,
-
-    "autoprefixerBrowsers": [
-            "ie >= 8",
-            "ie_mob >= 10",
-            "Firefox > 24",
-            "last 10 Chrome versions",
-            "safari >= 6",
-            "opera >= 24",
-            "ios >= 6",
-            "android >= 4",
-            "bb >= 10"
-    ],
-
-    "browserSync": {
-            "notify": false,
-            "logPrefix": "BrowserSync",
-            "server": {
-                    "baseDir": ["<%= folder.dest %>/"]
-            }
+    "images": {
+      "src": "<%= folder.images.src %>/",
+      "dest": "<%= folder.images.dest %>/"
     },
 
-    "browserSyncBuild": {
-            "notify": false,
-            "logPrefix": "BrowserSync",
-            "server": {
-                    "baseDir": ["<%= folder.build %>/"]
-            }
+    "fonts": {
+      "dest": "<%= folder.fonts %>/"
+    },
+
+    "sprite": {
+      "src": "<%= folder.sprite %>/"
+    },
+
+    "scripts": {
+      "src": "<%= folder.scripts.src %>/",
+      "dest": "<%= folder.scripts.dest %>/"
+    },
+
+    "styles": {
+      "src": "<%= folder.styles.src %>/",
+      "dest": "<%= folder.styles.dest %>/"
     }
+  },
+
+  "components": true,
+
+  "es6": <%= es6 %>,
+
+  "jQuery": <%= jquery %>,
+
+  "lintCSS": <%= lintcss %>,
+
+  "lintJS": <%= lintjs %>,
+
+  "inlineSVG": false,
+
+  "handlebars": true,
+
+  "autoprefixerBrowsers": [
+    "ie > 7",
+    "ie_mob > 9",
+    "Firefox > 24",
+    "last 10 Chrome versions",
+    "safari > 5",
+    "opera > 24",
+    "ios > 5",
+    "android > 4",
+    "bb > 10"
+  ],
+
+  "browserSync": {
+    "notify": false,
+    "logPrefix": "BrowserSync",
+    "server": {
+      "baseDir": ["<%= folder.dest %>/"]
+    }
+  },
+
+  "browserSyncBuild": {
+    "notify": false,
+    "logPrefix": "BrowserSync",
+    "server": {
+      "baseDir": ["<%= folder.build %>/"]
+    }
+  }
 }

@@ -1,31 +1,27 @@
+/*eslint-env node */
+/*eslint strict: ["error", "global"]*/
 'use strict';
 
 var yeoman = require('yeoman-generator');
 
 module.exports = yeoman.Base.extend({
-  prompting: function () {
-    var done = this.async();
+    prompting: function () {
+        this.composeWith('swill-boilerplate:style', {});
 
-    this.composeWith('swill-boilerplate:style', {});
+        var prompts = [{
+            name: 'folder',
+            required: true,
+            message: 'Folder and file path'
+        }];
 
-    var prompts = [{
-      name: 'folder',
-      required: true,
-      message: 'Folder and file path'
-    }];
+        return this.prompt(prompts).then(function (props) {
+            this.props = props;
+        }.bind(this));
+    },
 
-    this.prompt(prompts, function (props) {
-      this.props = props;
+    writing: function () {
+        var config = require(this.destinationPath('config.json'));
 
-      done();
-    }.bind(this));
-  },
-
-  writing: function () {
-    console.log(this.props.folder);
-
-    var config = require(this.destinationPath('config.json'));
-
-    this.fs.write(this.destinationPath(config.basePaths.styles.src + this.props.folder), '');
-  }
+        this.fs.write(this.destinationPath(config.basePaths.styles.src + this.props.folder), '');
+    }
 });

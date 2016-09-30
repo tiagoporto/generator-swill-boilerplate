@@ -1,0 +1,31 @@
+{
+  "name": "",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "homepage": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+  ],
+  "main": "",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/*",
+    "!CHANGELOG.md",
+    "!LICENSE.md",
+    "!dist/**/*",
+    "!README.md"
+  ],
+  "devDependencies": { }
+}

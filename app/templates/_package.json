@@ -2,8 +2,8 @@
   "name": "your-project",
   "version": "0.1.0",
   "description": "Description of your project",
-  "keywords": [],
   "homepage": "",
+  "keywords": [],
   "author": {
     "name": "",
     "url": ""
@@ -12,6 +12,8 @@
     "type": "git",
     "url": ""
   },
+  "scripts": {},
+  "files": [],
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
     "browser-sync": "^2.10.0",
@@ -22,16 +24,16 @@
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-coveralls": "^0.1.4",
-    "gulp-csslint": "^0.2.0",
-    "gulp-csso": "^1.0.1",
+    "gulp-csslint": "^0.3.1",
+    "gulp-csso": "^2.0.0",
     "gulp-eslint": "^2.0.0",
-    "gulp-file": "^0.2.0",
+    "gulp-file": "^0.3.0",
     "gulp-gh-pages": "^0.5.4",
-    "gulp-htmlmin": "^1.3.0",
+    "gulp-hb": "^5.1.0",
+    "gulp-htmlmin": "^2.0.0",
     "gulp-if": "^2.0.0",
-    "gulp-imagemin": "^2.4.0",
-    "gulp-jasmine": "^2.2.1",
-    "gulp-karma": "0.0.5",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-inline": "^0.1.1",
     "gulp-load-plugins": "^1.1.0",
     "gulp-newer": "^1.1.0",
     "gulp-notify": "^2.2.0",
@@ -42,21 +44,21 @@
     "gulp-sass": "^2.1.1",<% } %><% if (preprocessor.name === 'stylus') {%>
     "gulp-stylus": "^2.1.0",<% } %>
     "gulp-svg-sprite": "^1.2.15",
-    "gulp-svg2png": "^1.0.0",
+    "gulp-svg2png": "^2.0.0",
     "gulp-uglify": "^1.5.1",
     "gulp-useref": "^3.0.3",
     "gulp-wrapper": "^1.0.0",
     "gulp.spritesmith": "^6.0.0",
     "jasmine-core": "^2.4.1",
-    "karma": "^0.13.16",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-coverage": "^0.5.3",
-    "karma-jasmine": "^0.3.6",
+    "karma": "^1.1.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
     "merge-stream": "^1.0.0",
     "rf": "0.0.1",
     "run-sequence": "^1.1.5",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-paths": "^2.1.0",
     "yargs": "^4.1.0"
-  }
+  },
+  "license": ""
 }

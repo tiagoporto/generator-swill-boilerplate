@@ -1,10 +1,15 @@
 # Swill Boilerplate Generator
-[![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Dependency Status][daviddm-image]][daviddm-url]
-[![devDependencies Status](https://img.shields.io/david/dev/tiagoporto/generator-swill-boilerplate.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate#info=devDependencies)
-[![Coverage percentage][coveralls-image]][coveralls-url]
-[![Github License](https://img.shields.io/github/license/tiagoporto/generator-swill-boilerplate.svg)](http://opensource.org/licenses/MIT)
+
+[![Build Status](https://travis-ci.org/tiagoporto/generator-swill-boilerplate.svg)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
+[![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
+[![Dependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate)
+[![devDependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate#info=devDependencies)
+
+[![NPM version](https://badge.fury.io/js/generator-swill-boilerplate.svg)](https://npmjs.org/package/generator-swill-boilerplate)
+[![NPM Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg)](https://www.npmjs.com/package/generator-swill-boilerplate)
+[![Github Issues](https://img.shields.io/github/issues/tiagoporto/generator-swill-boilerplate.svg)](https://github.com/tiagoporto/generator-swill-boilerplate/issues)
+[![Github License](https://img.shields.io/github/license/tiagoporto/generator-swill-boilerplate.svg)](https://raw.githubusercontent.com/tiagoporto/generator-swill-boilerplate/master/LICENSE.md)
+
 
 <p align="center">
   <img src="http://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
@@ -50,13 +55,3 @@ yo swill-boilerplate
 ## License
 
 Swill Boilerplate Generator is released under the terms of the [MIT license](https://github.com/tiagoporto/generator-swill-boilerplate/blob/master/LICENSE).
-
-
-[npm-image]: https://badge.fury.io/js/generator-swill-boilerplate.svg
-[npm-url]: https://npmjs.org/package/generator-swill-boilerplate
-[travis-image]: https://travis-ci.org/tiagoporto/generator-swill-boilerplate.svg?branch=master
-[travis-url]: https://travis-ci.org/tiagoporto/generator-swill-boilerplate
-[daviddm-image]: https://david-dm.org/tiagoporto/generator-swill-boilerplate.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/tiagoporto/generator-swill-boilerplate
-[coveralls-image]: https://coveralls.io/repos/tiagoporto/generator-swill-boilerplate/badge.svg
-[coveralls-url]: https://coveralls.io/r/tiagoporto/generator-swill-boilerplate
