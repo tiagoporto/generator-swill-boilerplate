@@ -4,7 +4,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
 [![Dependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate)
 [![devDependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate#info=devDependencies)
-[![boilerplate devDependencies Status](https://david-dm.org/tiagoporto/swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/swill-boilerplate#info=devDependencies)
+[![boilerplate devDependencies Status](https://david-dm.org/tiagoporto/swillboilerplate.rocks/dev-status.svg)](https://david-dm.org/tiagoporto/swillboilerplate.rocks#info=devDependencies)
 
 [![NPM version](https://badge.fury.io/js/generator-swill-boilerplate.svg)](https://npmjs.org/package/generator-swill-boilerplate)
 [![NPM Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg)](https://www.npmjs.com/package/generator-swill-boilerplate)
@@ -13,11 +13,11 @@
 
 
 <p align="center">
-  <img src="http://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
+  <img src="http://tiagoporto.github.io/swillboilerplate.rocks/img/logos/logo.png" alt="Swill Boilerplate Logo">
   <img src="https://nerdsondotcom.files.wordpress.com/2013/03/yeoman-logo.png" alt="Yeoman Logo" height="215">
 </p>
 
-> Yeoman generator for [Swill Boilerplate](https://github.com/tiagoporto/swill-boilerplate)
+> Yeoman generator for [Swill Boilerplate](https://github.com/tiagoporto/swillboilerplate.rocks)
 
 ## Features
 
@@ -55,7 +55,7 @@ yo swill-boilerplate
 
 ## Docs
 
-[Swill Boilerplate docs](https://github.com/tiagoporto/swill-boilerplate)
+[Swill Boilerplate](http://swillboilerplate.rocks)
 
 ## License
 
