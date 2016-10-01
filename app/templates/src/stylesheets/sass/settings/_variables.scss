@@ -8,9 +8,9 @@ $selection-color: #FFF;
 $selection-bg-color: $primary-color;
 
 // Paths
-$font-path: "../fonts/";
+$font-path: "../<%= folder.fonts %>/";
 
-$image-path: "../img/";
+$image-path: "../<%= folder.images.dest %>/";
 
 // Typography
 $font-family-base: Helvetica, Arial, sans-serif;

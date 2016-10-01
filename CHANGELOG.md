@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.8beta] - 2016-09-XX
+### Added
+- Class with display block svg sprite
+- Set jQuery option in `.eslintrc`
+
+### Changed
+- Fixed use of es6
+
+### Fixed
+- Removed hard coded option font-path and image-path in stylesheets
+- Copy lang folder of outdated-browser
+
 ## [0.2.7beta] - 2016-09-18
 ### Changed
 - Fixed boilerplate dependencies

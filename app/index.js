@@ -157,10 +157,6 @@ module.exports = yeoman.Base.extend({
             name: 'options',
             message: 'Would you like to use?',
             choices: [{
-                name: 'ECMAScript 6',
-                value: 'es6',
-                checked: true
-            }, {
                 name: 'Lint CSS',
                 value: 'lintCSS',
                 checked: false
@@ -290,7 +286,6 @@ module.exports = yeoman.Base.extend({
             };
 
             this.props.use = {
-                es6: props.options.indexOf('es6') >= 0,
                 jquery: props.features.indexOf('jquery') >= 0,
                 jqueryLogoDownloadtip: props.jqueryLogoDownloadtip,
                 lint: {
@@ -374,9 +369,11 @@ module.exports = yeoman.Base.extend({
             this.destinationPath('.csslintrc')
         );
 
-        this.fs.copy(
+        this.fs.copyTpl(
             this.templatePath('eslintrc'),
-            this.destinationPath('.eslintrc')
+            this.destinationPath('.eslintrc'), {
+                use: this.props.use
+            }
         );
     },
     package: function() {
@@ -417,8 +414,10 @@ module.exports = yeoman.Base.extend({
         // }
         this.fs.copyTpl(
             this.templatePath('src/stylesheets/' + this.props.preprocessor.name + '/**/*'),
-            this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'),
-            { bower: this.props.folder.dest + '/' + this.props.folder.bower }
+            this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'), {
+                folder: this.props.folder,
+                path: { bower: this.props.folder.dest + '/' + this.props.folder.bower }
+            }
         );
     },
     scripts: function() {

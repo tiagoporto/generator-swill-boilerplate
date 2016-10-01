@@ -38,8 +38,6 @@
 
   "components": true,
 
-  "es6": <%= use.es6 %>,
-
   "jQuery": <%= use.jquery %>,
 
   "lintCSS": <%= use.lint.css %>,

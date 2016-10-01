@@ -296,7 +296,7 @@ gulp.task('scripts', function() {
         .pipe(plugins.if(config.lintJS, plugins.eslint()))
         .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
         .pipe(plugins.concat('scripts.js'))
-        .pipe(plugins.if(config.es6, plugins.babel(babelOption)))
+        .pipe(plugins.babel(babelOption))
         .pipe(plugins.if(config.jQuery, plugins.wrapper(jQueryWrapper)))
         .pipe(plugins.wrapper(headerWrapper))
         .pipe(gulp.dest(paths.scripts.dest))
@@ -313,7 +313,7 @@ gulp.task('scripts', function() {
                     .pipe(plugins.rename(function(path) {
                         path.basename = path.basename.substring(0, path.basename.length - 9);
                     }))
-                    .pipe(plugins.if(config.es6, plugins.babel(babelOption)))
+                    .pipe(plugins.babel(babelOption))
                     .pipe(plugins.wrapper(headerWrapper))
                     .pipe(gulp.dest(paths.scripts.dest))
                     .pipe(plugins.rename({suffix: '.min'}))
@@ -356,28 +356,11 @@ gulp.task('copy', function() {
 });
 
 gulp.task('outdatedbrowser', function() {
-    if (config.outdatedBrowser) {
-        return gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
-            .pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
-    }
+    return gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
+        .pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
 });
 
-// gulp.task('set-dependencies', ['outdatedbrowser'], function() {
-//     var bower_path = gulp.src('./.bowerrc')
-//                         .pipe(plugins.replace(/"directory" : "[a-z\/_]+"/g, '"directory" : "' + basePaths.bower + '"'))
-//                         .pipe(gulp.dest('./'));
-
-//     var styles_var = gulp.src(paths.styles.src + '**/*.{styl,sass,scss}')
-//                         .pipe(plugins.replace(/(image-path[\s=:]+ ")[.\/a-z]+"/g, '$1../' + basePaths.images.dest + '"'))
-//                         .pipe(plugins.replace(/(font-path[\s=:]+ ")[.\/a-z]+"/g, '$1../' + basePaths.fonts.dest + '"'))
-//                         .pipe(gulp.dest(paths.styles.src));
-// });
-
 // *************************** Utility Tasks ****************************** //
-
-// gulp.task('setup', function(cb) {
-//     sequence('set-dependencies', cb);
-// });
 
 gulp.task('combine-assets', function() {
     var assets = {searchPath: basePaths.dest};
@@ -448,7 +431,7 @@ gulp.task('serve', function() {
 // Serve project and clean, compile and watch if pass the parameter --compile
 gulp.task('default', function() {
     if (args.compile) {
-        sequence('clean', ['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'serve');
+        sequence('clean', ['outdatedbrowser', 'handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'serve');
     } else {
         sequence('handlebars', 'serve');
     }
@@ -456,7 +439,7 @@ gulp.task('default', function() {
 
 // Clean and compile the project
 gulp.task('compile', function() {
-    sequence('clean', ['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts');
+    sequence('clean', ['outdatedbrowser', 'handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts');
 });
 
 gulp.task('gh', function() {
@@ -467,12 +450,12 @@ gulp.task('gh', function() {
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('gh-pages', function() {
     env = 'prod';
-    sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', 'gh');
+    sequence(['outdatedbrowser', 'handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', 'gh');
 });
 
 // Build Project and serve if pass the parameter --serve
 gulp.task('build', ['clean'], function() {
     env = 'prod';
-    sequence(['handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', function() {args.serve && browserSync(config.browserSyncBuild)}
+    sequence(['outdatedbrowser', 'handlebars', 'images', 'bitmap-sprite', 'vetor-sprite', 'styles-helpers', 'vendor-scripts'], 'svg2png', 'svg-inline', 'styles', 'scripts', 'copy', function() {args.serve && browserSync(config.browserSyncBuild)}
     );
 });
