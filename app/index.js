@@ -63,13 +63,6 @@ module.exports = yeoman.Base.extend({
                 return response.settingFolder === true;
             }
         }, {
-            name: 'bowerFolder',
-            message: 'Bower folder??',
-            default: 'bower_components',
-            when: function(response) {
-                return response.settingFolder === true;
-            }
-        }, {
             name: 'fontsDestFolder',
             message: 'Webfonts destination folder??',
             default: 'fonts',
@@ -267,7 +260,6 @@ module.exports = yeoman.Base.extend({
                 src: props.srcFolder || 'src',
                 dest: props.destFolder || 'app',
                 build: props.buildFolder || 'build',
-                bower: props.bowerFolder || 'bower_components',
                 handlebars: props.handlebarsSrcFolder || 'handlebars',
                 fonts: props.fontsDestFolder || 'fonts',
                 sprite: props.spriteSrcFolder || 'sprite',
@@ -323,28 +315,34 @@ module.exports = yeoman.Base.extend({
             this.destinationRoot(this.destinationPath(this.props.project.sanitizeName));
         }
     },
-    bower: function() {
-        var bowerJson = require('./templates/_bower.json');
+    // package: function() {
+    //     this.fs.copyTpl(
+    //         this.templatePath('_package.json'),
+    //         this.destinationPath('package.json'), {
+    //             project: this.props.project,
+    //             author: this.props.author,
+    //             preprocessor: this.props.preprocessor
+    //         }
+    //     );
+    // },
+    package: function() {
+        var packageJson = require('./templates/_package.json');
 
-        bowerJson.name = this.props.project.sanitizeName;
-        bowerJson.description = this.props.project.description;
-        bowerJson.homepage = this.props.project.homepage;
-        bowerJson.author.name = this.props.author.name;
-        bowerJson.author.homepage = this.props.author.homepage;
+        packageJson.name = this.props.project.sanitizeName;
+        packageJson.description = this.props.project.description;
+        packageJson.homepage = this.props.project.homepage;
+        packageJson.author.name = this.props.author.name;
+        packageJson.author.homepage = this.props.author.homepage;
 
-        this.props.use.jquery && (bowerJson.devDependencies.jquery = '^3.1.0');
-        this.props.use.jqueryLogoDownloadtip && (bowerJson.devDependencies['jquery-logo-downloadtip'] = '^2.0.0');
-        this.props.use.outdatedBrowser && (bowerJson.devDependencies['outdated-browser'] = '^1.1.3');
-        this.props.use.normalize && (bowerJson.devDependencies['normalize-css'] = '^4.2.0');
+        (this.props.preprocessor.name === 'sass') && (packageJson.devDependencies['gulp-sass'] = '2.3.2');
+        (this.props.preprocessor.name === 'stylus') && (packageJson.devDependencies['gulp-stylus'] = '2.5.0');
 
-        this.fs.writeJSON(this.destinationPath('bower.json'), bowerJson);
+        this.props.use.jquery && (packageJson.dependencies.jquery = '3.1.1');
+        this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0');
+        this.props.use.outdatedBrowser && (packageJson.dependencies['outdated-browser'] = '1.0.2 ');
+        this.props.use.normalize && (packageJson.dependencies['normalize.css'] = '4.2.0');
 
-        this.fs.copyTpl(
-            this.templatePath('bowerrc'),
-            this.destinationPath('.bowerrc'), {
-                folder: this.props.folder.dest + '/' + this.props.folder.bower
-            }
-        );
+        this.fs.writeJSON(this.destinationPath('package.json'), packageJson);
     },
     editorconfig: function() {
         this.fs.copy(
@@ -373,16 +371,6 @@ module.exports = yeoman.Base.extend({
             this.templatePath('eslintrc'),
             this.destinationPath('.eslintrc'), {
                 use: this.props.use
-            }
-        );
-    },
-    package: function() {
-        this.fs.copyTpl(
-            this.templatePath('_package.json'),
-            this.destinationPath('package.json'), {
-                project: this.props.project,
-                author: this.props.author,
-                preprocessor: this.props.preprocessor
             }
         );
     },
@@ -415,8 +403,7 @@ module.exports = yeoman.Base.extend({
         this.fs.copyTpl(
             this.templatePath('src/stylesheets/' + this.props.preprocessor.name + '/**/*'),
             this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'), {
-                folder: this.props.folder,
-                path: { bower: this.props.folder.dest + '/' + this.props.folder.bower }
+                folder: this.props.folder
             }
         );
     },

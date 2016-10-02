@@ -4,6 +4,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0beta] - 2016-10-xx
+### Changed
+- Moved bower to npm
+
 ## [0.3.0beta] - 2016-10-01
 ### Added
 - Class with display block svg sprite
