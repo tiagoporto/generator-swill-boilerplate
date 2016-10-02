@@ -1,8 +1,8 @@
 {
   "name": "generator-swill-boilerplate",
   "version": "0.3.0beta",
-  "description": "Customizable front-end boilerplate with Gulp to quick multi-device development.",
-  "homepage": "http://tiagoporto.github.io/swill-boilerplate/",
+  "description": "🍺 The front-end Boilerplate that you need to start multi-device development, easy to customize.",
+  "homepage": "http://swillboilerplate.rocks/",
   "keywords": [
     "yeoman-generator",
     "template",
@@ -32,19 +32,19 @@
     "app"
   ],
   "dependencies": {
-    "apache-server-configs": "^2.14.0",
-    "chalk": "^1.0.0",
-    "generator-license": "^4.0.0",
-    "mkdirp": "^0.5.1",
-    "underscore.string": "^3.2.3",
-    "yeoman-generator": "^0.24.1",
-    "yosay": "^1.0.2"
+    "apache-server-configs": "2.14.0",
+    "chalk": "1.0.0",
+    "generator-license": "4.0.0",
+    "mkdirp": "0.5.1",
+    "underscore.string": "3.2.3",
+    "yeoman-generator": "0.24.1",
+    "yosay": "1.0.2"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^3.0.0",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-nsp": "^2.1.0"
+    "gulp": "3.9.0",
+    "gulp-eslint": "3.0.0",
+    "gulp-exclude-gitignore": "1.0.0",
+    "gulp-nsp": "2.1.0"
   },
   "license": "MIT"
 }
