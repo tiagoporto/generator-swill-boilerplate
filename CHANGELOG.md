@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.4.0beta] - 2016-10-xx
 ### Changed
 - Moved bower to npm
+- Updated dependencies
 
 ## [0.3.0beta] - 2016-10-01
 ### Added
