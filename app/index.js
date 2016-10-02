@@ -208,6 +208,10 @@ module.exports = yeoman.Base.extend({
                 value: 'htaccess',
                 checked: false
             }, {
+                name: 'bower.json',
+                value: 'bower',
+                checked: false
+            }, {
                 name: 'crossdomain.xml (Cross-domain policy)',
                 value: 'crossdomain',
                 checked: false
@@ -294,6 +298,7 @@ module.exports = yeoman.Base.extend({
                 htaccess: props.files.indexOf('htaccess') >= 0,
                 404: props.files.indexOf('404') >= 0,
                 readme: props.files.indexOf('readme') >= 0,
+                bower: props.files.indexOf('bower') >= 0,
                 contributing: props.files.indexOf('contributing') >= 0,
                 changelog: props.files.indexOf('changelog') >= 0,
                 crossdomain: props.files.indexOf('crossdomain') >= 0,
@@ -315,16 +320,6 @@ module.exports = yeoman.Base.extend({
             this.destinationRoot(this.destinationPath(this.props.project.sanitizeName));
         }
     },
-    // package: function() {
-    //     this.fs.copyTpl(
-    //         this.templatePath('_package.json'),
-    //         this.destinationPath('package.json'), {
-    //             project: this.props.project,
-    //             author: this.props.author,
-    //             preprocessor: this.props.preprocessor
-    //         }
-    //     );
-    // },
     package: function() {
         var packageJson = require('./templates/_package.json');
 
@@ -566,6 +561,18 @@ module.exports = yeoman.Base.extend({
                 this.templatePath('public/humans.txt'),
                 this.destinationPath(this.props.folder.dest + '/humans.txt')
             );
+        }
+
+        if (this.props.include.bower) {
+            var bowerJson = require('./templates/_bower.json');
+
+            bowerJson.name = this.props.project.sanitizeName;
+            bowerJson.description = this.props.project.description;
+            bowerJson.homepage = this.props.project.homepage;
+            bowerJson.author.name = this.props.author.name;
+            bowerJson.author.homepage = this.props.author.homepage;
+
+            this.fs.writeJSON(this.destinationPath('bower.json'), bowerJson);
         }
     },
     license: function() {
