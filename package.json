@@ -41,10 +41,14 @@
     "yosay": "1.0.2"
   },
   "devDependencies": {
-    "gulp": "3.9.0",
+    "gulp": "3.9.1",
     "gulp-eslint": "3.0.0",
     "gulp-exclude-gitignore": "1.0.0",
-    "gulp-nsp": "2.1.0"
+    "gulp-mocha": "3.0.1",
+    "gulp-nsp": "2.1.0",
+    "gulp-plumber": "1.0.0",
+    "yeoman-assert": "2.2.1",
+    "yeoman-test": "1.5.1"
   },
   "license": "MIT"
 }

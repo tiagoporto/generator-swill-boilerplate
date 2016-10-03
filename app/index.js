@@ -176,13 +176,13 @@ module.exports = yeoman.Base.extend({
                 checked: true
             }]
         }, {
-            when: function(response) {
-                return response.features.indexOf('jquery') >= 0;
-            },
             type: 'confirm',
             name: 'jqueryLogoDownloadtip',
             message: 'Want use jQuery Logo Downloadtip?',
-            default: false
+            default: false,
+            when: function(response) {
+                return response.features.indexOf('jquery') >= 0;
+            }
         }, {
             type: 'checkbox',
             name: 'files',
