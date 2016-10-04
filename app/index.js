@@ -383,9 +383,14 @@ module.exports = yeoman.Base.extend({
         );
     },
     gulpfile: function() {
+        var swillPackage = require('../package.json');
+
         this.fs.copyTpl(
             this.templatePath('gulpfile.js'),
-            this.destinationPath('gulpfile.js'), { preprocessor: this.props.preprocessor }
+            this.destinationPath('gulpfile.js'), {
+                boilerplate: swillPackage,
+                preprocessor: this.props.preprocessor
+            }
         );
     },
     styles: function() {
