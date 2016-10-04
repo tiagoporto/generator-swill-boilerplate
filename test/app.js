@@ -21,7 +21,15 @@ describe('generator-swill-boilerplate:app', function() {
 
     it('creates files', function() {
         assert.file([
-            'package.json'
+            '.csslintrc',
+            '.editorconfig',
+            '.eslintrc',
+            '.yo-rc.json',
+            'app/favicon.ico',
+            'config.json',
+            'gulpfile.js',
+            'package.json',
+            'src/header-comments.txt'
         ]);
     });
 });

@@ -25,8 +25,7 @@ gulp.task('nsp', function(cb) {
     return nsp({package: path.resolve('package.json')}, cb);
 });
 
-// gulp.task('test', ['nsp', 'eslint'], function(cb) {
-gulp.task('test', function(cb) {
+gulp.task('test', ['nsp', 'eslint'], function(cb) {
     var mochaErr;
 
     gulp.src('test/**/*.js')
