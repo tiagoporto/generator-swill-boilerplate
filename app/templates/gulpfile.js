@@ -1,5 +1,5 @@
 /*
-* Swill Boilerplate
+* Swill Boilerplate v<%= boilerplate.version %>
 * https://github.com/tiagoporto/swill-boilerplate
 * Copyright (c) 2014-2016 Tiago Porto (http://tiagoporto.com)
 * Released under the MIT license
@@ -331,8 +331,7 @@ gulp.task('copy', function() {
     // Minify and Copy HTML
     var html = gulp.src(
         [
-            basePaths.dest + '**/*.{html,php}',
-            '!' + basePaths.bower + '{,/**}'
+            basePaths.dest + '**/*.{html,php}'
         ])
         .pipe(plugins.useref(assets))
         .pipe(plugins.if('*.js', plugins.uglify()))
@@ -344,7 +343,6 @@ gulp.task('copy', function() {
     // Copy All Other files except HTML, PHP, CSS e JS Files
     var allFiles = gulp.src(
         [
-            '!' + basePaths.bower + '{,/**}',
             basePaths.dest + '**/*',
             '!' + paths.styles.dest + '**/*',
             '!' + paths.scripts.dest + '**/*',
@@ -356,7 +354,7 @@ gulp.task('copy', function() {
 });
 
 gulp.task('outdatedbrowser', function() {
-    return gulp.src(basePaths.bower + '/outdated-browser/outdatedbrowser/lang/*')
+    return gulp.src('node_modules/outdated-browser/outdatedbrowser/lang/*')
         .pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'));
 });
 

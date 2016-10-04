@@ -1,20 +1,35 @@
 /* eslint-env node, mocha */
 /* eslint strict: ["error", "global"] */
 'use strict';
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-generator').test;
+var assert = require('yeoman-assert'),
+    helpers = require('yeoman-test'),
+    path = require('path');
 
 describe('generator-swill-boilerplate:app', function() {
-    before(function(done) {
-        helpers.run(path.join(__dirname, '../app'))
-            .withOptions({preprocessor: 'stylus'})
-            .on('end', done);
+    before(function() {
+        return helpers.run(path.join(__dirname, '../app'))
+            .withPrompts({
+                features: [],
+                options: [],
+                files: [],
+                license: {
+                    license: 'nolicense'
+                }
+            })
+            .toPromise();
     });
 
     it('creates files', function() {
         assert.file([
-            'package.json'
+            '.csslintrc',
+            '.editorconfig',
+            '.eslintrc',
+            '.yo-rc.json',
+            'app/favicon.ico',
+            'config.json',
+            'gulpfile.js',
+            'package.json',
+            'src/header-comments.txt'
         ]);
     });
 });

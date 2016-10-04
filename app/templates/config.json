@@ -3,7 +3,6 @@
     "src": "<%= folder.src %>/",
     "dest": "<%= folder.dest %>/",
     "build": "<%= folder.build %>/",
-    "bower": "<%= folder.dest %>/<%= folder.bower %>",
 
     "handlebars": {
        "src": "<%= folder.handlebars %>/",
@@ -64,7 +63,11 @@
     "notify": false,
     "logPrefix": "BrowserSync",
     "server": {
-      "baseDir": ["<%= folder.dest %>/"]
+      "baseDir": ["<%= folder.dest %>/", "./"]
+    },
+    "routes": {
+        "/bower_components": "bower_components",
+        "/node_modules": "node_modules"
     }
   },
 
