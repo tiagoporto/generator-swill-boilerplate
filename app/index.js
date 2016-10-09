@@ -327,7 +327,7 @@ module.exports = yeoman.Base.extend({
         packageJson.description = this.props.project.description;
         packageJson.homepage = this.props.project.homepage;
         packageJson.author.name = this.props.author.name;
-        packageJson.author.homepage = this.props.author.homepage;
+        packageJson.author.url = this.props.author.homepage;
 
         (this.props.preprocessor.name === 'sass') && (packageJson.devDependencies['gulp-sass'] = '2.3.2');
         (this.props.preprocessor.name === 'stylus') && (packageJson.devDependencies['gulp-stylus'] = '2.5.0');
