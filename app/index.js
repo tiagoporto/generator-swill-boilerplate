@@ -28,7 +28,7 @@ module.exports = yeoman.Base.extend({
             name: 'keywords',
             message: 'Project keywords (comma to split)',
             filter: function(words) {
-                return words.split(/\s*,\s*/g);
+                return words ? words.split(/\s*,\s*/g) : [];
             }
         }, {
             name: 'authorName',
@@ -254,7 +254,7 @@ module.exports = yeoman.Base.extend({
                 description: props.projectDescription,
                 homepage: props.projectHomepage,
                 keywords: props.keywords,
-                joinedKeywords: props.keywords.join()
+                joinedKeywords: props.keywords && props.keywords.join()
             };
 
             this.props.githubUser = (props.githubUser) ? props.githubUser : '{Github User}';
