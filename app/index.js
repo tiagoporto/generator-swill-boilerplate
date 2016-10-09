@@ -25,17 +25,25 @@ module.exports = yeoman.Base.extend({
             name: 'projectHomepage',
             message: 'Project Homepage'
         }, {
+            name: 'keywords',
+            message: 'Project keywords (comma to split)',
+            filter: function(words) {
+                return words.split(/\s*,\s*/g);
+            }
+        }, {
             name: 'authorName',
-            message: 'Author Name'
+            message: 'Author Name',
+            default: this.user.git.name()
         }, {
             name: 'authorEmail',
-            message: 'Author Email'
+            message: 'Author Email',
+            default: this.user.git.email()
         }, {
             name: 'authorHomepage',
             message: 'Author\'s website'
         }, {
             name: 'githubUser',
-            message: 'Github User'
+            message: 'Github User or organization'
         }, {
             type: 'confirm',
             name: 'settingFolder',
@@ -244,7 +252,9 @@ module.exports = yeoman.Base.extend({
                 cleanName: (props.projectName) ? _s.clean(props.projectName) : 'project-name',
                 sanitizeName: (props.projectName) ? _s.slugify(_s.clean(props.projectName)) : '{project-name}',
                 description: props.projectDescription,
-                homepage: props.projectHomepage
+                homepage: props.projectHomepage,
+                keywords: props.keywords,
+                joinedKeywords: props.keywords.join()
             };
 
             this.props.githubUser = (props.githubUser) ? props.githubUser : '{Github User}';
@@ -326,6 +336,7 @@ module.exports = yeoman.Base.extend({
         packageJson.name = this.props.project.sanitizeName;
         packageJson.description = this.props.project.description;
         packageJson.homepage = this.props.project.homepage;
+        packageJson.keywords = this.props.project.keywords;
         packageJson.author.name = this.props.author.name;
         packageJson.author.homepage = this.props.author.homepage;
 
@@ -446,6 +457,7 @@ module.exports = yeoman.Base.extend({
                 this.templatePath('src/handlebars/**/*'),
                 this.destinationPath(this.props.folder.src + '/handlebars/'), {
                     use: this.props.use,
+                    project: this.props.project,
                     include: this.props.include
                 }
             );
