@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - `bower.json` Optional
 - Set boilerplate version on `gulpfile.js`
+- Keywords in project
+- Set description and keywords in `index.html`
 
 ### Changed
 - Moved bower to npm
