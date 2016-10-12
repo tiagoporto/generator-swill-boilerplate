@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Readme",
+    "value": "readme",
+    "checked": false
+  }, {
+    "name": "Contributing",
+    "value": "contributing",
+    "checked": false
+  }, {
+    "name": "Changelog",
+    "value": "changelog",
+    "checked": false
+  }, {
+    "name": "404 page",
+    "value": "404",
+    "checked": false
+  }, {
+    "name": ".htaccess (Apache Server Configs)",
+    "value": "htaccess",
+    "checked": false
+  }, {
+    "name": "bower.json",
+    "value": "bower",
+    "checked": false
+  }, {
+    "name": "crossdomain.xml (Cross-domain policy)",
+    "value": "crossdomain",
+    "checked": false
+  }, {
+    "name": "manifest.json(Chrome app info)",
+    "value": "manifestJson",
+    "checked": false
+  }, {
+    "name": "manifest.webapp (Firefox OS app info)",
+    "value": "manifestWebapp",
+    "checked": false
+  }, {
+    "name": "robots.txt (Instructions about their site to web robots)",
+    "value": "robots",
+    "checked": false
+  }, {
+    "name": "humans.txt (Contains the information about humans to the web building.)",
+    "value": "humans",
+    "checked": false
+  }
+]

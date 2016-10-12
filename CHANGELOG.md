@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Set boilerplate version on `gulpfile.js`
 - Keywords in project
 - Set description and keywords in `index.html`
+- Option to set default project language
 
 ### Changed
 - Moved bower to npm
