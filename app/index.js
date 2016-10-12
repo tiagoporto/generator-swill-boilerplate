@@ -4,6 +4,7 @@
 
 var _s = require('underscore.string'),
     chalk = require('chalk'),
+    files = require('./optional-files.json'),
     mkdirp = require('mkdirp'),
     path = require('path'),
     yeoman = require('yeoman-generator'),
@@ -30,6 +31,11 @@ module.exports = yeoman.Base.extend({
             filter: function(words) {
                 return words ? words.split(/\s*,\s*/g) : [];
             }
+        }, {
+            type: 'input',
+            name: 'language',
+            message: 'Default project language (en, en-US, pt-BR, fr-CA...)',
+            default: 'en'
         }, {
             name: 'authorName',
             message: 'Author Name',
@@ -195,51 +201,7 @@ module.exports = yeoman.Base.extend({
             type: 'checkbox',
             name: 'files',
             message: 'Which files do you need?',
-            choices: [{
-                name: 'Readme',
-                value: 'readme',
-                checked: false
-            }, {
-                name: 'Contributing',
-                value: 'contributing',
-                checked: false
-            }, {
-                name: 'Changelog',
-                value: 'changelog',
-                checked: false
-            }, {
-                name: '404 page',
-                value: '404',
-                checked: false
-            }, {
-                name: '.htaccess (Apache Server Configs)',
-                value: 'htaccess',
-                checked: false
-            }, {
-                name: 'bower.json',
-                value: 'bower',
-                checked: false
-            }, {
-                name: 'crossdomain.xml (Cross-domain policy)',
-                value: 'crossdomain',
-                checked: false
-            }, {
-                name: 'manifest.json(Chrome app info)',
-                value: 'manifestJson',
-                checked: false
-            }, {
-                name: 'manifest.webapp (Firefox OS app info)',
-                value: 'manifestWebapp',
-                checked: false
-            }, {
-                name: 'robots.txt (Instructions about their site to web robots)',
-                value: 'robots',
-                checked: false
-            }, {
-                name: 'humans.txt (Contains the information about humans to the web building.)',
-                value: 'humans',
-                checked: false
-            }]
+            choices: files
         }];
 
         // ================== Get props ================== //
@@ -254,6 +216,7 @@ module.exports = yeoman.Base.extend({
                 description: props.projectDescription,
                 homepage: props.projectHomepage,
                 keywords: props.keywords,
+                language: props.languageList || props.language,
                 joinedKeywords: props.keywords && props.keywords.join()
             };
 
@@ -325,7 +288,7 @@ module.exports = yeoman.Base.extend({
     // ====================== Copy settings files ====================== //
     default: function() {
         if (path.basename(this.destinationPath()) !== this.props.project.sanitizeName) {
-            this.log('The folder ' + this.props.project.sanitizeName + 'will be automatically created!!');
+            this.log('The folder ' + this.props.project.sanitizeName + ' will be automatically created!!');
             mkdirp(this.props.project.sanitizeName);
             this.destinationRoot(this.destinationPath(this.props.project.sanitizeName));
         }
@@ -422,7 +385,8 @@ module.exports = yeoman.Base.extend({
         this.fs.copyTpl(
             this.templatePath('src/scripts/**/*'),
             this.destinationPath(this.props.folder.src + '/' + this.props.folder.scripts.src + '/'), {
-                use: this.props.use
+                use: this.props.use,
+                project: this.props.project
             }
         );
     },

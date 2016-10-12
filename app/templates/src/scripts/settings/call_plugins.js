@@ -18,7 +18,7 @@ addLoadEvent(
         bgColor: '#f25648',
         color: '#fff',
         lowerThan: 'transform',
-        languagePath: 'lang/outdated_browser/{-}.html'
+        languagePath: 'lang/outdated_browser/en.html'
     })<% } %><% if (use.jqueryLogoDownloadtip && use.outdatedBrowser) { %>,
 <% } %><% if (use.jqueryLogoDownloadtip) { %>
     $('#logo').downloadTip({ 'position': 'right' })<% } %>
