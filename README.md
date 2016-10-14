@@ -33,10 +33,10 @@
 * Generate Sprites with .svg and a .png to fallback
 * Analyze CSS with csslint
 * Prefix CSS with Autoprefixer
-* Compile Sass or Stylus (Catch the Stylus and Sass errors and shows them directly on the page)
+* Compile Sass or Stylus (Catch the Stylus errors and show them directly on the page, like with sass)
 * Concatenate And Minify Scripts
 * Analyze JavaScript with ESLint
-* Compile to ES2015
+* Compile ES2015
 * Notifications when tasks have completed
 * Monitors changes in the files and reload browser with BrowserSync
 * Javascript tests with Jasmine and Karma
