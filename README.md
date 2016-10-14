@@ -27,20 +27,19 @@
 
 ## Features
 
-* Clean the assets (build, images, css, js) in the project to maintain the directory organized
+* Clean the assets (build, images, css, js) in the project to maintain the directory in organised manner
 * Compress Images
-* Generate Sprites with .png
-* Generate Sprites with .svg and a .png to fallback
+* Generate Sprites with .svg and .png, a .png to fallback
 * Analyze CSS with csslint
 * Prefix CSS with Autoprefixer
-* Compile Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
-* Concatenate And Minify Scripts
+* Compile Sass or Stylus (Catches the Stylus error and directly shows on the page, as in Sass)
+* Concatenate And minify Scripts
 * Analyze JavaScript with ESLint
-* Compile ES2015
-* Notify when tasks are complete
-* Monitors change in the files and reload browser with BrowserSync
+* Compile to ES2015
+* Task Completion Notifications
+* Monitors change in the files and automatically reload browser with BrowserSync
 * Javascript tests with Jasmine and Karma
-* Build the project compressing HTML, CSS and JS.
+* Build the project by compressing HTML, CSS and JS.
 * Push the `build` folder to gh-pages branch
 
 ## Installation
@@ -65,4 +64,4 @@ yo swill-boilerplate
 
 ## License
 
-Swill Boilerplate Generator is released under the terms of the [MIT license](https://github.com/tiagoporto/generator-swill-boilerplate/blob/master/LICENSE).
+Swill Boilerplate Generator is released under the terms of [MIT license](https://github.com/tiagoporto/generator-swill-boilerplate/blob/master/LICENSE).
