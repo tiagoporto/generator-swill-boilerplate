@@ -27,17 +27,17 @@
 
 ## Features
 
-* Clean the assets (build, images, css, js) in the project to maintain the directory organized
+* Clean the assets (build, images, css, js) in the project to keep the directory organized
 * Compress Images
 * Generate Sprites with .png
 * Generate Sprites with .svg and a .png to fallback
 * Analyze CSS with csslint
 * Prefix CSS with Autoprefixer
-* Compile Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
+* Compile Sass or Stylus (Catch the Stylus and Sass errors and shows them directly on the page)
 * Concatenate And Minify Scripts
 * Analyze JavaScript with ESLint
-* Compile ES2015
-* Notify when tasks are complete
+* Compile to ES2015
+* Notifications when tasks have completed
 * Monitors changes in the files and reload browser with BrowserSync
 * Javascript tests with Jasmine and Karma
 * Build the project compressing HTML, CSS and JS.
