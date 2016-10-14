@@ -8,12 +8,12 @@
 [![Github Issues](https://img.shields.io/github/issues/tiagoporto/generator-swill-boilerplate.svg)](https://github.com/tiagoporto/generator-swill-boilerplate/issues)
 [![Github License](https://img.shields.io/github/license/tiagoporto/generator-swill-boilerplate.svg)](https://raw.githubusercontent.com/tiagoporto/generator-swill-boilerplate/master/LICENSE)
 
-> Generator dependencies
+<small>Generator dependencies</small>
 
 [![Dependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate)
 [![devDependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate#info=devDependencies)
 
-> Swill Boilerplate dependencies
+<small>Swill Boilerplate dependencies</small>
 
 [![boilerplate devDependencies Status](https://david-dm.org/tiagoporto/swillboilerplate.rocks/dev-status.svg)](https://david-dm.org/tiagoporto/swillboilerplate.rocks#info=devDependencies)
 
@@ -66,3 +66,4 @@ yo swill-boilerplate
 ## License
 
 Swill Boilerplate Generator is released under the terms of the [MIT license](https://github.com/tiagoporto/generator-swill-boilerplate/blob/master/LICENSE).
+
