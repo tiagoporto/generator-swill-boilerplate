@@ -37,8 +37,8 @@
 * Concatenate And Minify Scripts
 * Analyze JavaScript with ESLint
 * Compile ES2015
-* Notify when tasks are complete
-* Monitors change in the files and reload browser with BrowserSync
+* Notify once tasks are complete
+* Monitor changes in the files and reload browser with BrowserSync
 * Javascript tests with Jasmine and Karma
 * Build the project compressing HTML, CSS and JS.
 * Push the `build` folder to gh-pages branch
