@@ -31,7 +31,7 @@
 * Compresses Images
 * Generates Sprites with .png
 * Generates Sprites with .svg and a .png to fallback
-* Analyzes CSS with csslint
+* Analyzes CSS with CSS Lint
 * Prefixes CSS with Autoprefixer
 * Compiles Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
 * Concatenates And Minifies Scripts
@@ -39,7 +39,7 @@
 * Compiles ES2015
 * Notifies when tasks are complete
 * Monitors change in the files and reloads browser with BrowserSync
-* Uses JavaScript tests with Jasmine & Karma
+* Uses Jasmine & Karma to test JavaScript
 * Builds the project compressing HTML, CSS and JS
 * Pushes the `build` folder to gh-pages branch
 
