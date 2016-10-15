@@ -27,7 +27,7 @@
 
 ## Features
 
-* Clean the assets (build, images, css, js) in the project to maintain the directory organized
+* Clean the assets (build, images, css, js) in the project to maintain the directory organization
 * Compress Images
 * Generate Sprites with .png
 * Generate Sprites with .svg and a .png to fallback
