@@ -39,7 +39,7 @@
 * Compiles ES2015
 * Notifies when tasks are complete
 * Monitors change in the files and reloads browser with BrowserSync
-* Uses Javascript tests with Jasmine and Karma
+* Uses JavaScript tests with Jasmine and Karma
 * Builds the project compressing HTML, CSS and JS.
 * Pushes the `build` folder to gh-pages branch
 
