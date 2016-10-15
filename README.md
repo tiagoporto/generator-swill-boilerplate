@@ -34,13 +34,13 @@
 * Analyzes CSS with csslint
 * Prefixes CSS with Autoprefixer
 * Compiles Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
-* Concatenates And Minify Scripts
+* Concatenates And Minifies Scripts
 * Analyzes JavaScript with ESLint
 * Compiles ES2015
 * Notifies when tasks are complete
 * Monitors change in the files and reloads browser with BrowserSync
 * Uses JavaScript tests with Jasmine and Karma
-* Builds the project compressing HTML, CSS and JS.
+* Builds the project compressing HTML, CSS and JS
 * Pushes the `build` folder to gh-pages branch
 
 ## Installation
