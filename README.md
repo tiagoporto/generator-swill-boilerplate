@@ -27,11 +27,11 @@
 
 ## Features
 
-* Clean the assets (build, images, css, js) in the project to maintain the directory organized
+* Clean the assets (build, images, CSS, js) in the project to maintain the directory organised
 * Compress Images
 * Generate Sprites with .png
 * Generate Sprites with .svg and a .png to fallback
-* Analyze CSS with csslint
+* Analyze CSS with clint
 * Prefix CSS with Autoprefixer
 * Compile Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
 * Concatenate And Minify Scripts
