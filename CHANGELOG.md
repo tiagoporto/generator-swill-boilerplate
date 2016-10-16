@@ -4,20 +4,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.4.0beta] - 2016-10-xx
+## [0.5.0beta] - 2016-10-16
 ### Fixed
-- Set url in `package.json`
-
-## [0.4.0beta] - 2016-10-03
-### Fixed
+- Set Author url in `package.json`
 - Set footer readme project name
 
 ### Added
+- Set Keywords
+- Set description and keywords in `index.html`
+- Get Author name and email by git
+- Option to set default project language
+
+## [0.4.0beta] - 2016-10-03
+### Added
 - `bower.json` Optional
 - Set boilerplate version on `gulpfile.js`
-- Keywords in project
-- Set description and keywords in `index.html`
-- Option to set default project language
 
 ### Changed
 - Moved bower to npm
