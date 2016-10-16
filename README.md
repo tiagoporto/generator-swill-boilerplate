@@ -27,25 +27,25 @@
 
 ## Features
 
-* Cleans the assets (build, images, CSS, JS) in the project to maintain the directory organization
-* Compresses Images
-* Generates Sprites with .png
-* Generates Sprites with .svg and a .png to fallback
-* Analyzes CSS with CSS Lint
-* Prefixes CSS with Autoprefixer
-* Compiles Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass)
-* Concatenates And Minifies Scripts
-* Analyzes JavaScript with ESLint
-* Compiles ES2015
-* Notifies when tasks are complete
-* Monitors change in the files and reloads browser with BrowserSync
-* Uses Jasmine & Karma to test JavaScript
-* Builds the project compressing HTML, CSS and JS
-* Pushes the `build` folder to gh-pages branch
+* Cleans the assets (build, images, CSS, JS) in the project to maintain the directory organization.
+* Compresses Images.
+* Generates Sprites with .png.
+* Generates Sprites with .svg and a .png to fallback.
+* Analyzes CSS with CSS Lint.
+* Prefixes CSS with Autoprefixer.
+* Compiles Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass).
+* Concatenates and minifies scripts.
+* Analyzes JavaScript with ESLint.
+* Compiles ES2015.
+* Notifies when tasks are complete.
+* Monitors change in the files and reloads browser with BrowserSync.
+* Uses Jasmine & Karma to test JavaScript.
+* Builds the project compressing HTML, CSS and JS.
+* Pushes the `build` folder to gh-pages branch.
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and `generator-swill-boilerplate` using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and the `generator-swill-boilerplate` using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
