@@ -374,7 +374,6 @@ module.exports = yeoman.Base.extend({
         //         this.destinationPath(this.props.folder.src + '/' + this.props.stylesSrcFolder + '/components')
         //     );
         // }
-        console.log('coveralls');
 
         this.fs.copyTpl(
             this.templatePath('src/stylesheets/' + this.props.preprocessor.name + '/**/*'),
