@@ -1,9 +1,11 @@
 /* eslint-env node */
 /* eslint strict: ["error", "global"] */
 'use strict';
-var eslint = require('gulp-eslint'),
+var coveralls = require('gulp-coveralls'),
+    eslint = require('gulp-eslint'),
     excludeGitignore = require('gulp-exclude-gitignore'),
     gulp = require('gulp'),
+    istanbul = require('gulp-istanbul'),
     mocha = require('gulp-mocha'),
     nsp = require('gulp-nsp'),
     path = require('path'),
@@ -25,7 +27,16 @@ gulp.task('nsp', function(cb) {
     return nsp({package: path.resolve('package.json')}, cb);
 });
 
-gulp.task('test', ['nsp', 'eslint'], function(cb) {
+gulp.task('istanbul', function() {
+    return gulp.src('app/index.js')
+        .pipe(excludeGitignore())
+        .pipe(istanbul({
+            includeUntested: true
+        }))
+        .pipe(istanbul.hookRequire());
+});
+
+gulp.task('mocha', ['istanbul'], function(cb) {
     var mochaErr;
 
     gulp.src('test/**/*.js')
@@ -34,9 +45,23 @@ gulp.task('test', ['nsp', 'eslint'], function(cb) {
         .on('error', function(err) {
             mochaErr = err;
         })
-        // .pipe(istanbul.writeReports())
+        .pipe(istanbul.writeReports())
         .on('end', function() {
             cb(mochaErr);
         });
 });
 
+gulp.task('coveralls', ['mocha'], function() {
+    if (!process.env.CI) {
+        return;
+    }
+
+    return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
+    .pipe(coveralls());
+});
+
+gulp.task('default', ['nsp', 'eslint', 'coveralls']);
+
+gulp.task('watch-test', function() {
+    gulp.watch(['app/index.js', 'test/**/*.js'], ['mocha']);
+});
