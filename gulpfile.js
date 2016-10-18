@@ -52,12 +52,11 @@ gulp.task('mocha', ['istanbul'], function(cb) {
 });
 
 gulp.task('coveralls', ['mocha'], function() {
-    console.log(process.env);
     if (!process.env.CI) {
         return;
     }
 
-    return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
+    return gulp.src('coverage/lcov.info')
     .pipe(coveralls());
 });
 
