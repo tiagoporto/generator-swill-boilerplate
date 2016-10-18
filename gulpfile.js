@@ -52,6 +52,7 @@ gulp.task('mocha', ['istanbul'], function(cb) {
 });
 
 gulp.task('coveralls', ['mocha'], function() {
+    console.log(process.env);
     if (!process.env.CI) {
         return;
     }
