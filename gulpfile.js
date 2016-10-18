@@ -60,7 +60,7 @@ gulp.task('coveralls', ['mocha'], function() {
     .pipe(coveralls());
 });
 
-gulp.task('default', ['nsp', 'eslint', 'coveralls']);
+gulp.task('test', ['nsp', 'eslint', 'coveralls']);
 
 gulp.task('watch-test', function() {
     gulp.watch(['app/index.js', 'test/**/*.js'], ['mocha']);
