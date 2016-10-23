@@ -4,6 +4,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0beta] - 2016-xx-xx
+### Added
+- Config to clena paths
+
 ## [0.5.0beta] - 2016-10-16
 ### Fixed
 - Set Author url in `package.json`

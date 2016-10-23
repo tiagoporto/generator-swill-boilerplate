@@ -32,6 +32,12 @@
     "styles": {
       "src": "<%= folder.styles.src %>/",
       "dest": "<%= folder.styles.dest %>/"
+    },
+
+    "clean": {
+      "ignore": [
+        "!<%= folder.dest %>/<%= folder.images.dest %>/{copyright,logos}{,**/*{,**/*}}"
+      ]
     }
   },
 
