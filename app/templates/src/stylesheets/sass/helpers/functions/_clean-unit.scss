@@ -7,9 +7,9 @@
 /// @return  {number} - Cleaned value
 
 @function _clean-unit($value) {
-  @if type-of($value) == 'number' {
-    @return $value / ($value * 0 + 1);
-  } @else {
-    @warn "#{$value} it's not a number";
-  }
+    @if type-of($value) == 'number' {
+        @return $value / ($value * 0 + 1);
+    } @else {
+        @warn "#{$value} it's not a number";
+    }
 }

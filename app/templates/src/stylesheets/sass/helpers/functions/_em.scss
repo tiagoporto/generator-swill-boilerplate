@@ -21,9 +21,9 @@
 ///   }
 
 @function em($pixels, $context: $base-font-size){
-  @if type-of($pixels) == 'number' {
-    @return (_clean-unit($pixels) / _clean-unit($context)) * 1em;
-  }  @else {
-    @warn '#{$pixels} is not a number';
-  }
+    @if type-of($pixels) == 'number' {
+        @return (_clean-unit($pixels) / _clean-unit($context)) * 1em;
+    }  @else {
+        @warn '#{$pixels} is not a number';
+    }
 }
