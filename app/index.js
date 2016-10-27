@@ -280,7 +280,8 @@ module.exports = yeoman.Base.extend({
                     firefox: props.files.indexOf('manifestWebapp') >= 0
                 },
                 robots: props.files.indexOf('robots') >= 0,
-                humans: props.files.indexOf('humans') >= 0
+                humans: props.files.indexOf('humans') >= 0,
+                travis: props.files.indexOf('travis') >= 0
             };
         }.bind(this));
     },
@@ -507,6 +508,13 @@ module.exports = yeoman.Base.extend({
             this.fs.copy(
                 this.templatePath('CHANGELOG.md'),
                 this.destinationPath('CHANGELOG.md')
+            );
+        }
+
+        if (this.props.include.travis) {
+            this.fs.copy(
+                this.templatePath('travis.yml'),
+                this.destinationPath('.travis.yml')
             );
         }
 
