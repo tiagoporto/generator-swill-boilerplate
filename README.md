@@ -29,8 +29,8 @@
 
 * Cleans the assets (build, images, CSS, JS) in the project to maintain the directory organization.
 * Compresses Images.
-* Generates Sprites with .png.
-* Generates Sprites with .svg and a .png to fallback.
+* Generates Sprites in .png format.
+* Generates Sprites in .svg and .png formats for fallback.
 * Analyzes CSS with CSS Lint.
 * Prefixes CSS with Autoprefixer.
 * Compiles Sass or Stylus (Catch the Stylus error and direct shows on the page, as in Sass).
