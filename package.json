@@ -1,7 +1,7 @@
 {
   "name": "generator-swill-boilerplate",
   "version": "0.5.0beta",
-  "description": "🍺 The front-end Boilerplate that you need to start multi-device development, easy to customize.",
+  "description": "🍺 The front-end Boilerplate that you need to start easily customizable multi-device development.",
   "homepage": "http://swillboilerplate.rocks",
   "keywords": [
     "yeoman-generator",
