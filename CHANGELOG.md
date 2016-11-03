@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Config to clean paths
 - Option to .travis.yml file
 
+### Changed
+- karma-chrome-launcher to karma-phantomjs-launcher
+
 ## [0.5.0beta] - 2016-10-16
 ### Fixed
 - Set Author url in `package.json`
