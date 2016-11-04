@@ -55,9 +55,6 @@
 
   "globals": {
     // additional predefined global variables
-    "angular": true,
-    "ga": true,
-    "outdatedBrowser": true
   },
 
   "plugins": [

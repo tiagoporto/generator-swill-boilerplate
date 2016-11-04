@@ -7,14 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.6.0beta] - 2016-xx-xx
 ### Added
 - Config to clean paths
-- Option to .travis.yml file
+- Option to `.travis.yml` file
 
 ### Fixed
 - Title in handlebars
+- Set dynamically outdatedBrowser in `.eslintrc`
 
 ### Changed
 - karma-chrome-launcher to karma-phantomjs-launcher
-- Turned off sort-vars eslint
+- Turned off `sort-vars` in eslint
 
 ### Removed
 - Background from <body> in `styl` files

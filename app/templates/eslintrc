@@ -55,9 +55,8 @@
 
   "globals": {
     // additional predefined global variables
-    "angular": true,
-    "ga": true,
-    "outdatedBrowser": true
+    "ga": true<% if (use.outdatedBrowser) { %>,
+    "outdatedBrowser": true<% } %>
   },
 
   "plugins": [
