@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Config to clean paths
 - Option to .travis.yml file
 
+### Fixed
+- Title in handlebars
+
 ### Changed
 - karma-chrome-launcher to karma-phantomjs-launcher
 - Turned off sort-vars eslint
