@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - karma-chrome-launcher to karma-phantomjs-launcher
 - Turned off sort-vars eslint
 
+### Removed
+- Background from <body> in `styl` files
+
 ## [0.5.0beta] - 2016-10-16
 ### Fixed
 - Set Author url in `package.json`
