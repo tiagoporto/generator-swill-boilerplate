@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - karma-chrome-launcher to karma-phantomjs-launcher
+- Turned off sort-vars eslint
 
 ## [0.5.0beta] - 2016-10-16
 ### Fixed
