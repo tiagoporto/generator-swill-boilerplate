@@ -281,7 +281,8 @@ module.exports = yeoman.Base.extend({
                 },
                 robots: props.files.indexOf('robots') >= 0,
                 humans: props.files.indexOf('humans') >= 0,
-                travis: props.files.indexOf('travis') >= 0
+                travis: props.files.indexOf('travis') >= 0,
+                npmignore: props.files.indexOf('npmignore') >= 0
             };
         }.bind(this));
     },
@@ -515,6 +516,15 @@ module.exports = yeoman.Base.extend({
             this.fs.copy(
                 this.templatePath('travis.yml'),
                 this.destinationPath('.travis.yml')
+            );
+        }
+
+        if (this.props.include.npmignore) {
+            this.fs.copyTpl(
+                this.templatePath('npmignore'),
+                this.destinationPath('.npmignore'), {
+                    folder: this.props.folder
+                }
             );
         }
 

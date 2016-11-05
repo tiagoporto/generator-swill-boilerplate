@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Config to clean paths
 - Option to `.travis.yml` file
+- Option to `.npmignore` file
 
 ### Fixed
 - Title in handlebars

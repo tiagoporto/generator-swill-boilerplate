@@ -20,6 +20,10 @@
     "value": "travis",
     "checked": false
   }, {
+    "name": ".npmignore",
+    "value": "npmignore",
+    "checked": false
+  }, {
     "name": "bower.json",
     "value": "bower",
     "checked": false
