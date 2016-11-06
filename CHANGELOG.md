@@ -4,6 +4,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0beta] - 2016-11-06
+### Added
+- Config to clean paths
+- Option to `.travis.yml` file
+- Option to `.npmignore` file
+- Set `package.json` repository
+- Set `bower.json` keywords, author, repository and ignore files
+
+### Fixed
+- Title in handlebars
+- Set dynamically outdatedBrowser in `.eslintrc`
+
+### Changed
+- karma-chrome-launcher to karma-phantomjs-launcher
+- Turned off `sort-vars` in eslint
+
+### Removed
+- Background from <body> in `styl` files
+
 ## [0.5.0beta] - 2016-10-16
 ### Fixed
 - Set Author url in `package.json`

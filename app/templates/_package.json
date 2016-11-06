@@ -13,6 +13,7 @@
     "url": ""
   },
   "scripts": {},
+  "main": "",
   "files": [],
   "dependencies": {},
   "devDependencies": {
@@ -50,7 +51,7 @@
     "gulp.spritesmith": "6.2.1",
     "jasmine-core": "2.5.2",
     "karma": "1.3.0",
-    "karma-chrome-launcher": "2.0.0",
+    "karma-phantomjs-launcher": "1.0.2",
     "karma-coverage": "1.1.1",
     "karma-jasmine": "1.0.2",
     "merge-stream": "1.0.0",

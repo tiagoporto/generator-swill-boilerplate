@@ -1,6 +1,6 @@
 {
   "name": "generator-swill-boilerplate",
-  "version": "0.5.0beta",
+  "version": "0.6.0beta",
   "description": "🍺 The front-end Boilerplate that you need to start easily customizable multi-device development.",
   "homepage": "http://swillboilerplate.rocks",
   "keywords": [
@@ -24,9 +24,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tiagoporto/generator-swill-boilerplate.git"
-  },
-  "scripts": {
-    "pretest": "gulp test"
   },
   "files": [
     "app"

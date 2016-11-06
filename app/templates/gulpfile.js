@@ -373,15 +373,15 @@ gulp.task('combine-assets', function() {
 
 // Clean Directories
 gulp.task('clean', function(cb) {
-    return del([
+    var cleanPaths = [
         basePaths.build,
         paths.styles.dest,
         paths.scripts.dest,
         paths.styles.src + 'helpers/{_bitmap-sprite,_vetor-sprite}.{styl,scss}',
-        paths.images.dest + '**/*',
-        // Add here the folders that will not be deleted in app/img
-        '!' + paths.images.dest + '{copyright,logos}{,**/*{,**/*}}'
-    ], cb);
+        paths.images.dest + '**/*'
+    ];
+
+    return del(cleanPaths.concat(basePaths.clean.ignore), cb);
 });
 
 // ***************************** Main Tasks ******************************* //

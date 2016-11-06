@@ -209,6 +209,8 @@ module.exports = yeoman.Base.extend({
             this.prompts = props;
             this.props = {};
 
+            this.props.githubUser = (props.githubUser) ? props.githubUser : '{Github User}';
+
             this.props.project = {
                 name: (props.projectName) ? _s.clean(props.projectName) : '{Project Name}',
                 cleanName: (props.projectName) ? _s.clean(props.projectName) : 'project-name',
@@ -220,7 +222,8 @@ module.exports = yeoman.Base.extend({
                 joinedKeywords: props.keywords && props.keywords.join()
             };
 
-            this.props.githubUser = (props.githubUser) ? props.githubUser : '{Github User}';
+            this.props.project.repository = 'https://github.com/' + this.props.githubUser + '/' + this.props.project.sanitizeName + '.git';
+
 
             this.props.author = {
                 name: _s.clean(props.authorName),
@@ -280,7 +283,9 @@ module.exports = yeoman.Base.extend({
                     firefox: props.files.indexOf('manifestWebapp') >= 0
                 },
                 robots: props.files.indexOf('robots') >= 0,
-                humans: props.files.indexOf('humans') >= 0
+                humans: props.files.indexOf('humans') >= 0,
+                travis: props.files.indexOf('travis') >= 0,
+                npmignore: props.files.indexOf('npmignore') >= 0
             };
         }.bind(this));
     },
@@ -302,6 +307,7 @@ module.exports = yeoman.Base.extend({
         packageJson.keywords = this.props.project.keywords;
         packageJson.author.name = this.props.author.name;
         packageJson.author.url = this.props.author.homepage;
+        packageJson.repository.url = this.props.project.repository;
 
         (this.props.preprocessor.name === 'sass') && (packageJson.devDependencies['gulp-sass'] = '2.3.2');
         (this.props.preprocessor.name === 'stylus') && (packageJson.devDependencies['gulp-stylus'] = '2.5.0');
@@ -510,6 +516,22 @@ module.exports = yeoman.Base.extend({
             );
         }
 
+        if (this.props.include.travis) {
+            this.fs.copy(
+                this.templatePath('travis.yml'),
+                this.destinationPath('.travis.yml')
+            );
+        }
+
+        if (this.props.include.npmignore) {
+            this.fs.copyTpl(
+                this.templatePath('npmignore'),
+                this.destinationPath('.npmignore'), {
+                    folder: this.props.folder
+                }
+            );
+        }
+
         if (this.props.include.crossdomain) {
             this.fs.copy(
                 this.templatePath('public/crossdomain.xml'),
@@ -551,8 +573,11 @@ module.exports = yeoman.Base.extend({
             bowerJson.name = this.props.project.sanitizeName;
             bowerJson.description = this.props.project.description;
             bowerJson.homepage = this.props.project.homepage;
-            bowerJson.author.name = this.props.author.name;
-            bowerJson.author.homepage = this.props.author.homepage;
+            bowerJson.keywords = this.props.project.keywords;
+            bowerJson.authors[0].name = this.props.author.name;
+            bowerJson.authors[0].homepage = this.props.author.homepage;
+            bowerJson.repository.url = this.props.project.repository;
+            bowerJson.ignore.push('!' + this.props.folder.dest + '/**/*');
 
             this.fs.writeJSON(this.destinationPath('bower.json'), bowerJson);
         }

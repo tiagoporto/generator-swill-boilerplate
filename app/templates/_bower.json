@@ -2,31 +2,26 @@
   "name": "",
   "description": "",
   "homepage": "",
-  "author": {
-    "name": "",
-    "homepage": ""
-  },
+  "keywords": [
+  ],
+  "authors": [
+    {
+      "name": "",
+      "homepage": ""
+    }
+  ],
   "repository": {
     "type": "git",
     "url": ""
   },
-  "keywords": [
-  ],
-  "main": "",
-  "moduleType": [
-    "amd",
-    "es6",
-    "globals",
-    "node"
-  ],
-  "license": "MIT",
+  "main": [""],
   "ignore": [
     "**/*",
     "!CHANGELOG.md",
-    "!LICENSE.md",
-    "!dist/**/*",
+    "!LICENSE",
     "!README.md"
   ],
-  "dependencies": { },
-  "devDependencies": { }
+  "dependencies": {},
+  "devDependencies": {},
+  "license": ""
 }

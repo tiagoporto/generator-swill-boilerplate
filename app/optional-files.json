@@ -16,12 +16,20 @@
     "value": "404",
     "checked": false
   }, {
-    "name": ".htaccess (Apache Server Configs)",
-    "value": "htaccess",
+    "name": ".travis.yml (Travis CI)",
+    "value": "travis",
+    "checked": false
+  }, {
+    "name": ".npmignore",
+    "value": "npmignore",
     "checked": false
   }, {
     "name": "bower.json",
     "value": "bower",
+    "checked": false
+  }, {
+    "name": ".htaccess (Apache Server Configs)",
+    "value": "htaccess",
     "checked": false
   }, {
     "name": "crossdomain.xml (Cross-domain policy)",
