@@ -4,7 +4,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.6.0beta] - 2016-xx-xx
+## [0.6.0beta] - 2016-11-06
 ### Added
 - Config to clean paths
 - Option to `.travis.yml` file
