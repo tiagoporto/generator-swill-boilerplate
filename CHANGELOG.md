@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Config to clean paths
 - Option to `.travis.yml` file
 - Option to `.npmignore` file
+- Set `package.json` repository
+- Set `bower.json` keywords, author, repository and ignore files
 
 ### Fixed
 - Title in handlebars
