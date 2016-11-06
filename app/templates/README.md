@@ -20,7 +20,7 @@
 * [Running](#running)
 * [Contributing](#contributing)
 * [Credits](#credits)
-* [License](license)
+* [License](#license)
 
 ## Features
 
