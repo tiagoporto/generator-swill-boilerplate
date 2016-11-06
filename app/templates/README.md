@@ -18,6 +18,7 @@
 * [Dependencies](#dependencies)
 * [Installation](#installation)
 * [Running](#running)
+* [Contributing](#contributing)
 * [Credits](#credits)
 * [License](license)
 
