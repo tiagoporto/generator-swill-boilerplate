@@ -1,10 +1,10 @@
 language: node_js
 
 node_js:
-  - "stable"
+  - "v6.9.1"
 
 before_install:
   - npm install -g gulp
 
 script:
-  - gulp coveralls
+  - gulp test
