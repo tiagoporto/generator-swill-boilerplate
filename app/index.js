@@ -518,7 +518,7 @@ module.exports = yeoman.Base.extend({
 
         if (this.props.include.travis) {
             this.fs.copy(
-                this.templatePath('travis.yml'),
+                this.templatePath('travis'),
                 this.destinationPath('.travis.yml')
             );
         }
