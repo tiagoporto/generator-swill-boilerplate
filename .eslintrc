@@ -2,10 +2,10 @@
   // http://eslint.org/docs/rules/
 
   "ecmaFeatures": {
-    "arrowFunctions": false,                    // enable arrow functions
+    "arrowFunctions": true,                    // enable arrow functions
     "binaryLiterals": false,                    // enable binary literals
     "blockBindings": false,                     // enable let and const (aka block bindings)
-    "classes": false,                           // enable classes
+    "classes": true,                           // enable classes
     "defaultParams": false,                     // enable default function parameters
     "destructuring": false,                     // enable destructuring
     "forOf": false,                             // enable for-of loops
@@ -83,12 +83,11 @@
     "no-inner-declarations": ["error", "functions"],    // disallow function or variable declarations in nested blocks
     "no-invalid-regexp": "error",        // disallow invalid regular expression strings in the RegExp constructor
     "no-irregular-whitespace": "error",  // disallow irregular whitespace outside of strings and comments
-    "no-negated-in-lhs": "error",        // disallow negation of the left operand of an in expression
     "no-obj-calls": "error",             // disallow the use of object properties of the global object (Math and JSON) as functions
     "no-regex-spaces": "error",          // disallow multiple spaces in a regular expression literal
-    "no-reserved-keys": "off",         // disallow reserved words being used as object literal keys (off by default)
     "no-sparse-arrays": "error",         // disallow sparse arrays
     "no-unreachable": "error",           // disallow unreachable statements after a return, throw, continue, or break statement
+    "no-unsafe-negation": "error",        // disallow negating the left operand of Relational Operators
     "use-isnan": "error",                // disallow comparisons with the value NaN
     "valid-jsdoc": "off",              // Ensure JSDoc comments are valid (off by default)
     "valid-typeof": "error",             // Ensure that the results of typeof are compared against a valid string
@@ -111,7 +110,6 @@
     "no-caller": "error",             // disallow use of arguments.caller or arguments.callee
     "no-div-regex": "off",          // disallow division operators explicitly at beginning of regular expression (off by default)
     "no-else-return": "off",        // disallow else after a return in an if (off by default)
-    "no-empty-label": "off",        // disallow use of labels for anything other than loops and switches
     "no-eq-null": "error",            // disallow comparisons to null without a type-checking operator (off by default)
     "no-eval": "error",               // disallow use of eval()
     "no-extend-native": "off",      // disallow adding to native types
@@ -119,13 +117,13 @@
     "no-fallthrough": "error",        // disallow fallthrough of case statements
     "no-floating-decimal": "off",   // disallow the use of leading or trailing decimal points in numeric literals (off by default)
     "no-implied-eval": "off",       // disallow use of eval()-like methods
+    "no-global-assign": "error",    // disallow modification to read-only global variables
     "no-iterator": "error",           // disallow usage of __iterator__ property
     "no-labels": "off",             // disallow use of labeled statements
     "no-lone-blocks": "off",        // disallow unnecessary nested blocks
     "no-loop-func": "error",          // disallow creation of functions within loops
     "no-multi-spaces": "warn",       // disallow use of multiple spaces
     "no-multi-str": "off",          // disallow use of multiline strings
-    "no-native-reassign": "off",    // disallow reassignments of native objects
     "no-new-func": "warn",           // disallow use of new operator for Function object
     "no-new-wrappers": "off",       // disallows creating new instances of String, Number, and Boolean
     "no-new": "error",                // disallow use of new operator when not part of the assignment or comparison
@@ -169,7 +167,7 @@
     "no-use-before-define": "off",        // disallow use of variables before they are defined
 
 
-    ////////// Node.js //////////
+    ////////// Node.js and CommonJS //////////
 
     "handle-callback-err": "off",   // enforces error handling in callbacks (off by default) (on by default in the node environment)
     "no-mixed-requires": ["off", false],     // disallow mixing regular variable and require declarations (off by default) (on by default in the node environment)
@@ -197,9 +195,13 @@
     "keyword-spacing": "error", // enforce consistent spacing before and after keywords
     "lines-around-comment": "warn",        // enforces empty lines around comments (off by default)
     "linebreak-style": ["error", "unix"],             // disallow mixed 'LF' and 'CRLF' as linebreaks (off by default)
+    "max-depth": ["warn", 4],                                     // specify the maximum depth that blocks can be nested (off by default)
+    "max-len": ["off", 80, 4],                                   // specify the maximum length of a line in your program (off by default)
     "max-nested-callbacks": ["warn", 5],        // specify the maximum depth callbacks can be nested (off by default)
+    "max-params": ["off", 3],                                    // limits the number of parameters that can be used in the function declaration. (off by default)
     "new-cap": ["error", { "capIsNew": false }],                     // require a capital letter for constructors
     "new-parens": "error",                  // disallow the omission of parentheses when invoking a constructor with no arguments
+    "max-statements": ["off", 10],                               // specify the maximum number of statement allowed in a function (off by default)
     "newline-after-var": "off",           // allow/disallow an empty newline after var statement (off by default)
     "no-array-constructor": "warn",        // disallow use of the Array constructor
     "no-continue": "warn",                 // disallow use of the continue statement (off by default)
@@ -209,7 +211,9 @@
     "no-multiple-empty-lines": ["warn", {"max": 3, "maxEOF": 1}],     // disallow multiple empty lines (off by default)
     "no-nested-ternary": "error",           // disallow nested ternary expressions (off by default)
     "no-new-object": "warn",               // disallow use of the Object constructor
-    "no-spaced-func": "error",              // disallow space between function identifier and application
+    "func-call-spacing": ["error", "never"],              // disallow spaces between the function name and the opening parenthesis that calls it
+    "no-bitwise": "error",                                         // disallow use of bitwise operators (off by default)
+    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],  // disallow use of unary operators, ++ and -- (off by default)
     "no-ternary": "off",                  // disallow the use of ternary operators (off by default)
     "no-trailing-spaces": "error",          // disallow trailing whitespace at the end of lines
     "no-underscore-dangle": "off",        // disallow dangling underscores in identifiers
@@ -234,20 +238,10 @@
     ////////// ECMAScript 6 //////////
 
     "constructor-super": "off",      // verify super() callings in constructors (off by default)
-    "generator-star-spacing": "off", // enforce the spacing around the * in generator functions (off by default)
+    "generator-star-spacing": ["error", {"before": true, "after": true}], // enforce spacing around the * of generator functions (off by default)
     "no-this-before-super": "off",   // disallow to use this/super before super() calling in constructors (off by default)
     "no-var": "off",                 // require let or const instead of var (off by default)
     "object-shorthand": "off",       // require method and property shorthand syntax for object literals (off by default)
-    "prefer-const": "off",           // suggest using of const declaration for variables that are never modified after declared (off by default)
-
-
-    ////////// Legacy //////////
-
-    "max-depth": ["warn", 4],                                     // specify the maximum depth that blocks can be nested (off by default)
-    "max-len": ["off", 80, 4],                                   // specify the maximum length of a line in your program (off by default)
-    "max-params": ["off", 3],                                    // limits the number of parameters that can be used in the function declaration. (off by default)
-    "max-statements": ["off", 10],                               // specify the maximum number of statement allowed in a function (off by default)
-    "no-bitwise": "error",                                         // disallow use of bitwise operators (off by default)
-    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }]  // disallow use of unary operators, ++ and -- (off by default)
+    "prefer-const": "off"           // suggest using of const declaration for variables that are never modified after declared (off by default)
   }
 }
