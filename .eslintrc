@@ -98,28 +98,36 @@
 
     ////////// Best Practices //////////
 
-    "accessor-pairs": "off",                             // enforces getter/setter pairs in objects (off by default)
-    "block-scoped-var": "off",                           // treat var statements as if they were block scoped (off by default)
-    "complexity": ["off", 11],                           // specify the maximum cyclomatic complexity allowed in a program (off by default)
+    "accessor-pairs": "off",                             // enforce getter and setter pairs in objects
+    "array-callback-return": "error",                    // enforce return statements in callbacks of array methods
+    "block-scoped-var": "off",                           // enforce the use of variables within the scope they are defined
+    "class-methods-use-this": "error",                   // enforce that class methods utilize this
+    "complexity": ["off", 11],                           // enforce a maximum cyclomatic complexity allowed in a program
     "consistent-return": "off",                          // require return statements to either always or never specify values
-    "curly": ["error", "all"],                           // specify curly brace conventions for all control statements
-    "default-case": "off",                               // require default case in switch statements (off by default)
-    "dot-notation": ["warn", { "allowKeywords": true }], // encourages use of dot notation whenever possible
-    "dot-location": "off",                               // enforces consistent newlines before or after dots (off by default)
+    "curly": ["error", "all"],                           // enforce consistent brace style for all control statements
+    "default-case": "off",                               // require default cases in switch statements
+    "dot-location": "off",                               // enforce consistent newlines before and after dots
+    "dot-notation": ["warn", { "allowKeywords": true }], // enforce dot notation whenever possible
     "eqeqeq": "error",                                   // require the use of === and !==
-    "guard-for-in": "error",                             // make sure for-in loops have an if statement (off by default)
+    "guard-for-in": "error",                             // require for-in loops to include an if statement
     "no-alert": "off",                                   // disallow the use of alert, confirm, and prompt
-    "no-caller": "error",                                // disallow use of arguments.caller or arguments.callee
-    "no-div-regex": "off",                               // disallow division operators explicitly at beginning of regular expression (off by default)
-    "no-else-return": "off",                             // disallow else after a return in an if (off by default)
-    "no-eq-null": "error",                               // disallow comparisons to null without a type-checking operator (off by default)
-    "no-eval": "error",                                  // disallow use of eval()
-    "no-extend-native": "off",                           // disallow adding to native types
-    "no-extra-bind": "off",                              // disallow unnecessary function binding
+    "no-caller": "error",                                // disallow the use of arguments.caller or arguments.callee
+    "no-case-declarations": "off",                       // disallow lexical declarations in case clauses
+    "no-div-regex": "off",                               // disallow division operators explicitly at the beginning of regular expressions
+    "no-else-return": "off",                             // disallow else blocks after return statements in if statements
+    "no-empty-function": "warn",                         // disallow empty functions
+    "no-empty-pattern": "eror",                          // disallow empty destructuring patterns
+    "no-eq-null": "error",                               // disallow null comparisons without type-checking operators
+    "no-eval": "error",                                  // disallow the use of eval()
+    "no-extend-native": "off",                           // disallow extending native types
+    "no-extra-bind": "off",                              // disallow unnecessary calls to .bind()
+    "no-extra-label": "error",                           // disallow unnecessary labels
     "no-fallthrough": "error",                           // disallow fallthrough of case statements
-    "no-floating-decimal": "off",                        // disallow the use of leading or trailing decimal points in numeric literals (off by default)
-    "no-implied-eval": "off",                            // disallow use of eval()-like methods
-    "no-global-assign": "error",                         // disallow modification to read-only global variables
+    "no-floating-decimal": "off",                        // disallow leading or trailing decimal points in numeric literals
+    "no-global-assign": "error",                         // disallow assignments to native objects or read-only global variables
+    "no-implicit-coercion": "error",                     // disallow shorthand type conversions
+    "no-implicit-globals": "off",                        // disallow variable and function declarations in the global scope
+    "no-implied-eval": "off",                            // disallow the use of eval()-like methods
     "no-iterator": "error",                              // disallow usage of __iterator__ property
     "no-labels": "off",                                  // disallow use of labeled statements
     "no-lone-blocks": "off",                             // disallow unnecessary nested blocks
