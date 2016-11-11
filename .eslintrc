@@ -64,34 +64,36 @@
   "rules": {
     ////////// Possible Errors //////////
 
-    "comma-dangle": ["error", "never"],             // disallow trailing commas in object literals
-    "no-cond-assign": "error",           // disallow assignment in conditional expressions
-    "no-console": "error",               // disallow use of console (off by default in the node environment)
-    "no-constant-condition": "error",    // disallow use of constant expressions in conditions
-    "no-control-regex": "off",         // disallow control characters in regular expressions
-    "no-debugger": "warn",              // disallow use of debugger
-    "no-dupe-args": "error",             // disallow duplicate arguments in functions
-    "no-dupe-keys": "error",             // disallow duplicate keys when creating object literals
-    "no-duplicate-case": "error",        // disallow a duplicate case label
-    "no-empty-character-class": "error", // disallow the use of empty character classes in regular expressions
-    "no-empty": "error",                 // disallow empty statements
-    "no-ex-assign": "error",             // disallow assigning to the exception in a catch block
-    "no-extra-boolean-cast": "error",    // disallow double-negation boolean casts in a boolean context
-    "no-extra-parens": "off",          // disallow unnecessary parentheses (off by default)
-    "no-extra-semi": "error",            // disallow unnecessary semicolons
-    "no-func-assign": "error",           // disallow overwriting functions written as function declarations
-    "no-inner-declarations": ["error", "functions"],    // disallow function or variable declarations in nested blocks
-    "no-invalid-regexp": "error",        // disallow invalid regular expression strings in the RegExp constructor
-    "no-irregular-whitespace": "error",  // disallow irregular whitespace outside of strings and comments
-    "no-obj-calls": "error",             // disallow the use of object properties of the global object (Math and JSON) as functions
-    "no-regex-spaces": "error",          // disallow multiple spaces in a regular expression literal
-    "no-sparse-arrays": "error",         // disallow sparse arrays
-    "no-unreachable": "error",           // disallow unreachable statements after a return, throw, continue, or break statement
-    "no-unsafe-negation": "error",        // disallow negating the left operand of Relational Operators
-    "use-isnan": "error",                // disallow comparisons with the value NaN
-    "valid-jsdoc": "off",              // Ensure JSDoc comments are valid (off by default)
-    "valid-typeof": "error",             // Ensure that the results of typeof are compared against a valid string
-    "no-unexpected-multiline": "off",  // Avoid code that looks like two expressions but is actually one (off by default)
+    "no-cond-assign": "error",                       // disallow assignment operators in conditional expressions
+    "no-console": "error",                           // disallow the use of console
+    "no-constant-condition": "error",                // disallow constant expressions in conditions
+    "no-control-regex": "off",                       // disallow control characters in regular expressions
+    "no-debugger": "warn",                           // disallow the use of debugger
+    "no-dupe-args": "error",                         // disallow duplicate arguments in function definitions
+    "no-dupe-keys": "error",                         // disallow duplicate keys in object literals
+    "no-duplicate-case": "error",                    // disallow duplicate case labels
+    "no-empty-character-class": "error",             // disallow empty character classes in regular expressions
+    "no-empty": "error",                             // disallow empty block statements
+    "no-ex-assign": "error",                         // disallow reassigning exceptions in catch clauses
+    "no-extra-boolean-cast": "error",                // disallow unnecessary boolean casts
+    "no-extra-parens": "off",                        // disallow unnecessary parentheses
+    "no-extra-semi": "error",                        // disallow unnecessary semicolons
+    "no-func-assign": "error",                       // disallow reassigning function declarations
+    "no-inner-declarations": ["error", "functions"], // disallow variable or function declarations in nested blocks
+    "no-invalid-regexp": "error",                    // disallow invalid regular expression strings in RegExp constructors
+    "no-irregular-whitespace": "error",              // disallow irregular whitespace outside of strings and comments
+    "no-obj-calls": "error",                         // disallow calling global object properties as functions
+    "no-prototype-builtins": "error",                // disallow calling some Object.prototype methods directly on objects
+    "no-regex-spaces": "error",                      // disallow multiple spaces in regular expressions
+    "no-sparse-arrays": "error",                     // disallow sparse arrays
+    "no-template-curly-in-string": "error"           // disallow template literal placeholder syntax in regular strings
+    "no-unexpected-multiline": "off",                // disallow confusing multiline expressions
+    "no-unreachable": "error",                       // disallow unreachable code after return, throw, continue, and break statements
+    "no-unsafe-finally": "error"                     // disallow control flow statements in finally blocks
+    "no-unsafe-negation": "error",                   // disallow negating the left operand of relational operators
+    "use-isnan": "error",                            // require calls to isNaN() when checking for NaN
+    "valid-jsdoc": "off",                            // enforce valid JSDoc comments
+    "valid-typeof": "error",                         // enforce comparing typeof expressions against valid strings
 
 
     ////////// Best Practices //////////
@@ -182,6 +184,7 @@
 
     "array-bracket-spacing": ["warn", "never"],       // enforce spacing inside array brackets (off by default)
     "brace-style": ["error", "1tbs"],                 // enforce one true brace style (off by default)
+    "comma-dangle": ["error", "never"],             // disallow trailing commas in object literals
     "camelcase": "warn",                   // require camel case names
     "comma-spacing": ["warn", { "before": false, "after": true }],               // enforce spacing before and after comma
     "comma-style": ["error", "last"],                 // enforce one true comma style (off by default)
