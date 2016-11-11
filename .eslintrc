@@ -3,54 +3,54 @@
 
   "ecmaFeatures": {
     "arrowFunctions": true,                    // enable arrow functions
-    "binaryLiterals": false,                    // enable binary literals
-    "blockBindings": false,                     // enable let and const (aka block bindings)
+    "binaryLiterals": false,                   // enable binary literals
+    "blockBindings": false,                    // enable let and const (aka block bindings)
     "classes": true,                           // enable classes
-    "defaultParams": false,                     // enable default function parameters
-    "destructuring": false,                     // enable destructuring
-    "forOf": false,                             // enable for-of loops
-    "generators": false,                        // enable generators
-    "modules": false,                           // enable modules and global strict mode
-    "objectLiteralComputedProperties": false,   // enable computed object literal property names
-    "objectLiteralDuplicateProperties": false,  // enable duplicate object literal properties in strict mode
-    "objectLiteralShorthandMethods": false,     // enable object literal shorthand methods
-    "objectLiteralShorthandProperties": false,  // enable object literal shorthand properties
-    "octalLiterals": false,                     // enable octal literals
-    "regexUFlag": false,                        // enable the regular expression u flag
-    "regexYFlag": false,                        // enable the regular expression y flag
-    "restParams": false,                        // enable the rest parameters
-    "spread": false,                            // enable the spread operator
-    "superInFunctions": false,                  // enable super references inside of functions
-    "templateStrings": false,                   // enable template strings
-    "unicodeCodePointEscapes": false,           // enable code point escapes
-    "globalReturn": false,                      // allow return statements in the global scope
-    "jsx": false                                // enable JSX
+    "defaultParams": false,                    // enable default function parameters
+    "destructuring": false,                    // enable destructuring
+    "forOf": false,                            // enable for-of loops
+    "generators": false,                       // enable generators
+    "modules": false,                          // enable modules and global strict mode
+    "objectLiteralComputedProperties": false,  // enable computed object literal property names
+    "objectLiteralDuplicateProperties": false, // enable duplicate object literal properties in strict mode
+    "objectLiteralShorthandMethods": false,    // enable object literal shorthand methods
+    "objectLiteralShorthandProperties": false, // enable object literal shorthand properties
+    "octalLiterals": false,                    // enable octal literals
+    "regexUFlag": false,                       // enable the regular expression u flag
+    "regexYFlag": false,                       // enable the regular expression y flag
+    "restParams": false,                       // enable the rest parameters
+    "spread": false,                           // enable the spread operator
+    "superInFunctions": false,                 // enable super references inside of functions
+    "templateStrings": false,                  // enable template strings
+    "unicodeCodePointEscapes": false,          // enable code point escapes
+    "globalReturn": false,                     // allow return statements in the global scope
+    "jsx": false                               // enable JSX
   },
 
   "env": {
-    "amd": false,             // defines require() and define() as global variables as per the amd spec
-    "applescript": false,     // AppleScript global variables.
-    "browser": true,          // browser global variables
-    "commonjs": false,         // CommonJS global variables and CommonJS scoping
-                              // (use this for browser-only code that uses Browserify/WebPack).
-    "embertest": false,       // Ember test helper globals.
-    "es6": true,             // enable all ECMAScript 6 features except for modules.
-    "jasmine": false,         // adds all of the Jasmine testing global variables for version 1.3 and 2.0
-    "jest": false,            // Jest global variables.
-    "jquery": true,           // jquery global variables
-    "meteor": false,          // Meteor global variables.
-    "mocha": false,           // adds all of the Mocha testing global variables
-    "mongo": false,           // MongoDB global variables.
-    "nashorn": false,         // Java 8 Nashorn global variables.
-    "node": false,            // Node.js global variables and Node.js-specific rules
-    "phantomjs": false,       // phantomjs global variables
-    "prototypejs": false,     // Prototype.js global variables.
-    "protractor": false,      // Protractor global variables.
-    "qunit": false,           // QUnit global variables.
-    "serviceworker": false,   // Service Worker global variables.
-    "shelljs": false,         // shelljs global variables
-    "webextensions": false,   // WebExtensions globals.
-    "worker": false,          // web workers global variables.
+    "amd": false,           // defines require() and define() as global variables as per the amd spec
+    "applescript": false,   // AppleScript global variables.
+    "browser": true,        // browser global variables
+    "commonjs": false,      // CommonJS global variables and CommonJS scoping
+                            // (use this for browser-only code that uses Browserify/WebPack).
+    "embertest": false,     // Ember test helper globals.
+    "es6": true,            // enable all ECMAScript 6 features except for modules.
+    "jasmine": false,       // adds all of the Jasmine testing global variables for version 1.3 and 2.0
+    "jest": false,          // Jest global variables.
+    "jquery": true,         // jquery global variables
+    "meteor": false,        // Meteor global variables.
+    "mocha": false,         // adds all of the Mocha testing global variables
+    "mongo": false,         // MongoDB global variables.
+    "nashorn": false,       // Java 8 Nashorn global variables.
+    "node": false,          // Node.js global variables and Node.js-specific rules
+    "phantomjs": false,     // phantomjs global variables
+    "prototypejs": false,   // Prototype.js global variables.
+    "protractor": false,    // Protractor global variables.
+    "qunit": false,         // QUnit global variables.
+    "serviceworker": false, // Service Worker global variables.
+    "shelljs": false,       // shelljs global variables
+    "webextensions": false, // WebExtensions globals.
+    "worker": false,        // web workers global variables.
   },
 
   "globals": {
@@ -128,36 +128,46 @@
     "no-implicit-coercion": "error",                     // disallow shorthand type conversions
     "no-implicit-globals": "off",                        // disallow variable and function declarations in the global scope
     "no-implied-eval": "off",                            // disallow the use of eval()-like methods
-    "no-iterator": "error",                              // disallow usage of __iterator__ property
-    "no-labels": "off",                                  // disallow use of labeled statements
+    "no-invalid-this": "off",                            // disallow this keywords outside of classes or class-like objects
+    "no-iterator": "error",                              // disallow the use of the __iterator__ property
+    "no-labels": "off",                                  // disallow labeled statements
     "no-lone-blocks": "off",                             // disallow unnecessary nested blocks
-    "no-loop-func": "error",                             // disallow creation of functions within loops
-    "no-multi-spaces": "warn",                           // disallow use of multiple spaces
-    "no-multi-str": "off",                               // disallow use of multiline strings
-    "no-new-func": "warn",                               // disallow use of new operator for Function object
-    "no-new-wrappers": "off",                            // disallows creating new instances of String, Number, and Boolean
-    "no-new": "error",                                   // disallow use of new operator when not part of the assignment or comparison
-    "no-octal-escape": "off",                            // disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
-    "no-octal": "error",                                 // disallow use of octal literals
-    "no-param-reassign": "off",                          // disallow reassignment of function parameters (off by default)
-    "no-proto": "error",                                 // disallow usage of __proto__ property
-    "no-redeclare": "error",                             // disallow declaring the same variable more than once
-    "no-return-assign": "off",                           // disallow use of assignment in return statement
-    "no-script-url": "error",                            // disallow use of javascript: urls
-    "no-self-compare": "off",                            // disallow comparisons where both sides are exactly the same (off by default)
-    "no-sequences": "off",                               // disallow use of comma operator
-    "no-throw-literal": "off",                           // restrict what can be thrown as an exception (off by default)
-    "no-unused-expressions": "off",                      // disallow usage of expressions in statement position
-    "no-void": "off",                                    // disallow use of void operator (off by default)
-    "no-warning-comments": ["off", { "terms": ["todo", "fixme", "xxx"], "location": "start" }],  // disallow usage of configurable warning terms in comments, e.g. TODO or FIXME (off by default)
-    "no-with": "off",                                    // disallow use of the with statement
-    "radix": "off",                                      // require use of the second argument for parseInt() (off by default)
-    "vars-on-top": "off",                                // requires to declare all vars on top of their containing scope (off by default)
-    "wrap-iife": "off",                                  // require immediate function invocation to be wrapped in parentheses (off by default)
-    "yoda": ["off", "never"],                            // require or disallow Yoda conditions
+    "no-loop-func": "error",                             // disallow function declarations and expressions inside loop statements
+    "no-magic-numbers": "error",                         // disallow magic numbers
+    "no-multi-spaces": "warn",                           // disallow multiple spaces
+    "no-multi-str": "off",                               // disallow multiline strings
+    "no-new-func": "warn",                               // disallow new operators with the Function object
+    "no-new-wrappers": "off",                            // disallow new operators with the String, Number, and Boolean objects
+    "no-new": "error",                                   // disallow new operators outside of assignments or comparisons
+    "no-octal-escape": "off",                            // disallow octal escape sequences in string literals
+    "no-octal": "error",                                 // disallow octal literals
+    "no-param-reassign": "off",                          // disallow reassigning function parameters
+    "no-proto": "error",                                 // disallow the use of the __proto__ property
+    "no-redeclare": "error",                             // disallow variable redeclaration
+    "no-restricted-properties": "off",                   // disallow certain properties on certain objects
+    "no-return-assign": "off",                           // disallow assignment operators in return statements
+    "no-script-url": "error",                            // disallow javascript: urls
+    "no-self-assign": "error",                           // disallow assignments where both sides are exactly the same
+    "no-self-compare": "off",                            // disallow comparisons where both sides are exactly the same
+    "no-sequences": "off",                               // disallow comma operators
+    "no-throw-literal": "off",                           // disallow throwing literals as exceptions
+    "no-unmodified-loop-condition": "off",               // disallow unmodified loop conditions
+    "no-unused-expressions": "off",                      // disallow unused expressions
+    "no-unused-labels": "error",                         // disallow unused labels
+    "no-useless-call": "off",                            // disallow unnecessary calls to .call() and .apply()
+    "no-useless-concat": "error",                        // disallow unnecessary concatenation of literals or template literals
+    "no-useless-escape": "warn",                         // disallow unnecessary escape characters
+    "no-useless-return": "error",                        // disallow redundant return statements
+    "no-void": "off",                                    // disallow void operators
+    "no-warning-comments": ["off", { "terms": ["todo", "fixme", "xxx"], "location": "start" }],  // disallow specified warning terms in comments
+    "no-with": "off",                                    // disallow with statements
+    "radix": "off",                                      // enforce the consistent use of the radix argument when using parseInt()
+    "vars-on-top": "off",                                // require var declarations be placed at the top of their containing scope
+    "wrap-iife": "off",                                  // require parentheses around immediate function invocations
+    "yoda": ["error", "never", { "exceptRange": true }], // require or disallow “Yoda” conditions
 
 
-////////// Strict Mode //////////
+    ////////// Strict Mode //////////
 
     "strict": ["error", "function"],     // require or disallow strict mode directives
 
