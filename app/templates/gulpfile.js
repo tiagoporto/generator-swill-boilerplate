@@ -20,6 +20,7 @@ var args = require('yargs').argv,
     handlebars = require('gulp-hb'),
     Karma = require('karma').Server,
     merge = require('merge-stream'),
+    mergeMediaQueries = require('gulp-merge-media-queries'),
     plugins = require('gulp-load-plugins')(),
     sequence = require('run-sequence'),
     spritesmith = require('gulp.spritesmith'),
@@ -150,6 +151,7 @@ gulp.task('styles', function() {<% if (preprocessor.name === "stylus") { %>
         .pipe(plugins.wrapper({
             header: headerProject + '\n'
         }))
+        .pipe(mergeMediaQueries({log: true}))
         .pipe(plugins.if(config.lintCSS, plugins.csslint('./.csslintrc')))
         .pipe(plugins.if(config.lintCSS, plugins.csslint.formatter()))
         .pipe(gulp.dest(paths.styles.dest))
