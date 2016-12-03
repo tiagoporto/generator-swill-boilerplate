@@ -87,7 +87,9 @@ gulp.task('handlebars', function() {
             .pipe(handlebars({
                 partials: paths.html.src + basePaths.handlebars.partials.src + '**/*.hbs'
             }))
-            .pipe(gulp.dest(basePaths.dest));
+            .pipe(plugins.w3cjs())
+            .pipe(gulp.dest(basePaths.dest))
+            .pipe(plugins.notify({message: 'Handlebars task complete', onLast: true}));
     }
 });
 
