@@ -1,6 +1,6 @@
 /* eslint-env node */
 /* eslint strict: ["error", "global"] */
-'use strict';
+
 var coveralls = require('gulp-coveralls'),
     eslint = require('gulp-eslint'),
     excludeGitignore = require('gulp-exclude-gitignore'),
@@ -30,9 +30,7 @@ gulp.task('nsp', function(cb) {
 gulp.task('istanbul', function() {
     return gulp.src('app/index.js')
         .pipe(excludeGitignore())
-        .pipe(istanbul({
-            includeUntested: true
-        }))
+        .pipe(istanbul({includeUntested: true}))
         .pipe(istanbul.hookRequire());
 });
 

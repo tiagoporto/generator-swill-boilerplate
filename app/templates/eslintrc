@@ -99,57 +99,73 @@
 
     ////////// Best Practices //////////
 
-    "accessor-pairs": "off",        // enforces getter/setter pairs in objects (off by default)
-    "block-scoped-var": "off",      // treat var statements as if they were block scoped (off by default)
-    "complexity": ["off", 11],            // specify the maximum cyclomatic complexity allowed in a program (off by default)
-    "consistent-return": "off",     // require return statements to either always or never specify values
-    "curly": ["error", "all"],                 // specify curly brace conventions for all control statements
-    "default-case": "off",          // require default case in switch statements (off by default)
-    "dot-notation": ["warn", { "allowKeywords": true }],          // encourages use of dot notation whenever possible
-    "dot-location": "off",          // enforces consistent newlines before or after dots (off by default)
-    "eqeqeq": "error",                // require the use of === and !==
-    "guard-for-in": "error",          // make sure for-in loops have an if statement (off by default)
-    "no-alert": "off",              // disallow the use of alert, confirm, and prompt
-    "no-caller": "error",             // disallow use of arguments.caller or arguments.callee
-    "no-div-regex": "off",          // disallow division operators explicitly at beginning of regular expression (off by default)
-    "no-else-return": "off",        // disallow else after a return in an if (off by default)
-    "no-empty-label": "off",        // disallow use of labels for anything other than loops and switches
-    "no-eq-null": "error",            // disallow comparisons to null without a type-checking operator (off by default)
-    "no-eval": "error",               // disallow use of eval()
-    "no-extend-native": "off",      // disallow adding to native types
-    "no-extra-bind": "off",         // disallow unnecessary function binding
-    "no-fallthrough": "error",        // disallow fallthrough of case statements
-    "no-floating-decimal": "off",   // disallow the use of leading or trailing decimal points in numeric literals (off by default)
-    "no-implied-eval": "off",       // disallow use of eval()-like methods
-    "no-iterator": "error",           // disallow usage of __iterator__ property
-    "no-labels": "off",             // disallow use of labeled statements
-    "no-lone-blocks": "off",        // disallow unnecessary nested blocks
-    "no-loop-func": "error",          // disallow creation of functions within loops
-    "no-multi-spaces": "warn",       // disallow use of multiple spaces
-    "no-multi-str": "off",          // disallow use of multiline strings
-    "no-native-reassign": "off",    // disallow reassignments of native objects
-    "no-new-func": "warn",           // disallow use of new operator for Function object
-    "no-new-wrappers": "off",       // disallows creating new instances of String, Number, and Boolean
-    "no-new": "error",                // disallow use of new operator when not part of the assignment or comparison
-    "no-octal-escape": "off",       // disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
-    "no-octal": "error",              // disallow use of octal literals
-    "no-param-reassign": "off",     // disallow reassignment of function parameters (off by default)
-    "no-process-env": "off",        // disallow use of process.env (off by default)
-    "no-proto": "error",              // disallow usage of __proto__ property
-    "no-redeclare": "error",          // disallow declaring the same variable more than once
-    "no-return-assign": "off",      // disallow use of assignment in return statement
-    "no-script-url": "error",         // disallow use of javascript: urls
-    "no-self-compare": "off",       // disallow comparisons where both sides are exactly the same (off by default)
-    "no-sequences": "off",          // disallow use of comma operator
-    "no-throw-literal": "off",      // restrict what can be thrown as an exception (off by default)
-    "no-unused-expressions": "off", // disallow usage of expressions in statement position
-    "no-void": "off",               // disallow use of void operator (off by default)
-    "no-warning-comments": ["off", { "terms": ["todo", "fixme", "xxx"], "location": "start" }],   // disallow usage of configurable warning terms in comments, e.g. TODO or FIXME (off by default)
-    "no-with": "off",               // disallow use of the with statement
-    "radix": "off",                 // require use of the second argument for parseInt() (off by default)
-    "vars-on-top": "off",           // requires to declare all vars on top of their containing scope (off by default)
-    "wrap-iife": "off",             // require immediate function invocation to be wrapped in parentheses (off by default)
-    "yoda": ["off", "never"],                  // require or disallow Yoda conditions
+    "accessor-pairs": "off",                                       // enforce getter and setter pairs in objects
+    "array-callback-return": "error",                              // enforce return statements in callbacks of array methods
+    "block-scoped-var": "off",                                     // enforce the use of variables within the scope they are defined
+    "class-methods-use-this": "error",                             // enforce that class methods utilize this
+    "complexity": ["off", 11],                                     // enforce a maximum cyclomatic complexity allowed in a program
+    "consistent-return": "off",                                    // require return statements to either always or never specify values
+    "curly": ["error", "all"],                                     // enforce consistent brace style for all control statements
+    "default-case": "off",                                         // require default cases in switch statements
+    "dot-location": "off",                                         // enforce consistent newlines before and after dots
+    "dot-notation": ["warn", { "allowKeywords": true }],           // enforce dot notation whenever possible
+    "eqeqeq": "error",                                             // require the use of === and !==
+    "guard-for-in": "error",                                       // require for-in loops to include an if statement
+    "no-alert": "off",                                             // disallow the use of alert, confirm, and prompt
+    "no-caller": "error",                                          // disallow the use of arguments.caller or arguments.callee
+    "no-case-declarations": "off",                                 // disallow lexical declarations in case clauses
+    "no-div-regex": "off",                                         // disallow division operators explicitly at the beginning of regular expressions
+    "no-else-return": "off",                                       // disallow else blocks after return statements in if statements
+    "no-empty-function": "warn",                                   // disallow empty functions
+    "no-empty-pattern": "error",                                   // disallow empty destructuring patterns
+    "no-eq-null": "error",                                         // disallow null comparisons without type-checking operators
+    "no-eval": "error",                                            // disallow the use of eval()
+    "no-extend-native": "off",                                     // disallow extending native types
+    "no-extra-bind": "off",                                        // disallow unnecessary calls to .bind()
+    "no-extra-label": "error",                                     // disallow unnecessary labels
+    "no-fallthrough": "error",                                     // disallow fallthrough of case statements
+    "no-floating-decimal": "off",                                  // disallow leading or trailing decimal points in numeric literals
+    "no-global-assign": "error",                                   // disallow assignments to native objects or read-only global variables
+    "no-implicit-coercion": "error",                               // disallow shorthand type conversions
+    "no-implicit-globals": "off",                                  // disallow variable and function declarations in the global scope
+    "no-implied-eval": "off",                                      // disallow the use of eval()-like methods
+    "no-invalid-this": "off",                                      // disallow this keywords outside of classes or class-like objects
+    "no-iterator": "error",                                        // disallow the use of the __iterator__ property
+    "no-labels": "off",                                            // disallow labeled statements
+    "no-lone-blocks": "off",                                       // disallow unnecessary nested blocks
+    "no-loop-func": "error",                                       // disallow function declarations and expressions inside loop statements
+    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true }], // disallow magic numbers
+    "no-multi-spaces": "warn",                                     // disallow multiple spaces
+    "no-multi-str": "off",                                         // disallow multiline strings
+    "no-new-func": "warn",                                         // disallow new operators with the Function object
+    "no-new-wrappers": "off",                                      // disallow new operators with the String, Number, and Boolean objects
+    "no-new": "error",                                             // disallow new operators outside of assignments or comparisons
+    "no-octal-escape": "off",                                      // disallow octal escape sequences in string literals
+    "no-octal": "error",                                           // disallow octal literals
+    "no-param-reassign": "off",                                    // disallow reassigning function parameters
+    "no-proto": "error",                                           // disallow the use of the __proto__ property
+    "no-redeclare": "error",                                       // disallow variable redeclaration
+    "no-restricted-properties": "off",                             // disallow certain properties on certain objects
+    "no-return-assign": "off",                                     // disallow assignment operators in return statements
+    "no-script-url": "error",                                      // disallow javascript: urls
+    "no-self-assign": "error",                                     // disallow assignments where both sides are exactly the same
+    "no-self-compare": "off",                                      // disallow comparisons where both sides are exactly the same
+    "no-sequences": "off",                                         // disallow comma operators
+    "no-throw-literal": "off",                                     // disallow throwing literals as exceptions
+    "no-unmodified-loop-condition": "off",                         // disallow unmodified loop conditions
+    "no-unused-expressions": "off",                                // disallow unused expressions
+    "no-unused-labels": "error",                                   // disallow unused labels
+    "no-useless-call": "off",                                      // disallow unnecessary calls to .call() and .apply()
+    "no-useless-concat": "error",                                  // disallow unnecessary concatenation of literals or template literals
+    "no-useless-escape": "warn",                                   // disallow unnecessary escape characters
+    "no-useless-return": "error",                                  // disallow redundant return statements
+    "no-void": "off",                                              // disallow void operators
+    "no-warning-comments": ["off", { "terms": ["todo", "fixme", "xxx"], "location": "start" }],  // disallow specified warning terms in comments
+    "no-with": "off",                                              // disallow with statements
+    "radix": "off",                                                // enforce the consistent use of the radix argument when using parseInt()
+    "vars-on-top": "off",                                          // require var declarations be placed at the top of their containing scope
+    "wrap-iife": "off",                                            // require parentheses around immediate function invocations
+    "yoda": ["error", "never", { "exceptRange": true }],           // require or disallow “Yoda” conditions
 
 
     ////////// Strict Mode //////////
