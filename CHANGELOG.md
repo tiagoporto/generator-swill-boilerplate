@@ -4,6 +4,23 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Added
+- Support to es2016 and es2017
+- Merge media queries
+- HTML Validation
+- Added new partials `stylus`
+    + Lists
+    + Pre
+    + Abbr
+
+### Changed
+- Updated `.eslint` with new rules and removed olds
+- Updated font size definition to sans
+- Default
+- `Stylus` Partial
+    + Code
+    + Kbd
+
 ## [0.6.0beta] - 2016-11-06
 ### Added
 - Config to clean paths
