@@ -1,6 +1,5 @@
 /* eslint-env node */
 /* eslint strict: ["error", "global"] */
-'use strict';
 
 var yeoman = require('yeoman-generator');
 

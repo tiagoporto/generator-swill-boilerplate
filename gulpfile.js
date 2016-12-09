@@ -24,13 +24,17 @@ gulp.task('eslint', function() {
 });
 
 gulp.task('nsp', function(cb) {
-    return nsp({package: path.resolve('package.json')}, cb);
+    return nsp({
+        package: path.resolve('package.json')
+    }, cb);
 });
 
 gulp.task('istanbul', function() {
     return gulp.src('app/index.js')
         .pipe(excludeGitignore())
-        .pipe(istanbul({includeUntested: true}))
+        .pipe(istanbul({
+            includeUntested: true
+        }))
         .pipe(istanbul.hookRequire());
 });
 
@@ -39,7 +43,9 @@ gulp.task('mocha', ['istanbul'], function(cb) {
 
     gulp.src('test/**/*.js')
         .pipe(plumber())
-        .pipe(mocha({reporter: 'spec'}))
+        .pipe(mocha({
+            reporter: 'spec'
+        }))
         .on('error', function(err) {
             mochaErr = err;
         })

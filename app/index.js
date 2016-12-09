@@ -382,8 +382,9 @@ module.exports = yeoman.Base.extend({
 
         this.fs.copyTpl(
             this.templatePath('src/stylesheets/' + this.props.preprocessor.name + '/**/*'),
-            this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'),
-            {folder: this.props.folder}
+            this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'), {
+                folder: this.props.folder
+            }
         );
     },
     scripts: function() {
@@ -524,8 +525,9 @@ module.exports = yeoman.Base.extend({
         if (this.props.include.npmignore) {
             this.fs.copyTpl(
                 this.templatePath('npmignore'),
-                this.destinationPath('.npmignore'),
-                {folder: this.props.folder}
+                this.destinationPath('.npmignore'), {
+                    folder: this.props.folder
+                }
             );
         }
 
