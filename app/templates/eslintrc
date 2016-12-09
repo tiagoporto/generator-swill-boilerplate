@@ -137,7 +137,7 @@
     "no-labels": "off",                                            // disallow labeled statements
     "no-lone-blocks": "off",                                       // disallow unnecessary nested blocks
     "no-loop-func": "error",                                       // disallow function declarations and expressions inside loop statements
-    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true }], // disallow magic numbers
+    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true, "ignore": [-1, 0, 1] }], // disallow magic numbers
     "no-multi-spaces": "warn",                                     // disallow multiple spaces
     "no-multi-str": "off",                                         // disallow multiline strings
     "no-new-func": "warn",                                         // disallow new operators with the Function object
@@ -173,21 +173,23 @@
 
     ////////// Strict Mode //////////
 
-    "strict": ["error", "function"],          // controls location of Use Strict Directives
+    "strict": ["error", "function"],     // require or disallow strict mode directives
 
 
     ////////// Variables //////////
 
-    "no-catch-shadow": "off",             // disallow the catch clause parameter name being the same as a variable in the outer scope (off by default in the node environment)
-    "no-delete-var": "off",               // disallow deletion of variables
-    "no-label-var": "off",                // disallow labels that share a name with a variable
-    "no-shadow": "off",                   // disallow declaration of variables already declared in the outer scope
-    "no-shadow-restricted-names": "off",  // disallow shadowing of names such as arguments
-    "no-undef": "error",                    // disallow use of undeclared variables unless mentioned in a /*global */ block
-    "no-undef-init": "off",               // disallow use of undefined when initializing variables
-    "no-undefined": "off",                // disallow use of undefined variable (off by default)
-    "no-unused-vars": "error",              // disallow declaration of variables that are not used in the code
-    "no-use-before-define": "off",        // disallow use of variables before they are defined
+    "init-declarations": "off",          // require or disallow initialization in variable declarations
+    "no-catch-shadow": "off",            // disallow catch clause parameters from shadowing variables in the outer scope
+    "no-delete-var": "off",              // disallow deleting variables
+    "no-label-var": "off",               // disallow labels that share a name with a variable
+    "no-restricted-globals": "off",      // disallow specified global variables
+    "no-shadow": "off",                  // disallow variable declarations from shadowing variables declared in the outer scope
+    "no-shadow-restricted-names": "off", // disallow identifiers from shadowing restricted names
+    "no-undef": "error",                 // disallow the use of undeclared variables unless mentioned in /*global */ comments
+    "no-undef-init": "off",              // disallow initializing variables to undefined
+    "no-undefined": "off",               // disallow the use of undefined as an identifier
+    "no-unused-vars": "error",           // disallow unused variables
+    "no-use-before-define": "off",       // disallow the use of variables before they are defined
 
 
     ////////// Node.js //////////
