@@ -208,53 +208,86 @@
 
     ////////// Stylistic Issues //////////
 
-    "array-bracket-spacing": ["warn", "never"],       // enforce spacing inside array brackets (off by default)
-    "brace-style": ["error", "1tbs"],                 // enforce one true brace style (off by default)
-    "camelcase": "warn",                   // require camel case names
-    "comma-spacing": ["warn", { "before": false, "after": true }],               // enforce spacing before and after comma
-    "comma-style": ["error", "last"],                 // enforce one true comma style (off by default)
-    "computed-property-spacing": ["warn", "never"],   // require or disallow padding inside computed properties (off by default)
-    "consistent-this": ["warn", "context"],             // enforces consistent naming when capturing the current execution context (off by default)
-    "eol-last": "warn",                    // enforce newline at the end of file, with no multiple empty lines
-    "func-names": "off",                  // require function expressions to have a name (off by default)
-    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],                  // enforces use of function declarations or expressions (off by default)
-    "indent": ["error", 4, { "VariableDeclarator": { "var": 1, "let": 1, "const": 2 }, "SwitchCase": 1 }],                      // this option sets a specific tab width for your code (off by default)
-    "key-spacing": ["warn", { "beforeColon": false, "afterColon": true }],                 // enforces spacing between keys and values in object literal properties
-    "keyword-spacing": "error", // enforce consistent spacing before and after keywords
-    "lines-around-comment": "warn",        // enforces empty lines around comments (off by default)
-    "linebreak-style": ["error", "unix"],             // disallow mixed 'LF' and 'CRLF' as linebreaks (off by default)
-    "max-nested-callbacks": ["warn", 5],        // specify the maximum depth callbacks can be nested (off by default)
-    "new-cap": ["error", { "capIsNew": false }],                     // require a capital letter for constructors
-    "new-parens": "error",                  // disallow the omission of parentheses when invoking a constructor with no arguments
-    "newline-after-var": "off",           // allow/disallow an empty newline after var statement (off by default)
-    "no-array-constructor": "warn",        // disallow use of the Array constructor
-    "no-continue": "warn",                 // disallow use of the continue statement (off by default)
-    "no-inline-comments": "warn",          // disallow comments inline after code (off by default)
-    "no-lonely-if": "error",                // disallow if as the only statement in an else block (off by default)
-    "no-mixed-spaces-and-tabs": ["error", false],    // disallow mixed spaces and tabs for indentation
-    "no-multiple-empty-lines": ["warn", {"max": 3, "maxEOF": 1}],     // disallow multiple empty lines (off by default)
-    "no-nested-ternary": "error",           // disallow nested ternary expressions (off by default)
-    "no-new-object": "warn",               // disallow use of the Object constructor
-    "no-spaced-func": "error",              // disallow space between function identifier and application
-    "no-ternary": "off",                  // disallow the use of ternary operators (off by default)
-    "no-trailing-spaces": "error",          // disallow trailing whitespace at the end of lines
-    "no-underscore-dangle": "off",        // disallow dangling underscores in identifiers
-    "one-var": ["off", "always"],                     // allow just one var statement per function (off by default)
-    "operator-assignment": ["off", "always"],         // require assignment operator shorthand where possible or prohibit it entirely (off by default)
-    "operator-linebreak": ["error", "before"],          // enforce operators to be placed before or after line breaks (off by default)
-    "padded-blocks": ["warn", "never"],               // enforce padding within blocks (off by default)
-    "quote-props": ["warn", "consistent"],                 // require quotes around object literal property names (off by default)
-    "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}],                      // specify whether double or single quotes should be used
-    "semi-spacing": ["error", {"before": false, "after": true}],                // enforce spacing before and after semicolons
-    "semi": ["error", "always", { "omitLastInOneLineBlock": true}],                        // require or disallow use of semicolons instead of ASI
-    "sort-vars": "off",                   // sort variables within the same declaration block (off by default)
-    "space-before-blocks": ["error", "always"],         // require or disallow space before blocks (off by default)
-    "space-before-function-paren": ["error", "never"], // require or disallow space before function opening parenthesis (off by default)
-    "space-in-parens": ["warn", "never"],             // require or disallow spaces inside parentheses (off by default)
-    "space-infix-ops": "error",             // require spaces around operators
-    "space-unary-ops": ["error", { "words": true, "nonwords": false }],             // require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
-    "spaced-comment": ["warn", "always", { "line": { "exceptions": ["="] } }],              // require or disallow a space immediately following the // or /* in a comment (off by default)
-    "wrap-regex": "off",                  // require regex literals to be wrapped in parentheses (off by default)
+    "array-bracket-spacing": ["warn", "never"],                                          // enforce consistent spacing inside array brackets
+    "block-spacing": "error",                                                            // enforce consistent spacing inside single-line blocks
+    "brace-style": ["error", "1tbs"],                                                    // enforce consistent brace style for blocks
+    "camelcase": "warn",                                                                 // enforce camelcase naming convention
+    "comma-dangle": ["error", "never"],                                                  // require or disallow trailing commas
+    "comma-spacing": ["warn", { "before": false, "after": true }],                       // enforce consistent spacing before and after commas
+    "comma-style": ["error", "last"],                                                    // enforce consistent comma style
+    "computed-property-spacing": ["warn", "never"],                                      // enforce consistent spacing inside computed property brackets
+    "consistent-this": ["warn", "context"],                                              // enforce consistent naming when capturing the current execution context
+    "eol-last": "warn",                                                                  // require or disallow newline at the end of files
+    "func-call-spacing": ["error", "never"],                                             // require or disallow spacing between function identifiers and their invocations
+    "func-name-matching": "off",                                                         // require function names to match the name of the variable or property to which they are assigned
+    "func-names": "off",                                                                 // require or disallow named function expressions
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],             // enforce the consistent use of either function declarations or expressions
+    "id-blacklist": "warn",                                                              // disallow specified identifiers
+    "id-length": "warn",                                                                 // enforce minimum and maximum identifier lengths
+    "id-match": "off",                                                                   // require identifiers to match a specified regular expression
+    "indent": ["error", 4, { "VariableDeclarator": { "var": 1, "let": 1, "const": 2 }, "SwitchCase": 1 }], // enforce consistent indentation
+    "jsx-quotes": ["error", "prefer-single"],                                            // enforce the consistent use of either double or single quotes in JSX attributes
+    "key-spacing": ["warn", { "beforeColon": false, "afterColon": true }],               // enforce consistent spacing between keys and values in object literal properties
+    "keyword-spacing": "error",                                                          // enforce consistent spacing before and after keywords
+    "line-comment-position": "off",                                                      // enforce position of line comments
+    "linebreak-style": ["error", "unix"],                                                // enforce consistent linebreak style
+    "lines-around-comment": "warn",                                                      // require empty lines around comments
+    "lines-around-directive": ["warn", { "before": "never", "after": "always" }],        // require or disallow newlines around directives
+    "max-depth": ["warn", 4],                                                            // enforce a maximum depth that blocks can be nested
+    "max-len": ["off", 80, 4],                                                           // enforce a maximum line length
+    "max-lines": "off",                                                                  // enforce a maximum number of lines per file
+    "max-nested-callbacks": ["warn", 5],                                                 // enforce a maximum depth that callbacks can be nested
+    "max-params": ["warn", 5],                                                           // enforce a maximum number of parameters in function definitions
+    "max-statements": ["off", 10],                                                       // enforce a maximum number of statements allowed in function blocks
+    "max-statements-per-line": ["error", { "max": 3 }],                                  // enforce a maximum number of statements allowed per line
+    "multiline-ternary": "off",                                                          // enforce newlines between operands of ternary expressions
+    "new-cap": ["error", { "capIsNew": false }],                                         // require constructor names to begin with a capital letter
+    "new-parens": "error",                                                               // require parentheses when invoking a constructor with no arguments
+    "newline-after-var": "off",                                                          // require or disallow an empty line after variable declarations
+    "newline-before-return": "off",                                                      // require an empty line before return statements
+    "newline-per-chained-call": "off",                                                   // require a newline after each call in a method chain
+    "no-array-constructor": "warn",                                                      // disallow Array constructors
+    "no-bitwise": "error",                                                               // disallow bitwise operators
+    "no-continue": "warn",                                                               // disallow continue statements
+    "no-inline-comments": "warn",                                                        // disallow inline comments after code
+    "no-lonely-if": "error",                                                             // disallow if statements as the only statement in else blocks
+    "no-mixed-operators": "warn",                                                        // disallow mixed binary operators
+    "no-mixed-spaces-and-tabs": ["error", false],                                        // disallow mixed spaces and tabs for indentation
+    "no-multiple-empty-lines": ["warn", {"max": 3, "maxEOF": 1}],                        // disallow multiple empty lines
+    "no-negated-condition": "off",                                                       // disallow negated conditions
+    "no-nested-ternary": "error",                                                        // disallow nested ternary expressions
+    "no-new-object": "warn",                                                             // disallow Object constructors
+    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],                       // disallow the unary operators ++ and --
+    "no-restricted-syntax": "off",                                                       // disallow specified syntax
+    "no-tabs": "error",                                                                  // disallow tabs in file
+    "no-ternary": "off",                                                                 // disallow ternary operators
+    "no-trailing-spaces": "error",                                                       // disallow trailing whitespace at the end of lines
+    "no-underscore-dangle": "off",                                                       // disallow dangling underscores in identifiers
+    "no-unneeded-ternary": "error",                                                      // disallow ternary operators when simpler alternatives exist
+    "no-whitespace-before-property": "off",                                              // disallow whitespace before properties
+    "object-curly-newline": ["warn", {"ObjectExpression": {"minProperties": 1}, "ObjectPattern": {"minProperties": 1}}],                             // enforce consistent line breaks inside braces
+    "object-curly-spacing": "warn",                                                      // enforce consistent spacing inside braces
+    "object-property-newline": "warn",                                                   // enforce placing object properties on separate lines
+    "one-var-declaration-per-line": ["warn", "always"],                                  // require or disallow newlines around variable declarations
+    "one-var": ["off", "always"],                                                        // enforce variables to be declared either together or separately in functions
+    "operator-assignment": ["off", "always"],                                            // require or disallow assignment operator shorthand where possible
+    "operator-linebreak": ["error", "before"],                                           // enforce consistent linebreak style for operators
+    "padded-blocks": ["warn", "never"],                                                  // require or disallow padding within blocks
+    "quote-props": ["warn", "consistent"],                                               // require quotes around object literal property names
+    "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}], // enforce the consistent use of either backticks, double, or single quotes
+    "require-jsdoc": "error",                                                            // require JSDoc comments
+    "semi": ["error", "always", { "omitLastInOneLineBlock": true}],                      // require or disallow semicolons instead of ASI
+    "semi-spacing": ["error", {"before": false, "after": true}],                         // enforce consistent spacing before and after semicolons
+    "sort-keys": "off",                                                                  // require object keys to be sorted
+    "sort-vars": "off",                                                                  // require variables within the same declaration block to be sorted
+    "space-before-blocks": ["error", "always"],                                          // enforce consistent spacing before blocks
+    "space-before-function-paren": ["error", "never"],                                   // enforce consistent spacing before function definition opening parenthesis
+    "space-in-parens": ["warn", "never"],                                                // enforce consistent spacing inside parentheses
+    "space-infix-ops": "error",                                                          // require spacing around infix operators
+    "space-unary-ops": ["error", { "words": true, "nonwords": false }],                  // enforce consistent spacing before or after unary operators
+    "spaced-comment": ["warn", "always", { "line": { "exceptions": ["="] } }],           // enforce consistent spacing after the // or /* in a comment
+    "unicode-bom": "off",                                                                // require or disallow Unicode byte order mark (BOM)
+    "wrap-regex": "off",                                                                 // require parenthesis around regex literals
 
 
     ////////// ECMAScript 6 //////////
