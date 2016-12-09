@@ -192,15 +192,18 @@
     "no-use-before-define": "off",       // disallow the use of variables before they are defined
 
 
-    ////////// Node.js //////////
+    ////////// Node.js and CommonJS //////////
 
-    "handle-callback-err": "off",   // enforces error handling in callbacks (off by default) (on by default in the node environment)
-    "no-mixed-requires": ["off", false],     // disallow mixing regular variable and require declarations (off by default) (on by default in the node environment)
-    "no-new-require": "off",        // disallow use of new operator with the require function (off by default) (on by default in the node environment)
-    "no-path-concat": "off",        // disallow string concatenation with __dirname and __filename (off by default) (on by default in the node environment)
-    "no-process-exit": "off",       // disallow process.exit() (on by default in the node environment)
-    "no-restricted-modules": "off", // restrict usage of specified node modules (off by default)
-    "no-sync": "off",               // disallow use of synchronous methods (off by default)
+    "callback-return": "off",            // require return statements after callbacks
+    "global-require": "off",             // require require() calls to be placed at top-level module scope
+    "handle-callback-err": "off",        // require error handling in callbacks
+    "no-mixed-requires": ["off", false], // disallow require calls to be mixed with regular variable declarations
+    "no-new-require": "off",             // disallow new operators with calls to require
+    "no-path-concat": "off",             // disallow string concatenation with __dirname and __filename
+    "no-process-env": "off",             // disallow the use of process.env
+    "no-process-exit": "off",            // disallow the use of process.exit()
+    "no-restricted-modules": "off",      // disallow specified modules when loaded by require
+    "no-sync": "off",                    // disallow synchronous methods
 
 
     ////////// Stylistic Issues //////////
