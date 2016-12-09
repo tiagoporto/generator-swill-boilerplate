@@ -1,5 +1,4 @@
 /* eslint-env node, mocha */
-/* eslint strict: ["error", "global"] */
 
 var assert = require('yeoman-assert'),
     helpers = require('yeoman-test'),

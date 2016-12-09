@@ -1,5 +1,4 @@
 /* eslint-env node */
-/* eslint strict: ["error", "global"] */
 
 var _s = require('underscore.string'),
     chalk = require('chalk'),

@@ -1,5 +1,4 @@
 /* eslint-env node */
-/* eslint strict: ["error", "global"] */
 
 var coveralls = require('gulp-coveralls'),
     eslint = require('gulp-eslint'),
