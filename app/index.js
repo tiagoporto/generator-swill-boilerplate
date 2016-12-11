@@ -307,13 +307,13 @@ module.exports = yeoman.Base.extend({
         packageJson.author.url = this.props.author.homepage;
         packageJson.repository.url = this.props.project.repository;
 
-        (this.props.preprocessor.name === 'sass') && (packageJson.devDependencies['gulp-sass'] = '2.3.2');
-        (this.props.preprocessor.name === 'stylus') && (packageJson.devDependencies['gulp-stylus'] = '2.5.0');
+        (this.props.preprocessor.name === 'sass') && (packageJson.devDependencies['gulp-sass'] = '3.0.0');
+        (this.props.preprocessor.name === 'stylus') && (packageJson.devDependencies['gulp-stylus'] = '2.6.0');
 
         this.props.use.jquery && (packageJson.dependencies.jquery = '3.1.1');
         this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0');
         this.props.use.outdatedBrowser && (packageJson.dependencies['outdated-browser'] = '1.0.2 ');
-        this.props.use.normalize && (packageJson.dependencies['normalize.css'] = '4.2.0');
+        this.props.use.normalize && (packageJson.dependencies['normalize.css'] = '5.0.0');
 
         this.fs.writeJSON(this.destinationPath('package.json'), packageJson);
     },
