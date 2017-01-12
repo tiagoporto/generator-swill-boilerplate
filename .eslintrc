@@ -72,6 +72,7 @@
   "rules": {
     ////////// Possible Errors //////////
 
+    "no-await-in-loop": "error",                     // disallow await inside of loops
     "no-cond-assign": "error",                       // disallow assignment operators in conditional expressions
     "no-console": "error",                           // disallow the use of console
     "no-constant-condition": "error",                // disallow constant expressions in conditions
