@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.x.xbeta] - xxxx-xx-xx
+### Changed
 - Update Swill packages (it's necessary node ^6.0.0)
+- Add JavaScript Standard
+- Indent size 4 to 2
 
 ## [0.7.0beta] - 2016-12-08
 ### Added
