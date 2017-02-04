@@ -6,7 +6,9 @@
 [![NPM version](https://badge.fury.io/js/generator-swill-boilerplate.svg)](https://npmjs.org/package/generator-swill-boilerplate)
 [![NPM Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg)](https://www.npmjs.com/package/generator-swill-boilerplate)
 [![Github Issues](https://img.shields.io/github/issues/tiagoporto/generator-swill-boilerplate.svg)](https://github.com/tiagoporto/generator-swill-boilerplate/issues)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 [![Github License](https://img.shields.io/github/license/tiagoporto/generator-swill-boilerplate.svg)](https://raw.githubusercontent.com/tiagoporto/generator-swill-boilerplate/master/LICENSE)
+
 
 <small>Generator Dependencies</small>
 
@@ -42,6 +44,7 @@
 * Uses Jasmine & Karma to test JavaScript
 * Builds the project compressing HTML, CSS and JS
 * Pushes the `build` folder to gh-pages branch
+* Uses [http://standardjs.com/](JavaScript Standard Style)
 
 ## Installation
 
