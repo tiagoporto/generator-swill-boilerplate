@@ -271,7 +271,6 @@ module.exports = class extends Yeoman {
         htaccess: props.files.indexOf('htaccess') >= 0,
         404: props.files.indexOf('404') >= 0,
         readme: props.files.indexOf('readme') >= 0,
-        bower: props.files.indexOf('bower') >= 0,
         contributing: props.files.indexOf('contributing') >= 0,
         changelog: props.files.indexOf('changelog') >= 0,
         crossdomain: props.files.indexOf('crossdomain') >= 0,
@@ -287,37 +286,33 @@ module.exports = class extends Yeoman {
     }.bind(this))
   }
 
-  // ====================== Copy settings files ====================== //
   default () {
+    // license
+    this.composeWith(require.resolve('generator-license/app'), {
+      name: this.props.project.name,
+      email: '',
+      website: ''
+    })
+  }
+
+  writing () {
+  // ====================== Copy boilerplate files ======================//
     if (path.basename(this.destinationPath()) !== this.props.project.sanitizeName) {
       this.log('The folder ' + this.props.project.sanitizeName + ' will be automatically created!!')
       mkdirp(this.props.project.sanitizeName)
       this.destinationRoot(this.destinationPath(this.props.project.sanitizeName))
     }
-  }
 
-  // ====================== Copy boilerplate files ======================//
-  writing () {
     // Package.json
-    var packageJson = require('./templates/_package.json')
+    var swillPackage = require('../package.json')
 
-    packageJson.name = this.props.project.sanitizeName
-    packageJson.description = this.props.project.description
-    packageJson.homepage = this.props.project.homepage
-    packageJson.keywords = this.props.project.keywords
-    packageJson.author.name = this.props.author.name
-    packageJson.author.url = this.props.author.homepage
-    packageJson.repository.url = this.props.project.repository
-
-    this.props.preprocessor.name === 'sass' && (packageJson.devDependencies['gulp-sass'] = '3.0.0')
-    this.props.preprocessor.name === 'stylus' && (packageJson.devDependencies['gulp-stylus'] = '2.6.0')
-
-    this.props.use.jquery && (packageJson.dependencies.jquery = '3.1.1')
-    this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0')
-    this.props.use.outdatedBrowser && (packageJson.dependencies['outdated-browser'] = '1.0.2 ')
-    this.props.use.normalize && (packageJson.dependencies['normalize.css'] = '5.0.0')
-
-    this.fs.writeJSON(this.destinationPath('package.json'), packageJson)
+    this.fs.copyTpl(
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js'), {
+        boilerplate: swillPackage,
+        preprocessor: this.props.preprocessor
+      }
+    )
 
     // Editorconfig
     this.fs.copy(
@@ -353,17 +348,6 @@ module.exports = class extends Yeoman {
       this.destinationPath('config.json'), {
         folder: this.props.folder,
         use: this.props.use
-      }
-    )
-
-    // Package.json
-    var swillPackage = require('../package.json')
-
-    this.fs.copyTpl(
-      this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'), {
-        boilerplate: swillPackage,
-        preprocessor: this.props.preprocessor
       }
     )
 
@@ -473,7 +457,6 @@ module.exports = class extends Yeoman {
     this.fs.write(this.props.folder.dest + '/' + this.props.folder.fonts + '/.gitkeep', '')
 
   // ====================== Copy optional Files  ======================//
-  // optionalFiles
     if (!this.props.include[404]) {
       this.fs.delete(this.destinationPath(this.props.folder.dest + '/404.html'))
       this.fs.delete(this.destinationPath(this.props.folder.src + '/handlebars/404.html'))
@@ -559,35 +542,13 @@ module.exports = class extends Yeoman {
         this.destinationPath(this.props.folder.dest + '/humans.txt')
       )
     }
-
-    if (this.props.include.bower) {
-      var bowerJson = require('./templates/_bower.json')
-
-      bowerJson.name = this.props.project.sanitizeName
-      bowerJson.description = this.props.project.description
-      bowerJson.homepage = this.props.project.homepage
-      bowerJson.keywords = this.props.project.keywords
-      bowerJson.authors[0].name = this.props.author.name
-      bowerJson.authors[0].homepage = this.props.author.homepage
-      bowerJson.repository.url = this.props.project.repository
-      bowerJson.ignore.push('!' + this.props.folder.dest + '/**/*')
-
-      this.fs.writeJSON(this.destinationPath('bower.json'), bowerJson)
-    }
-
-    // license
-    this.composeWith(require.resolve('generator-license/app'), {
-      name: this.props.project.name,
-      email: '',
-      website: ''
-    })
   }
 
   // ====================== YO actions ====================== //
   install () {
     this.config.set(this.prompts)
     this.config.save()
-    this.installDependencies()
+    this.installDependencies({bower: false})
   }
 
   end () {
