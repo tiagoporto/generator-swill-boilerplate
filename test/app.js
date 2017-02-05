@@ -1,21 +1,23 @@
-var assert = require('yeoman-assert')
-var helpers = require('yeoman-test')
+var yoAssert = require('yeoman-assert')
+var yoTest = require('yeoman-test')
 var path = require('path')
 
 describe('generator-swill-boilerplate:app', function () {
   before(function () {
-    return helpers.run(path.join(__dirname, '../app'))
+    return yoTest
+      .run(path.join(__dirname, '../app'))
       .withPrompts({
+        'preprocessor': 'stylus',
         features: [],
         options: [],
         files: [],
-        license: { license: 'nolicense' }
+        license: 'nolicense'
       })
       .toPromise()
   })
 
   it('creates files', function () {
-    assert.file([
+    yoAssert.file([
       '.csslintrc',
       '.editorconfig',
       '.eslintrc',
