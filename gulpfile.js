@@ -9,15 +9,16 @@ var path = require('path')
 var plumber = require('gulp-plumber')
 
 gulp.task('eslint', function () {
-  return gulp.src([
-    '**/*.js',
-    '!app/templates/gulpfile.js',
-    '!app/templates/src/scripts/settings/call_plugins.js'
-  ])
-  .pipe(excludeGitignore())
-  .pipe(eslint())
-  .pipe(eslint.format())
-  .pipe(eslint.failAfterError())
+  return gulp
+    .src([
+      '**/*.js',
+      '!app/templates/gulpfile.js',
+      '!app/templates/src/scripts/settings/call_plugins.js'
+    ])
+    .pipe(excludeGitignore())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
 })
 
 gulp.task('nsp', function (cb) {
@@ -27,11 +28,10 @@ gulp.task('nsp', function (cb) {
 })
 
 gulp.task('istanbul', function () {
-  return gulp.src('app/index.js')
+  return gulp
+    .src('app/index.js')
     .pipe(excludeGitignore())
-    .pipe(istanbul({
-      includeUntested: true
-    }))
+    .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire())
 })
 
@@ -57,12 +57,27 @@ gulp.task('coveralls', ['mocha'], function () {
     return
   }
 
-  return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
+  return gulp
+    .src(path.join(__dirname, 'coverage/lcov.info'))
     .pipe(coveralls())
 })
 
-gulp.task('test', ['nsp', 'eslint', 'mocha', 'coveralls'])
+gulp.task(
+  'test',
+  [
+    'nsp',
+    'eslint',
+    'mocha',
+    'coveralls'
+  ]
+)
 
 gulp.task('watch-test', function () {
-  gulp.watch(['app/index.js', 'test/**/*.js'], ['mocha'])
+  gulp.watch(
+    [
+      'app/index.js',
+      'test/**/*.js'
+    ],
+    ['mocha']
+  )
 })
