@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.8.0beta] - xxxx-xx-xx
+### Added
+- Set license on `README.md`
+
 ### Changed
 - Update Swill packages (it's necessary node ^6.0.0)
 - Add JavaScript Standard
