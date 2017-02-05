@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add JavaScript Standard
 - Indent size 4 to 2
 
+### Removed
+- Bower option
+
 ## [0.7.0beta] - 2016-12-08
 ### Added
 - Support to es2016 and es2017
