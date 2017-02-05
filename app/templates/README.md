@@ -66,4 +66,4 @@ $ gulp --compile
 
 ## License
 
-<%= project.name %> is released under the terms of the [license](LICENSE).
+<%= project.name %> is released under the terms of the [<%= license %>](LICENSE).

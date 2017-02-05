@@ -491,16 +491,6 @@ module.exports = class extends Yeoman {
       )
     }
 
-    if (this.props.include.readme) {
-      this.fs.copyTpl(
-        this.templatePath('README.md'),
-        this.destinationPath('README.md'), {
-          project: this.props.project,
-          githubUser: this.props.githubUser
-        }
-      )
-    }
-
     if (this.props.include.contributing) {
       this.fs.copy(
         this.templatePath('CONTRIBUTING.md'),
@@ -568,10 +558,24 @@ module.exports = class extends Yeoman {
   }
 
   // ====================== YO actions ====================== //
+
   install () {
+    var pkg = this.fs.readJSON(this.destinationPath('package.json'), {})
+
+    if (this.props.include.readme) {
+      this.fs.copyTpl(
+        this.templatePath('README.md'),
+        this.destinationPath('README.md'), {
+          project: this.props.project,
+          githubUser: this.props.githubUser,
+          license: pkg.license
+        }
+      )
+    }
+
     this.config.set(this.prompts)
     this.config.save()
-    this.installDependencies({bower: false})
+    // this.installDependencies({bower: false})
   }
 
   end () {
