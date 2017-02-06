@@ -575,7 +575,7 @@ module.exports = class extends Yeoman {
 
     this.config.set(this.prompts)
     this.config.save()
-    // this.installDependencies({bower: false})
+    this.installDependencies({bower: false})
   }
 
   end () {
