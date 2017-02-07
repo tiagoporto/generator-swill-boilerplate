@@ -24,10 +24,6 @@
     "value": "npmignore",
     "checked": false
   }, {
-    "name": "bower.json",
-    "value": "bower",
-    "checked": false
-  }, {
     "name": ".htaccess (Apache Server Configs)",
     "value": "htaccess",
     "checked": false
@@ -42,6 +38,10 @@
   }, {
     "name": "manifest.webapp (Firefox OS app info)",
     "value": "manifestWebapp",
+    "checked": false
+  }, {
+    "name": "browserconfig.xml (Tile icon for Win8)",
+    "value": "browserconfig",
     "checked": false
   }, {
     "name": "robots.txt (Instructions about their site to web robots)",

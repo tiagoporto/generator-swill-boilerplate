@@ -4,7 +4,7 @@
   "launch_path": "/index.html",
   "description": "{-}",
   "icons": {
-    "128": "img/touch/icon-128x128.png"
+    "128": "<%= folder.images.dest %>/touch/icon-128x128.png"
   },
   "developer": {
     "name": "{-}",

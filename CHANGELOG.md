@@ -4,6 +4,23 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.8.0beta] - xxxx-xx-xx
+### Added
+- Set license on `README.md`
+- set `font-feature-settings` in `<pre>`
+- `browserconfig.xml`
+- Set dynamic path in `manifest.json` and `manifest.webapp`
+
+### Changed
+- Update Swill packages (it's necessary node ^6.0.0)
+- Add JavaScript Standard
+- Indent size 4 to 2
+- Tile icons
+
+### Removed
+- Bower option
+
+
 ## [0.7.0beta] - 2016-12-08
 ### Added
 - Support to es2016 and es2017
