@@ -1,3 +1,5 @@
+'use strict'
+
 var _s = require('underscore.string')
 var chalk = require('chalk')
 var files = require('./optional-files.json')
