@@ -40,6 +40,10 @@
     "value": "manifestWebapp",
     "checked": false
   }, {
+    "name": "browserconfig.xml (Tile icon for Win8)",
+    "value": "browserconfig",
+    "checked": false
+  }, {
     "name": "robots.txt (Instructions about their site to web robots)",
     "value": "robots",
     "checked": false
