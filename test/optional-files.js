@@ -11,15 +11,29 @@ describe('generator-swill-boilerplate:app', function () {
         preprocessor: 'stylus',
         features: [],
         options: [],
-        files: [],
+        files: [
+          'readme',
+          'contributing',
+          'changelog',
+          '404',
+          'travis',
+          'npmignore',
+          'htaccess',
+          'crossdomain',
+          'manifestJson',
+          'manifestWebapp',
+          'browserconfig',
+          'robots',
+          'humans'
+        ],
         license: 'unlicense'
       })
       .toPromise()
   })
 
-  it('Base settings with Stylus', function () {
+  it('Base settings with all optional files', function () {
     yoAssert.file(
-      files.base.concat(files.stylus)
+      files.base.concat(files.stylus, files.optionals)
     )
   })
 })
