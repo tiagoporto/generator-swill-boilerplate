@@ -274,6 +274,7 @@ module.exports = class extends Yeoman {
         contributing: props.files.indexOf('contributing') >= 0,
         changelog: props.files.indexOf('changelog') >= 0,
         crossdomain: props.files.indexOf('crossdomain') >= 0,
+        browserconfig: props.files.indexOf('browserconfig') >= 0,
         manifest: {
           chrome: props.files.indexOf('manifestJson') >= 0,
           firefox: props.files.indexOf('manifestWebapp') >= 0
@@ -354,6 +355,7 @@ module.exports = class extends Yeoman {
         use: this.props.use
       }
     )
+
     this.fs.copyTpl(
       this.templatePath('config.json'),
       this.destinationPath('config.json'), {
@@ -398,12 +400,34 @@ module.exports = class extends Yeoman {
     )
 
     // Images
+    if (this.props.include.manifest.firefox || this.props.include.manifest.chrome) {
+      this.fs.copy(
+        this.templatePath('src/images/touch/icon-128x128.png'),
+        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/icon-128x128.png')
+      )
+    }
+
+    if (this.props.include.browserconfig || this.props.include.manifest.chrome) {
+      this.fs.copy(
+        this.templatePath('src/images/touch/ms-touch-icon-144x144-precomposed.png'),
+        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/ms-touch-icon-144x144-precomposed.png')
+      )
+    }
+
     this.fs.copy(
-      this.templatePath('src/images/**/*'),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/')
+      this.templatePath('src/images/touch/chrome-touch-icon-192x192.png'),
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/chrome-touch-icon-192x192.png')
     )
 
-    this.fs.write(this.props.folder.src + '/' + this.props.folder.images.src + '/sprite/.gitkeep', '')
+    this.fs.copy(
+      this.templatePath('src/images/touch/apple-touch-icon.png'),
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/apple-touch-icon.png')
+    )
+
+    this.fs.copy(
+      this.templatePath('src/images/sprite/.gitkeep'),
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/sprite/.gitkeep')
+    )
 
     this.fs.copy(
       this.templatePath('public/img/**/*'),
@@ -411,11 +435,6 @@ module.exports = class extends Yeoman {
     )
 
     this.fs.write(this.props.folder.dest + '/' + this.props.folder.images.dest + '/copyright/.gitkeep', '')
-
-    this.fs.copy(
-      this.templatePath('public/apple-touch-icon.png'),
-      this.destinationPath(this.props.folder.dest + '/apple-touch-icon.png')
-    )
 
     this.fs.copy(
       this.templatePath('public/favicon.ico'),
@@ -427,9 +446,10 @@ module.exports = class extends Yeoman {
       this.fs.copyTpl(
         this.templatePath('src/handlebars/**/*'),
         this.destinationPath(this.props.folder.src + '/handlebars/'), {
-          use: this.props.use,
+          folder: this.props.folder,
+          include: this.props.include,
           project: this.props.project,
-          include: this.props.include
+          use: this.props.use
         }
       )
     } else {
@@ -528,17 +548,30 @@ module.exports = class extends Yeoman {
       )
     }
 
+    if (this.props.include.browserconfig) {
+      this.fs.copyTpl(
+        this.templatePath('public/browserconfig.xml'),
+        this.destinationPath(this.props.folder.dest + '/browserconfig.xml'), {
+          folder: this.props.folder
+        }
+      )
+    }
+
     if (this.props.include.manifest.chrome) {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('public/manifest.json'),
-        this.destinationPath(this.props.folder.dest + '/manifest.json')
+        this.destinationPath(this.props.folder.dest + '/manifest.json'), {
+          folder: this.props.folder
+        }
       )
     }
 
     if (this.props.include.manifest.firefox) {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('public/manifest.webapp'),
-        this.destinationPath(this.props.folder.dest + '/manifest.webapp')
+        this.destinationPath(this.props.folder.dest + '/manifest.webapp'), {
+          folder: this.props.folder
+        }
       )
     }
 
