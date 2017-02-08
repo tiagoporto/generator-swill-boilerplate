@@ -3,7 +3,7 @@
 Did you like it?<br>
 Make a dev happy...<br>
 Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate/tree/master">Star</a></p>
->
+<p></p>
 
 [![Build Status](https://travis-ci.org/tiagoporto/generator-swill-boilerplate.svg)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
 [![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
