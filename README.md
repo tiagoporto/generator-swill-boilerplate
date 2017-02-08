@@ -5,7 +5,7 @@
 <img src="http://icons.iconarchive.com/icons/icons8/christmas-flat-color/256/star-icon.png" alt="Star"height="25">
 <br>Did you like it?
 <br>Make a dev happy...
-<br>Leave a [Star](https://github.com/tiagoporto/generator-swill-boilerplate/tree/master)</p>
+<br>Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate/tree/master">Star</a></p>
 
 
 [![Build Status](https://travis-ci.org/tiagoporto/generator-swill-boilerplate.svg)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
