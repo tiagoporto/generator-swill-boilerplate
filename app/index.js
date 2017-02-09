@@ -52,6 +52,11 @@ module.exports = class extends Yeoman {
       message: 'Github User or organization'
     }, {
       type: 'confirm',
+      name: 'handlebars',
+      message: 'Do you want use handlebars Template?',
+      default: true
+    }, {
+      type: 'confirm',
       name: 'settingFolder',
       message: 'You can rename default folder structure, do you want customize?',
       default: false
@@ -60,90 +65,85 @@ module.exports = class extends Yeoman {
       message: 'Source folder??',
       default: 'src',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'destFolder',
       message: 'Destination folder??',
       default: 'app',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'buildFolder',
       message: 'Builded folder??',
       default: 'build',
       when: function (response) {
-        return response.settingFolder === true
-      }
-    }, {
-      name: 'fontsDestFolder',
-      message: 'Webfonts destination folder??',
-      default: 'fonts',
-      when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'handlebarsSrcFolder',
       message: 'Handlebars Source folder??',
       default: 'handlebars',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder && response.handlebars
       }
     }, {
-      name: 'spriteSrcFolder',
-      message: 'Sprite source folder??',
-      default: 'sprite',
+      name: 'fontsDestFolder',
+      message: 'Webfonts destination folder??',
+      default: 'fonts',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'imgSrcFolder',
       message: 'Images source folder??',
       default: 'images',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'imgDestFolder',
       message: 'Images destination folder??',
       default: 'img',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
+      }
+    }, {
+      name: 'spriteSrcFolder',
+      message: 'Sprite source folder??',
+      default: 'sprite',
+      when: function (response) {
+        return response.settingFolder
       }
     }, {
       name: 'stylesSrcFolder',
       message: 'Styles source folder??',
       default: 'stylesheets',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'stylesDestFolder',
       message: 'Styles destination folder??',
       default: 'css',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'scriptsSrcFolder',
       message: 'Scripts source folder??',
       default: 'scripts',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
     }, {
       name: 'scriptsDestFolder',
       message: 'Scripts destination folder??',
       default: 'js',
       when: function (response) {
-        return response.settingFolder === true
+        return response.settingFolder
       }
-    }, {
-      type: 'confirm',
-      name: 'handlebars',
-      message: 'Do you want use handlebars Template?',
-      default: true
     }, {
       type: 'list',
       name: 'preprocessor',
