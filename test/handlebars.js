@@ -8,18 +8,19 @@ describe('generator-swill-boilerplate:app', function () {
     return yoTest
       .run(path.join(__dirname, '../app'))
       .withPrompts({
-        preprocessor: 'sass',
+        preprocessor: 'stylus',
         features: [],
         options: [],
         files: [],
+        handlebars: false,
         license: 'unlicense'
       })
       .toPromise()
   })
 
-  it('Base settings with Sass', function () {
+  it('Base settings with Stylus without handlebars', function () {
     yoAssert.file(
-      files.base.concat(files.sass, files.handlebars.enabled.all)
+      files.base.concat(files.stylus, files.handlebars.disabled.all)
     )
   })
 })

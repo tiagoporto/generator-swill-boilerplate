@@ -26,14 +26,15 @@ describe('generator-swill-boilerplate:app', function () {
           'robots',
           'humans'
         ],
+        handlebars: false,
         license: 'unlicense'
       })
       .toPromise()
   })
 
-  it('Base settings with all optional files', function () {
+  it('Base settings with all optional files without handlebars', function () {
     yoAssert.file(
-      files.base.concat(files.stylus, files.optionals, files.handlebars.enabled['404'])
+      files.base.concat(files.stylus, files.optionals, files.handlebars.disabled['404'])
     )
   })
 })

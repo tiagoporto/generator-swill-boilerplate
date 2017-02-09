@@ -23,9 +23,6 @@
     "LICENSE",
     "package.json",
     "spec/my-test.js",
-    "src/handlebars/includes/footer.hbs",
-    "src/handlebars/includes/header.hbs",
-    "src/handlebars/index.html",
     "src/header-comments.txt",
     "src/images/sprite/.gitkeep",
     "src/images/touch/apple-touch-icon.png",
@@ -91,11 +88,31 @@
     "src/vendors/.gitkeep"
   ],
 
+  "handlebars": {
+    "enabled": {
+      "all": [
+        "src/handlebars/includes/footer.hbs",
+        "src/handlebars/includes/header.hbs",
+        "src/handlebars/index.html"
+      ],
+      "404": [
+        "src/handlebars/404.html"
+      ]
+    },
+    "disabled": {
+      "all": [
+        "app/index.html"
+      ],
+      "404": [
+        "app/404.html"
+      ]
+    }
+  },
+
   "optionals": [
     "README.md",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
-    "src/handlebars/404.html",
     ".travis.yml",
     ".npmignore",
     "app/.htaccess",

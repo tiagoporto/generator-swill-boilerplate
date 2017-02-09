@@ -19,7 +19,7 @@ describe('generator-swill-boilerplate:app', function () {
 
   it('Base settings with Stylus', function () {
     yoAssert.file(
-      files.base.concat(files.stylus)
+      files.base.concat(files.stylus, files.handlebars.enabled.all)
     )
   })
 })
