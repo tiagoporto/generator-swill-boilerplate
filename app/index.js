@@ -140,11 +140,11 @@ module.exports = class extends Yeoman {
         return response.settingFolder === true
       }
     }, {
-    //     type: 'confirm',
-    //     name: 'handlebars',
-    //     message: 'Do you want use handlebars Template?',
-    //     default: true
-    // }, {
+      type: 'confirm',
+      name: 'handlebars',
+      message: 'Do you want use handlebars Template?',
+      default: true
+    }, {
       type: 'list',
       name: 'preprocessor',
       message: 'Which CSS preprocessor you will use?',
@@ -265,8 +265,7 @@ module.exports = class extends Yeoman {
         },
         normalize: props.features.indexOf('normalize') >= 0,
         outdatedBrowser: props.features.indexOf('outdatedBrowser') >= 0,
-        // handlebars: props.handlebars
-        handlebars: true
+        handlebars: props.handlebars
       }
 
       this.props.include = {
@@ -444,27 +443,30 @@ module.exports = class extends Yeoman {
     )
 
     // html
+    var handlebarsOptions = {
+      folder: this.props.folder,
+      include: this.props.include,
+      project: this.props.project,
+      use: this.props.use
+    }
+
     if (this.props.use.handlebars) {
       this.fs.copyTpl(
         this.templatePath('src/handlebars/**/*'),
-        this.destinationPath(this.props.folder.src + '/handlebars/'), {
-          folder: this.props.folder,
-          include: this.props.include,
-          project: this.props.project,
-          use: this.props.use
-        }
+        this.destinationPath(this.props.folder.src + '/handlebars/'),
+        handlebarsOptions
       )
     } else {
-      // this.fs.copyTpl(
-      // this.templatePath('public/index.html'),
-      // this.destinationPath(this.props.folder.dest + '/index.html'), {
-      //     humans: this.props.files.indexOf('humans') >= 0,
-      //     jquery: this.includeJquery,
-      //     outdatedBrowser: this.includeOutdatedBrowser,
-      //     jqueryLogoDownloadtip: this.props.jqueryLogoDownloadtip,
-      //     normalize: this.includeNormalize,
-      //     folder: this.props.folder
-      // });
+      this.fs.copyTpl(
+        this.templatePath('public/index.html'),
+        this.destinationPath(this.props.folder.dest + '/index.html'),
+        handlebarsOptions
+      )
+      this.fs.copyTpl(
+        this.templatePath('public/404.html'),
+        this.destinationPath(this.props.folder.dest + '/404.html'),
+        handlebarsOptions
+      )
     }
 
     // header
@@ -506,6 +508,7 @@ module.exports = class extends Yeoman {
       this.fs.delete(this.destinationPath(this.props.folder.dest + '/404.html'))
       this.fs.delete(this.destinationPath(this.props.folder.src + '/handlebars/404.html'))
     }
+
     if (this.props.include.htaccess) {
       this.fs.copy(
         this.templatePath('../../node_modules/apache-server-configs/dist/.htaccess'),
@@ -596,6 +599,7 @@ module.exports = class extends Yeoman {
 
   install () {
     var pkg = this.fs.readJSON(this.destinationPath('package.json'), {})
+    this.prompts.license = this.props.license = pkg.license
 
     if (this.props.include.readme) {
       this.fs.copyTpl(
@@ -603,14 +607,14 @@ module.exports = class extends Yeoman {
         this.destinationPath('README.md'), {
           project: this.props.project,
           githubUser: this.props.githubUser,
-          license: pkg.license
+          license: this.props.license
         }
       )
     }
 
     this.config.set(this.prompts)
     this.config.save()
-    this.installDependencies({bower: false})
+    // this.installDependencies({bower: false})
   }
 
   end () {

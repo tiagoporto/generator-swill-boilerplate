@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Page Not Found</title>
+    <meta name="description" content="<%= project.description %>">
+    <meta name="keywords" content="<%= project.joinedKeywords %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><% if (include.humans) { %>
+    <link rel="author" href="humans.txt" /><% } %>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="theme-color" content="{-}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="{-}">
+    <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
+
+    <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
+    <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %><% if (use.outdatedBrowser) { %>
+    <link rel="stylesheet" href="../node_modules/outdated-browser/outdatedbrowser/outdatedbrowser.css"><% } %>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- endbuild -->
+  </head>
+  <body><% if (use.outdatedBrowser) { %>
+    <!-- ============= Outdated Browser ============= -->
+    <div id="outdated"></div>
+    <!-- ============================================ --><% } %>
+
+    <h1>Page Not Found <span>:(</span></h1>
+    <p>Sorry, but the page you were trying to view does not exist.</p>
+    <p>It looks like this was the result of either:</p>
+
+
+  </body>
+</html>

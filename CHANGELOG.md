@@ -4,6 +4,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.0beta] - xxxx-xx-xx
+### Added
+- Option to use handlebars
+- Save license option in `.yo-rc.json`
+
 ## [0.8.0beta] - 2016-02-07
 ### Added
 - Set license on `README.md`

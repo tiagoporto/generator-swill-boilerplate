@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="<%= project.language %>">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{-}</title>
+    <meta name="description" content="<%= project.description %>">
+    <meta name="keywords" content="<%= project.joinedKeywords %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><% if (include.humans) { %>
+    <link rel="author" href="humans.txt" /><% } %><% if (use.jqueryLogoDownloadtip) { %>
+
+    <!-- Logos downloadtip -->
+    <link rel="icon" type="image/png" href="<%= folder.images.dest %>/logos/logo.png" data-title="Screen Bitmap file (.png)" />
+    <link rel="icon" type="image/png" href="<%= folder.images.dest %>/logos/logo-monochrome.png" data-title="Screen Monochrome Bitmap file (.png)" />
+    <link rel="icon" type="image/svg+xml" href="<%= folder.images.dest %>/logos/logo.svg" data-title="Screen Vector file (.svg)" />
+    <link rel="icon" type="image/svg+xml" href="<%= folder.images.dest %>/logos/logo-monochrome.svg" data-title="Screen Monochrome Vector file (.svg)" />
+    <link rel="icon" type="image/eps" href="<%= folder.images.dest %>/logos/logo.eps" data-title="Print file (.eps)" />
+    <link rel="icon" type="image/eps" href="<%= folder.images.dest %>/logos/logo-monochrome.eps" data-title="Print Monochrome file (.eps)" /><% } %>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="theme-color" content="{-}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="{-}">
+    <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
+    <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %><% if (use.outdatedBrowser) { %>
+    <link rel="stylesheet" href="../node_modules/outdated-browser/outdatedbrowser/outdatedbrowser.css"><% } %><% if (use.jqueryLogoDownloadtip) { %>
+    <link rel="stylesheet" href="../node_modules/jquery-logo-downloadtip/css/jquery-logo-downloadtip.css"><% } %>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- endbuild -->
+  </head>
+  <body><% if (use.outdatedBrowser) { %>
+    <!-- ============= Outdated Browser ============= -->
+    <div id="outdated"></div>
+    <!-- ============================================ --><% } %>
+
+    <h1>
+      <a href="{-}">
+        <img id="logo" src="img/logos/logo.svg" alt="{-}" width="250">
+      </a>
+    </h1>
+
+
+
+
+    <!-- build:js js/scripts.combined.min.js --><% if (use.outdatedBrowser) { %>
+    <script src="../node_modules/outdated-browser/outdatedbrowser/outdatedbrowser.js"></script><% } %><% if (use.jquery) { %>
+    <script src="../node_modules/jquery/dist/jquery.js"></script><% } %><% if (use.jqueryLogoDownloadtip) { %>
+    <script src="../node_modules/jquery-logo-downloadtip/js/jquery-logo-downloadtip.min.js"></script><% } %>
+    <script src="js/vendors.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
