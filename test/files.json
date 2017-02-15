@@ -2,6 +2,7 @@
   "base": [
     ".csslintrc",
     ".editorconfig",
+    ".babelrc",
     ".eslintrc",
     ".gitattributes",
     ".gitignore",
@@ -18,7 +19,7 @@
     "app/img/logos/logo.png",
     "app/img/logos/logo.svg",
     "config.json",
-    "gulpfile.js",
+    "gulpfile.babel.js",
     "karma.conf.js",
     "LICENSE",
     "package.json",
@@ -27,7 +28,8 @@
     "src/images/sprite/.gitkeep",
     "src/images/touch/apple-touch-icon.png",
     "src/images/touch/chrome-touch-icon-192x192.png",
-    "src/scripts/javascripts.js",
+    "src/scripts/index.js",
+    "src/scripts/javascript.js",
     "src/scripts/settings/call_plugins.js",
     "src/scripts/settings/google_analytics.js"
   ],

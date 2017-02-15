@@ -327,6 +327,12 @@ module.exports = class extends Yeoman {
 
     this.fs.writeJSON(this.destinationPath('package.json'), packageJson)
 
+    // Babel
+    this.fs.copy(
+      this.templatePath('babelrc'),
+      this.destinationPath('.babelrc')
+    )
+
     // Editorconfig
     this.fs.copy(
       this.templatePath('editorconfig'),
@@ -370,7 +376,7 @@ module.exports = class extends Yeoman {
 
     this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'), {
+      this.destinationPath('gulpfile.babel.js'), {
         boilerplate: swillPackage,
         preprocessor: this.props.preprocessor
       }
