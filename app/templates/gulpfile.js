@@ -8,7 +8,9 @@
 'use strict'
 
 var args = require('yargs').argv
+var babelify = require('babelify')
 var browserSync = require('browser-sync')
+var browserify = require('browserify')
 var buffer = require('vinyl-buffer')
 var config = require('./config.json')
 var del = require('del')
@@ -21,6 +23,7 @@ var merge = require('merge-stream')
 var mergeMediaQueries = require('gulp-merge-media-queries')
 var plugins = require('gulp-load-plugins')()
 var sequence = require('run-sequence')
+var source = require('vinyl-source-stream')
 var spritesmith = require('gulp.spritesmith')
 var svgSprite = require('gulp-svg-sprite')
 
@@ -281,50 +284,45 @@ gulp.task('vendor-scripts', function () {
 gulp.task('scripts', function () {
   var babelOption = { presets: ['es2015', 'es2016', 'es2017'] }
   var headerWrapper = { header: headerProject + '\n' }
-  var jQueryWrapper = {
-    header: 'jQuery(document).ready(function ($) {\n\n',
-    footer: '\n});'
-  }
 
-  var concatenate = gulp
-    .src([
-      '!' + paths.scripts.src + '**/*{_SEPARATE,_IGNORE}.js',
-      paths.scripts.src + '*.js'
-    ])
-    .pipe(plugins.plumber())
-    .pipe(plugins.cached('scripts'))
-    .pipe(plugins.remember('scripts'))
-    .pipe(plugins.plumber())
-    .pipe(plugins.if(config.lintJS, plugins.eslint()))
-    .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
-    .pipe(plugins.concat('scripts.js'))
-    .pipe(plugins.babel(babelOption))
-    .pipe(plugins.if(config.jQuery, plugins.wrapper(jQueryWrapper)))
-    .pipe(plugins.wrapper(headerWrapper))
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(plugins.uglify())
-    .pipe(gulp.dest(paths.scripts.dest))
+  // var concatenate =
+  return browserify(paths.scripts.src + 'index.js')
+  .transform(babelify.configure(babelOption))
+  .bundle()
+  .pipe(source('scripts.js'))
+  // .pipe(plugins.plumber())
+  // .pipe(plugins.cached('scripts'))
+  // .pipe(plugins.remember('scripts'))
+  // .pipe(plugins.plumber())
+  // .pipe(plugins.if(config.lintJS, plugins.eslint()))
+  // .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
+  // .pipe(plugins.concat('scripts.js'))
+  // .pipe(plugins.babel(babelOption))
+  // .pipe(plugins.wrapper(headerWrapper))
+  // .pipe(gulp.dest(paths.scripts.dest))
+  // .pipe(plugins.rename({suffix: '.min'}))
+  // .pipe(plugins.uglify())
+  .pipe(gulp.dest(paths.scripts.dest))
 
-  var copy = gulp
-    .src(paths.scripts.src + '/**/*_SEPARATE.js')
-    .pipe(plugins.plumber())
-    .pipe(plugins.newer(paths.scripts.dest))
-    .pipe(plugins.plumber())
-    .pipe(plugins.if(config.lintJS, plugins.eslint()))
-    .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
-    .pipe(plugins.rename(function (path) {
-      path.basename = path.basename.substring(0, path.basename.length - 9)
-    }))
-    .pipe(plugins.babel(babelOption))
-    .pipe(plugins.wrapper(headerWrapper))
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(plugins.uglify({preserveComments: 'some'}))
-    .pipe(gulp.dest(paths.scripts.dest))
-      .pipe(plugins.notify({message: 'Scripts task complete', onLast: true}))
+  // var copy = gulp
+  //   .src(paths.scripts.src + '/**/*_SEPARATE.js')
+  //   .pipe(plugins.plumber())
+  //   .pipe(plugins.newer(paths.scripts.dest))
+  //   .pipe(plugins.plumber())
+  //   .pipe(plugins.if(config.lintJS, plugins.eslint()))
+  //   .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
+  //   .pipe(plugins.rename(function (path) {
+  //     path.basename = path.basename.substring(0, path.basename.length - 9)
+  //   }))
+  //   .pipe(plugins.babel(babelOption))
+  //   .pipe(plugins.wrapper(headerWrapper))
+  //   .pipe(gulp.dest(paths.scripts.dest))
+  //   .pipe(plugins.rename({suffix: '.min'}))
+  //   .pipe(plugins.uglify({preserveComments: 'some'}))
+  //   .pipe(gulp.dest(paths.scripts.dest))
+  //     .pipe(plugins.notify({message: 'Scripts task complete', onLast: true}))
 
-  return merge(concatenate, copy)
+  // return merge(concatenate, copy)
 })
 
 // Copy Files to Build
@@ -411,7 +409,7 @@ gulp.task('serve', function () {
 
   gulp.watch(paths.scripts.src + '*.js', ['scripts', browserSync.reload])
 
-  gulp.watch(paths.scripts.src + 'settings/**/*.js', ['vendor-scripts', browserSync.reload])
+  gulp.watch(paths.scripts.src + 'settings/**/*.js', browserSync.reload)
 
   gulp.watch(
     [
@@ -439,8 +437,7 @@ gulp.task('default', function () {
         'images',
         'bitmap-sprite',
         'vetor-sprite',
-        'styles-helpers',
-        'vendor-scripts'
+        'styles-helpers'
       ],
       'svg2png',
       'svg-inline',
@@ -463,8 +460,7 @@ gulp.task('compile', function () {
       'images',
       'bitmap-sprite',
       'vetor-sprite',
-      'styles-helpers',
-      'vendor-scripts'
+      'styles-helpers'
     ],
     'svg2png',
     'svg-inline',
@@ -489,8 +485,7 @@ gulp.task('gh-pages', function () {
       'images',
       'bitmap-sprite',
       'vetor-sprite',
-      'styles-helpers',
-      'vendor-scripts'
+      'styles-helpers'
     ],
     'svg2png',
     'svg-inline',
@@ -511,8 +506,7 @@ gulp.task('build', ['clean'], function () {
       'images',
       'bitmap-sprite',
       'vetor-sprite',
-      'styles-helpers',
-      'vendor-scripts'
+      'styles-helpers'
     ],
     'svg2png',
     'svg-inline',
