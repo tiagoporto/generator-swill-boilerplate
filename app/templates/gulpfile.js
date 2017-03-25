@@ -5,33 +5,31 @@
 * Released under the MIT license
 */
 
-'use strict'
-
-var args = require('yargs').argv
-var babelify = require('babelify')
-var browserSync = require('browser-sync')
-var browserify = require('browserify')
-var buffer = require('vinyl-buffer')
-var config = require('./config.json')
-var del = require('del')
-var fs = require('fs')
-var ghPages = require('gulp-gh-pages')
-var gulp = require('gulp')
-var handlebars = require('gulp-hb')
-var Karma = require('karma').Server
-var merge = require('merge-stream')
-var mergeMediaQueries = require('gulp-merge-media-queries')
-var plugins = require('gulp-load-plugins')()
-var sequence = require('run-sequence')
-var source = require('vinyl-source-stream')
-var spritesmith = require('gulp.spritesmith')
-var svgSprite = require('gulp-svg-sprite')
+const args = require('yargs').argv
+const babelify = require('babelify')
+const browserSync = require('browser-sync')
+const browserify = require('browserify')
+const buffer = require('vinyl-buffer')
+const config = require('./config.json')
+const del = require('del')
+const fs = require('fs')
+const ghPages = require('gulp-gh-pages')
+const gulp = require('gulp')
+const handlebars = require('gulp-hb')
+const Karma = require('karma').Server
+const merge = require('merge-stream')
+const mergeMediaQueries = require('gulp-merge-media-queries')
+const plugins = require('gulp-load-plugins')()
+const sequence = require('run-sequence')
+const source = require('vinyl-source-stream')
+const spritesmith = require('gulp.spritesmith')
+const svgSprite = require('gulp-svg-sprite')
 
   // ***************************** Path configs ***************************** //
 
-var basePaths = config.basePaths
+const basePaths = config.basePaths
 
-var paths = {
+const paths = {
   html: {
     src: basePaths.src + basePaths.handlebars.src
   },
@@ -60,33 +58,35 @@ var paths = {
 }
 
   // ******************************* Settings ******************************* //
-var env = (args.prod) ? 'prod' : 'dev'
-var extensionStyle = '<%= preprocessor.extension %>'
-var headerProject = fs.readFileSync(basePaths.src + 'header-comments.txt', 'utf8')
+let env = (args.prod) ? 'prod' : 'dev'
+const extensionStyle = '<%= preprocessor.extension %>'
+const headerProject = fs.readFileSync(`${basePaths.src}header-comments.txt`, 'utf8')
+const babelOption = { presets: ['es2015', 'es2016', 'es2017'] }
+const headerWrapper = { header: `${headerProject}\n` }
 
 // ******************************** Tasks ********************************* //
 
-gulp.task('coverall', function () {
+gulp.task('coverall', () => {
   gulp.src('coverage/**/lcov.info')
     .pipe(plugins.coveralls())
 })
 
-gulp.task('karma', function (done) {
+gulp.task('karma', (done) => {
   new Karma({
     configFile: path.join(__dirname, '/karma.conf.js')
   }, done).start()
 })
 
-gulp.task('test', function () {
+gulp.task('test', () => {
   sequence('karma', 'coverall')
 })
 
-gulp.task('handlebars', function () {
+gulp.task('handlebars', () => {
   if (config.handlebars) {
     return gulp
-        .src(paths.html.src + '**/*.html')
+        .src(`${paths.html.src}**/*.html`)
         .pipe(handlebars({
-          partials: paths.html.src + basePaths.handlebars.partials.src + '**/*.hbs'
+          partials: `${paths.html.src}${basePaths.handlebars.partials.src}**/*.hbs`
         }))
         .pipe(plugins.w3cjs())
         .pipe(gulp.dest(basePaths.dest))
@@ -94,10 +94,10 @@ gulp.task('handlebars', function () {
   }
 })
 
-gulp.task('svg-inline', function () {
+gulp.task('svg-inline', () => {
   if (config.inlineSVG) {
     return gulp
-      .src(basePaths.dest + '**/*.html')
+      .src(`${basePaths.dest}**/*.html`)
       .pipe(plugins.inline({
         base: './',
         disabledTypes: ['css', 'js']
@@ -106,22 +106,22 @@ gulp.task('svg-inline', function () {
   }
 })
 
-gulp.task('styles-helpers', function () {
-  var mixins = gulp
-      .src(paths.styles.src + 'helpers/mixins/*.{styl,scss}')
-      .pipe(plugins.concat('_mixins.' + extensionStyle))
-      .pipe(gulp.dest(paths.styles.src + 'helpers'))
+gulp.task('styles-helpers', () => {
+  const mixins = gulp
+      .src(`${paths.styles.src}helpers/mixins/*.{styl,scss}`)
+      .pipe(plugins.concat(`_mixins.${extensionStyle}`))
+      .pipe(gulp.dest(`${paths.styles.src}helpers`))
 
-  var functions = gulp
-      .src(paths.styles.src + 'helpers/functions/*.{styl,scss}')
-      .pipe(plugins.concat('_functions.' + extensionStyle))
+  const functions = gulp
+      .src(`${paths.styles.src}helpers/functions/*.{styl,scss}`)
+      .pipe(plugins.concat(`_functions.${extensionStyle}`))
       .pipe(gulp.dest(paths.styles.src + 'helpers'))
 
   return merge(mixins, functions)
 })
 
-gulp.task('styles', function () {<% if (preprocessor.name === "stylus") { %>
-  return gulp
+gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
+  gulp
     .src([
       paths.styles.src + '*.styl',
       '!' + paths.styles.src + '_*.styl'
@@ -129,7 +129,7 @@ gulp.task('styles', function () {<% if (preprocessor.name === "stylus") { %>
     .pipe(plugins.plumber())
     .pipe(
       plugins.stylus({ 'include css': true })
-      .on('error', function (err) {
+      .on('error', (err) => {
         console.log(err.message)
 
         // If rename the stylus file change here
@@ -144,7 +144,7 @@ gulp.task('styles', function () {<% if (preprocessor.name === "stylus") { %>
             .pipe(gulp.dest(paths.styles.dest))
       })
   )<% } %><% if (preprocessor.name === "sass") { %>
-  return gulp
+  gulp
     .src(paths.styles.src + 'styles.scss')
     .pipe(plugins.plumber())
     .pipe(plugins.sass({precision: 3, outputStyle: 'expanded'})
@@ -163,8 +163,8 @@ gulp.task('styles', function () {<% if (preprocessor.name === "stylus") { %>
 })
 
 // Generate Bitmap Sprite
-gulp.task('bitmap-sprite', function () {
-  var sprite = gulp
+gulp.task('bitmap-sprite', () => {
+  let sprite = gulp
     .src(paths.sprite.src + '**/*.png')
     .pipe(plugins.plumber())
     .pipe(
@@ -172,7 +172,7 @@ gulp.task('bitmap-sprite', function () {
         imgName: 'bitmap-sprite.png',
         cssName: '_bitmap-sprite.' + extensionStyle,
         cssOpts: {
-          cssSelector: function (item) {
+          cssSelector: (item) => {
             if (item.name.indexOf('~hover') !== -1) {
               return '.icon-' + item.name.replace('~hover', ':hover')
             } else {
@@ -190,6 +190,7 @@ gulp.task('bitmap-sprite', function () {
     .pipe(buffer())
     .pipe(plugins.imagemin())
     .pipe(gulp.dest(paths.images.dest))
+
   sprite.css
     .pipe(gulp.dest(paths.styles.src + 'helpers'))
     .pipe(plugins.notify({message: 'Bitmap sprite task complete', onLast: true}))
@@ -198,7 +199,7 @@ gulp.task('bitmap-sprite', function () {
 })
 
 // Generate SVG Sprite
-gulp.task('vetor-sprite', function () {
+gulp.task('vetor-sprite', () => {
   var spriteOptions = {
     shape: {
       spacing: { padding: 2 }
@@ -228,7 +229,7 @@ gulp.task('vetor-sprite', function () {
 })
 
 // Fallback convert SVG to PNG
-gulp.task('svg2png', function () {
+gulp.task('svg2png', () => {
   return gulp
     .src(paths.images.dest + 'vetor-sprite.svg')
     .pipe(plugins.plumber())
@@ -237,7 +238,7 @@ gulp.task('svg2png', function () {
 })
 
 // Optimize Images
-gulp.task('images', function () {
+gulp.task('images', () => {
   var images = gulp
     .src([
       paths.images.src + '**/*.{bmp,gif,jpg,jpeg,png,svg}',
@@ -262,70 +263,48 @@ gulp.task('images', function () {
   return merge(images, svg)
 })
 
-// Concatenate vendor scripts and Minify
-gulp.task('vendor-scripts', function () {
-  var envProd = (env === 'prod') ? '' : '!'
-
+// Concatenate and Minify Main Scripts
+gulp.task('other-scripts', () => {
   return gulp
     .src([
-      '!' + paths.scripts.src + '**/*{_SEPARATE,_IGNORE}.js',
-      paths.scripts.src + 'settings/*.js',
-      envProd + paths.scripts.src + 'settings/google_analytics.js'
+      `${paths.scripts.src}*.js`,
+      `!${paths.scripts.src}index.js`
     ])
-    .pipe(plugins.plumber())
-    .pipe(plugins.concat('vendors.js'))
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(plugins.rename('vendors.min.js'))
-    .pipe(plugins.uglify())
-    .pipe(gulp.dest(paths.scripts.dest))
-})
-
-// Concatenate and Minify Main Scripts
-gulp.task('scripts', function () {
-  var babelOption = { presets: ['es2015', 'es2016', 'es2017'] }
-  var headerWrapper = { header: headerProject + '\n' }
-
-  var concatenate = browserify(paths.scripts.src + 'index.js')
-    .transform(babelify, babelOption)
-    .bundle()
-    .pipe(source('scripts.js'))
-    // .pipe(plugins.plumber())
-    .pipe(plugins.cached('scripts'))
-    .pipe(plugins.remember('scripts'))
-    // .pipe(plugins.plumber())
-    .pipe(plugins.if(config.lintJS, plugins.eslint()))
-    .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
-    // .pipe(plugins.concat('scripts.js'))
-    // .pipe(plugins.babel(babelOption))
-    // .pipe(plugins.wrapper(headerWrapper))
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(plugins.uglify())
-    .pipe(gulp.dest(paths.scripts.dest))
-
-  var copy = gulp
-    .src(paths.scripts.src + '/**/*_SEPARATE.js')
     .pipe(plugins.plumber())
     .pipe(plugins.newer(paths.scripts.dest))
     .pipe(plugins.plumber())
     .pipe(plugins.if(config.lintJS, plugins.eslint()))
     .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
-    .pipe(plugins.rename(function (path) {
-      path.basename = path.basename.substring(0, path.basename.length - 9)
-    }))
     .pipe(plugins.babel(babelOption))
     .pipe(plugins.wrapper(headerWrapper))
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify({preserveComments: 'some'}))
     .pipe(gulp.dest(paths.scripts.dest))
-      .pipe(plugins.notify({message: 'Scripts task complete', onLast: true}))
+    .pipe(plugins.notify({message: 'Scripts task complete', onLast: true}))
+})
 
-  return merge(concatenate, copy)
+gulp.task('scripts', ['other-scripts'], () => {
+  return browserify(paths.scripts.src + 'index.js')
+    .transform(babelify, babelOption)
+    .bundle()
+    .pipe(source('scripts.js'))
+    .pipe(buffer())
+    // .pipe(plugins.plumber())
+    .pipe(plugins.cached('scripts'))
+    .pipe(plugins.remember('scripts'))
+    // .pipe(plugins.plumber())
+    .pipe(plugins.if(config.lintJS, plugins.eslint()))
+    .pipe(plugins.if(config.lintJS, plugins.eslint.format()))
+    .pipe(plugins.wrapper(headerWrapper))
+    .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(plugins.rename({suffix: '.min'}))
+    .pipe(plugins.uglify())
+    .pipe(gulp.dest(paths.scripts.dest))
 })
 
 // Copy Files to Build
-gulp.task('copy', function () {
+gulp.task('copy', () => {
   var assets = { searchPath: basePaths.dest }
 
   // Minify and Copy HTML
@@ -353,7 +332,7 @@ gulp.task('copy', function () {
   return merge(html, allFiles)
 })
 
-gulp.task('outdatedbrowser', function () {
+gulp.task('outdatedbrowser', () => {
   return gulp
     .src('node_modules/outdated-browser/outdatedbrowser/lang/*')
     .pipe(gulp.dest(basePaths.dest + 'lang/outdated_browser'))
@@ -361,7 +340,7 @@ gulp.task('outdatedbrowser', function () {
 
 // *************************** Utility Tasks ****************************** //
 
-gulp.task('combine-assets', function () {
+gulp.task('combine-assets', () => {
   var assets = {searchPath: basePaths.dest}
 
   // Minify and Copy HTML
@@ -374,7 +353,7 @@ gulp.task('combine-assets', function () {
 })
 
 // Clean Directories
-gulp.task('clean', function (cb) {
+gulp.task('clean', (cb) => {
   var cleanPaths = [
     basePaths.build,
     paths.styles.dest,
@@ -389,7 +368,7 @@ gulp.task('clean', function (cb) {
 // ***************************** Main Tasks ******************************* //
 
 // Serve the project and watch
-gulp.task('serve', function () {
+gulp.task('serve', () => {
   browserSync(config.browserSync)
 
   gulp.watch(
@@ -426,7 +405,7 @@ gulp.task('serve', function () {
 })
 
 // Serve project and clean, compile and watch if pass the parameter --compile
-gulp.task('default', function () {
+gulp.task('default', () => {
   if (args.compile) {
     sequence(
       'clean',
@@ -450,7 +429,7 @@ gulp.task('default', function () {
 })
 
 // Clean and compile the project
-gulp.task('compile', function () {
+gulp.task('compile', () => {
   sequence(
     'clean',
     [
@@ -468,14 +447,14 @@ gulp.task('compile', function () {
   )
 })
 
-gulp.task('gh', function () {
+gulp.task('gh', () => {
   return gulp
     .src(basePaths.build + '**/*')
     .pipe(ghPages())
 })
 
 // Build the project and push the builded folder to gh-pages branch
-gulp.task('gh-pages', function () {
+gulp.task('gh-pages', () => {
   env = 'prod'
   sequence(
     [
@@ -496,7 +475,7 @@ gulp.task('gh-pages', function () {
 })
 
 // Build Project and serve if pass the parameter --serve
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean'], () => {
   env = 'prod'
   sequence(
     [
@@ -512,7 +491,7 @@ gulp.task('build', ['clean'], function () {
     'styles',
     'scripts',
     'copy',
-    function () {
+    () => {
       args.serve && browserSync(config.browserSyncBuild)
     }
   )
