@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.9.0beta] - xxxx-xx-xx
 ### Added
+- NPM scripts
 - Option to use handlebars
 - Save license option in `.yo-rc.json`
 
