@@ -37,7 +37,7 @@
 * Prefixes CSS with Autoprefixer
 * Compiles Sass or Stylus (Catches Stylus errors and shows them directly on the page, as in Sass)
 * Combines matching media queries into one
-* Concatenates and minifies scripts
+* Concatenates scripts with Browserify and minifies
 * Analyzes JavaScript with ESLint
 * Compiles ES2015, ES2016 and ES2017
 * Validates HTML

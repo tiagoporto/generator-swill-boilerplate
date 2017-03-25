@@ -9,6 +9,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - NPM scripts
 - Option to use handlebars
 - Save license option in `.yo-rc.json`
+- Browserify
+
+### Changed
+- Manual scripts management to Browserify
 
 ## [0.8.0beta] - 2016-02-07
 ### Added
