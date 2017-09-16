@@ -12,7 +12,15 @@
     "type": "git",
     "url": ""
   },
-  "scripts": {},
+  "scripts": {
+    "start": "gulp --compile",
+    "serve": "gulp",
+    "compile": "gulp compile",
+    "build": "gulp build",
+    "serve-build": "gulp build --serve",
+    "gh-pages": "gulp gh-pages",
+    "test": "gulp test"
+  },
   "main": "",
   "files": [],
   "dependencies": {},
