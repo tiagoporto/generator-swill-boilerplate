@@ -101,7 +101,6 @@
     "app/.htaccess",
     "app/crossdomain.xml",
     "app/manifest.json",
-    "app/manifest.webapp",
     "app/browserconfig.xml",
     "app/robots.txt",
     "app/humans.txt",

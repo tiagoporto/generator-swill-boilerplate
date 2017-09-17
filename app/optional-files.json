@@ -32,12 +32,8 @@
     "value": "crossdomain",
     "checked": false
   }, {
-    "name": "manifest.json(Chrome app info)",
+    "name": "manifest.json (Web App Manifest)",
     "value": "manifestJson",
-    "checked": false
-  }, {
-    "name": "manifest.webapp (Firefox OS app info)",
-    "value": "manifestWebapp",
     "checked": false
   }, {
     "name": "browserconfig.xml (Tile icon for Win8)",
