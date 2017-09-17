@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.8.1beta] - 2017-09-17
+### Changed
+- Set title page title to `Untitle` and other default options when the user don't set
+- Update packages
+- Remove manifest.webapp
+
 ## [0.8.0beta] - 2016-02-07
 ### Added
 - Set license on `README.md`
