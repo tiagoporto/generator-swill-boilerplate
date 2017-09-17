@@ -4,7 +4,7 @@
     <msapplication>
         <tile>
             <TileImage src="<%= folder.images.dest %>/touch/ms-touch-icon-144x144-precomposed.png"/>
-            <TileColor>{-}</TileColor>
+            <TileColor></TileColor>
         </tile>
     </msapplication>
 </browserconfig>

@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{#if title}}{{title}}{{else}}{-}{{/if}}</title>
-    <meta name="description" content="{{#if description}}{{description}}{{else}}{-}{{/if}}">
-    <meta name="keywords" content="{{#if keywords}}{{keywords}}{{else}}{-}{{/if}}">
+    <title>{{#if title}}{{title}}{{else}}Untitled{{/if}}</title>
+    <meta name="description" content="{{#if description}}{{description}}{{/if}}">
+    <meta name="keywords" content="{{#if keywords}}{{keywords}}{{/if}}">
     <meta name="viewport" content="width=device-width, initial-scale=1"><% if (include.humans) { %>
-    <link rel="author" href="humans.txt" /><% } %><% if (use.jqueryLogoDownloadtip) { %>
+    <link rel="author" href="humans.txt" /><% } %><% if (include.manifest) { %>
+    <link rel="manifest" href="/manifest.json"><% } %><% if (use.jqueryLogoDownloadtip) { %>
 
     <!-- Logos downloadtip -->
     <link rel="icon" type="image/png" href="<%= folder.images.dest %>/logos/logo.png" data-title="Screen Bitmap file (.png)" />
@@ -18,7 +19,7 @@
     <link rel="icon" type="image/eps" href="<%= folder.images.dest %>/logos/logo-monochrome.eps" data-title="Print Monochrome file (.eps)" /><% } %>
 
     <!-- Add to homescreen for Chrome on Android -->
-    <meta name="theme-color" content="{-}">
+    <meta name="theme-color" content="">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png">
 
@@ -27,11 +28,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="{{#if title}}{{title}}{{else}}{-}{{/if}}">
     <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
-
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
 
     <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
     <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %><% if (use.outdatedBrowser) { %>
