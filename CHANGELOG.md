@@ -6,13 +6,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.9.0beta] - xxxx-xx-xx
 ### Added
-- NPM scripts
 - Option to use handlebars
 - Save license option in `.yo-rc.json`
 - Browserify
 
 ### Changed
 - Manual scripts management to Browserify
+
+## [0.8.1beta] - 2017-09-17
+### Added
+- NPM scripts
+
+### Changed
+- Set title page title to `Untitle` and other default options when the user don't set
+- Update packages
+- Remove manifest.webapp
 
 ## [0.8.0beta] - 2016-02-07
 ### Added

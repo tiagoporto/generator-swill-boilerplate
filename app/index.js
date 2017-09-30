@@ -276,10 +276,7 @@ module.exports = class extends Yeoman {
         changelog: props.files.indexOf('changelog') >= 0,
         crossdomain: props.files.indexOf('crossdomain') >= 0,
         browserconfig: props.files.indexOf('browserconfig') >= 0,
-        manifest: {
-          chrome: props.files.indexOf('manifestJson') >= 0,
-          firefox: props.files.indexOf('manifestWebapp') >= 0
-        },
+        manifest: props.files.indexOf('manifestJson') >= 0,
         robots: props.files.indexOf('robots') >= 0,
         humans: props.files.indexOf('humans') >= 0,
         travis: props.files.indexOf('travis') >= 0,
@@ -407,14 +404,14 @@ module.exports = class extends Yeoman {
     )
 
     // Images
-    if (this.props.include.manifest.firefox || this.props.include.manifest.chrome) {
+    if (this.props.include.manifest) {
       this.fs.copy(
         this.templatePath('src/images/touch/icon-128x128.png'),
         this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/icon-128x128.png')
       )
     }
 
-    if (this.props.include.browserconfig || this.props.include.manifest.chrome) {
+    if (this.props.include.browserconfig || this.props.include.manifest) {
       this.fs.copy(
         this.templatePath('src/images/touch/ms-touch-icon-144x144-precomposed.png'),
         this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/ms-touch-icon-144x144-precomposed.png')
@@ -568,19 +565,10 @@ module.exports = class extends Yeoman {
       )
     }
 
-    if (this.props.include.manifest.chrome) {
+    if (this.props.include.manifest) {
       this.fs.copyTpl(
         this.templatePath('public/manifest.json'),
         this.destinationPath(this.props.folder.dest + '/manifest.json'), {
-          folder: this.props.folder
-        }
-      )
-    }
-
-    if (this.props.include.manifest.firefox) {
-      this.fs.copyTpl(
-        this.templatePath('public/manifest.webapp'),
-        this.destinationPath(this.props.folder.dest + '/manifest.webapp'), {
           folder: this.props.folder
         }
       )

@@ -21,7 +21,6 @@ describe('generator-swill-boilerplate:app', function () {
           'htaccess',
           'crossdomain',
           'manifestJson',
-          'manifestWebapp',
           'browserconfig',
           'robots',
           'humans'

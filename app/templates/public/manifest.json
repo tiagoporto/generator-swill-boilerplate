@@ -1,6 +1,6 @@
 {
-  "name": "{Title}",
-  "short_name": "{-}",
+  "name": "",
+  "short_name": "",
   "icons": [{
         "src": "<%= folder.images.dest %>/touch/icon-128x128.png",
         "sizes": "128x128"

@@ -18,6 +18,7 @@
     "compile": "gulp compile",
     "build": "gulp build",
     "publish": "gulp gh-pages",
+    "serve-build": "gulp build --serve",
     "test": "gulp test"
   },
   "main": "",
