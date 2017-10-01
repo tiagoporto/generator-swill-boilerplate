@@ -372,7 +372,7 @@ module.exports = class extends Yeoman {
     var swillPackage = require('../package.json')
 
     this.fs.copyTpl(
-      this.templatePath('gulpfile.js'),
+      this.templatePath('gulpfile.babel.js'),
       this.destinationPath('gulpfile.babel.js'), {
         boilerplate: swillPackage,
         preprocessor: this.props.preprocessor
