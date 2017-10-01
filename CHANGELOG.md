@@ -4,14 +4,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.9.0beta] - xxxx-xx-xx
+## [1.0.0beta] - 2017-xx-xx
 ### Added
 - Option to use handlebars
 - Save license option in `.yo-rc.json`
 - Browserify
+- awesome_bot in travis to check links in README.md
+- Project name to manifest.json
 
 ### Changed
 - Manual scripts management to Browserify
+- Update packages
+- Move outdated browser to oficial npm
+- Update some eslint rules
+- Use babel in gulp
+- Unify partials styles
+- Rename folder scripts/settings to scripts/imports
+
+### Fixed
+- Karma task
 
 ## [0.8.1beta] - 2017-09-17
 ### Added
