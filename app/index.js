@@ -572,7 +572,8 @@ module.exports = class extends Yeoman {
       this.fs.copyTpl(
         this.templatePath('public/manifest.json'),
         this.destinationPath(this.props.folder.dest + '/manifest.json'), {
-          folder: this.props.folder
+          folder: this.props.folder,
+          project: this.props.project
         }
       )
     }
