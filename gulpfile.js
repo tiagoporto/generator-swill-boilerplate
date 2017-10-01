@@ -12,8 +12,8 @@ gulp.task('eslint', function () {
   return gulp
     .src([
       '**/*.js',
-      '!app/templates/gulpfile.js',
-      '!app/templates/src/scripts/settings/call_plugins.js'
+      '!app/templates/gulpfile.babel.js',
+      '!app/templates/src/scripts/imports/call_plugins.js'
     ])
     .pipe(excludeGitignore())
     .pipe(eslint())
@@ -39,17 +39,17 @@ gulp.task('mocha', ['istanbul'], function (cb) {
   var mochaErr
 
   gulp.src('test/**/*.js')
-      .pipe(plumber())
-      .pipe(mocha({
-        reporter: 'spec'
-      }))
-      .on('error', function (err) {
-        mochaErr = err
-      })
-      .pipe(istanbul.writeReports())
-      .on('end', function () {
-        cb(mochaErr)
-      })
+    .pipe(plumber())
+    .pipe(mocha({
+      reporter: 'spec'
+    }))
+    .on('error', function (err) {
+      mochaErr = err
+    })
+    .pipe(istanbul.writeReports())
+    .on('end', function () {
+      cb(mochaErr)
+    })
 })
 
 gulp.task('coveralls', ['mocha'], function () {
