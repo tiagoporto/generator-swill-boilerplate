@@ -1,5 +1,4 @@
-// Settings
-import './settings/call_plugins.js'
+// Imports
 
-// Main
-import './javascript'
+import './imports/call_plugins.js'
+// import './imports/javascript'
