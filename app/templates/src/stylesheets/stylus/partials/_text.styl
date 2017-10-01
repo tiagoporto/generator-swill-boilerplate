@@ -1,0 +1,70 @@
+abbr
+    text-decoration: underline
+
+a
+    color: #1878cc
+
+    &:visited,
+    &:active,
+    &:hover
+        color: #4A148C
+
+blockquote
+    font-style: italic
+    padding-left: em(10px)
+    border-left: em(5px) solid lighten(#000, 60%)
+    rhythm-margins(1, 1, $base-font-size)
+
+kbd
+    color: #fff
+    font-family: $font-family-mono
+    background-color: rgba(0, 0, 0, .3)
+    border-radius: em(3px)
+    display: inline-block
+    vertical-align: bottom
+    padding: 0 0.2em 0 0.2em
+
+h1, h2, h3, h4, h5, h6
+    font-weight: $header-weight
+
+for num in (1..6)
+    h{num}
+        adjust-font-size-to($font-size-h + num)
+        rhythm-margins(1, 1, $font-size-h + num)
+
+p
+    adjust-font-size-to($base-font-size)
+    rhythm-margins(1, 1, $base-font-size)
+    hyphens: auto
+    // max-width ($base-font-size * 30)
+
+code
+    color: lightness(#00FF00, 50%)
+    background: darken(#333, 30%)
+    padding: 0 0.2em
+    display: inline-block
+    border-radius: em(3px)
+    vertical-align: bottom
+    overflow: auto
+    // rhythm-margins(1, 1, $base-font-size)
+
+pre
+    overflow: auto
+    font-feature-settings: "tnum"
+
+    code
+        padding: 0 em($base-line-height / 2)
+        rhythm-padding(.5, .5, $base-font-size)
+        width: 100%
+
+ul,
+ol,
+dl
+    rhythm-margins(1, 1, $base-font-size)
+
+    li &
+        margin: 0
+
+i[class^="icon-"]
+    display: block
+
