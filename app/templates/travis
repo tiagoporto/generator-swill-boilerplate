@@ -6,5 +6,6 @@ node_js:
 before_install:
   - npm install -g gulp
 
-script:
+script:<% if (include.readme) { %>
+  - awesome_bot README.md --allow-redirect --white-list travis-ci<% } %>
   - gulp test

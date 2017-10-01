@@ -505,8 +505,9 @@ module.exports = class extends Yeoman {
     // font
     this.fs.write(this.props.folder.dest + '/' + this.props.folder.fonts + '/.gitkeep', '')
 
-  // ====================== Copy optional Files  ======================//
-  // optionalFiles
+    // ====================== Copy optional Files  ======================//
+
+    // optionalFiles
     if (!this.props.include[404]) {
       this.fs.delete(this.destinationPath(this.props.folder.dest + '/404.html'))
       this.fs.delete(this.destinationPath(this.props.folder.src + '/handlebars/404.html'))
@@ -534,9 +535,11 @@ module.exports = class extends Yeoman {
     }
 
     if (this.props.include.travis) {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('travis'),
-        this.destinationPath('.travis.yml')
+        this.destinationPath('.travis.yml'), {
+          include: this.props.include
+        }
       )
     }
 
