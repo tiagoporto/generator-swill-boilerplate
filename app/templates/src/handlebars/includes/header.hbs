@@ -26,12 +26,12 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="{{#if title}}{{title}}{{else}}{-}{{/if}}">
+    <meta name="apple-mobile-web-app-title" content="{{#if title}}{{title}}{{else}}Untitle{{/if}}">
     <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
 
     <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
     <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %><% if (use.outdatedBrowser) { %>
-    <link rel="stylesheet" href="../node_modules/outdated-browser/outdatedbrowser/outdatedbrowser.css"><% } %><% if (use.jqueryLogoDownloadtip) { %>
+    <link rel="stylesheet" href="../node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.css"><% } %><% if (use.jqueryLogoDownloadtip) { %>
     <link rel="stylesheet" href="../node_modules/jquery-logo-downloadtip/css/jquery-logo-downloadtip.css"><% } %>
     <link rel="stylesheet" href="css/styles.css">
     <!-- endbuild -->
