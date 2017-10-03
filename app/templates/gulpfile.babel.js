@@ -19,6 +19,7 @@ const handlebars = require('gulp-hb')
 const Karma = require('karma').Server
 const merge = require('merge-stream')
 const mergeMediaQueries = require('gulp-merge-media-queries')
+const path = require('path)
 const plugins = require('gulp-load-plugins')()
 const sequence = require('run-sequence')
 const source = require('vinyl-source-stream')
@@ -73,7 +74,7 @@ gulp.task('coverall', () => {
 
 gulp.task('karma', done => {
   new Karma({
-    configFile: `${__dirname}/karma.conf.js`
+    configFile: path.join(__dirname, karma.conf.js)
   }, done).start()
 })
 
