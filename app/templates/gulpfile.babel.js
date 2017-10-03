@@ -5,13 +5,13 @@
 * Released under the MIT license
 */
 
-const args = require('yargs').argv
 const babelify = require('babelify')
 const browserSync = require('browser-sync')
 const browserify = require('browserify')
 const buffer = require('vinyl-buffer')
 const config = require('./config.json')
 const del = require('del')
+const envify = require('envify/custom')
 const fs = require('fs')
 const ghPages = require('gulp-gh-pages')
 const gulp = require('gulp')
@@ -58,7 +58,7 @@ const paths = {
 }
 
 // ******************************* Settings ******************************* //
-let env = (args.prod) ? 'prod' : 'dev'
+let env = process.env.NODE_ENV ? 'production' : 'development'
 const extensionStyle = '<%= preprocessor.extension %>'
 const headerProject = fs.readFileSync(`${basePaths.src}header-comments.txt`, 'utf8')
 const babelOption = { presets: ['env'] }
@@ -295,6 +295,9 @@ gulp.task('lint-script', () => {
 // Compile, Minify Main Script and run other-scripts task
 gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
   return browserify(`${paths.scripts.src}index.js`)
+    .transform(envify({
+      NODE_ENV: env
+    }))
     .transform(babelify, babelOption)
     .bundle()
     .pipe(source('scripts.js'))
@@ -411,28 +414,29 @@ gulp.task('serve', () => {
   gulp.watch(`${basePaths.dest}**/*.{html,php,json}`, ['svg-inline', browserSync.reload])
 })
 
-// Serve project and clean, compile and watch if pass the parameter --compile
+// Serve the project
 gulp.task('default', () => {
-  if (args.compile) {
-    sequence(
-      'clean',
-      [
-        'outdatedbrowser',
-        'handlebars',
-        'images',
-        'bitmap-sprite',
-        'vetor-sprite',
-        'styles-helpers'
-      ],
-      'svg2png',
-      'svg-inline',
-      'styles',
-      'scripts',
-      'serve'
-    )
-  } else {
-    sequence('handlebars', 'serve')
-  }
+  sequence('handlebars', 'serve')
+})
+
+// Clean, compile and watch and serve the project
+gulp.task('default', () => {
+  sequence(
+    'clean',
+    [
+      'outdatedbrowser',
+      'handlebars',
+      'images',
+      'bitmap-sprite',
+      'vetor-sprite',
+      'styles-helpers'
+    ],
+    'svg2png',
+    'svg-inline',
+    'styles',
+    'scripts',
+    'serve'
+  )
 })
 
 // Clean and compile the project
@@ -462,7 +466,7 @@ gulp.task('gh', () => {
 
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('gh-pages', () => {
-  env = 'prod'
+  env = 'production'
   sequence(
     [
       'outdatedbrowser',
@@ -481,9 +485,30 @@ gulp.task('gh-pages', () => {
   )
 })
 
-// Build Project and serve if pass the parameter --serve
+// Build Project
 gulp.task('build', ['clean'], () => {
-  env = 'prod'
+  env = 'production'
+  sequence(
+    [
+      'outdatedbrowser',
+      'handlebars',
+      'images',
+      'bitmap-sprite',
+      'vetor-sprite',
+      'styles-helpers'
+    ],
+    'svg2png',
+    'svg-inline',
+    'styles',
+    'scripts',
+    'copy'
+  )
+})
+
+
+// Build Project and serve
+gulp.task('build:serve', ['clean'], () => {
+  env = 'production'
   sequence(
     [
       'outdatedbrowser',
@@ -498,6 +523,6 @@ gulp.task('build', ['clean'], () => {
     'styles',
     'scripts',
     'copy',
-    () => args.serve && browserSync(config.browserSyncBuild)
+    () => browserSync(config.browserSyncBuild)
   )
 })

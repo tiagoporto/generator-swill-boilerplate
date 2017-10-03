@@ -13,12 +13,12 @@
     "url": ""
   },
   "scripts": {
-    "start": "gulp --compile",
+    "start": "gulp default:compile",
     "serve": "gulp",
     "compile": "gulp compile",
     "build": "gulp build",
+    "serve-build": "gulp build:serve",
     "publish": "gulp gh-pages",
-    "serve-build": "gulp build --serve",
     "test": "gulp test"
   },
   "main": "",
@@ -36,6 +36,7 @@
     "eslint-plugin-node": "5.2.0",
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "3.0.1",
+    "envify": "4.1.0",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "4.0.0",
     "gulp-babel": "7.0.0",
@@ -76,8 +77,7 @@
     "rf": "0.0.1",
     "run-sequence": "2.2.0",
     "vinyl-buffer": "1.0.0",
-    "vinyl-source-stream": "1.1.0",
-    "yargs": "9.0.1"
+    "vinyl-source-stream": "1.1.0"
   },
   "license": ""
 }

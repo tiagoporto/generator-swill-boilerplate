@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Browserify
 - awesome_bot in travis to check links in README.md
 - Project name to manifest.json
+- Support to NODE_ENV in JS
 
 ### Changed
 - Manual scripts management to Browserify
