@@ -330,6 +330,12 @@ module.exports = class extends Yeoman {
       this.destinationPath('.babelrc')
     )
 
+    // Webpack
+    this.fs.copy(
+      this.templatePath('webpack.config.js'),
+      this.destinationPath('webpack.config.js')
+    )
+
     // Editorconfig
     this.fs.copy(
       this.templatePath('editorconfig'),

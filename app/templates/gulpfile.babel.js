@@ -25,6 +25,8 @@ const sequence = require('run-sequence')
 const source = require('vinyl-source-stream')
 const spritesmith = require('gulp.spritesmith')
 const svgSprite = require('gulp-svg-sprite')
+const webpackStream = require('webpack-stream')
+const webpackConfig = require('./webpack.config.js')
 
 // ***************************** Path configs ***************************** //
 
@@ -294,23 +296,29 @@ gulp.task('lint-script', () => {
 })
 
 // Compile, Minify Main Script and run other-scripts task
+// gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
+//   return browserify(`${paths.scripts.src}index.js`)
+//     .transform(envify({
+//       NODE_ENV: env
+//     }))
+//     .transform(babelify, babelOption)
+//     .bundle()
+//     .pipe(source('scripts.js'))
+//     .pipe(buffer())
+//     // .pipe(plugins.plumber())
+//     .pipe(plugins.cached('scripts'))
+//     .pipe(plugins.remember('scripts'))
+//     // .pipe(plugins.plumber())
+//     .pipe(plugins.wrapper(headerWrapper))
+//     .pipe(gulp.dest(paths.scripts.dest))
+//     .pipe(plugins.rename({suffix: '.min'}))
+//     .pipe(plugins.uglify())
+//     .pipe(gulp.dest(paths.scripts.dest))
+// })
+
 gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
-  return browserify(`${paths.scripts.src}index.js`)
-    .transform(envify({
-      NODE_ENV: env
-    }))
-    .transform(babelify, babelOption)
-    .bundle()
-    .pipe(source('scripts.js'))
-    .pipe(buffer())
-    // .pipe(plugins.plumber())
-    .pipe(plugins.cached('scripts'))
-    .pipe(plugins.remember('scripts'))
-    // .pipe(plugins.plumber())
-    .pipe(plugins.wrapper(headerWrapper))
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(plugins.uglify())
+  gulp.src(path.join(paths.scripts.src, 'index.js'))
+    .pipe(webpackStream(webpackConfig), webpack)
     .pipe(gulp.dest(paths.scripts.dest))
 })
 
