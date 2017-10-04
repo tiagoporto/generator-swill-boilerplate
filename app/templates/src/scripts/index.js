@@ -1,4 +1,3 @@
 // Imports
-
-import './imports/call_plugins.js'
-// import './imports/javascript'
+import './imports/javascript.js'
+import './imports/google_analytics.js'

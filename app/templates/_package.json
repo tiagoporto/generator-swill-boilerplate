@@ -27,6 +27,7 @@
   "devDependencies": {
     "babel-preset-env": "1.6.0",
     "babelify": "7.3.0",
+    "babel-loader": "7.1.2",
     "browser-sync": "2.18.13",
     "browserify": "14.4.0",
     "del": "3.0.0",

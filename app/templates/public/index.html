@@ -41,10 +41,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <!-- endbuild -->
   </head>
-  <body><% if (use.outdatedBrowser) { %>
-    <!-- ============= Outdated Browser ============= -->
-    <div id="outdated"></div>
-    <!-- ============================================ --><% } %>
+  <body>
 
     <h1>
       <a href="http://www.somewhere.com">
@@ -55,10 +52,7 @@
 
 
 
-    <!-- build:js js/scripts.combined.min.js --><% if (use.outdatedBrowser) { %>
-    <script src="../node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.js"></script><% } %><% if (use.jquery) { %>
-    <script src="../node_modules/jquery/dist/jquery.js"></script><% } %><% if (use.jqueryLogoDownloadtip) { %>
-    <script src="../node_modules/jquery-logo-downloadtip/js/jquery-logo-downloadtip.min.js"></script><% } %>
+    <!-- build:js js/scripts.combined.min.js -->
     <script src="js/scripts.js"></script>
     <!-- endbuild -->
   </body>

@@ -25,6 +25,7 @@ const sequence = require('run-sequence')
 const source = require('vinyl-source-stream')
 const spritesmith = require('gulp.spritesmith')
 const svgSprite = require('gulp-svg-sprite')
+const webpack = require('webpack')
 const webpackStream = require('webpack-stream')
 const webpackConfig = require('./webpack.config.js')
 
@@ -318,6 +319,7 @@ gulp.task('lint-script', () => {
 
 gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
   gulp.src(path.join(paths.scripts.src, 'index.js'))
+    .pipe(plugins.plumber())
     .pipe(webpackStream(webpackConfig), webpack)
     .pipe(gulp.dest(paths.scripts.dest))
 })
