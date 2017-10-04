@@ -22,19 +22,53 @@ $RECYCLE.BIN/
 coverage
 .coverage
 .tox
+.nyc_output
+lib-cov
 
 #################
 ## NPM
 #################
 
+.npm
 node_modules/
 npm-debug.log
+.lock-wscript
+
+# Output of 'npm pack'
+*.tgz
+
+#################
+## Logs
+#################
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+#################
+## Runtime data
+#################
+pids
+*.pid
+*.seed
+*.pid.lock
 
 #################
 ## Bower Components
 #################
 
-bower_components/
+bower_components
+
+#################
+## Yarn
+#################
+.yarn-integrity
+
+#################
+## Eslint
+#################
+.eslintcache
 
 #################
 ## SASS Cache
