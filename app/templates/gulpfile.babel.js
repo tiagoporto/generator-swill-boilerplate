@@ -421,7 +421,7 @@ gulp.task('default', () => {
 })
 
 // Clean, compile and watch and serve the project
-gulp.task('default', () => {
+gulp.task('default:compile', () => {
   sequence(
     'clean',
     [
