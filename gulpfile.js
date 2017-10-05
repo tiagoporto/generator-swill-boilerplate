@@ -13,7 +13,7 @@ gulp.task('eslint', function () {
     .src([
       '**/*.js',
       '!app/templates/gulpfile.babel.js',
-      '!app/templates/src/scripts/imports/call_plugins.js'
+      '!app/templates/src/scripts/imports/javascript.js'
     ])
     .pipe(excludeGitignore())
     .pipe(eslint())
