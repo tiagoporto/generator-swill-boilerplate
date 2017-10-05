@@ -96,7 +96,7 @@ gulp.task('coverall', () => {
 
 gulp.task('karma', done => {
   new Karma({
-    configFile: path.join(__dirname, karma.conf.js)
+    configFile: path.join(__dirname, 'karma.conf.js)
   }, done).start()
 })
 
