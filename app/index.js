@@ -313,13 +313,14 @@ module.exports = class extends Yeoman {
     packageJson.author.name = this.props.author.name
     packageJson.author.url = this.props.author.homepage
     packageJson.repository.url = this.props.project.repository
+    packageJson.scripts.lint = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
 
     this.props.preprocessor.name === 'sass' && (packageJson.devDependencies['gulp-sass'] = '3.1.0')
     this.props.preprocessor.name === 'stylus' && (packageJson.devDependencies['gulp-stylus'] = '2.6.0')
 
     this.props.use.jquery && (packageJson.dependencies.jquery = '3.2.1')
-    this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0')
-    this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5 ') && (packageJson.dependencies['exports-loader'] = '0.6.4 ')
+    this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0') && (packageJson.devDependencies['exports-loader'] = '0.6.4 ')
+    this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5 ')
     this.props.use.normalize && (packageJson.dependencies['normalize.css'] = '7.0.0')
 
     this.fs.writeJSON(this.destinationPath('package.json'), packageJson)

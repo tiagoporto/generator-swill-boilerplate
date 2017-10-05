@@ -1,7 +1,8 @@
-import domready from 'domready'<% if (use.jqueryLogoDownloadtip) { %>
-import $ from 'jquery'
-import downloadTip from 'jquery-logo-downloadtip'<% } %><% if (use.outdatedBrowser) { %>
-const outdatedBrowser = require("exports-loader?outdatedBrowser!outdatedbrowser/outdatedbrowser/outdatedbrowser.js")<% } %>
+<% if (use.outdatedBrowser) { %>/* eslint import/no-webpack-loader-syntax: off */<% } %><% if (use.jqueryLogoDownloadtip) { %>
+import 'jquery-logo-downloadtip'
+import $ from 'jquery'<% } %>
+import domready from 'domready'<% if (use.outdatedBrowser) { %>
+import outdatedBrowser from 'exports-loader?outdatedBrowser!outdatedbrowser/outdatedbrowser/outdatedbrowser.js'<% } %>
 
 // Executes after dow ready
 domready(() => {<% if (use.outdatedBrowser) { %>

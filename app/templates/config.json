@@ -1,37 +1,37 @@
 {
   "basePaths": {
-    "src": "<%= folder.src %>/",
-    "dest": "<%= folder.dest %>/",
-    "build": "<%= folder.build %>/",
+    "src": "<%= folder.src %>",
+    "dest": "<%= folder.dest %>",
+    "build": "<%= folder.build %>",
 
     "handlebars": {
-       "src": "<%= folder.handlebars %>/",
+       "src": "<%= folder.handlebars %>",
        "partials": {
-          "src": "includes/"
+          "src": "includes"
         }
     },
 
     "images": {
-      "src": "<%= folder.images.src %>/",
-      "dest": "<%= folder.images.dest %>/"
+      "src": "<%= folder.images.src %>",
+      "dest": "<%= folder.images.dest %>"
     },
 
     "fonts": {
-      "dest": "<%= folder.fonts %>/"
+      "dest": "<%= folder.fonts %>"
     },
 
     "sprite": {
-      "src": "<%= folder.sprite %>/"
+      "src": "<%= folder.sprite %>"
     },
 
     "scripts": {
-      "src": "<%= folder.scripts.src %>/",
-      "dest": "<%= folder.scripts.dest %>/"
+      "src": "<%= folder.scripts.src %>",
+      "dest": "<%= folder.scripts.dest %>"
     },
 
     "styles": {
-      "src": "<%= folder.styles.src %>/",
-      "dest": "<%= folder.styles.dest %>/"
+      "src": "<%= folder.styles.src %>",
+      "dest": "<%= folder.styles.dest %>"
     },
 
     "clean": {
