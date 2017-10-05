@@ -30,7 +30,6 @@
     "src/images/touch/chrome-touch-icon-192x192.png",
     "src/scripts/index.js",
     "src/scripts/imports/javascript.js",
-    "src/scripts/imports/call_plugins.js",
     "src/scripts/imports/google_analytics.js"
   ],
 
