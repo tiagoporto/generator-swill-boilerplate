@@ -36,7 +36,6 @@ const rename = require('gulp-rename')
 const replace = require('gulp-replace')<% if (preprocessor.name === "sass") { %>
 const sass = require('gulp-sass')<% } %>
 const sequence = require('run-sequence')
-const source = require('vinyl-source-stream')
 const spritesmith = require('gulp.spritesmith')<% if (preprocessor.name === "stylus") { %>
 const stylus = require('gulp-stylus')<% } %>
 const svg2png = require('gulp-svg2png')
