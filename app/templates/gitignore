@@ -31,7 +31,6 @@ lib-cov
 
 .npm
 node_modules/
-npm-debug.log
 .lock-wscript
 
 # Output of 'npm pack'

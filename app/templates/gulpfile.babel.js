@@ -96,7 +96,7 @@ gulp.task('coverall', () => {
 
 gulp.task('karma', done => {
   new Karma({
-    configFile: path.join(__dirname, 'karma.conf.js)
+    configFile: path.join(__dirname, 'karma.conf.js')
   }, done).start()
 })
 
@@ -133,12 +133,12 @@ gulp.task('styles-helpers', () => {
   const mixins = gulp
     .src(path.join(paths.styles.src, 'helpers/mixins/*.{styl,scss}'))
     .pipe(concat(`_mixins.${extensionStyle}`))
-    .pipe(gulp.dest(`${paths.styles.src}helpers`))
+    .pipe(gulp.dest(path.join(paths.styles.src, 'helpers')))
 
   const functions = gulp
     .src(path.join(paths.styles.src, 'helpers/functions/*.{styl,scss}'))
     .pipe(concat(`_functions.${extensionStyle}`))
-    .pipe(gulp.dest(`${paths.styles.src}helpers`))
+    .pipe(gulp.dest(path.join(paths.styles.src, 'helpers')))
 
   return merge(mixins, functions)
 })
