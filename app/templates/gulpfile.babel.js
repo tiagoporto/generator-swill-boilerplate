@@ -146,7 +146,7 @@ gulp.task('styles-helpers', () => {
 gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
   gulp
     .src([
-      path.join(paths.styles.src, '.styl'),
+      path.join(paths.styles.src, '*.styl'),
       path.join(`!${paths.styles.src}`, '_*.styl')
     ])
     .pipe(plumber())
