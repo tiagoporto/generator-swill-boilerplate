@@ -21,15 +21,11 @@
     <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
 
     <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
-    <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %><% if (use.outdatedBrowser) { %>
-    <link rel="stylesheet" href="../node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.css"><% } %>
+    <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %>
     <link rel="stylesheet" href="css/styles.css">
     <!-- endbuild -->
   </head>
-  <body><% if (use.outdatedBrowser) { %>
-    <!-- ============= Outdated Browser ============= -->
-    <div id="outdated"></div>
-    <!-- ============================================ --><% } %>
+  <body>
 
     <h1>Page Not Found <span>:(</span></h1>
     <p>Sorry, but the page you were trying to view does not exist.</p>

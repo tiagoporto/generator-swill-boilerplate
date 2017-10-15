@@ -29,11 +29,6 @@
     <meta name="apple-mobile-web-app-title" content="<% if (project.name) { %><%= project.name %><% } %><% if (!project.name) { %>Untitle<% } %>">
     <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
 
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
     <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
     <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %><% if (use.outdatedBrowser) { %>
     <link rel="stylesheet" href="../node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.css"><% } %><% if (use.jqueryLogoDownloadtip) { %>
