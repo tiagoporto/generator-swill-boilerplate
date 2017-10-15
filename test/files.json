@@ -24,7 +24,6 @@
     "LICENSE",
     "package.json",
     "spec/my-test.js",
-    "src/header-comments.txt",
     "src/images/sprite/.gitkeep",
     "src/images/touch/apple-touch-icon.png",
     "src/images/touch/chrome-touch-icon-192x192.png",
