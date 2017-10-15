@@ -17,7 +17,6 @@ const csso = require('gulp-csso')
 const del = require('del')
 const eslint = require('gulp-eslint')
 const file = require('gulp-file')
-const fs = require('fs')
 const ghPages = require('gulp-gh-pages')
 const gulp = require('gulp')
 const gulpIf = require('gulp-if')
@@ -46,7 +45,6 @@ const w3cjs = require('gulp-w3cjs')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.config.js')
 const webpackStream = require('webpack-stream')
-const wrapper = require('gulp-wrapper')
 
 // ***************************** Path configs ***************************** //
 
@@ -83,9 +81,6 @@ const paths = {
 // ******************************* Settings ******************************* //
 let env = process.env.NODE_ENV ? 'production' : 'development'
 const extensionStyle = '<%= preprocessor.extension %>'
-const headerProject = fs.readFileSync(path.join(basePaths.src, 'header-comments.txt'), 'utf8')
-const babelOption = { presets: ['env'] }
-const headerWrapper = { header: `${headerProject}\n` }
 
 // ******************************** Tasks ********************************* //
 
@@ -174,7 +169,6 @@ gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
       .on('error', sass.logError)
     )<% } %>
     .pipe(autoprefixer({ browsers: config.autoprefixerBrowsers }))
-    .pipe(wrapper({ header: `${headerProject}\n` }))
     .pipe(mergeMediaQueries({log: true}))
     .pipe(gulpIf(config.lintCSS, csslint('./.csslintrc')))
     .pipe(gulpIf(config.lintCSS, csslint.formatter()))
@@ -298,8 +292,7 @@ gulp.task('other-scripts', () => {
     .pipe(plumber())
     .pipe(gulpIf(config.lintJS, eslint()))
     .pipe(gulpIf(config.lintJS, eslint.format()))
-    .pipe(babel(babelOption))
-    .pipe(wrapper(headerWrapper))
+    .pipe(babel())
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify({preserveComments: 'some'}))
@@ -329,7 +322,6 @@ gulp.task('lint-script', () => {
 //     .pipe(cached('scripts'))
 //     .pipe(remember('scripts'))
 //     // .pipe(plumber())
-//     .pipe(wrapper(headerWrapper))
 //     .pipe(gulp.dest(paths.scripts.dest))
 //     .pipe(rename({suffix: '.min'}))
 //     .pipe(uglify())
@@ -423,9 +415,7 @@ gulp.task('serve', () => {
 
   gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png', 'handlebars', browserSync.reload])
 
-  gulp.watch(path.join(paths.scripts.src, '*.js'), ['scripts', browserSync.reload])
-
-  gulp.watch(path.join(paths.scripts.src, 'settings/**/*.js'), browserSync.reload)
+  gulp.watch(path.join(paths.scripts.src, '**/*.js'), ['scripts', browserSync.reload])
 
   gulp.watch(
     [

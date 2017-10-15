@@ -1,6 +1,0 @@
-/*!
-*   <%= project.name %> v0.1.0
-*   <%= project.homepage %>
-*   Copyright (c) initialyear-atualyear <%= author.name %> (<%= author.homepage %>)
-*   Released under the MIT license
-*/

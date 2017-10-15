@@ -479,15 +479,6 @@ module.exports = class extends Yeoman {
       )
     }
 
-    // header
-    this.fs.copyTpl(
-      this.templatePath('src/header-comments.txt'),
-      this.destinationPath(this.props.folder.src + '/header-comments.txt'), {
-        author: this.props.author,
-        project: this.props.project
-      }
-    )
-
     // test
     this.fs.copy(
       this.templatePath('karma.conf.js'),
