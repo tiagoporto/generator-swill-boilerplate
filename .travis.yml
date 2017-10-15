@@ -1,10 +1,12 @@
 language: node_js
 
 node_js:
-  - "v6.9.1"
+  - "stable"
 
 before_install:
   - npm install -g gulp
+  - gem install awesome_bot
 
 script:
+  - awesome_bot README.md --allow-redirect --white-list travis-ci
   - gulp coveralls
