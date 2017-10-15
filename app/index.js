@@ -317,6 +317,7 @@ module.exports = class extends Yeoman {
 
     this.props.preprocessor.name === 'sass' && (packageJson.devDependencies['gulp-sass'] = '3.1.0')
     this.props.preprocessor.name === 'stylus' && (packageJson.devDependencies['gulp-stylus'] = '2.6.0')
+    this.props.use.handlebars && (packageJson.devDependencies['gulp-hb'] = '6.0.2')
 
     this.props.use.jquery && (packageJson.dependencies.jquery = '3.2.1')
     this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0') && (packageJson.devDependencies['exports-loader'] = '0.6.4 ')
@@ -382,7 +383,8 @@ module.exports = class extends Yeoman {
       this.templatePath('gulpfile.babel.js'),
       this.destinationPath('gulpfile.babel.js'), {
         boilerplate: swillPackage,
-        preprocessor: this.props.preprocessor
+        preprocessor: this.props.preprocessor,
+        use: this.props.use
       }
     )
 

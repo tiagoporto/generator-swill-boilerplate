@@ -41,17 +41,15 @@
     }
   },
 
-  "components": true,
-
   "jQuery": <%= use.jquery %>,
 
   "lintCSS": <%= use.lint.css %>,
 
-  "lintJS": <%= use.lint.js %>,
+  "lintJS": <%= use.lint.js %>,<% if (use.handlebars) { %>
 
   "inlineSVG": false,
 
-  "handlebars": <%= use.handlebars %>,
+  "handlebars": <%= use.handlebars %>,<% } %>
 
   "autoprefixerBrowsers": [
     "ie > 7",

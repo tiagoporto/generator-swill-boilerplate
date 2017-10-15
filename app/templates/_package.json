@@ -48,7 +48,6 @@
     "gulp-eslint": "4.0.0",
     "gulp-file": "0.3.0",
     "gulp-gh-pages": "0.5.4",
-    "gulp-hb": "6.0.2",
     "gulp-htmlmin": "3.0.0",
     "gulp-if": "2.0.2",
     "gulp-imagemin": "3.3.0",

@@ -19,8 +19,8 @@ const eslint = require('gulp-eslint')
 const file = require('gulp-file')
 const ghPages = require('gulp-gh-pages')
 const gulp = require('gulp')
-const gulpIf = require('gulp-if')
-const handlebars = require('gulp-hb')
+const gulpIf = require('gulp-if')<% if (use.handlebars) { %>
+const handlebars = require('gulp-hb')<% } %>
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
 const inline = require('gulp-inline')
@@ -51,7 +51,7 @@ const webpackStream = require('webpack-stream')
 const basePaths = config.basePaths
 
 const paths = {
-  html: {
+  handlebars: {
     src: path.join(basePaths.src, basePaths.handlebars.src)
   },
 
@@ -99,17 +99,21 @@ gulp.task('test', () => {
   sequence('karma', 'coverall')
 })
 
-gulp.task('handlebars', () => {
-  if (config.handlebars) {
-    return gulp
-      .src(path.join(paths.html.src, '**/*.html'))
-      .pipe(handlebars({
-        partials: path.join(paths.html.src, basePaths.handlebars.partials.src, '**/*.hbs')
-      }))
-      .pipe(w3cjs())
-      .pipe(gulp.dest(basePaths.dest))
-      .pipe(notify({message: 'Handlebars task complete', onLast: true}))
-  }
+gulp.task('html', () => {
+  return gulp<% if (use.handlebars) { %>
+    .src([
+      path.join(paths.handlebars.src, '**/*.html'),
+      path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
+    ])
+    .pipe(handlebars({
+      partials: path.join(paths.handlebars.src, basePaths.handlebars.partials.src, '**/*.hbs')
+    }))
+    .pipe(w3cjs())
+    .pipe(gulp.dest(basePaths.dest))
+    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
+    .src(path.join(basePaths.dest, '**/*.html'))
+    .pipe(w3cjs())
+    .pipe(notify({message: 'HTML task complete', onLast: true}))<% } %>
 })
 
 gulp.task('svg-inline', () => {
@@ -370,13 +374,11 @@ gulp.task('outdatedbrowser', () => {
 
 // *************************** Utility Tasks ****************************** //
 
+// Minify assets and Copy HTML
 gulp.task('combine-assets', () => {
-  const assets = {searchPath: basePaths.dest}
-
-  // Minify and Copy HTML
   return gulp
     .src(path.join(basePaths.dest, '**/*.{html,php}'))
-    .pipe(useref(assets))
+    .pipe(useref({searchPath: basePaths.dest}))
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', csso()))
     .pipe(gulp.dest(basePaths.dest))
@@ -393,6 +395,12 @@ gulp.task('clean', cb => {
   ]
 
   return del(cleanPaths.concat(basePaths.clean.ignore), cb)
+})
+
+gulp.task('gh', () => {
+  return gulp
+    .src(path.join(basePaths.build, '**/*'))
+    .pipe(ghPages())
 })
 
 // ***************************** Main Tasks ******************************* //
@@ -413,7 +421,7 @@ gulp.task('serve', () => {
 
   gulp.watch(path.join(paths.sprite.src, '**/*.svg'), ['vetor-sprite', 'styles', browserSync.reload])
 
-  gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png', 'handlebars', browserSync.reload])
+  gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png',<% if (use.handlebars) { %>'html',<% } %> browserSync.reload])
 
   gulp.watch(path.join(paths.scripts.src, '**/*.js'), ['scripts', browserSync.reload])
 
@@ -427,14 +435,12 @@ gulp.task('serve', () => {
 
   gulp.watch(path.join(paths.styles.src, 'helpers/{mixins,functions}/*.{styl,scss,sass}'), ['styles-helpers'])
 
-  gulp.watch(path.join(paths.html.src, '**/*.{html,hbs}'), ['handlebars'])
-
-  gulp.watch(path.join(basePaths.dest, '**/*.{html,php,json}'), ['svg-inline', browserSync.reload])
+  gulp.watch(path.join(basePaths.dest, '**/*.{html,hbs,php,json}'), ['html', 'svg-inline', browserSync.reload])
 })
 
 // Serve the project
 gulp.task('default', () => {
-  sequence('handlebars', 'serve')
+  sequence(<% if (use.handlebars) { %>'html', <% } %>'serve')
 })
 
 // Clean, compile and watch and serve the project
@@ -443,7 +449,7 @@ gulp.task('default:compile', () => {
     'clean',
     [
       'outdatedbrowser',
-      'handlebars',
+      'html',
       'images',
       'bitmap-sprite',
       'vetor-sprite',
@@ -463,7 +469,7 @@ gulp.task('compile', () => {
     'clean',
     [
       'outdatedbrowser',
-      'handlebars',
+      'html',
       'images',
       'bitmap-sprite',
       'vetor-sprite',
@@ -476,19 +482,13 @@ gulp.task('compile', () => {
   )
 })
 
-gulp.task('gh', () => {
-  return gulp
-    .src(`${basePaths.build}**/*`)
-    .pipe(ghPages())
-})
-
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('gh-pages', () => {
   env = 'production'
   sequence(
     [
       'outdatedbrowser',
-      'handlebars',
+      'html',
       'images',
       'bitmap-sprite',
       'vetor-sprite',
@@ -509,7 +509,7 @@ gulp.task('build', ['clean'], () => {
   sequence(
     [
       'outdatedbrowser',
-      'handlebars',
+      'html',
       'images',
       'bitmap-sprite',
       'vetor-sprite',
@@ -530,7 +530,7 @@ gulp.task('build:serve', ['clean'], () => {
   sequence(
     [
       'outdatedbrowser',
-      'handlebars',
+      'html',
       'images',
       'bitmap-sprite',
       'vetor-sprite',
