@@ -14,17 +14,12 @@
 <small>Swill Boilerplate Dependencies:</small>
 [![boilerplate devDependencies Status](https://david-dm.org/tiagoporto/swillboilerplate.rocks/dev-status.svg)](https://david-dm.org/tiagoporto/swillboilerplate.rocks?type=dev)
 
-<p align="right">
-  <img src="http://icons.iconarchive.com/icons/icons8/christmas-flat-color/256/star-icon.png" alt="Star" height="25"><img src="http://icons.iconarchive.com/icons/icons8/christmas-flat-color/256/star-icon.png" alt="Star" height="25"><img src="http://icons.iconarchive.com/icons/icons8/christmas-flat-color/256/star-icon.png" alt="Star" height="25"><br>
-  <code>LIKE ? Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate/tree/master">Star</a> : Make a DEV sad</code>
-</p>
-
 <p align="center">
   <img src="http://tiagoporto.github.io/swillboilerplate.rocks/img/logos/logo.png" alt="Swill Boilerplate Logo">
   <img src="https://nerdsondotcom.files.wordpress.com/2013/03/yeoman-logo.png" alt="Yeoman Logo" height="215">
 </p>
 
-> Yeoman generator for [Swill Boilerplate](http://swillboilerplate.rocks)
+> Yeoman generator for [Swill Boilerplate][swill-website]
 
 
 ## Features
@@ -66,9 +61,12 @@ yo swill-boilerplate
 
 ## Docs
 
-[Swill Boilerplate](http://swillboilerplate.rocks)
+[Swill Boilerplate][swill-website]
 
 ## License
 
 Swill Boilerplate Generator is released under the terms of the [MIT license](https://github.com/tiagoporto/generator-swill-boilerplate/blob/master/LICENSE).
 
+
+
+[swill-website]: http://swillboilerplate.rocks
