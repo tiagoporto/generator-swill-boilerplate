@@ -1,25 +1,34 @@
 /* eslint-env node */
 
-var yeoman = require('yeoman-generator')
+var Yeoman = require('yeoman-generator')
+var path = require('path')
+var fs = require('fs')
 
-module.exports = yeoman.Base.extend({
-  prompting: function () {
-    this.composeWith('swill-boilerplate:style', {})
-
+module.exports = class extends Yeoman {
+  prompting () {
     var prompts = [{
-      name: 'folder',
+      name: 'filename',
       required: true,
-      message: 'Folder and file path'
+      message: 'Filename'
     }]
 
     return this.prompt(prompts).then(function (props) {
-      this.props = props
+      this.prompts = props
+      this.props = {
+        'filename': props.filename
+      }
+
     }.bind(this))
-  },
-
-  writing: function () {
-    var config = require(this.destinationPath('config.json'))
-
-    this.fs.write(this.destinationPath(config.basePaths.styles.src + this.props.folder), '')
   }
-})
+
+  writing () {
+    var config = require(this.destinationPath('config.json'))
+    var extension = require(this.destinationPath('.yo-rc.json'))
+    extension = (extension.preprocessor === 'sass') ? 'scss' : 'styl'
+    var savefile = path.join(config.basePaths.src, config.basePaths.styles.src, `components/_${this.props.filename}.${extension}`)
+    var index = fs.readFileSync(this.destinationPath(path.join(config.basePaths.src, config.basePaths.styles.src, `components/_index.${extension}`)), 'utf8')
+    console.log("index", index)
+
+    this.fs.write(this.destinationPath(savefile), '')
+  }
+}

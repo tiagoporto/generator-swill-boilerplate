@@ -156,10 +156,6 @@ module.exports = class extends Yeoman {
         value: 'sass'
       }]
     }, {
-    //     type: 'confirm',
-    //     name: 'componentsCSS',
-    //     message: 'Do you want use some basic CSS setings? Like paragraphs, titles, buttons ...'
-    // }, {
       type: 'checkbox',
       name: 'options',
       message: 'Would you like to use?',
@@ -389,13 +385,6 @@ module.exports = class extends Yeoman {
     )
 
     // Styles
-    // if (this.props.componentsCSS) {
-    //     this.fs.copy(
-    //         this.templatePath('src/stylesheets/' + this.props.preprocessor + '/components/*'),
-    //         this.destinationPath(this.props.folder.src + '/' + this.props.stylesSrcFolder + '/components')
-    //     )
-    // }
-
     this.fs.copyTpl(
       this.templatePath('src/stylesheets/' + this.props.preprocessor.name + '/**/*'),
       this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'), {
