@@ -25,23 +25,23 @@
 ## Features
 
 * Cleans the assets (build, images, CSS, JS) in the project to maintain the directory organization
-* Compresses Images
+* Compresses Images with [Imagemin](https://github.com/imagemin/imagemin)
 * Generates Sprites with .png
 * Generates Sprites with .svg and a .png to fallback
-* Analyzes CSS with CSS Lint
-* Prefixes CSS with Autoprefixer
+* Analyzes CSS with [CSS Lint](http://csslint.net) *optional
+* Prefixes CSS with [Autoprefixer](https://github.com/postcss/autoprefixer)
 * Compiles Sass or Stylus (Catches Stylus errors and shows them directly on the page, as in Sass)
 * Combines matching media queries into one
-* Concatenates scripts with Browserify and minifies
-* Analyzes JavaScript with ESLint
-* Compiles ES2015, ES2016 and ES2017
+* Compiles scripts with [Babel](https://babeljs.io) and bundle with [Webpack](https://webpack.js.org)
+* Analyzes JavaScript with [ESLint](https://eslint.org) *optional
+* Uses [http://standardjs.com/](JavaScript Standard Style)
+* Uses [Handlebars](http://handlebarsjs.com) *optional
 * Validates HTML
 * Notifies when tasks are complete
-* Monitors changes in the files and reloads the browser with BrowserSync
-* Uses Jasmine & Karma to test JavaScript
+* Monitors changes in the files and reloads the browser with [BrowserSync](https://www.browsersync.io)
+* Uses [Karma](https://karma-runner.github.io) & [Jasmine](https://jasmine.github.io) to test JavaScript
 * Builds the project compressing HTML, CSS and JS
 * Pushes the `build` folder to gh-pages branch
-* Uses [http://standardjs.com/](JavaScript Standard Style)
 
 ## Installation
 
@@ -57,6 +57,15 @@ Then generate your new project:
 ```bash
 yo swill-boilerplate
 ```
+
+Creating a style file
+
+In the project folder execute
+```bash
+yo swill-boilerplate:style
+```
+
+This will create a style file in components folder and import it into _index.{styl,scss}
 
 
 ## Docs
