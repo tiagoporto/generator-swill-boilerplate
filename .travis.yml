@@ -8,7 +8,7 @@ before_install:
 
 script:
   - awesome_bot README.md --allow-redirect --white-list travis-ci
-  - nsp check && npm run eslint && npm test
+  - nsp check && npm run lint && npm test
 
 after_success:
   - npm run coveralls
