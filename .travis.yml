@@ -4,9 +4,11 @@ node_js:
   - "stable"
 
 before_install:
-  - npm install -g gulp
   - gem install awesome_bot
 
 script:
   - awesome_bot README.md --allow-redirect --white-list travis-ci
-  - gulp coveralls
+  - nsp check && npm run eslint && npm test
+
+after_success:
+  - npm run coveralls
