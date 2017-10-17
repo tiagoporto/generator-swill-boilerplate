@@ -30,7 +30,7 @@
     "lint": "eslint .",
     "cover": "istanbul cover _mocha",
     "nsp": "nsp check",
-    "coveralls": "npm run test -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "test": "mocha"
   },
   "files": [
