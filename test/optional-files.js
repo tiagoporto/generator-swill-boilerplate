@@ -3,7 +3,7 @@ var yoTest = require('yeoman-test')
 var path = require('path')
 var files = require('./files.json')
 
-describe('generator-swill-boilerplate:app', function () {
+describe('Base with all optional files', function () {
   before(function () {
     return yoTest
       .run(path.join(__dirname, '../app'))
