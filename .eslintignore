@@ -1,2 +1,3 @@
 app/templates/gulpfile.babel.js
 app/templates/src/scripts/imports/javascript.js
+coverage/
