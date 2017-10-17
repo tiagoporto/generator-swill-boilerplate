@@ -472,24 +472,9 @@ module.exports = class extends Yeoman {
 
     // test
     this.fs.copy(
-      this.templatePath('karma.conf.js'),
-      this.destinationPath('karma.conf.js')
+      this.templatePath('test/**/*'),
+      this.destinationPath('test/')
     )
-
-    this.fs.copy(
-      this.templatePath('spec/**/*'),
-      this.destinationPath('spec/')
-    )
-
-    // vendors
-    if (this.props.preprocessor.name === 'sass') {
-      this.fs.write(this.props.folder.src + '/vendors/.gitkeep', '')
-    } else {
-      this.fs.copy(
-        this.templatePath('src/vendors/**/*'),
-        this.destinationPath(this.props.folder.src + '/vendors')
-      )
-    }
 
     // font
     this.fs.write(this.props.folder.dest + '/' + this.props.folder.fonts + '/.gitkeep', '')

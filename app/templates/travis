@@ -1,12 +1,14 @@
 language: node_js
 
 node_js:
-  - "stable"
+  - "stable"<% if (include.readme) { %>
 
 before_install:
-  - npm install -g gulp
-  - gem install awesome_bot
+  - gem install awesome_bot<% } %>
 
 script:<% if (include.readme) { %>
   - awesome_bot README.md --allow-redirect --white-list travis-ci<% } %>
-  - gulp test
+  - npm run lint && npm test
+
+after_success:
+  - npm run coveralls

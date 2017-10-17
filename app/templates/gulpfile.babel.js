@@ -11,7 +11,6 @@ const browserSync = require('browser-sync')
 const buffer = require('vinyl-buffer')
 const concat = require('gulp-concat')
 const config = require('./config.json')
-const coveralls = require('gulp-coveralls')
 const csslint = require('gulp-csslint')
 const csso = require('gulp-csso')
 const del = require('del')
@@ -24,7 +23,6 @@ const handlebars = require('gulp-hb')<% } %>
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
 const inline = require('gulp-inline')
-const Karma = require('karma').Server
 const merge = require('merge-stream')
 const mergeMediaQueries = require('gulp-merge-media-queries')
 const newer = require('gulp-newer')
@@ -84,23 +82,8 @@ const extensionStyle = '<%= preprocessor.extension %>'
 
 // ******************************** Tasks ********************************* //
 
-gulp.task('coverall', () => {
-  gulp.src('coverage/**/lcov.info')
-    .pipe(coveralls())
-})
-
-gulp.task('karma', done => {
-  new Karma({
-    configFile: path.join(__dirname, 'karma.conf.js')
-  }, done).start()
-})
-
-gulp.task('test', () => {
-  sequence('karma', 'coverall')
-})
-
 gulp.task('html', () => {
-  return gulp<% if (use.handlebars) { %>
+  gulp<% if (use.handlebars) { %>
     .src([
       path.join(paths.handlebars.src, '**/*.html'),
       path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
@@ -150,12 +133,12 @@ gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
     ])
     .pipe(plumber())
     .pipe(
-      stylus({ 'include css': true })
+      stylus({'include css': true})
         .on('error', err => {
           console.log(err.message)
 
           // If rename the stylus file change here
-          file('styles.css', `body:before{white-space: pre; font-family: monospace; content: "${err.message}";}`, { src: true })
+          file('styles.css', `body:before{white-space: pre; font-family: monospace; content: "${err.message}";}`, {src: true})
             .pipe(replace('\\', '/'))
             .pipe(replace(/\n/gm, '\\A '))
             .pipe(replace('"', '\''))
@@ -164,15 +147,15 @@ gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
             .pipe(gulp.dest(paths.styles.dest))
             .pipe(rename({suffix: '.min'}))
             .pipe(gulp.dest(paths.styles.dest))
-          })
-  )<% } %><% if (preprocessor.name === "sass") { %>
+        })
+    )<% } %><% if (preprocessor.name === "sass") { %>
   gulp
     .src(path.join(paths.styles.src, 'styles.scss'))
     .pipe(plumber())
     .pipe(sass({precision: 3, outputStyle: 'expanded'})
       .on('error', sass.logError)
     )<% } %>
-    .pipe(autoprefixer({ browsers: config.autoprefixerBrowsers }))
+    .pipe(autoprefixer({browsers: config.autoprefixerBrowsers}))
     .pipe(mergeMediaQueries({log: true}))
     .pipe(gulpIf(config.lintCSS, csslint('./.csslintrc')))
     .pipe(gulpIf(config.lintCSS, csslint.formatter()))
@@ -251,7 +234,7 @@ gulp.task('vetor-sprite', () => {
 
 // Fallback convert SVG to PNG
 gulp.task('svg2png', () => {
-  return gulp
+  gulp
     .src(path.join(paths.images.dest, 'vetor-sprite.svg'))
     .pipe(plumber())
     .pipe(svg2png())
@@ -286,7 +269,7 @@ gulp.task('images', () => {
 
 // Compile and Minify Other Scripts
 gulp.task('other-scripts', () => {
-  return gulp
+  gulp
     .src([
       path.join(paths.scripts.src, '*.js'),
       path.join(`!${paths.scripts.src}`, 'index.js')
@@ -341,7 +324,7 @@ gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
 
 // Copy Files to Build
 gulp.task('copy', () => {
-  const assets = { searchPath: basePaths.dest }
+  const assets = {searchPath: basePaths.dest}
 
   // Minify and Copy HTML
   const html = gulp
@@ -367,7 +350,7 @@ gulp.task('copy', () => {
 })
 
 gulp.task('outdatedbrowser', () => {
-  return gulp
+  gulp
     .src('node_modules/outdatedbrowser/outdatedbrowser/lang/*')
     .pipe(gulp.dest(path.join(basePaths.dest, 'lang/outdated_browser')))
 })
@@ -376,7 +359,7 @@ gulp.task('outdatedbrowser', () => {
 
 // Minify assets and Copy HTML
 gulp.task('combine-assets', () => {
-  return gulp
+  gulp
     .src(path.join(basePaths.dest, '**/*.{html,php}'))
     .pipe(useref({searchPath: basePaths.dest}))
     .pipe(gulpIf('*.js', uglify()))
@@ -398,7 +381,7 @@ gulp.task('clean', cb => {
 })
 
 gulp.task('gh', () => {
-  return gulp
+  gulp
     .src(path.join(basePaths.build, '**/*'))
     .pipe(ghPages())
 })
@@ -522,7 +505,6 @@ gulp.task('build', ['clean'], () => {
     'copy'
   )
 })
-
 
 // Build Project and serve
 gulp.task('build:serve', ['clean'], () => {
