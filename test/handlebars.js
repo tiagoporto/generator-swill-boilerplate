@@ -8,6 +8,7 @@ describe('Base with Stylus without handlebars', function () {
     return yoTest
       .run(path.join(__dirname, '../app'))
       .withPrompts({
+        keywords: ['test', 'another test'],
         preprocessor: 'stylus',
         features: [],
         options: [],
