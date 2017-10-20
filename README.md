@@ -26,8 +26,7 @@
 
 * Cleans the assets (build, images, CSS, JS) in the project to maintain the directory organization
 * Compresses Images with [Imagemin](https://github.com/imagemin/imagemin)
-* Generates Sprites with .png
-* Generates Sprites with .svg and a .png to fallback
+* Generates PNG and SVG(PNG to fallback) Sprites
 * Analyzes CSS with [CSS Lint](http://csslint.net) *optional
 * Prefixes CSS with [Autoprefixer](https://github.com/postcss/autoprefixer)
 * Compiles Sass or Stylus (Catches Stylus errors and shows them directly on the page, as in Sass)
@@ -37,10 +36,10 @@
 * Uses [http://standardjs.com/](JavaScript Standard Style)
 * Uses [Handlebars](http://handlebarsjs.com) *optional
 * Validates HTML
-* Notifies when tasks are complete
-* Monitors changes in the files and reloads the browser with [BrowserSync](https://www.browsersync.io)
-* Uses [Karma](https://karma-runner.github.io) & [Jasmine](https://jasmine.github.io) to test JavaScript
-* Builds the project compressing HTML, CSS and JS
+* Task Completion Notifications
+* Monitors changes in the files and automatically reloads the browser with [BrowserSync](https://www.browsersync.io)
+* Uses [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/) to test JavaScript and coverage with [Istanbul](https://istanbul.js.org/).
+* Builds the project by compressing HTML, CSS and JS
 * Pushes the `build` folder to gh-pages branch
 
 ## Installation
