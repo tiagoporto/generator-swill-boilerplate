@@ -198,6 +198,20 @@ module.exports = class extends Yeoman {
       name: 'files',
       message: 'Which files do you need?',
       choices: files
+    }, {
+      type: 'checkbox',
+      name: 'gitHooks',
+      message: 'You can force some rules before git comands. Do you want?',
+      choices: [{
+        name: 'Run eslint before commit',
+        value: 'precommit',
+        checked: false
+      }, {
+        name: 'Run tests before push',
+        value: 'prepush',
+        checked: false
+
+      }]
     }]
 
     // ================== Get props ================== //
@@ -261,7 +275,11 @@ module.exports = class extends Yeoman {
         },
         normalize: props.features.indexOf('normalize') >= 0,
         outdatedBrowser: props.features.indexOf('outdatedBrowser') >= 0,
-        handlebars: props.handlebars
+        handlebars: props.handlebars,
+        gitHooks: {
+          precommit: props.gitHooks.indexOf('precommit') >= 0,
+          prepush: props.gitHooks.indexOf('prepush') >= 0
+        }
       }
 
       this.props.include = {
@@ -310,7 +328,11 @@ module.exports = class extends Yeoman {
     packageJson.author.url = this.props.author.homepage
     packageJson.repository.url = this.props.project.repository
     packageJson.scripts.lint = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
+    packageJson.scripts['lint-fix'] = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/. --fix`;
 
+    (this.props.use.gitHooks.prepush || this.props.use.gitHooks.precommit) && (packageJson.devDependencies['husky'] = '0.14.3')
+    this.props.use.gitHooks.prepush && (packageJson.scripts.prepush = 'npm test')
+    this.props.use.gitHooks.precommit && (packageJson.scripts.precommit = 'npm run lint-fix && npm run lint')
     this.props.preprocessor.name === 'sass' && (packageJson.devDependencies['gulp-sass'] = '3.1.0')
     this.props.preprocessor.name === 'stylus' && (packageJson.devDependencies['gulp-stylus'] = '2.6.0')
     this.props.use.handlebars && (packageJson.devDependencies['gulp-hb'] = '6.0.2')

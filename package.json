@@ -30,7 +30,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "cover": "istanbul cover _mocha",
-    "precommit": "eslint . --fix && eslint . && npm test",
+    "precommit": "eslint . --fix && eslint .",
     "nsp": "nsp check",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "test": "mocha"

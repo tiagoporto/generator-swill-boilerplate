@@ -20,6 +20,7 @@
     "serve-build": "gulp build:serve",
     "ghpages": "gulp gh-pages",
     "lint": "",
+    "lint-fix": "",
     "cover": "istanbul cover _mocha",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "test": "mocha"
