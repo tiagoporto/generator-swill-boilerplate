@@ -68,6 +68,7 @@ describe('Travis File', function () {
         ],
         license: 'unlicense'
       })
+      .toPromise()
   })
 
   it('With Readme', function () {

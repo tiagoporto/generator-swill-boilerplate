@@ -33,7 +33,7 @@
     "cover": "nyc --reporter=lcov npm test",
     "coveralls": "nyc --reporter=text-lcov npm test | coveralls",
     "test": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js",
-    "test-watch": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js --watch",
+    "test-watch": "npm test -- --watch",
     "precommit": "eslint . --fix && eslint ."
   },
   "files": [
