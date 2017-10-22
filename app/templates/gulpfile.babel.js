@@ -205,7 +205,7 @@ gulp.task('bitmap-sprite', () => {
 })
 
 // Generate SVG Sprite
-gulp.task('vetor-sprite', () => {
+gulp.task('vector-sprite', () => {
   const spriteOptions = {
     shape: {
       spacing: {padding: 2}
@@ -214,7 +214,7 @@ gulp.task('vetor-sprite', () => {
       css: {
         prefix: '.icon-%s',
         dest: './',
-        sprite: path.join('../', basePaths.images.dest, 'vetor-sprite.svg'),
+        sprite: path.join('../', basePaths.images.dest, 'vector-sprite.svg'),
         layout: 'vertical',
         bust: false,
         render: {}
@@ -224,7 +224,7 @@ gulp.task('vetor-sprite', () => {
 
   spriteOptions.mode.css.render[extensionStyle] = {}
 
-  spriteOptions.mode.css.render[extensionStyle].dest = path.join('../../', paths.styles.src, `helpers/_vetor-sprite.${extensionStyle}`)
+  spriteOptions.mode.css.render[extensionStyle].dest = path.join('../../', paths.styles.src, `helpers/_vector-sprite.${extensionStyle}`)
 
   return gulp
     .src(`${paths.sprite.src}*.svg`)
@@ -237,7 +237,7 @@ gulp.task('vetor-sprite', () => {
 // Fallback convert SVG to PNG
 gulp.task('svg2png', () => {
   gulp
-    .src(path.join(paths.images.dest, 'vetor-sprite.svg'))
+    .src(path.join(paths.images.dest, 'vector-sprite.svg'))
     .pipe(plumber())
     .pipe(svg2png())
     .pipe(gulp.dest(paths.images.dest))
@@ -375,7 +375,7 @@ gulp.task('clean', cb => {
     basePaths.build,
     paths.styles.dest,
     paths.scripts.dest,
-    path.join(paths.styles.src, 'helpers/{_bitmap-sprite,_vetor-sprite}.{styl,scss}'),
+    path.join(paths.styles.src, 'helpers/{_bitmap-sprite,_vector-sprite}.{styl,scss}'),
     path.join(paths.images.dest, '**/*')
   ]
 
@@ -404,7 +404,7 @@ gulp.task('serve', () => {
 
   gulp.watch(path.join(paths.sprite.src, '**/*.{png,gif}'), ['bitmap-sprite', browserSync.reload])
 
-  gulp.watch(path.join(paths.sprite.src, '**/*.svg'), ['vetor-sprite', 'styles', browserSync.reload])
+  gulp.watch(path.join(paths.sprite.src, '**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
 
   gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png', browserSync.reload])
 
@@ -439,7 +439,7 @@ gulp.task('default:compile', () => {
       'html',
       'images',
       'bitmap-sprite',
-      'vetor-sprite',
+      'vector-sprite',
       'styles-helpers'
     ],
     'svg2png',
@@ -459,7 +459,7 @@ gulp.task('compile', () => {
       'html',
       'images',
       'bitmap-sprite',
-      'vetor-sprite',
+      'vector-sprite',
       'styles-helpers'
     ],
     'svg2png',
@@ -478,7 +478,7 @@ gulp.task('gh-pages', () => {
       'html',
       'images',
       'bitmap-sprite',
-      'vetor-sprite',
+      'vector-sprite',
       'styles-helpers'
     ],
     'svg2png',
@@ -499,7 +499,7 @@ gulp.task('build', ['clean'], () => {
       'html',
       'images',
       'bitmap-sprite',
-      'vetor-sprite',
+      'vector-sprite',
       'styles-helpers'
     ],
     'svg2png',
@@ -519,7 +519,7 @@ gulp.task('build:serve', ['clean'], () => {
       'html',
       'images',
       'bitmap-sprite',
-      'vetor-sprite',
+      'vector-sprite',
       'styles-helpers'
     ],
     'svg2png',
