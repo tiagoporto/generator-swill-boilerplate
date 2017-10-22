@@ -32,7 +32,7 @@
     "cover": "nyc --reporter=lcov npm test",
     "precommit": "eslint . --fix && eslint .",
     "nsp": "nsp check",
-    "coveralls": "npm run cover | coveralls",
+    "coveralls": "nyc --reporter=text-lcov npm test | coveralls",
     "test": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js"
   },
   "files": [
