@@ -420,7 +420,9 @@ gulp.task('serve', () => {
 
   gulp.watch(path.join(paths.styles.src, 'helpers/{mixins,functions}/*.{styl,scss,sass}'), ['styles-helpers'])
 
-  gulp.watch(path.join(basePaths.dest, '**/*.{html,hbs,php,json}'), ['html', 'svg-inline', browserSync.reload])
+  gulp.watch(path.join(basePaths.src, '**/*.{html,hbs,php}'), ['html', browserSync.reload])
+
+  gulp.watch(path.join(basePaths.dest, '**/*.{html,php,json}'), ['svg-inline', browserSync.reload])
 })
 
 // Serve the project
