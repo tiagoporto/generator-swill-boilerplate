@@ -16,203 +16,217 @@ module.exports = class extends Yeoman {
   }
 
   prompting () {
-    var prompts = [{
-      name: 'projectName',
-      message: 'Your project name'
-    }, {
-      name: 'projectDescription',
-      message: 'Your project description'
-    }, {
-      name: 'projectHomepage',
-      message: 'Project Homepage'
-    }, {
-      name: 'keywords',
-      message: 'Project keywords (comma to split)',
-      filter: function (words) {
-        return words ? words.split(/\s*,\s*/g) : []
-      }
-    }, {
-      type: 'input',
-      name: 'language',
-      message: 'Default project language (en, en-US, pt-BR, fr-CA...)',
-      default: 'en'
-    }, {
-      name: 'authorName',
-      message: 'Author Name',
-      default: this.user.git.name()
-    }, {
-      name: 'authorEmail',
-      message: 'Author Email',
-      default: this.user.git.email()
-    }, {
-      name: 'authorHomepage',
-      message: 'Author\'s website'
-    }, {
-      name: 'githubUser',
-      message: 'Github User or organization'
-    }, {
-      type: 'confirm',
-      name: 'handlebars',
-      message: 'Do you want use handlebars Template?',
-      default: true
-    }, {
-      type: 'confirm',
-      name: 'settingFolder',
-      message: 'You can rename default folder structure, do you want customize?',
-      default: false
-    }, {
-      name: 'srcFolder',
-      message: 'Source folder??',
-      default: 'src',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'destFolder',
-      message: 'Destination folder??',
-      default: 'app',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'buildFolder',
-      message: 'Builded folder??',
-      default: 'build',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'handlebarsSrcFolder',
-      message: 'Handlebars Source folder??',
-      default: 'handlebars',
-      when: function (response) {
-        return response.settingFolder && response.handlebars
-      }
-    }, {
-      name: 'fontsDestFolder',
-      message: 'Webfonts destination folder??',
-      default: 'fonts',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'imgSrcFolder',
-      message: 'Images source folder??',
-      default: 'images',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'imgDestFolder',
-      message: 'Images destination folder??',
-      default: 'img',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'spriteSrcFolder',
-      message: 'Sprite source folder??',
-      default: 'sprite',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'stylesSrcFolder',
-      message: 'Styles source folder??',
-      default: 'stylesheets',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'stylesDestFolder',
-      message: 'Styles destination folder??',
-      default: 'css',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'scriptsSrcFolder',
-      message: 'Scripts source folder??',
-      default: 'scripts',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      name: 'scriptsDestFolder',
-      message: 'Scripts destination folder??',
-      default: 'js',
-      when: function (response) {
-        return response.settingFolder
-      }
-    }, {
-      type: 'list',
-      name: 'preprocessor',
-      message: 'Which CSS preprocessor you will use?',
-      choices: [{
-        name: 'Stylus',
-        value: 'stylus'
+    var prompts = [
+      {
+        name: 'projectName',
+        message: 'Your project name'
       }, {
-        name: 'SASS',
-        value: 'sass'
-      }]
-    }, {
-      type: 'checkbox',
-      name: 'options',
-      message: 'Would you like to use?',
-      choices: [{
-        name: 'Lint CSS',
-        value: 'lintCSS',
-        checked: false
+        name: 'projectDescription',
+        message: 'Your project description'
       }, {
-        name: 'Lint JS',
-        value: 'lintJS',
-        checked: true
-      }]
-    }, {
-      type: 'checkbox',
-      name: 'features',
-      message: 'Do you want use some of these lib/plugin?',
-      choices: [{
-        name: 'jQuery',
-        value: 'jquery',
-        checked: true
+        name: 'projectHomepage',
+        message: 'Project Homepage'
       }, {
-        name: 'Normalize.css',
-        value: 'normalize',
-        checked: true
+        name: 'keywords',
+        message: 'Project keywords (comma to split)',
+        filter: function (words) {
+          return words ? words.split(/\s*,\s*/g) : []
+        }
       }, {
-        name: 'OutdatedBrowser',
-        value: 'outdatedBrowser',
-        checked: true
-      }]
-    }, {
-      type: 'confirm',
-      name: 'jqueryLogoDownloadtip',
-      message: 'Want use jQuery Logo Downloadtip?',
-      default: false,
-      when: function (response) {
-        return response.features.indexOf('jquery') >= 0
+        type: 'input',
+        name: 'language',
+        message: 'Default project language (en, en-US, pt-BR, fr-CA...)',
+        default: 'en'
+      }, {
+        name: 'authorName',
+        message: 'Author Name',
+        default: this.user.git.name()
+      }, {
+        name: 'authorEmail',
+        message: 'Author Email',
+        default: this.user.git.email()
+      }, {
+        name: 'authorHomepage',
+        message: 'Author\'s website'
+      }, {
+        name: 'githubUser',
+        message: 'Github User or organization'
+      }, {
+        type: 'confirm',
+        name: 'handlebars',
+        message: 'Do you want use handlebars Template?',
+        default: true
+      }, {
+        type: 'confirm',
+        name: 'settingFolder',
+        message: 'You can rename default folder structure, do you want customize?',
+        default: false
+      }, {
+        name: 'srcFolder',
+        message: 'Source folder??',
+        default: 'src',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'destFolder',
+        message: 'Destination folder??',
+        default: 'app',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'buildFolder',
+        message: 'Builded folder??',
+        default: 'build',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'handlebarsSrcFolder',
+        message: 'Handlebars Source folder??',
+        default: 'handlebars',
+        when: function (response) {
+          return response.settingFolder && response.handlebars
+        }
+      }, {
+        name: 'fontsDestFolder',
+        message: 'Webfonts destination folder??',
+        default: 'fonts',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'imgSrcFolder',
+        message: 'Images source folder??',
+        default: 'images',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'imgDestFolder',
+        message: 'Images destination folder??',
+        default: 'img',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'spriteSrcFolder',
+        message: 'Sprite source folder??',
+        default: 'sprite',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'stylesSrcFolder',
+        message: 'Styles source folder??',
+        default: 'stylesheets',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'stylesDestFolder',
+        message: 'Styles destination folder??',
+        default: 'css',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'scriptsSrcFolder',
+        message: 'Scripts source folder??',
+        default: 'scripts',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        name: 'scriptsDestFolder',
+        message: 'Scripts destination folder??',
+        default: 'js',
+        when: function (response) {
+          return response.settingFolder
+        }
+      }, {
+        type: 'list',
+        name: 'preprocessor',
+        message: 'Which CSS preprocessor you will use?',
+        choices: [{
+          name: 'Stylus',
+          value: 'stylus'
+        }, {
+          name: 'SASS',
+          value: 'sass'
+        }]
+      }, {
+        type: 'checkbox',
+        name: 'options',
+        message: 'Would you like to use?',
+        choices: [{
+          name: 'Lint CSS',
+          value: 'lintCSS',
+          checked: false
+        }, {
+          name: 'Lint JS',
+          value: 'lintJS',
+          checked: true
+        }]
+      }, {
+        type: 'checkbox',
+        name: 'features',
+        message: 'Do you want use some of these lib/plugin?',
+        choices: [{
+          name: 'jQuery',
+          value: 'jquery',
+          checked: true
+        }, {
+          name: 'Normalize.css',
+          value: 'normalize',
+          checked: true
+        }, {
+          name: 'OutdatedBrowser',
+          value: 'outdatedBrowser',
+          checked: true
+        }]
+      }, {
+        type: 'confirm',
+        name: 'jqueryLogoDownloadtip',
+        message: 'Want use jQuery Logo Downloadtip?',
+        default: false,
+        when: function (response) {
+          return response.features.indexOf('jquery') >= 0
+        }
+      }, {
+        type: 'checkbox',
+        name: 'files',
+        message: 'Which files do you need?',
+        choices: files
+      }, {
+        type: 'checkbox',
+        name: 'gitHooks',
+        message: 'You can force some rules before git comands. Do you want?',
+        choices: [{
+          name: 'Run eslint before commit',
+          value: 'precommit',
+          checked: false
+        }, {
+          name: 'Run tests before push',
+          value: 'prepush',
+          checked: false
+        }]
+      }, {
+        type: 'checkbox',
+        name: 'integrations',
+        message: 'Integration tools',
+        choices: [{
+          name: 'Travis CI',
+          value: 'travis',
+          checked: false
+        }, {
+          name: 'Coveralls.io',
+          value: 'coveralls',
+          checked: false
+        }]
       }
-    }, {
-      type: 'checkbox',
-      name: 'files',
-      message: 'Which files do you need?',
-      choices: files
-    }, {
-      type: 'checkbox',
-      name: 'gitHooks',
-      message: 'You can force some rules before git comands. Do you want?',
-      choices: [{
-        name: 'Run eslint before commit',
-        value: 'precommit',
-        checked: false
-      }, {
-        name: 'Run tests before push',
-        value: 'prepush',
-        checked: false
-
-      }]
-    }]
+    ]
 
     // ================== Get props ================== //
     return this.prompt(prompts).then(function (props) {
@@ -293,8 +307,12 @@ module.exports = class extends Yeoman {
         manifest: props.files.indexOf('manifestJson') >= 0,
         robots: props.files.indexOf('robots') >= 0,
         humans: props.files.indexOf('humans') >= 0,
-        travis: props.files.indexOf('travis') >= 0,
         npmignore: props.files.indexOf('npmignore') >= 0
+      }
+
+      this.props.integrations = {
+        travis: props.integrations.indexOf('travis') >= 0,
+        coveralls: props.integrations.indexOf('coveralls') >= 0
       }
     }.bind(this))
   }
@@ -328,7 +346,8 @@ module.exports = class extends Yeoman {
     packageJson.author.url = this.props.author.homepage
     packageJson.repository.url = this.props.project.repository
     packageJson.scripts.lint = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
-    packageJson.scripts['lint-fix'] = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/. --fix`;
+    packageJson.scripts['lint-fix'] = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/. --fix`
+    this.props.integrations.coveralls && (packageJson.devDependencies['coveralls'] = '3.0.0') && (packageJson.scripts['coveralls'] = 'nyc --reporter=text-lcov npm test | coveralls');
 
     (this.props.use.gitHooks.prepush || this.props.use.gitHooks.precommit) && (packageJson.devDependencies['husky'] = '0.14.3')
     this.props.use.gitHooks.prepush && (packageJson.scripts.prepush = 'npm test')
@@ -524,11 +543,12 @@ module.exports = class extends Yeoman {
       )
     }
 
-    if (this.props.include.travis) {
+    if (this.props.integrations.travis) {
       this.fs.copyTpl(
         this.templatePath('travis'),
         this.destinationPath('.travis.yml'), {
-          include: this.props.include
+          include: this.props.include,
+          integrations: this.props.integrations
         }
       )
     }

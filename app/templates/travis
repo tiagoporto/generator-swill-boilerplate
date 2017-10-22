@@ -8,7 +8,7 @@ before_install:
 
 script:<% if (include.readme) { %>
   - awesome_bot README.md --allow-redirect --white-list travis-ci<% } %>
-  - npm run lint && npm test
+  - npm run lint && npm test<% if (integrations.coveralls) { %>
 
 after_success:
-  - npm run coveralls
+  - npm run coveralls<% } %>

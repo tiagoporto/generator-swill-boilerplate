@@ -16,10 +16,6 @@
     "value": "404",
     "checked": false
   }, {
-    "name": ".travis.yml (Travis CI)",
-    "value": "travis",
-    "checked": false
-  }, {
     "name": ".npmignore",
     "value": "npmignore",
     "checked": false

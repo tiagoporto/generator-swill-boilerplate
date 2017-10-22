@@ -29,11 +29,12 @@
   "scripts": {
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "cover": "nyc --reporter=lcov npm test",
-    "precommit": "eslint . --fix && eslint .",
     "nsp": "nsp check",
+    "cover": "nyc --reporter=lcov npm test",
     "coveralls": "nyc --reporter=text-lcov npm test | coveralls",
-    "test": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js"
+    "test": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js",
+    "test-watch": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js --watch",
+    "precommit": "eslint . --fix && eslint ."
   },
   "files": [
     "app"

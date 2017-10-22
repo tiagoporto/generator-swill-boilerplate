@@ -21,16 +21,14 @@
     "ghpages": "gulp gh-pages",
     "lint": "",
     "lint-fix": "",
-    "cover": "istanbul cover _mocha",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "test": "'./{,!(node_modules)/**/}*.test.js' test/**/*.js"
+    "cover": "nyc --reporter=lcov npm test",
+    "test": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js"
   },
   "main": "",
   "files": [],
   "dependencies": {},
   "devDependencies": {
-    "coveralls": "3.0.0",
-    "istanbul": "0.4.5",
+    "nyc": "11.2.1",
     "mocha": "4.0.1",
     "mocha-lcov-reporter": "1.3.0",
     "babel-core": "6.26.0",
@@ -49,7 +47,6 @@
     "gulp-autoprefixer": "4.0.0",
     "gulp-babel": "7.0.0",
     "gulp-concat": "2.6.1",
-    "gulp-coveralls": "0.1.4",
     "gulp-csslint": "1.0.0",
     "gulp-csso": "3.0.0",
     "gulp-eslint": "4.0.0",
