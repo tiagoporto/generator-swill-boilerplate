@@ -22,6 +22,7 @@ $RECYCLE.BIN/
 coverage
 .coverage
 .tox
+.nyc_output
 
 #################
 ## NPM

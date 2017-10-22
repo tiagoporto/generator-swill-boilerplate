@@ -23,7 +23,7 @@
     "lint-fix": "",
     "cover": "istanbul cover _mocha",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "test": "mocha"
+    "test": "'./{,!(node_modules)/**/}*.test.js' test/**/*.js"
   },
   "main": "",
   "files": [],
