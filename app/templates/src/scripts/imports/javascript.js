@@ -1,4 +1,4 @@
-<% if (use.outdatedBrowser) { %>/* eslint import/no-webpack-loader-syntax: off */<% } %><% if (use.jqueryLogoDownloadtip) { %>
+<% if (use.jqueryLogoDownloadtip) { %>/* eslint import/no-webpack-loader-syntax: off */<% } %><% if (use.jqueryLogoDownloadtip) { %>
 import 'jquery-logo-downloadtip'
 import $ from 'jquery'<% } %>
 import domready from 'domready'<% if (use.outdatedBrowser) { %>
