@@ -28,6 +28,7 @@ describe('Base with all optional files without handlebars', function () {
         ],
         handlebars: false,
         gitHooks: [],
+        integrations: [],
         license: 'unlicense'
       })
       .toPromise()

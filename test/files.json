@@ -94,7 +94,6 @@
     "README.md",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
-    ".travis.yml",
     ".npmignore",
     "app/.htaccess",
     "app/crossdomain.xml",
