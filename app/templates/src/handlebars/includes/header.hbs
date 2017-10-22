@@ -29,6 +29,22 @@
     <meta name="apple-mobile-web-app-title" content="{{#if title}}{{title}}{{else}}Untitle{{/if}}">
     <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
 
+{{#if fbType}}    <meta property="og:type" content="{{fbType}}">{{/if}}{{#if fbUrl}}
+    <meta property="og:url" content="{{fbUrl}}">{{/if}}{{#if fbTitle}}
+    <meta property="og:title" content="{{fbTitle}}">{{/if}}{{#if fbImage}}
+    <meta property="og:image" content="{{fbImage}}">{{/if}}{{#if fbDescription}}
+    <meta property="og:description" content="{{fbDescription}}">{{/if}}{{#if fbSiteName}}
+    <meta property="og:site_name" content="{{fbSiteName}}">{{/if}}{{#if fbLocale}}
+    <meta property="og:locale" content="{{fbLocale}}">{{/if}}
+
+{{#if twCard}}    <meta name="twitter:card" content="{{twCard}}">{{/if}}{{#if twSite}}
+    <meta name="twitter:site" content="{{twSite}}">{{/if}}{{#if twCreator}}
+    <meta name="twitter:creator" content="{{twCreator}}">{{/if}}{{#if twUrl}}
+    <meta name="twitter:url" content="{{twUrl}}">{{/if}}{{#if twTitle}}
+    <meta name="twitter:title" content="{{twTitle}}">{{/if}}{{#if twDescription}}
+    <meta name="twitter:description" content="{{twDescription}}">{{/if}}{{#if twImage}}
+    <meta name="twitter:image" content="{{twImage}}">{{/if}}
+
     <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
     <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %><% if (use.outdatedBrowser) { %>
     <link rel="stylesheet" href="../node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.css"><% } %><% if (use.jqueryLogoDownloadtip) { %>
