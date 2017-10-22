@@ -77,7 +77,7 @@ const paths = {
 }
 
 // ******************************* Settings ******************************* //
-let env = process.env.NODE_ENV ? 'production' : 'development'
+// let env = process.env.NODE_ENV ? 'production' : 'development'
 const extensionStyle = '<%= preprocessor.extension %>'
 
 // ******************************** Tasks ********************************* //
@@ -406,7 +406,7 @@ gulp.task('serve', () => {
 
   gulp.watch(path.join(paths.sprite.src, '**/*.svg'), ['vetor-sprite', 'styles', browserSync.reload])
 
-  gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png',<% if (use.handlebars) { %>'html',<% } %> browserSync.reload])
+  gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png', browserSync.reload])
 
   gulp.watch(path.join(paths.scripts.src, '**/*.js'), ['scripts', browserSync.reload])
 
