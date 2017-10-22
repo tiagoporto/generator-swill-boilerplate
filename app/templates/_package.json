@@ -23,7 +23,7 @@
     "lint-fix": "",
     "cover": "nyc --reporter=lcov npm test",
     "test": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js",
-      "test-watch": "npm test -- --watch",
+    "test-watch": "npm test -- --watch"
   },
   "main": "",
   "files": [],
