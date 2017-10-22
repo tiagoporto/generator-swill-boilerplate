@@ -22,12 +22,12 @@
     "gulpfile.babel.js",
     "LICENSE",
     "package.json",
-    "test/my-test.js",
     "src/images/sprite/.gitkeep",
     "src/images/touch/apple-touch-icon.png",
     "src/images/touch/chrome-touch-icon-192x192.png",
     "src/scripts/index.js",
     "src/scripts/imports/javascript.js",
+    "src/scripts/imports/javascript.test.js",
     "src/scripts/imports/google_analytics.js"
   ],
 

@@ -492,12 +492,6 @@ module.exports = class extends Yeoman {
       )
     }
 
-    // test
-    this.fs.copy(
-      this.templatePath('test/**/*'),
-      this.destinationPath('test/')
-    )
-
     // font
     this.fs.write(this.props.folder.dest + '/' + this.props.folder.fonts + '/.gitkeep', '')
 
