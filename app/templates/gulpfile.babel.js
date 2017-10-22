@@ -322,6 +322,9 @@ gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
     .pipe(plumber())
     .pipe(webpackStream(webpackConfig), webpack)
     .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.scripts.dest))
 })
 
 // Copy Files to Build
