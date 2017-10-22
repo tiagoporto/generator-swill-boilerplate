@@ -88,6 +88,7 @@ gulp.task('html', () => {
       path.join(paths.handlebars.src, '**/*.html'),
       path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
     ])
+    .pipe(plumber())
     .pipe(handlebars({
       partials: path.join(paths.handlebars.src, basePaths.handlebars.partials.src, '**/*.hbs')
     }))
@@ -95,6 +96,7 @@ gulp.task('html', () => {
     .pipe(gulp.dest(basePaths.dest))
     .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
     .src(path.join(basePaths.dest, '**/*.html'))
+    .pipe(plumber())
     .pipe(w3cjs())
     .pipe(notify({message: 'HTML task complete', onLast: true}))<% } %>
 })
