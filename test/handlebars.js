@@ -13,6 +13,7 @@ describe('Base with Stylus without handlebars', function () {
         options: [],
         files: [],
         handlebars: false,
+        gitHooks: [],
         license: 'unlicense'
       })
       .toPromise()

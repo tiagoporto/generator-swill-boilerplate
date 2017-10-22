@@ -25,6 +25,7 @@ describe('Base with all optional files', function () {
           'robots',
           'humans'
         ],
+        gitHooks: [],
         license: 'unlicense'
       })
       .toPromise()

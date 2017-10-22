@@ -12,6 +12,7 @@ describe('Base with Stylus', function () {
         features: [],
         options: [],
         files: [],
+        gitHooks: [],
         license: 'unlicense'
       })
       .toPromise()

@@ -12,6 +12,7 @@ describe('Base with Sass', function () {
         features: [],
         options: [],
         files: [],
+        gitHooks: [],
         license: 'unlicense'
       })
       .toPromise()
