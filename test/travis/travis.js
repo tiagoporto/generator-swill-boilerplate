@@ -46,7 +46,7 @@ describe('Travis File', function () {
   })
 
   it('With Coveralls', function () {
-    yoAssert.fileContent('.travis.yml', fs.readFileSync(path.resolve(__dirname, 'coveralls.txt'), 'utf-8'))
+    yoAssert.equalsFileContent('.travis.yml', fs.readFileSync(path.resolve(__dirname, 'coveralls.txt'), 'utf-8'))
   })
 })
 
@@ -72,7 +72,7 @@ describe('Travis File', function () {
   })
 
   it('With Readme', function () {
-    yoAssert.fileContent('.travis.yml', fs.readFileSync(path.resolve(__dirname, 'readme.txt'), 'utf-8'))
+    yoAssert.equalsFileContent('.travis.yml', fs.readFileSync(path.resolve(__dirname, 'readme.txt'), 'utf-8'))
   })
 })
 
@@ -99,6 +99,6 @@ describe('Travis File', function () {
   })
 
   it('With Readme and coveralls', function () {
-    yoAssert.fileContent('.travis.yml', fs.readFileSync(path.resolve(__dirname, 'readme.txt'), 'utf-8'))
+    yoAssert.equalsFileContent('.travis.yml', fs.readFileSync(path.resolve(__dirname, 'readme-coveralls.txt'), 'utf-8'))
   })
 })
