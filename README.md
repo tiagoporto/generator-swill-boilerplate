@@ -4,7 +4,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
 [![NPM version](https://badge.fury.io/js/generator-swill-boilerplate.svg)][npm-swill-gen]
 [![NPM Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg)][npm-swill-gen]
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)][standardjs]
 [![Github License](https://img.shields.io/github/license/tiagoporto/generator-swill-boilerplate.svg)](https://raw.githubusercontent.com/tiagoporto/generator-swill-boilerplate/master/LICENSE)
 
 <small>Generator Dependencies:</small>
@@ -35,7 +35,7 @@
 * Combines matching media queries into one
 * Compiles scripts with [Babel](https://babeljs.io) and bundle with [Webpack](https://webpack.js.org)
 * Analyzes JavaScript with [ESLint](https://eslint.org) *optional
-* Uses [JavaScript Standard Style](http://standardjs.com)
+* Uses [JavaScript Standard Style][standardjs]
 * Uses [Handlebars](http://handlebarsjs.com) *optional
 * Validates HTML
 * Task Completion Notifications
@@ -81,3 +81,4 @@ Swill Boilerplate Generator is released under the terms of the [MIT license](htt
 
 [swill-website]: http://swillboilerplate.rocks
 [npm-swill-gen]: https://www.npmjs.com/package/generator-swill-boilerplate
+[standardjs]: http://standardjs.com
