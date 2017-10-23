@@ -35,7 +35,7 @@
 * Combines matching media queries into one
 * Compiles scripts with [Babel](https://babeljs.io) and bundle with [Webpack](https://webpack.js.org)
 * Analyzes JavaScript with [ESLint](https://eslint.org) *optional
-* Uses [http://standardjs.com/](JavaScript Standard Style)
+* Uses [JavaScript Standard Style](http://standardjs.com)
 * Uses [Handlebars](http://handlebarsjs.com) *optional
 * Validates HTML
 * Task Completion Notifications

@@ -212,7 +212,7 @@ gulp.task('vector-sprite', () => {
     },
     mode: {
       css: {
-        prefix: '.icon-%s',
+        prefix: `${config.svgPrefixClass}%s`,
         dest: './',
         sprite: path.join('../', basePaths.images.dest, 'vector-sprite.svg'),
         layout: 'vertical',
@@ -227,7 +227,7 @@ gulp.task('vector-sprite', () => {
   spriteOptions.mode.css.render[extensionStyle].dest = path.join('../../', paths.styles.src, `helpers/_vector-sprite.${extensionStyle}`)
 
   return gulp
-    .src(`${paths.sprite.src}*.svg`)
+    .src(path.join(paths.sprite.src, `*.svg`))
     .pipe(plumber())
     .pipe(svgSprite(spriteOptions))
     .pipe(gulp.dest(paths.images.dest))

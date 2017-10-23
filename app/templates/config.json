@@ -49,6 +49,8 @@
 
   "inlineSVG": false,
 
+  "svgPrefixClass": ".icon-",
+
   "handlebars": <%= use.handlebars %>,<% } %>
 
   "autoprefixerBrowsers": [
