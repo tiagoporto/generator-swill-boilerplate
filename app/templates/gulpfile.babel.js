@@ -83,7 +83,7 @@ const extensionStyle = '<%= preprocessor.extension %>'
 // ******************************** Tasks ********************************* //
 
 gulp.task('html', () => {
-  gulp<% if (use.handlebars) { %>
+  return gulp<% if (use.handlebars) { %>
     .src([
       path.join(paths.handlebars.src, '**/*.html'),
       path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
@@ -95,7 +95,10 @@ gulp.task('html', () => {
     .pipe(w3cjs())
     .pipe(gulp.dest(basePaths.dest))
     .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
-    .src(path.join(basePaths.dest, '**/*.html'))
+    .src([
+      path.join(basePaths.dest, '**/*.html'),
+      path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
+    ])
     .pipe(plumber())
     .pipe(w3cjs())
     .pipe(notify({message: 'HTML task complete', onLast: true}))<% } %>
@@ -128,7 +131,7 @@ gulp.task('styles-helpers', () => {
 })
 
 gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
-  gulp
+  return gulp
     .src([
       path.join(paths.styles.src, '*.styl'),
       path.join(`!${paths.styles.src}`, '_*.styl')
@@ -151,7 +154,7 @@ gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
             .pipe(gulp.dest(paths.styles.dest))
         })
     )<% } %><% if (preprocessor.name === "sass") { %>
-  gulp
+  return  gulp
     .src(path.join(paths.styles.src, 'styles.scss'))
     .pipe(plumber())
     .pipe(sass({precision: 3, outputStyle: 'expanded'})
@@ -236,7 +239,7 @@ gulp.task('vector-sprite', () => {
 
 // Fallback convert SVG to PNG
 gulp.task('svg2png', () => {
-  gulp
+  return  gulp
     .src(path.join(paths.images.dest, 'vector-sprite.svg'))
     .pipe(plumber())
     .pipe(svg2png())
@@ -271,7 +274,7 @@ gulp.task('images', () => {
 
 // Compile and Minify Other Scripts
 gulp.task('other-scripts', () => {
-  gulp
+  return gulp
     .src([
       path.join(paths.scripts.src, '*.js'),
       path.join(`!${paths.scripts.src}`, 'index.js')
@@ -291,7 +294,7 @@ gulp.task('other-scripts', () => {
 
 // Lint scripts
 gulp.task('lint-script', () => {
-  gulp
+  return gulp
     .src(path.join(paths.scripts.src, '**/*.js'))
     .pipe(gulpIf(config.lintJS, eslint()))
     .pipe(gulpIf(config.lintJS, eslint.format()))
@@ -318,7 +321,7 @@ gulp.task('lint-script', () => {
 // })
 
 gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
-  gulp.src(path.join(paths.scripts.src, 'index.js'))
+  return gulp.src(path.join(paths.scripts.src, 'index.js'))
     .pipe(plumber())
     .pipe(webpackStream(webpackConfig), webpack)
     .pipe(gulp.dest(paths.scripts.dest))
@@ -355,7 +358,7 @@ gulp.task('copy', () => {
 })
 
 gulp.task('outdatedbrowser', () => {
-  gulp
+  return gulp
     .src('node_modules/outdatedbrowser/outdatedbrowser/lang/*')
     .pipe(gulp.dest(path.join(basePaths.dest, 'lang/outdated_browser')))
 })
@@ -364,7 +367,7 @@ gulp.task('outdatedbrowser', () => {
 
 // Minify assets and Copy HTML
 gulp.task('combine-assets', () => {
-  gulp
+  return gulp
     .src(path.join(basePaths.dest, '**/*.{html,php}'))
     .pipe(useref({searchPath: basePaths.dest}))
     .pipe(gulpIf('*.js', uglify()))
@@ -386,7 +389,7 @@ gulp.task('clean', cb => {
 })
 
 gulp.task('gh', () => {
-  gulp
+  return gulp
     .src(path.join(basePaths.build, '**/*'))
     .pipe(ghPages())
 })
