@@ -39,12 +39,10 @@ module.exports = class extends Yeoman {
         default: 'en'
       }, {
         name: 'authorName',
-        message: 'Author Name',
-        default: this.user.git.name()
+        message: 'Author Name'
       }, {
         name: 'authorEmail',
-        message: 'Author Email',
-        default: this.user.git.email()
+        message: 'Author Email'
       }, {
         name: 'authorHomepage',
         message: 'Author\'s website'
@@ -339,9 +337,9 @@ module.exports = class extends Yeoman {
     var packageJson = require('./templates/_package.json')
 
     packageJson.name = this.props.project.sanitizeName
-    packageJson.description = this.props.project.description
-    packageJson.homepage = this.props.project.homepage
-    packageJson.keywords = this.props.project.keywords
+    packageJson.description = this.props.project.description || ''
+    packageJson.homepage = this.props.project.homepage || ''
+    packageJson.keywords = this.props.project.keywords || []
     packageJson.author.name = this.props.author.name
     packageJson.author.url = this.props.author.homepage
     packageJson.repository.url = this.props.project.repository
@@ -349,13 +347,17 @@ module.exports = class extends Yeoman {
     packageJson.scripts['lint-fix'] = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/. --fix`
     this.props.integrations.coveralls && (packageJson.devDependencies['coveralls'] = '3.0.0') && (packageJson.scripts['coveralls'] = 'nyc --reporter=text-lcov npm test | coveralls');
 
+    // Optional githooks
     (this.props.use.gitHooks.prepush || this.props.use.gitHooks.precommit) && (packageJson.devDependencies['husky'] = '0.14.3')
     this.props.use.gitHooks.prepush && (packageJson.scripts.prepush = 'npm test')
     this.props.use.gitHooks.precommit && (packageJson.scripts.precommit = 'npm run lint-fix && npm run lint')
+
+    // Optional preprocessor
     this.props.preprocessor.name === 'sass' && (packageJson.devDependencies['gulp-sass'] = '3.1.0')
     this.props.preprocessor.name === 'stylus' && (packageJson.devDependencies['gulp-stylus'] = '2.6.0')
-    this.props.use.handlebars && (packageJson.devDependencies['gulp-hb'] = '6.0.2')
 
+    // Optional libs and plugins
+    this.props.use.handlebars && (packageJson.devDependencies['gulp-hb'] = '6.0.2')
     this.props.use.jquery && (packageJson.dependencies.jquery = '3.2.1')
     this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0') && (packageJson.devDependencies['exports-loader'] = '0.6.4 ')
     this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5 ')
