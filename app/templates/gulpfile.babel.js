@@ -295,7 +295,7 @@ gulp.task('other-scripts', () => {
 // Lint scripts
 gulp.task('lint-script', () => {
   return gulp
-    .src(path.join(paths.scripts.src, '**/*.js'))
+    .src(path.join(paths.scripts.src, '**/*.{js,jsx}'))
     .pipe(gulpIf(config.lintJS, eslint()))
     .pipe(gulpIf(config.lintJS, eslint.format()))
 })
@@ -332,12 +332,10 @@ gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
 
 // Copy Files to Build
 gulp.task('copy', () => {
-  const assets = {searchPath: basePaths.dest}
-
   // Minify and Copy HTML
   const html = gulp
     .src(path.join(basePaths.dest, '**/*.{html,php}'))
-    .pipe(useref(assets))
+    .pipe(useref({searchPath: basePaths.dest}))
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', csso()))
     .pipe(gulpIf('*.html', htmlmin({collapseWhitespace: true, spare: true, empty: true, conditionals: true})))
@@ -364,16 +362,6 @@ gulp.task('outdatedbrowser', () => {
 })
 
 // *************************** Utility Tasks ****************************** //
-
-// Minify assets and Copy HTML
-gulp.task('combine-assets', () => {
-  return gulp
-    .src(path.join(basePaths.dest, '**/*.{html,php}'))
-    .pipe(useref({searchPath: basePaths.dest}))
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulpIf('*.css', csso()))
-    .pipe(gulp.dest(basePaths.dest))
-})
 
 // Clean Directories
 gulp.task('clean', cb => {
@@ -414,7 +402,7 @@ gulp.task('serve', () => {
 
   gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png', browserSync.reload])
 
-  gulp.watch(path.join(paths.scripts.src, '**/*.js'), ['scripts', browserSync.reload])
+  gulp.watch(path.join(paths.scripts.src, '**/*.{js,jsx}'), ['scripts', browserSync.reload])
 
   gulp.watch(
     [
@@ -477,7 +465,7 @@ gulp.task('compile', () => {
 
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('gh-pages', () => {
-  env = 'production'
+  // env = 'production'
   sequence(
     [
       'outdatedbrowser',
@@ -498,7 +486,7 @@ gulp.task('gh-pages', () => {
 
 // Build Project
 gulp.task('build', ['clean'], () => {
-  env = 'production'
+  // env = 'production'
   sequence(
     [
       'outdatedbrowser',
@@ -518,7 +506,7 @@ gulp.task('build', ['clean'], () => {
 
 // Build Project and serve
 gulp.task('build:serve', ['clean'], () => {
-  env = 'production'
+  // env = 'production'
   sequence(
     [
       'outdatedbrowser',
