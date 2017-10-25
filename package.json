@@ -45,7 +45,7 @@
     "generator-license": "5.1.0",
     "mkdirp": "0.5.1",
     "underscore.string": "3.3.4",
-    "yeoman-generator": "2.0.0",
+    "yeoman-generator": "2.0.1",
     "yosay": "2.0.1"
   },
   "devDependencies": {
