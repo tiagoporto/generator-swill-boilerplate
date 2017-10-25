@@ -359,8 +359,8 @@ module.exports = class extends Yeoman {
     // Optional libs and plugins
     this.props.use.handlebars && (packageJson.devDependencies['gulp-hb'] = '6.0.2')
     this.props.use.jquery && (packageJson.dependencies.jquery = '3.2.1')
-    this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0') && (packageJson.devDependencies['exports-loader'] = '0.6.4 ')
-    this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5 ')
+    this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0') && (packageJson.devDependencies['exports-loader'] = '0.6.4')
+    this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5')
     this.props.use.normalize && (packageJson.dependencies['normalize.css'] = '7.0.0')
 
     this.fs.writeJSON(this.destinationPath('package.json'), packageJson)
