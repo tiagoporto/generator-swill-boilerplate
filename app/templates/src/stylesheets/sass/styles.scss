@@ -1,7 +1,6 @@
 // Helpers
 @import "settings/variables";
-@import "helpers/functions";
-@import "helpers/mixins";
+@import "helpers/helpers";
 
 // Web Fonts
 // @import "settings/web_fonts";
@@ -16,15 +15,23 @@
 /*! ==================================================================
    Main Styles
    ================================================================== */
-@import "partials/_index";
 
-
-
-
-/*! ==================================================================
-   Media Queries
-   ================================================================== */
-// Printers
-@media print{
-    @import "partials/_print";
+/*!
+*
+* Box model reset
+* http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+*
+*/
+html {
+    box-sizing: border-box;
 }
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+i[class^="icon-"] {
+    display: block;
+}
+
+@import "components/index"

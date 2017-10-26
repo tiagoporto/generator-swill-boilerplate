@@ -1,7 +1,6 @@
 // Helpers
 @import "settings/_variables"
-@import "helpers/_functions"
-@import "helpers/_mixins"
+@import "helpers/_helpers"
 
 // Web Fonts
 // @import "settings/_web-fonts"
@@ -13,17 +12,23 @@
 // Vendors
 // @import "../../node_modules/"
 
-
 /*! ==================================================================
    Main Styles
    ================================================================== */
-@import "partials/_index"
+
+/*!
+*
+* Box model reset
+* http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+*
+*/
+html
+    box-sizing: border-box
+
+*, *:before, *:after
+    box-sizing: inherit
+
+i[class^="icon-"]
+    display: block
+
 @import "components/_index"
-
-
-
-/*! ==================================================================
-   Media Queries
-   ================================================================== */
-@media print
-    @import "partials/_print"
