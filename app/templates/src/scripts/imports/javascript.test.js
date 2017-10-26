@@ -1,5 +1,5 @@
-describe('Name of the group test', function () {
-  it('should behave...', function () {
-
+describe('Name of the group test', () => {
+  it('should behave...', () => {
+    // Add assert
   })
 })
