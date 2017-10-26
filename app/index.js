@@ -172,22 +172,22 @@ module.exports = class extends Yeoman {
         name: 'features',
         message: 'Do you want use some of these lib/plugin?',
         choices: [{
-          name: 'jQuery',
+          name: 'jQuery - Lib designed to simplify the client-side scripting of HTML.',
           value: 'jquery',
           checked: true
         }, {
-          name: 'Normalize.css',
+          name: 'Normalize.css - Make browsers render all elements more consistently.',
           value: 'normalize',
           checked: true
         }, {
-          name: 'OutdatedBrowser',
+          name: 'OutdatedBrowser -  Detects outdated browsers and advises users to upgrade to a new version.',
           value: 'outdatedBrowser',
           checked: true
         }]
       }, {
         type: 'confirm',
         name: 'jqueryLogoDownloadtip',
-        message: 'Want use jQuery Logo Downloadtip?',
+        message: 'Add jQuery Logo Downloadtip? - Allow users to download multiple logotype image types when they trying to grab low resolution logo.',
         default: false,
         when: function (response) {
           return response.features.indexOf('jquery') >= 0
@@ -343,9 +343,14 @@ module.exports = class extends Yeoman {
     packageJson.author.name = this.props.author.name
     packageJson.author.url = this.props.author.homepage
     packageJson.repository.url = this.props.project.repository
-    packageJson.scripts.lint = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
-    packageJson.scripts['lint-fix'] = `eslint ${this.props.folder.src}/${this.props.folder.scripts.src}/. --fix`
-    this.props.integrations.coveralls && (packageJson.devDependencies['coveralls'] = '3.0.0') && (packageJson.scripts['coveralls'] = 'nyc --reporter=text-lcov npm test | coveralls');
+    packageJson.scripts.lint = `${packageJson.scripts.lint} ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
+    this.props.integrations.coveralls && (packageJson.devDependencies['coveralls'] = '3.0.0') && (packageJson.scripts['coveralls'] = 'nyc --reporter=text-lcov npm test | coveralls')
+
+    if (this.props.use.lint.js) {
+      packageJson.scripts.start = `${packageJson.scripts.start} & npm run lint-w`
+      packageJson.scripts.serve = `${packageJson.scripts.serve} & npm run lint-w`
+      packageJson.scripts['serve-build'] = `${packageJson.scripts['serve-build']} & npm run lint-w`
+    }
 
     // Optional githooks
     (this.props.use.gitHooks.prepush || this.props.use.gitHooks.precommit) && (packageJson.devDependencies['husky'] = '0.14.3')
@@ -359,8 +364,8 @@ module.exports = class extends Yeoman {
     // Optional libs and plugins
     this.props.use.handlebars && (packageJson.devDependencies['gulp-hb'] = '6.0.2')
     this.props.use.jquery && (packageJson.dependencies.jquery = '3.2.1')
-    this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0') && (packageJson.devDependencies['exports-loader'] = '0.6.4')
-    this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5')
+    this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0')
+    this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5') && (packageJson.devDependencies['exports-loader'] = '0.6.4')
     this.props.use.normalize && (packageJson.dependencies['normalize.css'] = '7.0.0')
 
     this.fs.writeJSON(this.destinationPath('package.json'), packageJson)
