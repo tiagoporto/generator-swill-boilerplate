@@ -166,3 +166,27 @@ describe('Package.json File', () => {
     yoAssert.equalsFileContent('package.json', fs.readFileSync(path.resolve(__dirname, 'jqueryLogoDownloadtip.json'), 'utf-8'))
   })
 })
+
+describe('Package.json File', () => {
+  before(function () {
+    return yoTest
+      .run(path.join(__dirname, '../../app'))
+      .withPrompts({
+        preprocessor: 'stylus',
+        features: [
+          'outdatedBrowser'
+        ],
+        options: [],
+        files: [],
+        handlebars: false,
+        gitHooks: [],
+        integrations: [],
+        license: 'unlicense'
+      })
+      .toPromise()
+  })
+
+  xit('Outdatedbrowser', function () {
+    yoAssert.equalsFileContent('package.json', fs.readFileSync(path.resolve(__dirname, 'outdatedbrowser.json'), 'utf-8'))
+  })
+})
