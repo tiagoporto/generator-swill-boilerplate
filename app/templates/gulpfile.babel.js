@@ -14,7 +14,6 @@ const config = require('./config.json')
 const csslint = require('gulp-csslint')
 const csso = require('gulp-csso')
 const del = require('del')
-const eslint = require('gulp-eslint')
 const file = require('gulp-file')
 const ghPages = require('gulp-gh-pages')
 const gulp = require('gulp')
@@ -282,8 +281,6 @@ gulp.task('other-scripts', () => {
     .pipe(plumber())
     .pipe(newer(paths.scripts.dest))
     .pipe(plumber())
-    .pipe(gulpIf(config.lintJS, eslint()))
-    .pipe(gulpIf(config.lintJS, eslint.format()))
     .pipe(babel())
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(rename({suffix: '.min'}))
@@ -292,16 +289,8 @@ gulp.task('other-scripts', () => {
     .pipe(notify({message: 'Scripts task complete', onLast: true}))
 })
 
-// Lint scripts
-gulp.task('lint-script', () => {
-  return gulp
-    .src(path.join(paths.scripts.src, '**/*.{js,jsx}'))
-    .pipe(gulpIf(config.lintJS, eslint()))
-    .pipe(gulpIf(config.lintJS, eslint.format()))
-})
-
 // Compile, Minify Main Script and run other-scripts task
-// gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
+// gulp.task('scripts', ['other-scripts'], () => {
 //   return browserify(path.join(paths.scripts.src, 'index.js'))
 //     .transform(envify({
 //       NODE_ENV: env
@@ -320,7 +309,7 @@ gulp.task('lint-script', () => {
 //     .pipe(gulp.dest(paths.scripts.dest))
 // })
 
-gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
+gulp.task('scripts', ['other-scripts'], () => {
   return gulp.src(path.join(paths.scripts.src, 'index.js'))
     .pipe(plumber())
     .pipe(webpackStream(webpackConfig), webpack)
@@ -332,7 +321,7 @@ gulp.task('scripts', ['lint-script', 'other-scripts'], () => {
 
 // Copy Files to Build
 gulp.task('copy', () => {
-  // Minify and Copy HTML
+  // Minify and Copy HTML & PHP
   const html = gulp
     .src(path.join(basePaths.dest, '**/*.{html,php}'))
     .pipe(useref({searchPath: basePaths.dest}))
