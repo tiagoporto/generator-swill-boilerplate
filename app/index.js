@@ -52,12 +52,20 @@ module.exports = class extends Yeoman {
       }, {
         type: 'confirm',
         name: 'handlebars',
-        message: 'Do you want use handlebars Template?',
+        message: 'Handlebars Template?',
         default: true
       }, {
         type: 'confirm',
+        name: 'inlineSVG',
+        message: 'Use SVG inline?',
+        default: true,
+        when: function (response) {
+          return response.handlebars
+        }
+      }, {
+        type: 'confirm',
         name: 'settingFolder',
-        message: 'You can rename default folder structure, do you want customize?',
+        message: 'Do you want to customize the folder structure?',
         default: false
       }, {
         name: 'srcFolder',
@@ -170,7 +178,7 @@ module.exports = class extends Yeoman {
       }, {
         type: 'checkbox',
         name: 'features',
-        message: 'Do you want use some of these lib/plugin?',
+        message: 'Lib/plugin?',
         choices: [{
           name: 'jQuery - Lib designed to simplify the client-side scripting of HTML.',
           value: 'jquery',
@@ -288,6 +296,7 @@ module.exports = class extends Yeoman {
         normalize: props.features.indexOf('normalize') >= 0,
         outdatedBrowser: props.features.indexOf('outdatedBrowser') >= 0,
         handlebars: props.handlebars,
+        inlineSVG: props.inlineSVG,
         gitHooks: {
           precommit: props.gitHooks.indexOf('precommit') >= 0,
           prepush: props.gitHooks.indexOf('prepush') >= 0
@@ -345,6 +354,7 @@ module.exports = class extends Yeoman {
     packageJson.repository.url = this.props.project.repository
     packageJson.scripts.lint = `${packageJson.scripts.lint} ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
     this.props.integrations.coveralls && (packageJson.devDependencies['coveralls'] = '3.0.0') && (packageJson.scripts['coveralls'] = 'nyc --reporter=text-lcov npm test | coveralls')
+    this.props.use.inlineSVG && (packageJson.devDependencies['gulp-inline'] = '0.1.3')
 
     if (this.props.use.lint.js) {
       packageJson.scripts.start = `${packageJson.scripts.start} & npm run lint-w`

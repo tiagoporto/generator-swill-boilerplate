@@ -45,13 +45,9 @@
 
   "lintCSS": <%= use.lint.css %>,
 
-  "lintJS": <%= use.lint.js %>,<% if (use.handlebars) { %>
-
-  "inlineSVG": false,
+  "lintJS": <%= use.lint.js %>,
 
   "svgPrefixClass": ".icon-",
-
-  "handlebars": <%= use.handlebars %>,<% } %>
 
   "autoprefixerBrowsers": [
     "ie > 7",

@@ -20,8 +20,8 @@ const gulp = require('gulp')
 const gulpIf = require('gulp-if')<% if (use.handlebars) { %>
 const handlebars = require('gulp-hb')<% } %>
 const htmlmin = require('gulp-htmlmin')
-const imagemin = require('gulp-imagemin')
-const inline = require('gulp-inline')
+const imagemin = require('gulp-imagemin')<% if (use.inlineSVG) { %>
+const inline = require('gulp-inline')<% } %>
 const merge = require('merge-stream')
 const mergeMediaQueries = require('gulp-merge-media-queries')
 const newer = require('gulp-newer')
@@ -91,12 +91,12 @@ gulp.task('html', () => {
     .pipe(handlebars({
       partials: path.join(paths.handlebars.src, basePaths.handlebars.partials.src, '**/*.hbs')
     }))
-    .pipe(w3cjs())
+    .pipe(w3cjs())<% if (use.inlineSVG) { %>
     .pipe(inline({
       base: './',
-      disabledTypes: ['css', 'js']
+      disabledTypes: ['css', 'js', 'img']
     }))
-    .pipe(gulp.dest(basePaths.dest))
+<% } %>    .pipe(gulp.dest(basePaths.dest))
     .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
     .src([
       path.join(basePaths.dest, '**/*.html'),
@@ -393,15 +393,12 @@ gulp.task('serve', () => {
     ['styles', browserSync.reload]
   )
 
-  gulp.watch([
-      path.join(basePaths.src, '**/*.{html,hbs,php}'),
-      path.join(basePaths.dest, '**/*.{html,php}')
-    ],
-    ['html', browserSync.reload])
+  gulp.watch([path.join(basePaths.src, '**/*.{html,hbs}')], ['html', browserSync.reload])
 
-  gulp.watch([
-    path.join(basePaths.dest, '**/*'),
-    path.join(basePaths.dest, '!**/*.{html,php,css,js,bmp,gif,jpg,jpeg,png,svg}')
+  gulp.watch(
+    [
+      path.join(basePaths.dest, '**/*'),
+      path.join(`!${basePaths.dest}`, '**/*.{html,php,css,js,bmp,gif,jpg,jpeg,png,svg}')
     ],
     [browserSync.reload])
 })
