@@ -142,7 +142,7 @@ gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
             .pipe(gulp.dest(paths.styles.dest))
         })
     )<% } %><% if (preprocessor.name === "sass") { %>
-  return  gulp
+  return gulp
     .src(path.join(paths.styles.src, 'styles.scss'))
     .pipe(plumber())
     .pipe(sass({precision: 3, outputStyle: 'expanded'})
@@ -367,14 +367,6 @@ gulp.task('gh', () => {
 gulp.task('serve', () => {
   browserSync(config.browserSync)
 
-  gulp.watch(
-    [
-      path.join(paths.images.src, '**/*.{bmp,gif,jpg,jpeg,png,svg}'),
-      path.join(`!${paths.sprite.src}`, '**/*')
-    ],
-    ['images', browserSync.reload]
-  )
-
   gulp.watch(path.join(paths.sprite.src, '**/*.{png,gif}'), ['bitmap-sprite', browserSync.reload])
 
   gulp.watch(path.join(paths.sprite.src, '**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
@@ -387,6 +379,14 @@ gulp.task('serve', () => {
 
   gulp.watch(
     [
+      path.join(paths.images.src, '**/*.{bmp,gif,jpg,jpeg,png,svg}'),
+      path.join(`!${paths.sprite.src}`, '**/*')
+    ],
+    ['images', browserSync.reload]
+  )
+
+  gulp.watch(
+    [
       path.join(paths.styles.src, '**/*.{styl,scss,sass}'),
       path.join(`!${paths.styles.src}`, 'helpers/{mixins,functions}/*.{styl,scss,sass}')
     ],
@@ -394,12 +394,16 @@ gulp.task('serve', () => {
   )
 
   gulp.watch([
-    path.join(basePaths.src, '**/*.{html,hbs,php}'),
-    path.join(basePaths.dest, '**/*.{html,php}')
-  ],
-  ['html', browserSync.reload])
+      path.join(basePaths.src, '**/*.{html,hbs,php}'),
+      path.join(basePaths.dest, '**/*.{html,php}')
+    ],
+    ['html', browserSync.reload])
 
-  gulp.watch(path.join(basePaths.dest, '!**/*.{html,php,css,js,bmp,gif,jpg,jpeg,png,svg}'), [browserSync.reload])
+  gulp.watch([
+    path.join(basePaths.dest, '**/*'),
+    path.join(basePaths.dest, '!**/*.{html,php,css,js,bmp,gif,jpg,jpeg,png,svg}')
+    ],
+    [browserSync.reload])
 })
 
 // Serve the project
