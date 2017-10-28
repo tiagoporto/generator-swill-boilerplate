@@ -450,6 +450,8 @@ module.exports = class extends Yeoman {
       }
     )
 
+    this.fs.write(this.props.folder.src + '/' + this.props.folder.styles.src + '/helpers/functions/.gitkeep', '')
+
     // scripts
     this.fs.copyTpl(
       this.templatePath('src/scripts/**/*'),
