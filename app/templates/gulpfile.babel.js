@@ -91,13 +91,14 @@ gulp.task('html', () => {
     .pipe(handlebars({
       partials: path.join(paths.handlebars.src, basePaths.handlebars.partials.src, '**/*.hbs')
     }))
-    .pipe(w3cjs())<% if (use.inlineSVG) { %>
+    .pipe(w3cjs())
+    .pipe(gulp.dest(basePaths.dest))<% if (use.inlineSVG) { %>
     .pipe(inline({
       base: './',
       disabledTypes: ['css', 'js', 'img']
     }))
-<% } %>    .pipe(gulp.dest(basePaths.dest))
-    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
+    .pipe(gulp.dest(basePaths.dest))
+<% } %>    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
     .src([
       path.join(basePaths.dest, '**/*.html'),
       path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
