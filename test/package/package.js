@@ -82,6 +82,7 @@ describe('Package.json File', function () {
         options: [],
         files: [],
         handlebars: true,
+        inlineSVG: false,
         gitHooks: [],
         integrations: [],
         license: 'unlicense'
@@ -91,6 +92,29 @@ describe('Package.json File', function () {
 
   xit('Handlebars', function () {
     yoAssert.equalsFileContent('package.json', fs.readFileSync(path.resolve(__dirname, 'handlebars.json'), 'utf-8'))
+  })
+})
+
+describe('Package.json File', function () {
+  before(function () {
+    return yoTest
+      .run(path.join(__dirname, '../../app'))
+      .withPrompts({
+        preprocessor: 'stylus',
+        features: [],
+        options: [],
+        files: [],
+        handlebars: true,
+        inlineSVG: true,
+        gitHooks: [],
+        integrations: [],
+        license: 'unlicense'
+      })
+      .toPromise()
+  })
+
+  xit('Handlebars', function () {
+    yoAssert.equalsFileContent('package.json', fs.readFileSync(path.resolve(__dirname, 'inlinesvg.json'), 'utf-8'))
   })
 })
 

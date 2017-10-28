@@ -34,7 +34,6 @@
   "stylus": [
     "src/stylesheets/components/_index.styl",
     "src/stylesheets/helpers/functions/.gitkeep",
-    "src/stylesheets/helpers/mixins/_arrow.styl",
     "src/stylesheets/helpers/mixins/_clearfix.styl",
     "src/stylesheets/helpers/mixins/_retina.styl",
     "src/stylesheets/settings/_variables.styl",
