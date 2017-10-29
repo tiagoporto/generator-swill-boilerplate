@@ -45,7 +45,9 @@
 
   "lintCSS": <%= use.lint.css %>,
 
-  "lintJS": <%= use.lint.js %>,
+  "lintJS": <%= use.lint.js %>,<% if (use.inlineSVG) { %>
+
+  "inlineSVG": true,<% } %>
 
   "svgPrefixClass": ".icon-",
 

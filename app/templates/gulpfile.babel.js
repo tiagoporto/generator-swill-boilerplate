@@ -14,6 +14,7 @@ const config = require('./config.json')
 const csslint = require('gulp-csslint')
 const csso = require('gulp-csso')
 const del = require('del')
+const eslint = require('gulp-eslint')
 const file = require('gulp-file')
 const ghPages = require('gulp-gh-pages')
 const gulp = require('gulp')
@@ -92,11 +93,11 @@ gulp.task('html', () => {
       partials: path.join(paths.handlebars.src, basePaths.handlebars.partials.src, '**/*.hbs')
     }))
     .pipe(w3cjs())
-    .pipe(gulp.dest(basePaths.dest))<% if (use.inlineSVG) { %>
-    .pipe(inline({
+    .pipe(gulpIf(config.inlineSVG, gulp.dest(basePaths.dest)))<% if (use.inlineSVG) { %>
+    .pipe(gulpIf(config.inlineSVG, inline({
       base: './',
       disabledTypes: ['css', 'js', 'img']
-    }))
+    })))
     .pipe(gulp.dest(basePaths.dest))
 <% } %>    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
     .src([
@@ -291,7 +292,7 @@ gulp.task('scripts', () => {
     .pipe(uglify())
     .pipe(gulp.dest(paths.scripts.dest))
 
-    const others = gulp
+  const others = gulp
     .src([
       path.join(paths.scripts.src, '*.js'),
       path.join(`!${paths.scripts.src}`, 'index.js')
@@ -306,7 +307,12 @@ gulp.task('scripts', () => {
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe(notify({message: 'Scripts task complete', onLast: true}))
 
-    return merge(main, others)
+  const lint = gulp
+    .src(path.join(paths.scripts.src, '**/*.{js,jsx}'))
+    .pipe(gulpIf(config.lintJS, eslint()))
+    .pipe(gulpIf(config.lintJS, eslint.format()))
+
+  return merge(lint, main, others)
 })
 
 // Copy Files to Build

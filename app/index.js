@@ -180,22 +180,22 @@ module.exports = class extends Yeoman {
         name: 'features',
         message: 'Lib/plugin?',
         choices: [{
-          name: 'jQuery - Lib designed to simplify the client-side scripting of HTML.',
+          name: 'jQuery (Lib designed to simplify the client-side scripting of HTML)',
           value: 'jquery',
           checked: true
         }, {
-          name: 'Normalize.css - Make browsers render all elements more consistently.',
+          name: 'Normalize.css (Make browsers render all elements more consistently)',
           value: 'normalize',
           checked: true
         }, {
-          name: 'OutdatedBrowser -  Detects outdated browsers and advises users to upgrade to a new version.',
+          name: 'OutdatedBrowser (Detects outdated browsers and advises users to upgrade to a new version)',
           value: 'outdatedBrowser',
           checked: true
         }]
       }, {
         type: 'confirm',
         name: 'jqueryLogoDownloadtip',
-        message: 'Add jQuery Logo Downloadtip? - Allow users to download multiple logotype image types when they trying to grab low resolution logo.',
+        message: 'Add jQuery Logo Downloadtip? (Allow users to download multiple logotype image types when they trying to grab low resolution logo)',
         default: false,
         when: function (response) {
           return response.features.indexOf('jquery') >= 0
@@ -354,13 +354,7 @@ module.exports = class extends Yeoman {
     packageJson.repository.url = this.props.project.repository
     packageJson.scripts.lint = `${packageJson.scripts.lint} ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
     this.props.integrations.coveralls && (packageJson.devDependencies['coveralls'] = '3.0.0') && (packageJson.scripts['coveralls'] = 'nyc --reporter=text-lcov npm test | coveralls')
-    this.props.use.inlineSVG && (packageJson.devDependencies['gulp-inline'] = '0.1.3')
-
-    if (this.props.use.lint.js) {
-      packageJson.scripts.start = `${packageJson.scripts.start} & npm run lint-w`
-      packageJson.scripts.serve = `${packageJson.scripts.serve} & npm run lint-w`
-      packageJson.scripts['serve-build'] = `${packageJson.scripts['serve-build']} & npm run lint-w`
-    }
+    this.props.use.inlineSVG && (packageJson.devDependencies['gulp-inline'] = '0.1.3');
 
     // Optional githooks
     (this.props.use.gitHooks.prepush || this.props.use.gitHooks.precommit) && (packageJson.devDependencies['husky'] = '0.14.3')
