@@ -398,9 +398,11 @@ module.exports = class extends Yeoman {
       this.destinationPath('.gitattributes')
     )
 
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('gitignore'),
-      this.destinationPath('.gitignore')
+      this.destinationPath('.gitignore'), {
+        folder: this.props.folder
+      }
     )
 
     // Lint

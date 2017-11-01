@@ -1,3 +1,4 @@
+.babelrc
 .csslintrc
 .editorconfig
 .eslintrc
@@ -7,11 +8,13 @@
 
 bower.json
 config.json
-gulpfile.js
+gulpfile.babel.js
 karma.conf.js
 yarn.lock
+webpack.config.js
 
 .publish/
+.nyc_output/
 coverage/
 <%= folder.build %>/
 spec/

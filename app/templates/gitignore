@@ -85,8 +85,6 @@ bower_components
 ## Swill boilerplate
 #################
 
-build/
-app/templates/src/stylesheets/stylus/helpers/_functions.styl
-app/templates/src/stylesheets/stylus/helpers/_mixins.styl
-app/templates/src/stylesheets/sass/helpers/_functions.scss
-app/templates/src/stylesheets/sass/helpers/_mixins.scss
+<%= folder.build %>/
+<%= folder.src %>/<%= folder.styles.src %>/helpers/_helpers.styl
+<%= folder.src %>/<%= folder.styles.src %>/helpers/_helpers.scss
