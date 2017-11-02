@@ -635,7 +635,11 @@ module.exports = class extends Yeoman {
       )
     }
 
-    this.config.set(this.prompts)
+    var swillPackage = require('../package.json')
+    var version = { version: swillPackage.version }
+    var prompts = Object.assign(version, this.prompts)
+
+    this.config.set(prompts)
     this.config.save()
     this.installDependencies({bower: false})
   }
