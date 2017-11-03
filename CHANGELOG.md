@@ -7,23 +7,34 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.0beta] - 2017-xx-xx
 ### Added
 - Option to use handlebars
-- Save license option in `.yo-rc.json`
-- Browserify
+- Save license option and Swill Boilerplate version in `.yo-rc.json`
 - awesome_bot in travis to check links in README.md
 - Project name to manifest.json
 - Support to NODE_ENV in JS
+- Install dependencies after finish prompt
+- Mocha and (NYC) Istanbul
+- Git hooks options
+- Social meta in HTML
+- Option to sprite class name
 
 ### Changed
-- Manual scripts management to Browserify
+- Scripts management to Webpack
 - Update packages
 - Move outdated browser to oficial npm
-- Update some eslint rules
+- Eslint rules
 - Use babel in gulp
-- Unify partials styles
 - Rename folder scripts/settings to scripts/imports
+- Gulp with es6
+- Scripts links from html
+- Tests now supports files *.test.js
 
 ### Fixed
-- Karma task
+- HTML links
+
+### Removed
+- Karma and Jasmine
+- Partial stylus
+- Header wrapper
 
 ## [0.8.1beta] - 2017-09-17
 ### Added
