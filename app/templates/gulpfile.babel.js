@@ -76,10 +76,6 @@ const paths = {
   }
 }
 
-// ******************************* Settings ******************************* //
-// let env = process.env.NODE_ENV ? 'production' : 'development'
-const extensionStyle = '<%= preprocessor.extension %>'
-
 // ******************************** Tasks ********************************* //
 
 gulp.task('html', () => {
@@ -112,11 +108,11 @@ gulp.task('html', () => {
 gulp.task('styles-helpers', () => {
   return gulp
     .src([
-      path.join(paths.styles.src, 'helpers/mixins/*.{styl,scss}'),
-      path.join(paths.styles.src, 'helpers/functions/*.{styl,scss}')
+      path.join(paths.styles.src, 'helpers/mixins/*.<%= preprocessor.extension %>'),
+      path.join(paths.styles.src, 'helpers/functions/*.<%= preprocessor.extension %>')
     ])
     .pipe(plumber())
-    .pipe(concat(`_helpers.${extensionStyle}`))
+    .pipe(concat('_helpers.<%= preprocessor.extension %>'))
     .pipe(gulp.dest(path.join(paths.styles.src, 'helpers')))
 })
 
@@ -128,7 +124,12 @@ gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
     ])
     .pipe(plumber())
     .pipe(
-      stylus({'include css': true})
+      stylus({
+        'include': [
+          'node_modules'
+        ],
+        'include css': true
+      })
         .on('error', err => {
           console.log(err.message)
 
@@ -147,7 +148,13 @@ gulp.task('styles', () => {<% if (preprocessor.name === "stylus") { %>
   return gulp
     .src(path.join(paths.styles.src, 'styles.scss'))
     .pipe(plumber())
-    .pipe(sass({precision: 3, outputStyle: 'expanded'})
+    .pipe(sass({
+      precision: 3,
+      outputStyle: 'expanded',
+      includePaths: [
+        'node_modules'
+      ]
+    })
       .on('error', sass.logError)
     )<% } %>
     .pipe(autoprefixer({browsers: config.autoprefixerBrowsers}))
@@ -169,7 +176,7 @@ gulp.task('bitmap-sprite', () => {
     .pipe(
       spritesmith({
         imgName: 'bitmap-sprite.png',
-        cssName: `_bitmap-sprite.${extensionStyle}`,
+        cssName: '_bitmap-sprite.<%= preprocessor.extension %>',
         cssOpts: {
           cssSelector: item => {
             if (item.name.indexOf('~hover') !== -1) {
@@ -215,9 +222,9 @@ gulp.task('vector-sprite', () => {
     }
   }
 
-  spriteOptions.mode.css.render[extensionStyle] = {}
+  spriteOptions.mode.css.render.<%= preprocessor.extension %> = {}
 
-  spriteOptions.mode.css.render[extensionStyle].dest = path.join('../../', paths.styles.src, `helpers/_vector-sprite.${extensionStyle}`)
+  spriteOptions.mode.css.render.<%= preprocessor.extension %>.dest = path.join('../../', paths.styles.src, 'helpers/_vector-sprite.<%= preprocessor.extension %>')
 
   return gulp
     .src(path.join(paths.sprite.src, `*.svg`))
@@ -262,27 +269,19 @@ gulp.task('images', () => {
   return merge(images, svg)
 })
 
-// Compile, Minify Main Script and run other-scripts task
-// gulp.task('scripts', ['other-scripts'], () => {
-//   return browserify(path.join(paths.scripts.src, 'index.js'))
-//     .transform(envify({
-//       NODE_ENV: env
-//     }))
-//     .transform(babelify, babelOption)
-//     .bundle()
-//     .pipe(source('scripts.js'))
-//     .pipe(buffer())
-//     // .pipe(plumber())
-//     .pipe(cached('scripts'))
-//     .pipe(remember('scripts'))
-//     // .pipe(plumber())
-//     .pipe(gulp.dest(paths.scripts.dest))
-//     .pipe(rename({suffix: '.min'}))
-//     .pipe(uglify())
-//     .pipe(gulp.dest(paths.scripts.dest))
-// })
-
+// Compile, Minify and Lint Script
 gulp.task('scripts', () => {
+  // return browserify(path.join(paths.scripts.src, 'index.js'))
+  //   .transform(envify({
+  //     NODE_ENV: env
+  //   }))
+  //   .transform(babelify, babelOption)
+  //   .bundle()
+  //   .pipe(source('scripts.js'))
+  //   .pipe(buffer())
+  //   .pipe(cached('scripts'))
+  //   .pipe(remember('scripts'))
+  //   .pipe(gulp.dest(paths.scripts.dest))
   const main = gulp
     .src(path.join(paths.scripts.src, 'index.js'))
     .pipe(plumber())
@@ -429,19 +428,16 @@ gulp.task('compile', ['clean'], () => {
 
 // Build Project
 gulp.task('build', ['clean'], () => {
-  // env = 'production'
   sequence(noSequenceTaks, 'svg2png', 'styles', 'scripts', 'copy')
 })
 
 // Build Project and serve
 gulp.task('build:serve', ['clean'], () => {
-  // env = 'production'
   sequence(noSequenceTaks, 'svg2png', 'styles', 'scripts', 'copy', () => browserSync(config.browserSyncBuild)
   )
 })
 
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('gh-pages', () => {
-  // env = 'production'
   sequence(noSequenceTaks, 'svg2png', 'styles', 'scripts', 'copy', 'gh')
 })
