@@ -16,20 +16,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Git hooks options
 - Social meta in HTML
 - Option to sprite class name
+- `node_modules` global in styles
 
 ### Changed
 - Scripts management to Webpack
-- Update packages
 - Move outdated browser to oficial npm
 - Eslint rules
-- Use babel in gulp
-- Rename folder scripts/settings to scripts/imports
-- Gulp with es6
-- Scripts links from html
+- Scripts directory
+- Moved scripts from html to es6 imports
 - Tests now supports files *.test.js
 
 ### Fixed
 - HTML links
+- .npmignore links
 
 ### Removed
 - Karma and Jasmine

@@ -1,20 +1,16 @@
 # Swill Boilerplate Generator
 
-[![Build Status](https://travis-ci.org/tiagoporto/generator-swill-boilerplate.svg)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
-[![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
 [![NPM version](https://badge.fury.io/js/generator-swill-boilerplate.svg)][npm-swill-gen]
 [![NPM Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg)][npm-swill-gen]
+
+[![Build Status](https://travis-ci.org/tiagoporto/generator-swill-boilerplate.svg)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
+[![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)][standardjs]
 [![Github License](https://img.shields.io/github/license/tiagoporto/generator-swill-boilerplate.svg)](https://raw.githubusercontent.com/tiagoporto/generator-swill-boilerplate/master/LICENSE)
 
-<small>Generator Dependencies:</small>
+<p><small>Generator Dependencies:</small> <a href="https://david-dm.org/tiagoporto/generator-swill-boilerplate" style="vertical-align: sub;"><img src="https://david-dm.org/tiagoporto/generator-swill-boilerplate.svg" alt="Dependencies Status"></a></p>
 
-[![Dependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate)
- [![devDependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate?type=dev)
-
-<small>Swill Boilerplate Dependencies:</small>
-
-[![boilerplate devDependencies Status](https://david-dm.org/tiagoporto/swillboilerplate.rocks/dev-status.svg)](https://david-dm.org/tiagoporto/swillboilerplate.rocks?type=dev)
+<p><small>Swill Boilerplate Dependencies:</small> <a href="https://david-dm.org/tiagoporto/swillboilerplate.rocks?type=dev" style="vertical-align: sub;"><img src="https://david-dm.org/tiagoporto/swillboilerplate.rocks/dev-status.svg" alt="devDependencies Status"></a></p>
 
 <p align="center">
   <img src="http://tiagoporto.github.io/swillboilerplate.rocks/img/logos/logo.png" alt="Swill Boilerplate Logo">
