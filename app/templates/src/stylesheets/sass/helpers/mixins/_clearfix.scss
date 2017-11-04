@@ -2,27 +2,27 @@
 // Author: Tiago Porto - tiagoporto.com
 
 %clearfix{
-    zoom: 1;
+  zoom: 1;
 }
 
 %clearfix-after-before{
-    content: "";
-    display: table;
+  content: "";
+  display: table;
 }
 
 %clearfix-after{
-    clear: both;
+  clear: both;
 }
 
 @mixin clearfix(){
-    @extend %clearfix;
+  @extend %clearfix;
 
-    &:after
-    &:before{
-        @extend %clearfix-after-before
-    }
+  &:after
+  &:before{
+    @extend %clearfix-after-before
+  }
 
-    &:after{
-        @extend %clearfix-after
-    }
+  &:after{
+    @extend %clearfix-after
+  }
 }
