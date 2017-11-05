@@ -1,11 +1,11 @@
-<% if (use.outdatedBrowser) { %>/* eslint import/no-webpack-loader-syntax: off */<% } %>
-<% if (use.jqueryLogoDownloadtip) { %>import 'jquery-logo-downloadtip'
+<% if (use.outdatedBrowser) { %>/* eslint import/no-webpack-loader-syntax: off */
+<% } %><% if (use.jqueryLogoDownloadtip) { %>import 'jquery-logo-downloadtip'
 import $ from 'jquery'
 <% } %>import domready from 'domready'<% if (use.outdatedBrowser) { %>
 import outdatedBrowser from 'exports-loader?outdatedBrowser!outdatedbrowser/outdatedbrowser/outdatedbrowser.js'<% } %>
 
-// Executes after dow ready
-domready(() => {<% if (use.outdatedBrowser) { %>
+domready(() => {
+  // Executes after dow ready<% if (use.outdatedBrowser) { %>
   const outdatedElement = document.createElement('div')
   outdatedElement.setAttribute('id', 'outdated')
   document.body.insertBefore(outdatedElement, document.body.childNodes[0])
