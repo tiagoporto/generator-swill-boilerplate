@@ -399,7 +399,11 @@ gulp.task('serve', () => {
     ['styles', browserSync.reload]
   )
 
-  gulp.watch([path.join(basePaths.src, '**/*.{html,hbs}')], ['html', browserSync.reload])
+  gulp.watch(
+    [
+      path.join(basePaths.src, '**/*.{html,hbs}'),
+      path.join(basePaths.dest, '**/*.html')
+    ], ['html', browserSync.reload])
 
   gulp.watch(
     [
