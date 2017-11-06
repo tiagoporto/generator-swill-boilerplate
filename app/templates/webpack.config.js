@@ -1,5 +1,4 @@
 // webpack.config.js
-
 const webpack = require('webpack')
 
 const config = {
@@ -10,12 +9,13 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
-        loader: 'babel-loader',
-        query: {
-          presets: [
-            ['env']
-          ]}
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true
+          }
+        }
       }
     ]
   },
