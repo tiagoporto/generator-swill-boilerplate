@@ -165,8 +165,12 @@ module.exports = class extends Yeoman {
       }, {
         type: 'checkbox',
         name: 'options',
-        message: 'Would you like to use?',
+        message: 'Would you?',
         choices: [{
+          name: 'Validate HTML (W3C)',
+          value: 'validateHTML',
+          checked: false
+        }, {
           name: 'Lint CSS',
           value: 'lintCSS',
           checked: false
@@ -289,6 +293,7 @@ module.exports = class extends Yeoman {
       this.props.use = {
         jquery: props.features.indexOf('jquery') >= 0,
         jqueryLogoDownloadtip: props.jqueryLogoDownloadtip,
+        validateHTML: props.options.indexOf('validateHTML') >= 0,
         lint: {
           js: props.options.indexOf('lintJS') >= 0,
           css: props.options.indexOf('lintCSS') >= 0
@@ -359,7 +364,7 @@ module.exports = class extends Yeoman {
     // Optional githooks
     (this.props.use.gitHooks.prepush || this.props.use.gitHooks.precommit) && (packageJson.devDependencies['husky'] = '0.14.3')
     this.props.use.gitHooks.prepush && (packageJson.scripts.prepush = 'npm test')
-    this.props.use.gitHooks.precommit && (packageJson.scripts.precommit = 'npm run lint-fix && npm run lint')
+    this.props.use.gitHooks.precommit && (packageJson.scripts.precommit = 'npm run lint:fix && npm run lint')
 
     // Optional preprocessor
     this.props.preprocessor.name === 'sass' && (packageJson.devDependencies['gulp-sass'] = '3.1.0')

@@ -88,7 +88,7 @@ gulp.task('html', () => {
     .pipe(handlebars({
       partials: path.join(paths.handlebars.src, basePaths.handlebars.partials.src, '**/*.hbs')
     }))
-    .pipe(w3cjs())
+    .pipe(gulpIf(config.validateW3C, w3cjs()))
     .pipe(gulpIf(config.inlineSVG, gulp.dest(basePaths.dest)))<% if (use.inlineSVG) { %>
     .pipe(gulpIf(config.inlineSVG, inline({
       base: './',
@@ -101,7 +101,7 @@ gulp.task('html', () => {
       path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
     ])
     .pipe(plumber())
-    .pipe(w3cjs())
+    .pipe(gulpIf(config.validateW3C, w3cjs()))
     .pipe(notify({message: 'HTML task complete', onLast: true}))<% } %>
 })
 

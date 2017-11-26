@@ -41,6 +41,8 @@
     }
   },
 
+  "validateW3C": <%= use.validateHTML %>,
+
   "lintCSS": <%= use.lint.css %>,
 
   "lintJS": <%= use.lint.js %>,<% if (use.inlineSVG) { %>
