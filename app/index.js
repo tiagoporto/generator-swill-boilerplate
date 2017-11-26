@@ -380,12 +380,6 @@ module.exports = class extends Yeoman {
       this.destinationPath('.babelrc')
     )
 
-    // Webpack
-    this.fs.copy(
-      this.templatePath('webpack.config.js'),
-      this.destinationPath('webpack.config.js')
-    )
-
     // Editorconfig
     this.fs.copy(
       this.templatePath('editorconfig'),
@@ -432,6 +426,16 @@ module.exports = class extends Yeoman {
     this.fs.copyTpl(
       this.templatePath('gulpfile.babel.js'),
       this.destinationPath('gulpfile.babel.js'), {
+        boilerplate: swillPackage,
+        preprocessor: this.props.preprocessor,
+        use: this.props.use
+      }
+    )
+
+    // Webpack
+    this.fs.copyTpl(
+      this.templatePath('webpack.config.babel.js'),
+      this.destinationPath('webpack.config.babel.js'), {
         boilerplate: swillPackage,
         preprocessor: this.props.preprocessor,
         use: this.props.use
