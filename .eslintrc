@@ -19,7 +19,7 @@
     "serviceworker": false,
     "shelljs": false,
     "webextensions": false,
-    "worker": false,
+    "worker": false
   },
 
   "globals": {},
