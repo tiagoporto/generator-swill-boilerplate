@@ -12,26 +12,19 @@
     },
 
     "images": {
-      "src": "<%= folder.images.src %>",
-      "dest": "<%= folder.images.dest %>"
+      "src": "<%= folder.images.src %>"
     },
 
     "fonts": {
-      "dest": "<%= folder.fonts %>"
-    },
-
-    "sprite": {
-      "src": "<%= folder.sprite %>"
+      "src": "<%= folder.fonts %>"
     },
 
     "scripts": {
-      "src": "<%= folder.scripts.src %>",
-      "dest": "<%= folder.scripts.dest %>"
+      "src": "<%= folder.scripts.src %>"
     },
 
     "styles": {
-      "src": "<%= folder.styles.src %>",
-      "dest": "<%= folder.styles.dest %>"
+      "src": "<%= folder.styles.src %>"
     },
 
     "clean": {

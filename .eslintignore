@@ -1,4 +1,4 @@
 app/templates/gulpfile.babel.js
-app/templates/src/scripts/imports/javascript.js
+app/templates/src/scripts/javascript.js
 app/templates/webpack.config.babel.js
 coverage/

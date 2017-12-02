@@ -77,7 +77,7 @@ module.exports = class extends Yeoman {
       }, {
         name: 'destFolder',
         message: 'Destination folder??',
-        default: 'app',
+        default: 'dist',
         when: function (response) {
           return response.settingFolder
         }
@@ -89,65 +89,30 @@ module.exports = class extends Yeoman {
           return response.settingFolder
         }
       }, {
-        name: 'handlebarsSrcFolder',
-        message: 'Handlebars Source folder??',
-        default: 'handlebars',
-        when: function (response) {
-          return response.settingFolder && response.handlebars
-        }
-      }, {
-        name: 'fontsDestFolder',
-        message: 'Webfonts destination folder??',
+        name: 'fontsFolder',
+        message: 'Webfonts folder??',
         default: 'fonts',
         when: function (response) {
           return response.settingFolder
         }
       }, {
-        name: 'imgSrcFolder',
-        message: 'Images source folder??',
+        name: 'imgFolder',
+        message: 'Images folder??',
         default: 'images',
         when: function (response) {
           return response.settingFolder
         }
       }, {
-        name: 'imgDestFolder',
-        message: 'Images destination folder??',
-        default: 'img',
+        name: 'stylesFolder',
+        message: 'Styles folder??',
+        default: 'styles',
         when: function (response) {
           return response.settingFolder
         }
       }, {
-        name: 'spriteSrcFolder',
-        message: 'Sprite source folder??',
-        default: 'sprite',
-        when: function (response) {
-          return response.settingFolder
-        }
-      }, {
-        name: 'stylesSrcFolder',
-        message: 'Styles source folder??',
-        default: 'stylesheets',
-        when: function (response) {
-          return response.settingFolder
-        }
-      }, {
-        name: 'stylesDestFolder',
-        message: 'Styles destination folder??',
-        default: 'css',
-        when: function (response) {
-          return response.settingFolder
-        }
-      }, {
-        name: 'scriptsSrcFolder',
-        message: 'Scripts source folder??',
+        name: 'scriptsFolder',
+        message: 'Scripts folder??',
         default: 'scripts',
-        when: function (response) {
-          return response.settingFolder
-        }
-      }, {
-        name: 'scriptsDestFolder',
-        message: 'Scripts destination folder??',
-        default: 'js',
         when: function (response) {
           return response.settingFolder
         }
@@ -271,22 +236,17 @@ module.exports = class extends Yeoman {
 
       this.props.folder = {
         src: props.srcFolder || 'src',
-        dest: props.destFolder || 'app',
+        dest: props.destFolder || 'dist',
         build: props.buildFolder || 'build',
-        handlebars: props.handlebarsSrcFolder || 'handlebars',
-        fonts: props.fontsDestFolder || 'fonts',
-        sprite: props.spriteSrcFolder || 'sprite',
+        fonts: props.fontsFolder || 'fonts',
         images: {
-          src: props.imgSrcFolder || 'images',
-          dest: props.imgDestFolder || 'img'
+          src: props.imgFolder || 'images'
         },
         styles: {
-          src: props.stylesSrcFolder || 'stylesheets',
-          dest: props.stylesDestFolder || 'css'
+          src: props.stylesFolder || 'styles'
         },
         scripts: {
-          src: props.scriptsSrcFolder || 'scripts',
-          dest: props.scriptsDestFolder || 'js'
+          src: props.scriptsFolder || 'scripts'
         }
       }
 
@@ -449,8 +409,15 @@ module.exports = class extends Yeoman {
 
     // Styles
     this.fs.copyTpl(
-      this.templatePath('src/stylesheets/' + this.props.preprocessor.name + '/**/*'),
+      this.templatePath('src/styles/**/*.' + this.props.preprocessor.extension),
       this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'), {
+        folder: this.props.folder
+      }
+    )
+
+    this.fs.copyTpl(
+      this.templatePath('src/index.' + this.props.preprocessor.extension),
+      this.destinationPath(this.props.folder.src + '/index.' + this.props.preprocessor.extension), {
         folder: this.props.folder
       }
     )
@@ -463,6 +430,13 @@ module.exports = class extends Yeoman {
       this.destinationPath(this.props.folder.src + '/' + this.props.folder.scripts.src + '/'), {
         use: this.props.use,
         project: this.props.project
+      }
+    )
+
+    this.fs.copyTpl(
+      this.templatePath('src/index.js'),
+      this.destinationPath(this.props.folder.src + '/index.js'), {
+        folder: this.props.folder
       }
     )
 
@@ -497,19 +471,20 @@ module.exports = class extends Yeoman {
     )
 
     this.fs.copy(
-      this.templatePath('public/img/**/*'),
-      this.destinationPath(this.props.folder.dest + '/' + this.props.folder.images.dest + '/')
+      this.templatePath('src/images/logos/**/*'),
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/logos/')
     )
 
-    this.fs.write(this.props.folder.dest + '/' + this.props.folder.images.dest + '/copyright/.gitkeep', '')
+    this.fs.write(this.props.folder.src + '/' + this.props.folder.images.src + '/copyright/.gitkeep', '')
 
+    // Favicon
     this.fs.copy(
-      this.templatePath('public/favicon.ico'),
-      this.destinationPath(this.props.folder.dest + '/favicon.ico')
+      this.templatePath('src/favicon.ico'),
+      this.destinationPath(this.props.folder.src + '/favicon.ico')
     )
 
-    // html
-    var handlebarsOptions = {
+    // Html or Handlebars
+    var htmlOptions = {
       folder: this.props.folder,
       include: this.props.include,
       project: this.props.project,
@@ -517,39 +492,49 @@ module.exports = class extends Yeoman {
     }
 
     if (this.props.use.handlebars) {
+      this.fs.copy(
+        this.templatePath('src/includes/**/*'),
+        this.destinationPath(this.props.folder.src + '/includes/')
+      )
+
       this.fs.copyTpl(
-        this.templatePath('src/handlebars/**/*'),
-        this.destinationPath(this.props.folder.src + '/handlebars/'),
-        handlebarsOptions
+        this.templatePath('src/index-handlebars.html'),
+        this.destinationPath(this.props.folder.src + '/index.html'),
+        htmlOptions
+      )
+
+      this.fs.copyTpl(
+        this.templatePath('src/404-handlebars.html'),
+        this.destinationPath(this.props.folder.src + '/404.html'),
+        htmlOptions
       )
     } else {
       this.fs.copyTpl(
-        this.templatePath('public/index.html'),
-        this.destinationPath(this.props.folder.dest + '/index.html'),
-        handlebarsOptions
+        this.templatePath('src/index.html'),
+        this.destinationPath(this.props.folder.src + '/index.html'),
+        htmlOptions
       )
       this.fs.copyTpl(
-        this.templatePath('public/404.html'),
-        this.destinationPath(this.props.folder.dest + '/404.html'),
-        handlebarsOptions
+        this.templatePath('src/404.html'),
+        this.destinationPath(this.props.folder.src + '/404.html'),
+        htmlOptions
       )
     }
 
     // font
-    this.fs.write(this.props.folder.dest + '/' + this.props.folder.fonts + '/.gitkeep', '')
+    this.fs.write(this.props.folder.src + '/' + this.props.folder.fonts + '/.gitkeep', '')
 
     // ====================== Copy optional Files  ======================//
 
     // optionalFiles
     if (!this.props.include[404]) {
-      this.fs.delete(this.destinationPath(this.props.folder.dest + '/404.html'))
-      this.fs.delete(this.destinationPath(this.props.folder.src + '/handlebars/404.html'))
+      this.fs.delete(this.destinationPath(this.props.folder.src + '/404.html'))
     }
 
     if (this.props.include.htaccess) {
       this.fs.copy(
         this.templatePath('../../node_modules/apache-server-configs/dist/.htaccess'),
-        this.destinationPath(this.props.folder.dest + '/.htaccess')
+        this.destinationPath(this.props.folder.src + '/.htaccess')
       )
     }
 
@@ -588,15 +573,15 @@ module.exports = class extends Yeoman {
 
     if (this.props.include.crossdomain) {
       this.fs.copy(
-        this.templatePath('public/crossdomain.xml'),
-        this.destinationPath(this.props.folder.dest + '/crossdomain.xml')
+        this.templatePath('src/crossdomain.xml'),
+        this.destinationPath(this.props.folder.src + '/crossdomain.xml')
       )
     }
 
     if (this.props.include.browserconfig) {
       this.fs.copyTpl(
-        this.templatePath('public/browserconfig.xml'),
-        this.destinationPath(this.props.folder.dest + '/browserconfig.xml'), {
+        this.templatePath('src/browserconfig.xml'),
+        this.destinationPath(this.props.folder.src + '/browserconfig.xml'), {
           folder: this.props.folder
         }
       )
@@ -604,8 +589,8 @@ module.exports = class extends Yeoman {
 
     if (this.props.include.manifest) {
       this.fs.copyTpl(
-        this.templatePath('public/manifest.json'),
-        this.destinationPath(this.props.folder.dest + '/manifest.json'), {
+        this.templatePath('src/manifest.json'),
+        this.destinationPath(this.props.folder.src + '/manifest.json'), {
           folder: this.props.folder,
           project: this.props.project
         }
@@ -614,15 +599,15 @@ module.exports = class extends Yeoman {
 
     if (this.props.include.robots) {
       this.fs.copy(
-        this.templatePath('public/robots.txt'),
-        this.destinationPath(this.props.folder.dest + '/robots.txt')
+        this.templatePath('src/robots.txt'),
+        this.destinationPath(this.props.folder.src + '/robots.txt')
       )
     }
 
     if (this.props.include.humans) {
       this.fs.copy(
-        this.templatePath('public/humans.txt'),
-        this.destinationPath(this.props.folder.dest + '/humans.txt')
+        this.templatePath('src/humans.txt'),
+        this.destinationPath(this.props.folder.src + '/humans.txt')
       )
     }
   }
