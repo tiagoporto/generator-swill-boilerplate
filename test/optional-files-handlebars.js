@@ -36,7 +36,7 @@ describe('Base with all optional files without handlebars', function () {
 
   it('Base settings with all optional files without handlebars', function () {
     yoAssert.file(
-      files.base.concat(files.stylus, files.optionals, files.handlebars.disabled['404'])
+      files.base.concat(files.stylus, files.optionals, files['404'])
     )
   })
 })

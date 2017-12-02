@@ -34,7 +34,7 @@ describe('Base with all optional files', function () {
 
   it('Base settings with all optional files', function () {
     yoAssert.file(
-      files.base.concat(files.stylus, files.optionals, files.handlebars.enabled['404'])
+      files.base.concat(files.stylus, files.optionals, files['404'])
     )
   })
 })

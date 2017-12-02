@@ -22,7 +22,7 @@ describe('Base with Stylus without handlebars', function () {
 
   it('Base settings with Stylus without handlebars', function () {
     yoAssert.file(
-      files.base.concat(files.stylus, files.handlebars.disabled.all)
+      files.base.concat(files.stylus, files.html)
     )
   })
 })

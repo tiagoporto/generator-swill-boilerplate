@@ -7,82 +7,74 @@
     ".gitattributes",
     ".gitignore",
     ".yo-rc.json",
-    "app/favicon.ico",
-    "app/fonts/.gitkeep",
-    "app/img/copyright/.gitkeep",
-    "app/img/logos/logo-monochrome-RGB.eps",
-    "app/img/logos/logo-monochrome.eps",
-    "app/img/logos/logo-monochrome.png",
-    "app/img/logos/logo-monochrome.svg",
-    "app/img/logos/logo-RGB.eps",
-    "app/img/logos/logo.eps",
-    "app/img/logos/logo.png",
-    "app/img/logos/logo.svg",
     "config.json",
     "gulpfile.babel.js",
     "LICENSE",
     "package.json",
+    "src/index.js",
+    "src/favicon.ico",
+    "src/fonts/.gitkeep",
+    "src/images/copyright/.gitkeep",
+    "src/images/logos/logo-monochrome-RGB.eps",
+    "src/images/logos/logo-monochrome.eps",
+    "src/images/logos/logo-monochrome.png",
+    "src/images/logos/logo-monochrome.svg",
+    "src/images/logos/logo-RGB.eps",
+    "src/images/logos/logo.eps",
+    "src/images/logos/logo.png",
+    "src/images/logos/logo.svg",
     "src/images/sprite/.gitkeep",
     "src/images/touch/apple-touch-icon.png",
     "src/images/touch/chrome-touch-icon-192x192.png",
-    "src/scripts/index.js",
-    "src/scripts/imports/javascript.js",
-    "src/scripts/imports/javascript.test.js",
-    "src/scripts/imports/google_analytics.js"
+    "src/scripts/javascript.js",
+    "src/scripts/javascript.test.js",
+    "src/scripts/google_analytics.js"
   ],
 
   "stylus": [
-    "src/stylesheets/components/_index.styl",
-    "src/stylesheets/helpers/functions/.gitkeep",
-    "src/stylesheets/helpers/mixins/_clearfix.styl",
-    "src/stylesheets/helpers/mixins/_retina.styl",
-    "src/stylesheets/settings/_variables.styl",
-    "src/stylesheets/settings/_web-fonts.styl",
-    "src/stylesheets/styles.styl"
+    "src/index.styl",
+    "src/styles/components/_index.styl",
+    "src/styles/helpers/functions/.gitkeep",
+    "src/styles/helpers/mixins/_clearfix.styl",
+    "src/styles/helpers/mixins/_retina.styl",
+    "src/styles/settings/_variables.styl",
+    "src/styles/settings/_web-fonts.styl"
   ],
 
   "sass": [
-    "src/stylesheets/components/_index.scss",
-    "src/stylesheets/helpers/functions/.gitkeep",
-    "src/stylesheets/helpers/mixins/_clearfix.scss",
-    "src/stylesheets/helpers/mixins/_retina.scss",
-    "src/stylesheets/settings/_variables.scss",
-    "src/stylesheets/settings/_web-fonts.scss",
-    "src/stylesheets/styles.scss"
+    "src/index.scss",
+    "src/styles/components/_index.scss",
+    "src/styles/helpers/functions/.gitkeep",
+    "src/styles/helpers/mixins/_clearfix.scss",
+    "src/styles/helpers/mixins/_retina.scss",
+    "src/styles/settings/_variables.scss",
+    "src/styles/settings/_web-fonts.scss"
   ],
 
-  "handlebars": {
-    "enabled": {
-      "all": [
-        "src/handlebars/includes/footer.hbs",
-        "src/handlebars/includes/header.hbs",
-        "src/handlebars/index.html"
-      ],
-      "404": [
-        "src/handlebars/404.html"
-      ]
-    },
-    "disabled": {
-      "all": [
-        "app/index.html"
-      ],
-      "404": [
-        "app/404.html"
-      ]
-    }
-  },
+  "html": [
+    "src/index.html"
+  ],
+
+  "404": [
+    "src/404.html"
+  ],
+
+  "handlebars":  [
+    "src/includes/footer.hbs",
+    "src/includes/header.hbs"
+  ],
 
   "optionals": [
     "README.md",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
     ".npmignore",
-    "app/.htaccess",
-    "app/crossdomain.xml",
-    "app/manifest.json",
-    "app/browserconfig.xml",
-    "app/robots.txt",
-    "app/humans.txt",
+    "src/.htaccess",
+    "src/crossdomain.xml",
+    "src/manifest.json",
+    "src/browserconfig.xml",
+    "src/robots.txt",
+    "src/humans.txt",
     "src/images/touch/icon-128x128.png",
     "src/images/touch/ms-touch-icon-144x144-precomposed.png"
   ]

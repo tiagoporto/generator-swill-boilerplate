@@ -13,17 +13,18 @@
     "url": "https://github.com/{Github User}/{project-name}.git"
   },
   "scripts": {
-    "start": "gulp default:compile",
-    "serve": "gulp",
+    "start": "gulp compile:watch & npm run scripts -- --watch",
+    "serve": "gulp watch",
     "compile": "gulp compile",
     "build": "gulp build",
-    "serve-build": "gulp build:serve",
+    "serve:build": "gulp build:serve",
+    "scripts": "webpack --progress --colors",
     "ghpages": "gulp gh-pages",
     "lint": "eslint src/scripts/.",
-    "lint-fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix",
     "cover": "nyc --reporter=lcov npm test",
     "test": "mocha './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js",
-    "test-w": "npm test -- --watch"
+    "test:watch": "npm test -- --watch"
   },
   "main": "",
   "files": [],
@@ -72,7 +73,6 @@
     "run-sequence": "2.2.0",
     "vinyl-buffer": "1.0.0",
     "webpack": "3.8.1",
-    "webpack-stream": "4.0.0",
     "gulp-stylus": "2.6.0"
   },
   "license": "unlicense"

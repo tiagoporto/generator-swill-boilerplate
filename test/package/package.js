@@ -12,6 +12,7 @@ describe('Package.json File', () => {
         features: [],
         options: [],
         files: [],
+        inlineSVG: false,
         handlebars: false,
         gitHooks: [],
         integrations: [],
