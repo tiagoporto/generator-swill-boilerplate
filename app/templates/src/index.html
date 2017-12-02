@@ -19,7 +19,7 @@
     <link rel="icon" type="image/eps" href="<%= folder.images.dest %>/logos/logo-monochrome.eps" data-title="Print Monochrome file (.eps)" /><% } %>
 
     <!-- Add to homescreen for Chrome on Android -->
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="<%= project.color %>">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png">
 
@@ -56,7 +56,7 @@
 
     <h1>
       <a href="http://www.somewhere.com">
-        <img id="logo" src="img/logos/logo.svg" alt="" width="250">
+        <img <% if (use.jqueryLogoDownloadtip) { %>id="logo--main"<% } %> src="img/logos/logo.svg" alt="" width="250">
       </a>
     </h1>
 

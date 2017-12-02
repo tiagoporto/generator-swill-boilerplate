@@ -17,7 +17,7 @@ domready(() => {
     languagePath: 'lang/outdated_browser/en.html'
   })<% } %>
 <% if (use.jqueryLogoDownloadtip) { %>
-  $('#logo').downloadTip({
+  $('#logo--main').downloadTip({
     'position': 'right'
   })
 <% } %>})

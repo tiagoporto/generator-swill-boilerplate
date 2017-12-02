@@ -1,5 +1,5 @@
 // Color
-$primary-color: #000;
+$primary-color: <%= project.color %>;
 $secondary-color: #000;
 $tertiary-color: #000;
 

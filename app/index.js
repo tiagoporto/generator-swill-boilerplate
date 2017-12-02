@@ -34,6 +34,11 @@ module.exports = class extends Yeoman {
         }
       }, {
         type: 'input',
+        name: 'color',
+        message: 'Default project color (Use Hex Code)',
+        default: '#000000'
+      }, {
+        type: 'input',
         name: 'language',
         message: 'Default project language (en, en-US, pt-BR, fr-CA...)',
         default: 'en'
@@ -49,19 +54,6 @@ module.exports = class extends Yeoman {
       }, {
         name: 'githubUser',
         message: 'Github User or organization'
-      }, {
-        type: 'confirm',
-        name: 'handlebars',
-        message: 'Handlebars Template?',
-        default: true
-      }, {
-        type: 'confirm',
-        name: 'inlineSVG',
-        message: 'Use SVG inline?',
-        default: true,
-        when: function (response) {
-          return response.handlebars
-        }
       }, {
         type: 'confirm',
         name: 'settingFolder',
@@ -117,9 +109,19 @@ module.exports = class extends Yeoman {
           return response.settingFolder
         }
       }, {
+        type: 'confirm',
+        name: 'inlineSVG',
+        message: 'Use SVG inline?',
+        default: true
+      }, {
+        type: 'confirm',
+        name: 'handlebars',
+        message: 'Handlebars Template?',
+        default: true
+      }, {
         type: 'list',
         name: 'preprocessor',
-        message: 'Which CSS preprocessor you will use?',
+        message: 'Which CSS preprocessor?',
         choices: [{
           name: 'Stylus',
           value: 'stylus'
@@ -217,7 +219,8 @@ module.exports = class extends Yeoman {
         description: props.projectDescription,
         homepage: props.projectHomepage,
         keywords: props.keywords,
-        language: props.languageList || props.language,
+        color: props.color,
+        language: props.language,
         joinedKeywords: props.keywords && props.keywords.join()
       }
 
@@ -411,7 +414,8 @@ module.exports = class extends Yeoman {
     this.fs.copyTpl(
       this.templatePath('src/styles/**/*.' + this.props.preprocessor.extension),
       this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'), {
-        folder: this.props.folder
+        folder: this.props.folder,
+        project: this.props.project
       }
     )
 
@@ -492,9 +496,10 @@ module.exports = class extends Yeoman {
     }
 
     if (this.props.use.handlebars) {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('src/includes/**/*'),
-        this.destinationPath(this.props.folder.src + '/includes/')
+        this.destinationPath(this.props.folder.src + '/includes/'),
+        htmlOptions
       )
 
       this.fs.copyTpl(
@@ -582,7 +587,8 @@ module.exports = class extends Yeoman {
       this.fs.copyTpl(
         this.templatePath('src/browserconfig.xml'),
         this.destinationPath(this.props.folder.src + '/browserconfig.xml'), {
-          folder: this.props.folder
+          folder: this.props.folder,
+          project: this.props.project
         }
       )
     }

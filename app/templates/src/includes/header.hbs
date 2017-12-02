@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{#if title}}{{title}}{{else}}Untitled{{/if}}</title>
+    <title>{{#if title}}{{title}}{{else}}Untitle{{/if}}</title>
     <meta name="description" content="{{#if description}}{{description}}{{/if}}">
     <meta name="keywords" content="{{#if keywords}}{{keywords}}{{/if}}">
     <meta name="viewport" content="width=device-width, initial-scale=1"><% if (include.humans) { %>
@@ -19,7 +19,7 @@
     <link rel="icon" type="image/eps" href="<%= folder.images.dest %>/logos/logo-monochrome.eps" data-title="Print Monochrome file (.eps)" /><% } %>
 
     <!-- Add to homescreen for Chrome on Android -->
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="<%= project.color %>">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png">
 
