@@ -182,7 +182,7 @@ gulp.task('styles', ['styles:lint'], () => {<% if (preprocessor.name === "stylus
       path.join(`!${basePaths.src}`, 'index.styl'),
       path.join(`!${basePaths.src}`, '**/_*.styl')
     ])
-      .pipe(newer({dest: basePaths.dest, ext: '.css', extra: basePaths.src}))
+      .pipe(newer({dest: basePaths.dest, ext: '.css', extra: paths.styles.src}))
   )
 
   return merge(main, others)<% } %><% if (preprocessor.name === "sass") { %>
@@ -249,7 +249,7 @@ gulp.task('images', () => {
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', () => {
   const sprite = gulp
-    .src(path.join(paths.sprite.src, '**/*.png'))
+    .src(path.join(paths.images.src, '**/*.png'))
     .pipe(plumber())
     .pipe(
       spritesmith({
@@ -264,7 +264,7 @@ gulp.task('bitmap-sprite', () => {
             }
           }
         },
-        imgPath: path.join('../', basePaths.images.dest, 'bitmap-sprite.png'),
+        imgPath: path.join('../', paths.images.dest, 'bitmap-sprite.png'),
         padding: 2,
         algorithm: 'top-down'
       })
@@ -284,30 +284,28 @@ gulp.task('bitmap-sprite', () => {
 
 // Generate SVG Sprite
 gulp.task('vector-sprite', () => {
-  const spriteOptions = {
-    shape: {
-      spacing: {padding: 2}
-    },
-    mode: {
-      css: {
-        prefix: `${config.svgPrefixClass}%s`,
-        dest: './',
-        sprite: path.join('../', basePaths.images.dest, 'vector-sprite.svg'),
-        layout: 'vertical',
-        bust: false,
-        render: {}
-      }
-    }
-  }
-
-  spriteOptions.mode.css.render.<%= preprocessor.extension %> = {}
-
-  spriteOptions.mode.css.render.<%= preprocessor.extension %>.dest = path.join('../../', paths.styles.src, 'helpers/_vector-sprite.<%= preprocessor.extension %>')
-
   return gulp
-    .src(path.join(paths.sprite.src, `*.svg`))
+    .src(path.join(paths.images.src, 'sprite/*.svg'))
     .pipe(plumber())
-    .pipe(svgSprite(spriteOptions))
+    .pipe(svgSprite({
+      shape: {
+        spacing: {padding: 2}
+      },
+      mode: {
+        css: {
+          prefix: `${config.svgPrefixClass}%s`,
+          dest: './',
+          sprite: 'vector-sprite.svg',
+          layout: 'vertical',
+          bust: false,
+          render: {
+            <%= preprocessor.extension %>: {
+              dest: path.join('../../', paths.styles.src, 'helpers/_vector-sprite.<%= preprocessor.extension %>')
+            }
+          }
+        }
+      }
+    }))
     .pipe(gulp.dest(paths.images.dest))
     .pipe(notify({message: 'SVG sprite task complete', onLast: true}))
 })
