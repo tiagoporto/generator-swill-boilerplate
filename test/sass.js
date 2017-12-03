@@ -21,7 +21,7 @@ describe('Base with Sass', function () {
 
   it('Base settings with Sass', function () {
     yoAssert.file(
-      files.base.concat(files.sass, files.handlebars, files.html)
+      files.base.concat(files.sass, files.html)
     )
   })
 })

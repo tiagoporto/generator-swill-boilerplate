@@ -21,7 +21,7 @@ describe('Base with Stylus', function () {
 
   it('Base settings with Stylus', function () {
     yoAssert.file(
-      files.base.concat(files.stylus, files.handlebars, files.html)
+      files.base.concat(files.stylus, files.html)
     )
   })
 })
