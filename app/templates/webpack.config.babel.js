@@ -6,7 +6,7 @@
 */
 
 import path from 'path'
-import paths from './config.json'
+import paths from './.swillrc.json'
 import webpack from 'webpack'
 
 const config = {

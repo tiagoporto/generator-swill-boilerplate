@@ -3,35 +3,10 @@
     "src": "<%= folder.src %>",
     "dest": "<%= folder.dest %>",
     "build": "<%= folder.build %>",
-
-    "handlebars": {
-       "src": "<%= folder.handlebars %>",
-       "partials": {
-          "src": "includes"
-        }
-    },
-
-    "images": {
-      "src": "<%= folder.images.src %>"
-    },
-
-    "fonts": {
-      "src": "<%= folder.fonts %>"
-    },
-
-    "scripts": {
-      "src": "<%= folder.scripts.src %>"
-    },
-
-    "styles": {
-      "src": "<%= folder.styles.src %>"
-    },
-
-    "clean": {
-      "ignore": [
-        "!<%= folder.dest %>/<%= folder.images.dest %>/{copyright,logos}{,**/*{,**/*}}"
-      ]
-    }
+    "images": "<%= folder.images.src %>",
+    "fonts": "<%= folder.fonts %>",
+    "scripts": "<%= folder.scripts.src %>",
+    "styles": "<%= folder.styles.src %>"
   },
 
   "validateW3C": <%= use.validateHTML %>,

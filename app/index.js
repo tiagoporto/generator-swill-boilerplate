@@ -381,8 +381,8 @@ module.exports = class extends Yeoman {
     )
 
     this.fs.copyTpl(
-      this.templatePath('config.json'),
-      this.destinationPath('config.json'), {
+      this.templatePath('swillrc.json'),
+      this.destinationPath('.swillrc.json'), {
         folder: this.props.folder,
         use: this.props.use
       }
