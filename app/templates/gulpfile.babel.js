@@ -46,30 +46,22 @@ import w3cjs from 'gulp-w3cjs'
 const basePaths = config.basePaths
 
 const paths = {
-  handlebars: {
-    src: path.join(basePaths.src, basePaths.handlebars.src)
-  },
-
+  // handlebars: {
+  //   src: path.join(basePaths.src, basePaths.handlebars.src)
+  // },
   images: {
-    src: path.join(basePaths.src, basePaths.images.src),
-    dest: path.join(basePaths.dest, basePaths.images.dest),
-    build: path.join(basePaths.build, basePaths.images.src)
-  },
-
-  sprite: {
-    src: path.join(basePaths.src, basePaths.images.src, basePaths.sprite.src)
+    src: path.join(basePaths.src, basePaths.images),
+    dest: path.join(basePaths.dest, basePaths.images)
   },
 
   scripts: {
-    src: path.join(basePaths.src, basePaths.scripts.src),
-    dest: path.join(basePaths.dest, basePaths.scripts.dest),
-    build: path.join(basePaths.build, basePaths.scripts.dest)
+    src: path.join(basePaths.src, basePaths.scripts),
+    dest: path.join(basePaths.dest, basePaths.scripts)
   },
 
   styles: {
-    src: path.join(basePaths.src, basePaths.styles.src),
-    dest: path.join(basePaths.dest, basePaths.styles.dest),
-    build: path.join(basePaths.build, basePaths.styles.dest)
+    src: path.join(basePaths.src, basePaths.styles),
+    dest: path.join(basePaths.dest, basePaths.styles)
   }
 }
 
@@ -232,8 +224,8 @@ gulp.task('styles-helpers', () => {
 gulp.task('images', () => {
   const images = gulp
     .src([
-      path.join(paths.images.src, '**/*.{bmp,gif,jpg,jpeg,png,svg}'),
-      path.join(`!${paths.sprite.src}`, '**/*')
+      path.join(paths.images.src, '**/*.{bmp,gif,jpg,jpeg,png,svg,eps}'),
+      path.join(`!${paths.images.src}`, 'sprite/**/*')
     ])
     .pipe(plumber())
     .pipe(newer(paths.images.dest))
@@ -243,7 +235,7 @@ gulp.task('images', () => {
   const svg = gulp
     .src([
       path.join(paths.images.src, '**/*.svg'),
-      path.join(`!${paths.sprite.src}`, '**/*')
+      path.join(`!${paths.images.src}`, 'sprite/**/*')
     ])
     .pipe(plumber())
     .pipe(newer(paths.images.dest))
@@ -335,13 +327,11 @@ gulp.task('svg2png', () => {
 gulp.task('clean', cb => {
   const cleanPaths = [
     basePaths.build,
-    paths.styles.dest,
-    // paths.scripts.dest,
-    path.join(paths.styles.src, 'helpers/{_bitmap-sprite,_vector-sprite}.{styl,scss}'),
-    path.join(paths.images.dest, '**/*')
+    basePaths.dest,
+    path.join(paths.styles, 'helpers/{_bitmap-sprite,_vector-sprite}.{styl,scss}')
   ]
 
-  return del(cleanPaths.concat(basePaths.clean.ignore), cb)
+  return del(cleanPaths, cb)
 })
 
 // Copy Files to Build
