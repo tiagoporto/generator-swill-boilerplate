@@ -5,41 +5,42 @@
 * Released under the MIT license
 */
 
-import autoprefixer from 'gulp-autoprefixer'
-import babel from 'gulp-babel'
-import browserSync from 'browser-sync'
-import buffer from 'vinyl-buffer'
-import concat from 'gulp-concat'
-import config from './.swillrc.json'
-import csslint from 'gulp-csslint'
-import csso from 'gulp-csso'
-import del from 'del'
-import eslint from 'gulp-eslint'
-import file from 'gulp-file'
-import ghPages from 'gulp-gh-pages'
-import gulp from 'gulp'
-import gulpIf from 'gulp-if'<% if (use.workflow === 'handlebars') { %>
-import handlebars from 'gulp-hb'<% } %>
-import htmlmin from 'gulp-htmlmin'
-import imagemin from 'gulp-imagemin'<% if (use.inlineSVG) { %>
-import inline from 'gulp-inline'<% } %>
-import merge from 'merge-stream'
-import mergeMediaQueries from 'gulp-merge-media-queries'
-import newer from 'gulp-newer'
-import notify from 'gulp-notify'
-import path from 'path'
-import plumber from 'gulp-plumber'
-import rename from 'gulp-rename'
-import replace from 'gulp-replace'<% if (preprocessor.name === "sass") { %>
-import sass from 'gulp-sass'<% } %>
-import sequence from 'run-sequence'
-import spritesmith from 'gulp.spritesmith'<% if (preprocessor.name === "stylus") { %>
-import stylus from 'gulp-stylus'<% } %>
-import svg2png from 'gulp-svg2png'
-import svgSprite from 'gulp-svg-sprite'
-import uglify from 'gulp-uglify'
-import useref from 'gulp-useref'
-import w3cjs from 'gulp-w3cjs'
+const autoprefixer = require('gulp-autoprefixer')
+const babel = require('gulp-babel')
+const browserSync = require('browser-sync')
+const buffer = require('vinyl-buffer')
+const concat = require('gulp-concat')
+const config = require('./.swillrc.json')
+const csslint = require('gulp-csslint')
+const csso = require('gulp-csso')
+const del = require('del')
+const eslint = require('gulp-eslint')
+const file = require('gulp-file')
+const ghPages = require('gulp-gh-pages')
+const gulp = require('gulp')
+const gulpIf = require('gulp-if')<% if (use.workflow === 'handlebars') { %>
+const handlebars = require('gulp-hb')<% } %>
+const htmlmin = require('gulp-htmlmin')
+const imagemin = require('gulp-imagemin')<% if (use.inlineSVG) { %>
+const inline = require('gulp-inline')<% } %>
+const merge = require('merge-stream')
+const mergeMediaQueries = require('gulp-merge-media-queries')
+const newer = require('gulp-newer')
+const notify = require('gulp-notify')
+const path = require('path')
+const plumber = require('gulp-plumber')
+const rename = require('gulp-rename')
+const replace = require('gulp-replace')<% if (preprocessor.name === "sass") { %>
+const sass = require('gulp-sass')<% } %>
+const sequence = require('run-sequence')
+const spritesmith = require('gulp.spritesmith')<% if (preprocessor.name === "stylus") { %>
+const stylus = require('gulp-stylus')<% } %>
+const svgSprite = require('gulp-svg-sprite')
+const uglify = require('gulp-uglify')
+const useref = require('gulp-useref')
+const w3cjs = require('gulp-w3cjs')
+
+console.log('\x1b[32m', '\x1b[7m', 'Init Swill Boilerplate v<%= boilerplate.version %>', '\x1b[0m')
 
 // ***************************** Path configs ***************************** //
 
@@ -222,7 +223,7 @@ gulp.task('styles-helpers', () => {
 
 // Optimize Images
 gulp.task('images', () => {
-  const images = gulp
+  return gulp
     .src([
       path.join(paths.images.src, '**/*.{bmp,gif,jpg,jpeg,png,svg,eps}'),
       path.join(`!${paths.images.src}`, 'sprite/**/*')
@@ -231,19 +232,6 @@ gulp.task('images', () => {
     .pipe(newer(paths.images.dest))
     .pipe(imagemin({optimizationLevel: 5, progressive: true}))
     .pipe(gulp.dest(paths.images.dest))
-
-  const svg = gulp
-    .src([
-      path.join(paths.images.src, '**/*.svg'),
-      path.join(`!${paths.images.src}`, 'sprite/**/*')
-    ])
-    .pipe(plumber())
-    .pipe(newer(paths.images.dest))
-    .pipe(svg2png())
-    .pipe(gulp.dest(paths.images.dest))
-    .pipe(notify({message: 'Images task complete', onLast: true}))
-
-  return merge(images, svg)
 })
 
 // Generate Bitmap Sprite
@@ -310,26 +298,14 @@ gulp.task('vector-sprite', () => {
     .pipe(notify({message: 'SVG sprite task complete', onLast: true}))
 })
 
-// Fallback convert SVG to PNG
-gulp.task('svg2png', () => {
-  return gulp
-    .src(path.join(paths.images.dest, 'vector-sprite.svg'))
-    .pipe(plumber())
-    .pipe(svg2png())
-    .pipe(gulp.dest(paths.images.dest))
-})
-
 // *************************** Utility Tasks ****************************** //
 
 // Clean Directories
-gulp.task('clean', cb => {
-  const cleanPaths = [
-    basePaths.build,
-    basePaths.dest,
-    path.join(paths.styles.src, 'helpers/{_bitmap-sprite,_vector-sprite}.{styl,scss}')
-  ]
-
-  return del(cleanPaths, cb)
+gulp.task('clean', () => {
+  return del([
+    // basePaths.dest,
+    basePaths.build
+  ])
 })
 
 // Copy Files to Build
@@ -364,15 +340,13 @@ gulp.task('outdatedbrowser', () => {
 })
 
 // Serve the project and watch
-gulp.task('watch', () => {
+gulp.task('watch', callback => {
   browserSync(config.browserSync)
 
   // Images
   gulp.watch(path.join(paths.images.src, 'sprite/**/*.{png,gif}'), ['bitmap-sprite', browserSync.reload])
 
   gulp.watch(path.join(paths.images.src, 'sprite/**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
-
-  gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png', browserSync.reload])
 
   gulp.watch(
     [
@@ -399,13 +373,7 @@ gulp.task('watch', () => {
   gulp.watch(path.join(paths.styles.src, 'helpers/{mixins,functions}/*.{styl,scss,sass}'), ['styles-helpers'])
 
   // HTML
-  gulp.watch(
-    [
-      path.join(basePaths.src, '**/*.{html,hbs}'),
-      path.join(basePaths.dest, '**/*.html')
-    ],
-    ['html', browserSync.reload]
-  )
+  gulp.watch(path.join(basePaths.src, '**/*.{html,hbs}'), ['html', browserSync.reload])
 
   gulp.watch(
     [
@@ -414,12 +382,14 @@ gulp.task('watch', () => {
     ],
     browserSync.reload
   )
+
+  callback()
 })
 
 // ***************************** Main Tasks ******************************* //
 
 // Clean and compile the project
-gulp.task('compile', ['clean'], () => {
+gulp.task('compile', ['clean'], callback => {
   sequence(
     [
       'outdatedbrowser',
@@ -429,32 +399,30 @@ gulp.task('compile', ['clean'], () => {
       'vector-sprite',
       'styles-helpers'
     ],
-    'svg2png',
     'styles',
-    'scripts:lint'
+    'scripts:lint',
+    callback
   )
 })
 
 // Clean, compile, serve and watch the project
-gulp.task('compile:watch', ['clean'], () => {
-  sequence('compile', 'watch')
+gulp.task('compile:watch', callback => {
+  sequence('compile', 'watch', callback)
 })
 
 // Build Project
-gulp.task('build', ['clean'], () => {
-  sequence('compile', 'copy')
+gulp.task('build', ['compile'], () => {
+  gulp.start('copy')
 })
 
 // Build Project and serve
-gulp.task('build:serve', ['clean'], () => {
-  sequence('build', () => browserSync(config.browserSyncBuild))
+gulp.task('build:serve', ['build'], () => {
+  browserSync(config.browserSyncBuild)
 })
 
 // Build the project and push the builded folder to gh-pages branch
-gulp.task('gh-pages', () => {
-  sequence('build', () => {
-    return gulp
-      .src(path.join(basePaths.build, '**/*'))
-      .pipe(ghPages())
-  })
+gulp.task('gh-pages', ['build'], () => {
+  return gulp
+    .src(path.join(basePaths.build, '**/*'))
+    .pipe(ghPages())
 })

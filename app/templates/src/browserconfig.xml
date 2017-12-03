@@ -3,7 +3,7 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <TileImage src="<%= folder.images.dest %>/touch/ms-touch-icon-144x144-precomposed.png"/>
+            <TileImage src="<%= folder.images %>/touch/ms-touch-icon-144x144-precomposed.png"/>
             <TileColor><%= project.color %></TileColor>
         </tile>
     </msapplication>

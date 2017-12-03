@@ -12,13 +12,13 @@
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="theme-color" content="<%= project.color %>">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png">
+    <link rel="icon" sizes="192x192" href="<%= folder.images %>/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="<% if (project.name) { %><%= project.name %><% } %><% if (!project.name) { %>Untitle<% } %>">
-    <link rel="apple-touch-icon" href="<%= folder.images.dest %>/touch/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="<%= folder.images %>/touch/apple-touch-icon.png">
 
     <!-- build:css css/styles.combined.min.css --><% if (use.normalize) { %>
     <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css"><% } %>

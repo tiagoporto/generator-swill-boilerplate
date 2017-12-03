@@ -1,3 +1,3 @@
 // Imports
-import './imports/javascript.js'
-import './imports/google_analytics.js'
+import './<%= folder.scripts %>/javascript.js'
+import './<%= folder.scripts %>/google_analytics.js'

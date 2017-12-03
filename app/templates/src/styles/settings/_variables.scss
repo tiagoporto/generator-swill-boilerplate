@@ -10,7 +10,7 @@ $selection-bg-color: $primary-color;
 // Paths
 $font-path: "../<%= folder.fonts %>/";
 
-$image-path: "../<%= folder.images.dest %>/";
+$image-path: "../<%= folder.images %>/";
 
 // Typography
 $font-family-serif: "Times New Roman", Times, Georgia, Serif;

@@ -2,16 +2,16 @@
   "name": "<%= project.name %>",
   "short_name": "",
   "icons": [{
-        "src": "<%= folder.images.dest %>/touch/icon-128x128.png",
+        "src": "<%= folder.images %>/touch/icon-128x128.png",
         "sizes": "128x128"
       }, {
-        "src": "<%= folder.images.dest %>/touch/apple-touch-icon.png",
+        "src": "<%= folder.images %>/touch/apple-touch-icon.png",
         "sizes": "152x152"
       }, {
-        "src": "<%= folder.images.dest %>/touch/ms-touch-icon-144x144-precomposed.png",
+        "src": "<%= folder.images %>/touch/ms-touch-icon-144x144-precomposed.png",
         "sizes": "144x144"
       }, {
-        "src": "<%= folder.images.dest %>/touch/chrome-touch-icon-192x192.png",
+        "src": "<%= folder.images %>/touch/chrome-touch-icon-192x192.png",
         "sizes": "192x192"
       }],
   "start_url": "/index.html",

@@ -86,5 +86,5 @@ bower_components
 #################
 
 <%= folder.build %>/
-<%= folder.src %>/<%= folder.styles.src %>/helpers/_helpers.styl
-<%= folder.src %>/<%= folder.styles.src %>/helpers/_helpers.scss
+<%= folder.src %>/<%= folder.styles %>/helpers/_helpers.styl
+<%= folder.src %>/<%= folder.styles %>/helpers/_helpers.scss

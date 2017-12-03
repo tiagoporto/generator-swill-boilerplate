@@ -3,10 +3,10 @@
     "src": "<%= folder.src %>",
     "dest": "<%= folder.dest %>",
     "build": "<%= folder.build %>",
-    "images": "<%= folder.images.src %>",
+    "images": "<%= folder.images %>",
     "fonts": "<%= folder.fonts %>",
-    "scripts": "<%= folder.scripts.src %>",
-    "styles": "<%= folder.styles.src %>"
+    "scripts": "<%= folder.scripts %>",
+    "styles": "<%= folder.styles %>"
   },
 
   "validateW3C": <%= use.validateHTML %>,

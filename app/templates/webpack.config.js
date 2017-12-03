@@ -5,14 +5,14 @@
 * Released under the MIT license
 */
 
-import path from 'path'
-import paths from './.swillrc.json'
-import webpack from 'webpack'
+const path = require('path')
+const paths = require('./.swillrc.json')
+const webpack = require('webpack')
 
-const config = {
-  entry: path.join(__dirname, paths.basePaths.src, paths.basePaths.scripts.src, 'index.js'),
+module.exports = {
+  entry: path.join(__dirname, paths.basePaths.src, 'index.js'),
   output: {
-    path: path.resolve(__dirname, paths.basePaths.dest, paths.basePaths.scripts.dest),
+    path: path.resolve(__dirname, paths.basePaths.dest),
     filename: 'bundle.js'
   },
   module: {
@@ -41,5 +41,3 @@ const config = {
     })<% } %>
   ]
 }
-
-export default config

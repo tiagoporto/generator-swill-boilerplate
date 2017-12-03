@@ -248,15 +248,9 @@ module.exports = class extends Yeoman {
         dest: props.destFolder || 'dist',
         build: props.buildFolder || 'build',
         fonts: props.fontsFolder || 'fonts',
-        images: {
-          src: props.imgFolder || 'images'
-        },
-        styles: {
-          src: props.stylesFolder || 'styles'
-        },
-        scripts: {
-          src: props.scriptsFolder || 'scripts'
-        }
+        images: props.imgFolder || 'images',
+        styles: props.stylesFolder || 'styles',
+        scripts: props.scriptsFolder || 'scripts'
       }
 
       this.props.use = {
@@ -326,7 +320,7 @@ module.exports = class extends Yeoman {
     packageJson.author.name = this.props.author.name
     packageJson.author.url = this.props.author.homepage
     packageJson.repository.url = this.props.project.repository
-    packageJson.scripts.lint = `${packageJson.scripts.lint} ${this.props.folder.src}/${this.props.folder.scripts.src}/.`
+    packageJson.scripts.lint = `${packageJson.scripts.lint} ${this.props.folder.src}/${this.props.folder.scripts}/.`
     this.props.integrations.coveralls && (packageJson.devDependencies['coveralls'] = '3.0.0') && (packageJson.scripts['coveralls'] = 'nyc --reporter=text-lcov npm test | coveralls')
     this.props.use.inlineSVG && (packageJson.devDependencies['gulp-inline'] = '0.1.3');
 
@@ -398,8 +392,8 @@ module.exports = class extends Yeoman {
     var swillPackage = require('../package.json')
 
     this.fs.copyTpl(
-      this.templatePath('gulpfile.babel.js'),
-      this.destinationPath('gulpfile.babel.js'), {
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js'), {
         boilerplate: swillPackage,
         preprocessor: this.props.preprocessor,
         use: this.props.use
@@ -408,8 +402,8 @@ module.exports = class extends Yeoman {
 
     // Webpack
     this.fs.copyTpl(
-      this.templatePath('webpack.config.babel.js'),
-      this.destinationPath('webpack.config.babel.js'), {
+      this.templatePath('webpack.config.js'),
+      this.destinationPath('webpack.config.js'), {
         boilerplate: swillPackage,
         preprocessor: this.props.preprocessor,
         use: this.props.use
@@ -419,7 +413,7 @@ module.exports = class extends Yeoman {
     // Styles
     this.fs.copyTpl(
       this.templatePath('src/styles/**/*.' + this.props.preprocessor.extension),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles.src + '/'), {
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.styles + '/'), {
         folder: this.props.folder,
         project: this.props.project
       }
@@ -432,12 +426,12 @@ module.exports = class extends Yeoman {
       }
     )
 
-    this.fs.write(this.props.folder.src + '/' + this.props.folder.styles.src + '/helpers/functions/.gitkeep', '')
+    this.fs.write(this.props.folder.src + '/' + this.props.folder.styles + '/helpers/functions/.gitkeep', '')
 
     // scripts
     this.fs.copyTpl(
       this.templatePath('src/scripts/**/*'),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.scripts.src + '/'), {
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.scripts + '/'), {
         use: this.props.use,
         project: this.props.project
       }
@@ -454,38 +448,38 @@ module.exports = class extends Yeoman {
     if (this.props.include.manifest) {
       this.fs.copy(
         this.templatePath('src/images/touch/icon-128x128.png'),
-        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/icon-128x128.png')
+        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/touch/icon-128x128.png')
       )
     }
 
     if (this.props.include.browserconfig || this.props.include.manifest) {
       this.fs.copy(
         this.templatePath('src/images/touch/ms-touch-icon-144x144-precomposed.png'),
-        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/ms-touch-icon-144x144-precomposed.png')
+        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/touch/ms-touch-icon-144x144-precomposed.png')
       )
     }
 
     this.fs.copy(
       this.templatePath('src/images/touch/chrome-touch-icon-192x192.png'),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/chrome-touch-icon-192x192.png')
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/touch/chrome-touch-icon-192x192.png')
     )
 
     this.fs.copy(
       this.templatePath('src/images/touch/apple-touch-icon.png'),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/touch/apple-touch-icon.png')
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/touch/apple-touch-icon.png')
     )
 
     this.fs.copy(
       this.templatePath('src/images/sprite/.gitkeep'),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/sprite/.gitkeep')
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/sprite/.gitkeep')
     )
 
     this.fs.copy(
       this.templatePath('src/images/logos/**/*'),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images.src + '/logos/')
+      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/logos/')
     )
 
-    this.fs.write(this.props.folder.src + '/' + this.props.folder.images.src + '/copyright/.gitkeep', '')
+    this.fs.write(this.props.folder.src + '/' + this.props.folder.images + '/copyright/.gitkeep', '')
 
     // Favicon
     this.fs.copy(
