@@ -114,10 +114,16 @@ module.exports = class extends Yeoman {
         message: 'Use SVG inline?',
         default: true
       }, {
-        type: 'confirm',
-        name: 'handlebars',
-        message: 'Handlebars Template?',
-        default: true
+        type: 'list',
+        name: 'workflow',
+        message: 'Choose the workflow',
+        choices: [{
+          name: 'Static',
+          value: 'static'
+        }, {
+          name: 'Handlebars',
+          value: 'handlebars'
+        }]
       }, {
         type: 'list',
         name: 'preprocessor',
@@ -263,7 +269,7 @@ module.exports = class extends Yeoman {
         },
         normalize: props.features.indexOf('normalize') >= 0,
         outdatedBrowser: props.features.indexOf('outdatedBrowser') >= 0,
-        handlebars: props.handlebars,
+        workflow: props.workflow,
         inlineSVG: props.inlineSVG,
         gitHooks: {
           precommit: props.gitHooks.indexOf('precommit') >= 0,
@@ -334,7 +340,7 @@ module.exports = class extends Yeoman {
     this.props.preprocessor.name === 'stylus' && (packageJson.devDependencies['gulp-stylus'] = '2.6.0')
 
     // Optional libs and plugins
-    this.props.use.handlebars && (packageJson.devDependencies['gulp-hb'] = '6.0.2')
+    this.props.use.workflow === 'handlebars' && (packageJson.devDependencies['gulp-hb'] = '6.0.2')
     this.props.use.jquery && (packageJson.dependencies.jquery = '3.2.1')
     this.props.use.jqueryLogoDownloadtip && (packageJson.dependencies['jquery-logo-downloadtip'] = '2.0.0')
     this.props.use.outdatedBrowser && (packageJson.dependencies['outdatedbrowser'] = '1.1.5') && (packageJson.devDependencies['exports-loader'] = '0.6.4')
@@ -495,7 +501,7 @@ module.exports = class extends Yeoman {
       use: this.props.use
     }
 
-    if (this.props.use.handlebars) {
+    if (this.props.use.workflow === 'handlebars') {
       this.fs.copyTpl(
         this.templatePath('src/includes/**/*'),
         this.destinationPath(this.props.folder.src + '/includes/'),
