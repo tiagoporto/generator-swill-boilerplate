@@ -18,7 +18,7 @@ import eslint from 'gulp-eslint'
 import file from 'gulp-file'
 import ghPages from 'gulp-gh-pages'
 import gulp from 'gulp'
-import gulpIf from 'gulp-if'<% if (use.handlebars) { %>
+import gulpIf from 'gulp-if'<% if (use.workflow === 'handlebars') { %>
 import handlebars from 'gulp-hb'<% } %>
 import htmlmin from 'gulp-htmlmin'
 import imagemin from 'gulp-imagemin'<% if (use.inlineSVG) { %>
@@ -46,31 +46,31 @@ import w3cjs from 'gulp-w3cjs'
 const basePaths = config.basePaths
 
 const paths = {
-  // handlebars: {
-  //   src: path.join(basePaths.src, basePaths.handlebars.src)
-  // },
   images: {
     src: path.join(basePaths.src, basePaths.images),
-    dest: path.join(basePaths.dest, basePaths.images)
+    dest: path.join(basePaths.dest, basePaths.images),
+    build: path.join(basePaths.build, basePaths.images)
   },
 
   scripts: {
     src: path.join(basePaths.src, basePaths.scripts),
-    dest: path.join(basePaths.dest, basePaths.scripts)
+    dest: path.join(basePaths.dest, basePaths.scripts),
+    build: path.join(basePaths.build, basePaths.scripts)
   },
 
   styles: {
     src: path.join(basePaths.src, basePaths.styles),
-    dest: path.join(basePaths.dest, basePaths.styles)
+    dest: path.join(basePaths.dest, basePaths.styles),
+    build: path.join(basePaths.build, basePaths.styles)
   }
 }
 
 // ******************************** Tasks ********************************* //
 
 gulp.task('html', () => {
-  return gulp<% if (use.handlebars) { %>
+  return gulp<% if (use.workflow === 'handlebars') { %>
     .src([
-      path.join(paths.src, '**/*.html'),
+      path.join(basePaths.src, '**/*.html'),
       path.join(`!${basePaths.src}`, 'lang/outdated_browser/**/*.html')
     ])
     .pipe(plumber())
@@ -84,7 +84,7 @@ gulp.task('html', () => {
       disabledTypes: ['css', 'js', 'img']
     })))
     .pipe(gulp.dest(basePaths.dest))
-<% } %>    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
+<% } %>    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (use.workflow === 'static') { %>
     .src([
       path.join(basePaths.src, '**/*.html'),
       path.join(`!${basePaths.src}`, 'lang/outdated_browser/**/*.html')
@@ -326,7 +326,7 @@ gulp.task('clean', cb => {
   const cleanPaths = [
     basePaths.build,
     basePaths.dest,
-    path.join(paths.styles, 'helpers/{_bitmap-sprite,_vector-sprite}.{styl,scss}')
+    path.join(paths.styles.src, 'helpers/{_bitmap-sprite,_vector-sprite}.{styl,scss}')
   ]
 
   return del(cleanPaths, cb)
@@ -334,23 +334,22 @@ gulp.task('clean', cb => {
 
 // Copy Files to Build
 gulp.task('copy', () => {
-  // Minify and Copy HTML & PHP
+  // Minify and Copy HTML
   const html = gulp
-    .src(path.join(basePaths.dest, '**/*.{html,php}'))
+    .src(path.join(basePaths.dest, '**/*.html'))
     .pipe(useref({searchPath: basePaths.dest}))
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', csso()))
     .pipe(gulpIf('*.html', htmlmin({collapseWhitespace: true, spare: true, empty: true, conditionals: true})))
-    .pipe(gulpIf('*.php', htmlmin({collapseWhitespace: true, spare: true, empty: true, conditionals: true})))
     .pipe(gulp.dest(basePaths.build))
 
-  // Copy All Other files except HTML, PHP, CSS e JS Files
+  // Copy All Other files except HTML, CSS e JS Files
   const allFiles = gulp
     .src([
       path.join(basePaths.dest, '**/*'),
       path.join(`!${paths.styles.dest}`, '**/*'),
       path.join(`!${paths.scripts.dest}`, '**/*'),
-      path.join(`!${basePaths.dest}`, '**/*.{html,php}')
+      path.join(`!${basePaths.dest}`, '**/*.html')
     ], {dot: true})
     .pipe(gulp.dest(basePaths.build))
 
@@ -368,45 +367,50 @@ gulp.task('outdatedbrowser', () => {
 gulp.task('watch', () => {
   browserSync(config.browserSync)
 
-  gulp.watch(path.join(paths.sprite.src, '**/*.{png,gif}'), ['bitmap-sprite', browserSync.reload])
+  // Images
+  gulp.watch(path.join(paths.images.src, 'sprite/**/*.{png,gif}'), ['bitmap-sprite', browserSync.reload])
 
-  gulp.watch(path.join(paths.sprite.src, '**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
+  gulp.watch(path.join(paths.images.src, 'sprite/**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
 
   gulp.watch(path.join(paths.images.dest, '**/*.svg'), ['svg2png', browserSync.reload])
-
-  gulp.watch(path.join(paths.scripts.src, '**/*.{js,jsx}'), ['scripts'])
-
-  gulp.watch(path.join(paths.scripts.dest, '**/*.{js,jsx}'), browserSync.reload)
-
-  gulp.watch(path.join(paths.styles.src, 'helpers/{mixins,functions}/*.{styl,scss,sass}'), ['styles-helpers'])
 
   gulp.watch(
     [
       path.join(paths.images.src, '**/*.{bmp,gif,jpg,jpeg,png,svg}'),
-      path.join(`!${paths.sprite.src}`, '**/*')
+      path.join(`!${paths.images.src}`, 'sprite/**/*')
     ],
     ['images', browserSync.reload]
   )
 
+  // Scripts
+  gulp.watch(path.join(basePaths.src, '**/*.{js,jsx}'), ['scripts'])
+
+  gulp.watch(path.join(basePaths.dest, '**/*.{js}'), browserSync.reload)
+
+  // Styles
   gulp.watch(
     [
-      path.join(paths.styles.src, '**/*.{styl,scss,sass}'),
+      path.join(basePaths.src, '**/*.{styl,scss,sass}'),
       path.join(`!${paths.styles.src}`, 'helpers/{mixins,functions}/*.{styl,scss,sass}')
     ],
     ['styles', browserSync.reload]
   )
 
+  gulp.watch(path.join(paths.styles.src, 'helpers/{mixins,functions}/*.{styl,scss,sass}'), ['styles-helpers'])
+
+  // HTML
   gulp.watch(
     [
       path.join(basePaths.src, '**/*.{html,hbs}'),
       path.join(basePaths.dest, '**/*.html')
-    ], ['html', browserSync.reload]
+    ],
+    ['html', browserSync.reload]
   )
 
   gulp.watch(
     [
-      path.join(basePaths.dest, '**/*'),
-      path.join(`!${basePaths.dest}`, '**/*.{html,php,css,js,bmp,gif,jpg,jpeg,png,svg}')
+      path.join(basePaths.src, '**/*'),
+      path.join(`!${basePaths.src}`, '**/*.{html,css,js,bmp,gif,jpg,jpeg,png,svg}')
     ],
     browserSync.reload
   )
@@ -443,8 +447,7 @@ gulp.task('build', ['clean'], () => {
 
 // Build Project and serve
 gulp.task('build:serve', ['clean'], () => {
-  sequence('build', () => browserSync(config.browserSyncBuild)
-  )
+  sequence('build', () => browserSync(config.browserSyncBuild))
 })
 
 // Build the project and push the builded folder to gh-pages branch
