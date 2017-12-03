@@ -129,9 +129,8 @@ gulp.task('scripts', ['scripts:lint'], () => {
 gulp.task('styles:lint', () => {
   return gulp
     .src([
-      path.join(paths.styles.src, '*.styl'),
-      path.join(`!${paths.styles.src}`, '_*.styl'),
-      path.join(paths.styles.src, 'styles.scss')
+      path.join(basePaths.src, '*.styl'),
+      path.join(basePaths.src, 'index.scss')
     ])
     .pipe(gulpIf(config.lintCSS, csslint('./.csslintrc')))
     .pipe(gulpIf(config.lintCSS, csslint.formatter()))
@@ -157,33 +156,33 @@ gulp.task('styles', ['styles:lint'], () => {<% if (preprocessor.name === "stylus
               .pipe(replace('"', '\''))
               .pipe(replace("content: '", 'content: "'))
               .pipe(replace('\';}', '";}'))
-              .pipe(gulp.dest(paths.styles.dest))
+              .pipe(gulp.dest(basePaths.dest))
               .pipe(rename({suffix: '.min'}))
-              .pipe(gulp.dest(paths.styles.dest))
+              .pipe(gulp.dest(basePaths.dest))
           }))
       .pipe(autoprefixer({browsers: config.autoprefixerBrowsers}))
       .pipe(mergeMediaQueries({log: true}))
-      .pipe(gulp.dest(paths.styles.dest))
+      .pipe(gulp.dest(basePaths.dest))
       .pipe(csso())
       .pipe(rename({suffix: '.min'}))
-      .pipe(gulp.dest(paths.styles.dest))
+      .pipe(gulp.dest(basePaths.dest))
       .pipe(notify({message: 'Styles task complete', onLast: true}))
   }
 
   const main = streaming(
     gulp.src([
-      path.join(paths.styles.src, 'styles.styl'),
-      path.join(`!${paths.styles.src}`, '**/_*.styl')
+      path.join(basePaths.src, 'index.styl'),
+      path.join(`!${basePaths.src}`, '**/_*.styl')
     ])
   )
 
   const others = streaming(
     gulp.src([
-      path.join(paths.styles.src, '**/*.styl'),
-      path.join(`!${paths.styles.src}`, 'styles.styl'),
-      path.join(`!${paths.styles.src}`, '**/_*.styl')
+      path.join(basePaths.src, '**/*.styl'),
+      path.join(`!${basePaths.src}`, 'index.styl'),
+      path.join(`!${basePaths.src}`, '**/_*.styl')
     ])
-      .pipe(newer({dest: paths.styles.dest, ext: '.css', extra: paths.styles.src}))
+      .pipe(newer({dest: basePaths.dest, ext: '.css', extra: basePaths.src}))
   )
 
   return merge(main, others)<% } %><% if (preprocessor.name === "sass") { %>
@@ -201,10 +200,10 @@ gulp.task('styles', ['styles:lint'], () => {<% if (preprocessor.name === "stylus
     )
     .pipe(autoprefixer({browsers: config.autoprefixerBrowsers}))
     .pipe(mergeMediaQueries({log: true}))
-    .pipe(gulp.dest(paths.styles.dest))
+    .pipe(gulp.dest(basePaths.dest))
     .pipe(csso())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest(paths.styles.dest))
+    .pipe(gulp.dest(basePaths.dest))
     .pipe(notify({message: 'Styles task complete', onLast: true}))<% } %>
 })
 

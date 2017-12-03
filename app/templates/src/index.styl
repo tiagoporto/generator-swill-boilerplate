@@ -1,13 +1,13 @@
 // Helpers
-@import "settings/_variables"
-@import "helpers/_helpers"
+@import "<%= folder.styles.src %>/settings/_variables"
+@import "<%= folder.styles.src %>/helpers/_helpers"
 
 // Web Fonts
-// @import "settings/_web-fonts"
+// @import "<%= folder.styles.src %>/settings/_web-fonts"
 
 // Sprites
-// @import "helpers/_bitmap-sprite"
-// @import "helpers/_vector-sprite"
+// @import "<%= folder.styles.src %>/helpers/_bitmap-sprite"
+// @import "<%= folder.styles.src %>/helpers/_vector-sprite"
 
 // Vendors
 // @import "package_name"; // to import from node_modules
@@ -31,4 +31,4 @@ html
 i[class^="icon-"]
   display: block
 
-@import "components/_index"
+@import "<%= folder.styles.src %>/components/_index"
