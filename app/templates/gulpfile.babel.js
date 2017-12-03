@@ -100,7 +100,7 @@ gulp.task('html', () => {
 // Lint Script
 gulp.task('scripts:lint', () => {
   return gulp
-    .src(path.join(paths.scripts.src, '**/*.{js,jsx}'))
+    .src(path.join(basePaths.src, '**/*.{js,jsx,vue}'))
     .pipe(gulpIf(config.lintJS, eslint()))
     .pipe(gulpIf(config.lintJS, eslint.format()))
 })
