@@ -70,12 +70,12 @@ const paths = {
 gulp.task('html', () => {
   return gulp<% if (use.handlebars) { %>
     .src([
-      path.join(paths.handlebars.src, '**/*.html'),
-      path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
+      path.join(paths.src, '**/*.html'),
+      path.join(`!${basePaths.src}`, 'lang/outdated_browser/**/*.html')
     ])
     .pipe(plumber())
     .pipe(handlebars({
-      partials: path.join(paths.handlebars.src, basePaths.handlebars.partials.src, '**/*.hbs')
+      partials: path.join(basePaths.src, 'includes/**/*.hbs')
     }))
     .pipe(gulpIf(config.validateW3C, w3cjs()))
     .pipe(gulpIf(config.inlineSVG, gulp.dest(basePaths.dest)))<% if (use.inlineSVG) { %>
@@ -86,11 +86,12 @@ gulp.task('html', () => {
     .pipe(gulp.dest(basePaths.dest))
 <% } %>    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (!use.handlebars) { %>
     .src([
-      path.join(basePaths.dest, '**/*.html'),
-      path.join(`!${basePaths.dest}`, 'lang/outdated_browser/**/*.html')
+      path.join(basePaths.src, '**/*.html'),
+      path.join(`!${basePaths.src}`, 'lang/outdated_browser/**/*.html')
     ])
     .pipe(plumber())
     .pipe(gulpIf(config.validateW3C, w3cjs()))
+    .pipe(gulp.dest(basePaths.dest))
     .pipe(notify({message: 'HTML task complete', onLast: true}))<% } %>
 })
 
