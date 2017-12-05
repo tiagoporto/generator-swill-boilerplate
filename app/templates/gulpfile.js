@@ -108,7 +108,6 @@ gulp.task('scripts:lint', () => {
 
 // Compile, Minify and Lint Script
 gulp.task('scripts', ['scripts:lint'], () => {
-  // shell.task('webpack --progress --colors')
   return gulp
     .src([
       path.join(paths.scripts.src, '*.js'),
@@ -298,56 +297,39 @@ gulp.task('vector-sprite', () => {
     .pipe(notify({message: 'SVG sprite task complete', onLast: true}))
 })
 
+gulp.task('copy', () => {
+<% if (use.outdatedBrowser) { %>  const outdatedbrowser = gulp
+    .src('node_modules/outdatedbrowser/outdatedbrowser/lang/*')
+    .pipe(gulp.dest(path.join(basePaths.dest, 'lang/outdated_browser')))
+
+  const allFiles = <% } %><% if (!use.outdatedBrowser) { %>  return <% } %>gulp
+    .src([
+      path.join(basePaths.src, '{*,**/*}'),
+      path.join(`!${basePaths.src}`, '{**/.gitkeep,.gitkeep,{*,**/*}.{html,css,js,bmp,gif,jpg,jpeg,png,svg,eps,styl,sass,scss}}')
+    ], {dot: true, nodir: true})
+    .pipe(gulp.dest(basePaths.dest))<% if (use.outdatedBrowser) { %>
+
+  return merge(outdatedbrowser, allFiles)<% } %>
+})
+
 // *************************** Utility Tasks ****************************** //
 
 // Clean Directories
 gulp.task('clean', () => {
   return del([
-    // basePaths.dest,
+    basePaths.dest,
     basePaths.build
   ])
 })
 
-// Copy Files to Build
-gulp.task('copy', () => {
-  // Minify and Copy HTML
-  const html = gulp
-    .src(path.join(basePaths.dest, '**/*.html'))
-    .pipe(useref({searchPath: basePaths.dest}))
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulpIf('*.css', csso()))
-    .pipe(gulpIf('*.html', htmlmin({collapseWhitespace: true, spare: true, empty: true, conditionals: true})))
-    .pipe(gulp.dest(basePaths.build))
-
-  // Copy All Other files except HTML, CSS e JS Files
-  const allFiles = gulp
-    .src([
-      path.join(basePaths.dest, '**/*'),
-      path.join(`!${paths.styles.dest}`, '**/*'),
-      path.join(`!${paths.scripts.dest}`, '**/*'),
-      path.join(`!${basePaths.dest}`, '**/*.html')
-    ], {dot: true})
-    .pipe(gulp.dest(basePaths.build))
-
-  return merge(html, allFiles)
-})
-
-// Copy lang files from outdatedbrowser
-gulp.task('outdatedbrowser', () => {
-  return gulp
-    .src('node_modules/outdatedbrowser/outdatedbrowser/lang/*')
-    .pipe(gulp.dest(path.join(basePaths.dest, 'lang/outdated_browser')))
-})
-
 // Serve the project and watch
 gulp.task('watch', callback => {
-  browserSync(config.browserSync)
+  const bsConfig = config.browserSync
+  bsConfig.server.baseDir.push(basePaths.dest)
+
+  browserSync(bsConfig)
 
   // Images
-  gulp.watch(path.join(paths.images.src, 'sprite/**/*.{png,gif}'), ['bitmap-sprite', browserSync.reload])
-
-  gulp.watch(path.join(paths.images.src, 'sprite/**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
-
   gulp.watch(
     [
       path.join(paths.images.src, '**/*.{bmp,gif,jpg,jpeg,png,svg}'),
@@ -355,6 +337,11 @@ gulp.task('watch', callback => {
     ],
     ['images', browserSync.reload]
   )
+
+  // Sprite
+  gulp.watch(path.join(paths.images.src, 'sprite/**/*.{png,gif}'), ['bitmap-sprite', browserSync.reload])
+
+  gulp.watch(path.join(paths.images.src, 'sprite/**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
 
   // Scripts
   gulp.watch(path.join(basePaths.src, '{*,**/*}.{js,jsx}'), ['scripts'])
@@ -375,12 +362,13 @@ gulp.task('watch', callback => {
   // HTML
   gulp.watch(path.join(basePaths.src, '{*,**/*}.{html,hbs}'), ['html', browserSync.reload])
 
+  // Other files
   gulp.watch(
     [
       path.join(basePaths.src, '{*,**/*}'),
-      path.join(`!${basePaths.src}`, '{*,**/*}.{html,css,js,bmp,gif,jpg,jpeg,png,svg}')
+      path.join(`!${basePaths.src}`, '{*,**/*}.{html,css,js,bmp,gif,jpg,jpeg,png,svg,eps,styl,sass,scss}')
     ],
-    browserSync.reload
+    ['copy', browserSync.reload]
   )
 
   callback()
@@ -392,7 +380,7 @@ gulp.task('watch', callback => {
 gulp.task('compile', ['clean'], callback => {
   sequence(
     [
-      'outdatedbrowser',
+      'copy',
       'html',
       'images',
       'bitmap-sprite',
@@ -400,7 +388,7 @@ gulp.task('compile', ['clean'], callback => {
       'styles-helpers'
     ],
     'styles',
-    'scripts:lint',
+    'scripts',
     callback
   )
 })
@@ -412,12 +400,38 @@ gulp.task('compile:watch', callback => {
 
 // Build Project
 gulp.task('build', ['compile'], () => {
-  gulp.start('copy')
+  const html = gulp
+    .src(path.join(basePaths.dest, '**/*.html'))
+    .pipe(useref({searchPath: basePaths.dest}))
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', csso()))
+    .pipe(gulpIf('*.html', htmlmin({
+      collapseWhitespace: true,
+      spare: true,
+      empty: true,
+      conditionals: true
+    })))
+    .pipe(gulp.dest(basePaths.build))
+
+  // Copy All Other files except HTML, CSS e JS Files
+  const allFiles = gulp
+    .src([
+      path.join(basePaths.dest, '**/*'),
+      path.join(`!${paths.styles.dest}`, '**/*'),
+      path.join(`!${paths.scripts.dest}`, '**/*'),
+      path.join(`!${basePaths.dest}`, '**/*.html')
+    ], {dot: true, nodir: true})
+    .pipe(gulp.dest(basePaths.build))
+
+  return merge(html, allFiles)
 })
 
 // Build Project and serve
 gulp.task('build:serve', ['build'], () => {
-  browserSync(config.browserSyncBuild)
+  const bsConfig = config.browserSyncBuild
+  bsConfig.server.baseDir.push(basePaths.build)
+
+  browserSync(bsConfig)
 })
 
 // Build the project and push the builded folder to gh-pages branch

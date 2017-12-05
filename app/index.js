@@ -109,11 +109,6 @@ module.exports = class extends Yeoman {
           return response.settingFolder
         }
       }, {
-        type: 'confirm',
-        name: 'inlineSVG',
-        message: 'Use SVG inline?',
-        default: true
-      }, {
         type: 'list',
         name: 'workflow',
         message: 'Choose the workflow',
@@ -152,6 +147,11 @@ module.exports = class extends Yeoman {
           value: 'lintJS',
           checked: true
         }]
+      }, {
+        type: 'confirm',
+        name: 'inlineSVG',
+        message: 'Use SVG inline?',
+        default: true
       }, {
         type: 'checkbox',
         name: 'features',
