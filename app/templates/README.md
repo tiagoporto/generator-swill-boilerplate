@@ -7,7 +7,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dt/<%= project.sanitizeName %>.svg)](https://www.npmjs.com/package/<%= project.sanitizeName %>)
 [![Github Release](https://img.shields.io/github/release/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://github.com/<%= githubUser %>/<%= project.sanitizeName %>/releases)
 [![Github Issues](https://img.shields.io/github/issues/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://github.com/<%= githubUser %>/<%= project.sanitizeName %>/issues)
-[![Github License](https://img.shields.io/github/license/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://raw.githubusercontent.com/<%= githubUser %>/<%= project.sanitizeName %>/master/LICENSE.md)
+[![Github License](https://img.shields.io/github/license/<%= githubUser %>/<%= project.sanitizeName %>.svg)](https://raw.githubusercontent.com/<%= githubUser %>/<%= project.sanitizeName %>/master/LICENSE)
 
 <%= project.description %>
 
