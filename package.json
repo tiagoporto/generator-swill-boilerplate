@@ -40,7 +40,7 @@
     "app"
   ],
   "dependencies": {
-    "apache-server-configs": "2.14.0",
+    "apache-server-configs": "2.15.0",
     "chalk": "2.3.0",
     "generator-license": "5.1.0",
     "mkdirp": "0.5.1",
