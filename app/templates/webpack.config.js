@@ -6,13 +6,13 @@
 */
 
 const path = require('path')
-const paths = require('./.swillrc.json')
+const paths = require('./.swillrc.json').basePaths
 const webpack = require('webpack')
 
 module.exports = {
-  entry: path.join(__dirname, paths.basePaths.src, 'index.js'),
+  entry: path.join(__dirname, paths.src, 'index.js'),
   output: {
-    path: path.resolve(__dirname, paths.basePaths.dest),
+    path: path.resolve(__dirname, paths.dest),
     filename: 'bundle.js'
   },
   module: {
@@ -34,10 +34,6 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }
-    })<% if (use.jquery) { %>,
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    })<% } %>
+    })
   ]
 }
