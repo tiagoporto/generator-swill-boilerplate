@@ -64,6 +64,16 @@ paths.styles = {
   build: path.join(paths.build, paths.styles)
 }
 
+// ******************************* Settings ******************************* //
+
+let destFolder = paths.dest
+const fileFormats = {
+  images: 'bmp,gif,jpg,jpeg,png,svg,eps,webp,tiff',
+  scripts: 'js,jsx,vue',
+  styles: 'styl,sass,scss,css',
+  handlebars: 'html,hbs'
+}
+
 // ******************************** Tasks ********************************* //
 
 gulp.task('html', () => {
@@ -77,12 +87,12 @@ gulp.task('html', () => {
       partials: path.join(paths.src, 'includes/**/*.hbs')
     }))
     .pipe(gulpIf(config.validateW3C, w3cjs()))
-    .pipe(gulpIf(config.inlineSVG, gulp.dest(paths.dest)))<% if (use.inlineSVG) { %>
+    .pipe(gulpIf(config.inlineSVG, gulp.dest(destFolder)))<% if (use.inlineSVG) { %>
     .pipe(gulpIf(config.inlineSVG, inline({
       base: './',
       disabledTypes: ['css', 'js', 'img']
     })))
-    .pipe(gulp.dest(paths.dest))
+    .pipe(gulp.dest(destFolder))
 <% } %>    .pipe(notify({message: 'Handlebars task complete', onLast: true}))<% } %><% if (use.workflow === 'static') { %>
     .src([
       path.join(paths.src, '**/*.html'),
@@ -90,7 +100,7 @@ gulp.task('html', () => {
     ])
     .pipe(plumber())
     .pipe(gulpIf(config.validateW3C, w3cjs()))
-    .pipe(gulp.dest(paths.dest))
+    .pipe(gulp.dest(destFolder))
     .pipe(notify({message: 'HTML task complete', onLast: true}))<% } %>
 })
 
@@ -109,16 +119,17 @@ gulp.task('scripts', ['scripts:lint'], () => {
   return gulp
     .src([
       path.join(paths.scripts.src, '*.js'),
-      path.join(`!${paths.scripts.src}`, 'index.js')
+      path.join(`!${paths.scripts.src}`, 'index.js'),
+      path.join(`!${paths.scripts.src}`, '**/*.test.js')
     ])
     .pipe(plumber())
-    .pipe(newer(paths.scripts.dest))
+    .pipe(newer(paths.dest))
     .pipe(plumber())
     .pipe(babel())
-    .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(gulp.dest(paths.dest))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify({output: {comments: 'some'}}))
-    .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(gulp.dest(paths.dest))
     .pipe(notify({message: 'Scripts task complete', onLast: true}))
 })
 
@@ -154,16 +165,16 @@ gulp.task('styles', ['styles:lint'], () => {<% if (preprocessor.name === "stylus
               .pipe(replace('"', '\''))
               .pipe(replace("content: '", 'content: "'))
               .pipe(replace('\';}', '";}'))
-              .pipe(gulp.dest(paths.dest))
+              .pipe(gulp.dest(destFolder))
               .pipe(rename({suffix: '.min'}))
-              .pipe(gulp.dest(paths.dest))
+              .pipe(gulp.dest(destFolder))
           }))
       .pipe(autoprefixer({browsers: config.autoprefixerBrowsers}))
       .pipe(mergeMediaQueries({log: true}))
-      .pipe(gulp.dest(paths.dest))
+      .pipe(gulp.dest(destFolder))
       .pipe(csso())
       .pipe(rename({suffix: '.min'}))
-      .pipe(gulp.dest(paths.dest))
+      .pipe(gulp.dest(destFolder))
       .pipe(notify({message: 'Styles task complete', onLast: true}))
   }
 
@@ -180,7 +191,7 @@ gulp.task('styles', ['styles:lint'], () => {<% if (preprocessor.name === "stylus
       path.join(`!${paths.src}`, 'index.styl'),
       path.join(`!${paths.src}`, '**/_*.styl')
     ])
-      .pipe(newer({dest: paths.dest, ext: '.css', extra: paths.styles.src}))
+      .pipe(newer({dest: destFolder, ext: '.css', extra: paths.styles.src}))
   )
 
   return merge(main, others)<% } %><% if (preprocessor.name === "sass") { %>
@@ -198,10 +209,10 @@ gulp.task('styles', ['styles:lint'], () => {<% if (preprocessor.name === "stylus
     )
     .pipe(autoprefixer({browsers: config.autoprefixerBrowsers}))
     .pipe(mergeMediaQueries({log: true}))
-    .pipe(gulp.dest(paths.dest))
+    .pipe(gulp.dest(destFolder))
     .pipe(csso())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest(paths.dest))
+    .pipe(gulp.dest(destFolder))
     .pipe(notify({message: 'Styles task complete', onLast: true}))<% } %>
 })
 
@@ -227,7 +238,13 @@ gulp.task('images', () => {
     ])
     .pipe(plumber())
     .pipe(newer(paths.images.dest))
-    .pipe(imagemin({optimizationLevel: 5, progressive: true}))
+    .pipe(imagemin([
+      imagemin.jpegtran({progressive: true}),
+      imagemin.optipng({optimizationLevel: 5})
+    ], {
+      verbose: true
+    }
+    ))
     .pipe(gulp.dest(paths.images.dest))
 })
 
@@ -298,14 +315,14 @@ gulp.task('vector-sprite', () => {
 gulp.task('copy', () => {
 <% if (use.outdatedBrowser) { %>  const outdatedbrowser = gulp
     .src('node_modules/outdatedbrowser/outdatedbrowser/lang/*')
-    .pipe(gulp.dest(path.join(paths.dest, 'lang/outdated_browser')))
+    .pipe(gulp.dest(path.join(destFolder, 'lang/outdated_browser')))
 
   const allFiles = <% } %><% if (!use.outdatedBrowser) { %>  return <% } %>gulp
     .src([
-      path.join(paths.src, '{*,**/*}'),
-      path.join(`!${paths.src}`, '{**/.gitkeep,.gitkeep,{*,**/*}.{html,css,js,bmp,gif,jpg,jpeg,png,svg,eps,styl,sass,scss}}')
+      path.join(paths.src, '**/*'),
+      path.join(`!${paths.src}`, '{**/.gitkeep,**/*.{html,css,js,bmp,gif,jpg,jpeg,png,svg,eps,styl,sass,scss}}')
     ], {dot: true, nodir: true})
-    .pipe(gulp.dest(paths.dest))<% if (use.outdatedBrowser) { %>
+    .pipe(gulp.dest(destFolder))<% if (use.outdatedBrowser) { %>
 
   return merge(outdatedbrowser, allFiles)<% } %>
 })
@@ -342,14 +359,14 @@ gulp.task('watch', callback => {
   gulp.watch(path.join(paths.images.src, 'sprite/**/*.svg'), ['vector-sprite', 'styles', browserSync.reload])
 
   // Scripts
-  gulp.watch(path.join(paths.src, '{*,**/*}.{js,jsx}'), ['scripts'])
+  gulp.watch(path.join(paths.src, '**/*.{js,jsx}'), ['scripts'])
 
   gulp.watch(path.join(paths.dest, '*.js'), browserSync.reload)
 
   // Styles
   gulp.watch(
     [
-      path.join(paths.src, '{*,**/*}.{styl,scss,sass}'),
+      path.join(paths.src, '**/*.{styl,scss,sass}'),
       path.join(`!${paths.styles.src}`, 'helpers/{mixins,functions}/*.{styl,scss,sass}')
     ],
     ['styles', browserSync.reload]
@@ -358,13 +375,13 @@ gulp.task('watch', callback => {
   gulp.watch(path.join(paths.styles.src, 'helpers/{mixins,functions}/*.{styl,scss,sass}'), ['styles-helpers'])
 
   // HTML
-  gulp.watch(path.join(paths.src, '{*,**/*}.{html,hbs}'), ['html', browserSync.reload])
+  gulp.watch(path.join(paths.src, '**/*.{html,hbs}'), ['html', browserSync.reload])
 
   // Other files
   gulp.watch(
     [
-      path.join(paths.src, '{*,**/*}'),
-      path.join(`!${paths.src}`, '{*,**/*}.{html,css,js,bmp,gif,jpg,jpeg,png,svg,eps,styl,sass,scss}')
+      path.join(paths.src, '**/*'),
+      path.join(`!${paths.src}`, '**/*.{html,css,js,bmp,gif,jpg,jpeg,png,svg,eps,styl,sass,scss}')
     ],
     ['copy', browserSync.reload]
   )
@@ -398,9 +415,11 @@ gulp.task('compile:watch', callback => {
 
 // Build Project
 gulp.task('build', ['compile'], () => {
+  destFolder = paths.build
+
   const html = gulp
-    .src(path.join(paths.dest, '**/*.html'))
-    .pipe(useref({searchPath: paths.dest}))
+    .src(path.join(destFolder, '**/*.html'))
+    .pipe(useref({searchPath: destFolder}))
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', csso()))
     .pipe(gulpIf('*.html', htmlmin({
@@ -409,17 +428,17 @@ gulp.task('build', ['compile'], () => {
       empty: true,
       conditionals: true
     })))
-    .pipe(gulp.dest(paths.build))
+    .pipe(gulp.dest(destFolder))
 
   // Copy All Other files except HTML, CSS e JS Files
   const allFiles = gulp
     .src([
-      path.join(paths.dest, '**/*'),
+      path.join(destFolder, '**/*'),
       path.join(`!${paths.styles.dest}`, '**/*'),
       path.join(`!${paths.scripts.dest}`, '**/*'),
-      path.join(`!${paths.dest}`, '**/*.html')
+      path.join(`!${destFolder}`, '**/*.html')
     ], {dot: true, nodir: true})
-    .pipe(gulp.dest(paths.build))
+    .pipe(gulp.dest(destFolder))
 
   return merge(html, allFiles)
 })
@@ -427,7 +446,7 @@ gulp.task('build', ['compile'], () => {
 // Build Project and serve
 gulp.task('build:serve', ['build'], () => {
   const bsConfig = config.browserSyncBuild
-  bsConfig.server.baseDir.push(paths.build)
+  bsConfig.server.baseDir.push(destFolder)
 
   browserSync(bsConfig)
 })
@@ -435,6 +454,6 @@ gulp.task('build:serve', ['build'], () => {
 // Build the project and push the builded folder to gh-pages branch
 gulp.task('gh-pages', ['build'], () => {
   return gulp
-    .src(path.join(paths.build, '**/*'))
+    .src(path.join(destFolder, '**/*'))
     .pipe(ghPages())
 })

@@ -23,7 +23,7 @@
     "lint": "eslint",
     "lint:fix": "npm run lint -- --fix",
     "cover": "nyc --reporter=lcov npm test",
-    "test": "mocha --require babel-register './{,!(node_modules)/**/}*.test.js' test/**/*.js test/*.js",
+    "test": "mocha --require babel-register './{,!(node_modules)/**/}*.test.js' test/**/*.js",
     "test:watch": "npm test -- --watch"
   },
   "main": "",
