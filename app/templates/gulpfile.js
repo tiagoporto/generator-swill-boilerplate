@@ -238,7 +238,13 @@ gulp.task('images', () => {
     ])
     .pipe(plumber())
     .pipe(newer(paths.images.dest))
-    .pipe(imagemin({optimizationLevel: 5, progressive: true}))
+    .pipe(imagemin([
+      imagemin.jpegtran({progressive: true}),
+      imagemin.optipng({optimizationLevel: 5})
+    ], {
+      verbose: true
+    }
+    ))
     .pipe(gulp.dest(paths.images.dest))
 })
 
