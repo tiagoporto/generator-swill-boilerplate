@@ -40,7 +40,7 @@
 
     ////////// Possible Errors //////////
     "no-await-in-loop": "error",
-    "no-console": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-empty": "error",
     "no-extra-semi": "error",
     "no-prototype-builtins": "error",
