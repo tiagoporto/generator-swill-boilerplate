@@ -66,7 +66,8 @@ paths.styles = {
 
 // ******************************* Settings ******************************* //
 
-let destFolder = paths.dest
+const destFolder = process.argv[process.argv.length - 1] === '--prod' ? paths.build : paths.dest
+
 const fileFormats = {
   images: 'bmp,gif,jpg,jpeg,png,svg,eps,webp,tiff',
   scripts: 'js,jsx,vue',
@@ -116,21 +117,21 @@ gulp.task('scripts:lint', () => {
 
 // Compile, Minify and Lint Script
 gulp.task('scripts', ['scripts:lint'], () => {
-  return gulp
-    .src([
-      path.join(paths.scripts.src, '*.js'),
-      path.join(`!${paths.scripts.src}`, 'index.js'),
-      path.join(`!${paths.scripts.src}`, '**/*.test.js')
-    ])
-    .pipe(plumber())
-    .pipe(newer(paths.dest))
-    .pipe(plumber())
-    .pipe(babel())
-    .pipe(gulp.dest(paths.dest))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify({output: {comments: 'some'}}))
-    .pipe(gulp.dest(paths.dest))
-    .pipe(notify({message: 'Scripts task complete', onLast: true}))
+  if (paths.optionalScripts) {
+    return gulp
+      .src(paths.optionalScripts)
+      .pipe(plumber())
+      .pipe(newer(paths.dest))
+      .pipe(plumber())
+      .pipe(babel())
+      .pipe(gulp.dest(paths.dest))
+      .pipe(rename({suffix: '.min'}))
+      .pipe(uglify({output: {comments: 'some'}}))
+      .pipe(gulp.dest(paths.dest))
+      .pipe(notify({message: 'Scripts task complete', onLast: true}))
+  }
+
+  return
 })
 
 // ========= Styles ========= //
@@ -237,7 +238,7 @@ gulp.task('images', () => {
       path.join(`!${paths.images.src}`, 'sprite/**/*')
     ])
     .pipe(plumber())
-    .pipe(newer(paths.images.dest))
+    .pipe(newer(destFolder))
     .pipe(imagemin([
       imagemin.jpegtran({progressive: true}),
       imagemin.optipng({optimizationLevel: 5})
@@ -245,13 +246,13 @@ gulp.task('images', () => {
       verbose: true
     }
     ))
-    .pipe(gulp.dest(paths.images.dest))
+    .pipe(gulp.dest(destFolder))
 })
 
 // Generate Bitmap Sprite
 gulp.task('bitmap-sprite', () => {
   const sprite = gulp
-    .src(path.join(paths.images.src, '**/*.png'))
+    .src(path.join(paths.images.src, 'sprite/**/*.png'))
     .pipe(plumber())
     .pipe(
       spritesmith({
@@ -275,7 +276,7 @@ gulp.task('bitmap-sprite', () => {
   sprite.img
     .pipe(buffer())
     .pipe(imagemin())
-    .pipe(gulp.dest(paths.images.dest))
+    .pipe(gulp.dest(destFolder))
 
   sprite.css
     .pipe(gulp.dest(path.join(paths.styles.src, 'helpers')))
@@ -308,7 +309,7 @@ gulp.task('vector-sprite', () => {
         }
       }
     }))
-    .pipe(gulp.dest(paths.images.dest))
+    .pipe(gulp.dest(destFolder))
     .pipe(notify({message: 'SVG sprite task complete', onLast: true}))
 })
 
@@ -415,8 +416,6 @@ gulp.task('compile:watch', callback => {
 
 // Build Project
 gulp.task('build', ['compile'], () => {
-  destFolder = paths.build
-
   const html = gulp
     .src(path.join(destFolder, '**/*.html'))
     .pipe(useref({searchPath: destFolder}))

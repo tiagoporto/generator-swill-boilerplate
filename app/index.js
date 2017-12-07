@@ -474,10 +474,17 @@ module.exports = class extends Yeoman {
       this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/sprite/.gitkeep')
     )
 
-    this.fs.copy(
-      this.templatePath('src/images/logos/**/*'),
-      this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/logos/')
-    )
+    if (this.props.use.jqueryLogoDownloadtip) {
+      this.fs.copy(
+        this.templatePath('src/images/logos/**/*'),
+        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/logos/')
+      )
+    } else {
+      this.fs.copy(
+        this.templatePath('src/images/logos/logo.svg'),
+        this.destinationPath(this.props.folder.src + '/' + this.props.folder.images + '/logos/logo.svg')
+      )
+    }
 
     this.fs.write(this.props.folder.src + '/' + this.props.folder.images + '/copyright/.gitkeep', '')
 
