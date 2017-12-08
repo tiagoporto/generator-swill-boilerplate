@@ -16,13 +16,6 @@
     "src/favicon.ico",
     "src/fonts/.gitkeep",
     "src/images/copyright/.gitkeep",
-    "src/images/logos/logo-monochrome-RGB.eps",
-    "src/images/logos/logo-monochrome.eps",
-    "src/images/logos/logo-monochrome.png",
-    "src/images/logos/logo-monochrome.svg",
-    "src/images/logos/logo-RGB.eps",
-    "src/images/logos/logo.eps",
-    "src/images/logos/logo.png",
     "src/images/logos/logo.svg",
     "src/images/sprite/.gitkeep",
     "src/images/touch/apple-touch-icon.png",
@@ -63,6 +56,16 @@
   "handlebars":  [
     "src/includes/footer.hbs",
     "src/includes/header.hbs"
+  ],
+
+  "jqueryLogoDownloadtip": [
+    "src/images/logos/logo-monochrome-RGB.eps",
+    "src/images/logos/logo-monochrome.eps",
+    "src/images/logos/logo-monochrome.png",
+    "src/images/logos/logo-monochrome.svg",
+    "src/images/logos/logo-RGB.eps",
+    "src/images/logos/logo.eps",
+    "src/images/logos/logo.png"
   ],
 
   "optionals": [
