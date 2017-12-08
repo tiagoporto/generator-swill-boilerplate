@@ -119,7 +119,7 @@ gulp.task('scripts:lint', () => {
 gulp.task('scripts', ['scripts:lint'], () => {
   if (paths.optionalScripts) {
     return gulp
-      .src(paths.optionalScripts)
+      .src(paths.optionalScripts, {base: paths.src})
       .pipe(plumber())
       .pipe(newer(paths[destFolder]))
       .pipe(plumber())
