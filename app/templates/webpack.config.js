@@ -12,7 +12,7 @@ const webpack = require('webpack')
 module.exports = {
   entry: path.join(__dirname, paths.src, 'index.js'),
   output: {
-    path: path.resolve(__dirname, paths.dest),
+    path: path.resolve(__dirname, paths.dist),
     filename: 'bundle.js'
   },
   module: {

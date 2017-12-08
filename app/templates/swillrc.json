@@ -1,7 +1,7 @@
 {
   "basePaths": {
     "src": "<%= folder.src %>",
-    "dest": "<%= folder.dest %>",
+    "dist": "<%= folder.dist %>",
     "build": "<%= folder.build %>",
     "images": "<%= folder.images %>",
     "fonts": "<%= folder.fonts %>",
@@ -35,7 +35,7 @@
     "notify": false,
     "logPrefix": "BrowserSync",
     "server": {
-      "baseDir": ["<%= folder.dest %>/", "./"]
+      "baseDir": ["<%= folder.dist %>/", "./"]
     },
     "routes": {
         "/bower_components": "bower_components",

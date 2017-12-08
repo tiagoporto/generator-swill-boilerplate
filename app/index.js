@@ -67,8 +67,8 @@ module.exports = class extends Yeoman {
           return response.settingFolder
         }
       }, {
-        name: 'destFolder',
-        message: 'Destination folder??',
+        name: 'distFolder',
+        message: 'Distribution folder??',
         default: 'dist',
         when: function (response) {
           return response.settingFolder
@@ -245,7 +245,7 @@ module.exports = class extends Yeoman {
 
       this.props.folder = {
         src: props.srcFolder || 'src',
-        dest: props.destFolder || 'dist',
+        dist: props.distFolder || 'dist',
         build: props.buildFolder || 'build',
         fonts: props.fontsFolder || 'fonts',
         images: props.imgFolder || 'images',
