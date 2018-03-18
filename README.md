@@ -1,14 +1,14 @@
 # Swill Boilerplate Generator
 
 <p align="right">
-  <code>LIKED ? Leave a <a href="https://github.com/tiagoporto/gerador-validador-cpf">⭐</a> : 😞</code>
+  <code>LIKED ? Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate">⭐</a> : 😞</code>
 </p>
 
 [![Release](https://img.shields.io/npm/v/generator-swill-boilerplate.svg?style=flat-square&label=release)](https://npmjs.org/package/generator-swill-boilerplate)
 [![Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg?style=flat-square)](https://www.npmjs.com/package/generator-swill-boilerplate)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-yellow.svg?style=flat-square)](http://standardjs.com)
 [![Build Status](https://img.shields.io/travis/tiagoporto/generator-swill-boilerplate.svg?style=flat-square&logo=travis)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
-[![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
+[![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg?style=flat-square)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
 [![Dependencies Status](https://img.shields.io/david/tiagoporto/generator-swill-boilerplate.svg?style=flat-square)](https://david-dm.org/tiagoporto/generator-swill-boilerplate)
 [![devDependencies Status](https://img.shields.io/david/dev/tiagoporto/generator-swill-boilerplate.svg?style=flat-square)](https://david-dm.org/tiagoporto/generator-swill-boilerplate?type=dev)
 
