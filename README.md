@@ -1,23 +1,17 @@
 # Swill Boilerplate Generator
 
-[![Build Status](https://travis-ci.org/tiagoporto/generator-swill-boilerplate.svg)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
-[![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
-[![NPM version](https://badge.fury.io/js/generator-swill-boilerplate.svg)](https://npmjs.org/package/generator-swill-boilerplate)
-[![NPM Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg)](https://www.npmjs.com/package/generator-swill-boilerplate)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
-[![Github License](https://img.shields.io/github/license/tiagoporto/generator-swill-boilerplate.svg)](https://raw.githubusercontent.com/tiagoporto/generator-swill-boilerplate/master/LICENSE)
-
-<small>Generator Dependencies:</small>
-[![Dependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate)
- [![devDependencies Status](https://david-dm.org/tiagoporto/generator-swill-boilerplate/dev-status.svg)](https://david-dm.org/tiagoporto/generator-swill-boilerplate?type=dev)
-
-<small>Swill Boilerplate Dependencies:</small>
-[![boilerplate devDependencies Status](https://david-dm.org/tiagoporto/swillboilerplate.rocks/dev-status.svg)](https://david-dm.org/tiagoporto/swillboilerplate.rocks?type=dev)
-
 <p align="right">
-  <img src="http://icons.iconarchive.com/icons/icons8/christmas-flat-color/256/star-icon.png" alt="Star" height="25"><img src="http://icons.iconarchive.com/icons/icons8/christmas-flat-color/256/star-icon.png" alt="Star" height="25"><img src="http://icons.iconarchive.com/icons/icons8/christmas-flat-color/256/star-icon.png" alt="Star" height="25"><br>
-  <code>LIKE ? Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate/tree/master">Star</a> : Make a DEV sad</code>
+  <code>LIKED ? Leave a <a href="https://github.com/tiagoporto/gerador-validador-cpf">⭐</a> : 😞</code>
 </p>
+
+[![Release](https://img.shields.io/npm/v/generator-swill-boilerplate.svg?style=flat-square&label=release)](https://npmjs.org/package/generator-swill-boilerplate)
+[![Downloads](https://img.shields.io/npm/dt/generator-swill-boilerplate.svg?style=flat-square)](https://www.npmjs.com/package/generator-swill-boilerplate)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-yellow.svg?style=flat-square)](http://standardjs.com)
+[![Build Status](https://img.shields.io/travis/tiagoporto/generator-swill-boilerplate.svg?style=flat-square&logo=travis)](https://travis-ci.org/tiagoporto/generator-swill-boilerplate)
+[![Coverage Status](https://img.shields.io/coveralls/tiagoporto/generator-swill-boilerplate.svg)](https://coveralls.io/github/tiagoporto/generator-swill-boilerplate)
+[![Dependencies Status](https://img.shields.io/david/tiagoporto/generator-swill-boilerplate.svg?style=flat-square)](https://david-dm.org/tiagoporto/generator-swill-boilerplate)
+[![devDependencies Status](https://img.shields.io/david/dev/tiagoporto/generator-swill-boilerplate.svg?style=flat-square)](https://david-dm.org/tiagoporto/generator-swill-boilerplate?type=dev)
+
 
 <p align="center">
   <img src="http://tiagoporto.github.io/swillboilerplate.rocks/img/logos/logo.png" alt="Swill Boilerplate Logo">
@@ -25,7 +19,6 @@
 </p>
 
 > Yeoman generator for [Swill Boilerplate](http://swillboilerplate.rocks)
-
 
 ## Features
 
@@ -67,8 +60,4 @@ yo swill-boilerplate
 ## Docs
 
 [Swill Boilerplate](http://swillboilerplate.rocks)
-
-## License
-
-Swill Boilerplate Generator is released under the terms of the [MIT license](https://github.com/tiagoporto/generator-swill-boilerplate/blob/master/LICENSE).
 
