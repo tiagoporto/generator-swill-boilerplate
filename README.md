@@ -1,4 +1,4 @@
-# Swill Boilerplate Generator
+# Swill Boilerplate Generator ![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)
 
 <p align="right">
   <code>LIKED ? Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate">⭐</a> : 😞</code>
