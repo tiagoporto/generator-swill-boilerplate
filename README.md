@@ -39,7 +39,7 @@
 * Uses Jasmine & Karma to test JavaScript
 * Builds the project compressing HTML, CSS and JS
 * Pushes the `build` folder to gh-pages branch
-* Uses [http://standardjs.com/](JavaScript Standard Style)
+* Uses [JavaScript Standard Style](http://standardjs.com)
 
 ## Installation
 
