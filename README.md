@@ -43,7 +43,13 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and `generator-swill-boilerplate` using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+If you have Npm@5.2.0 or highest
+
+```bash
+npx -p yo -p generator-swill-boilerplate yo swill-boilerplate
+```
+
+If lower Npm@5.2.0
 
 ```bash
 npm install -g yo generator-swill-boilerplate
@@ -54,7 +60,6 @@ Then generate your new project:
 ```bash
 yo swill-boilerplate
 ```
-
 
 ## Docs
 
