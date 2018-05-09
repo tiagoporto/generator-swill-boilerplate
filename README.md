@@ -1,7 +1,7 @@
 # Swill Boilerplate Generator ![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)
 
 <p align="right">
-  <code>LIKED ? Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate">⭐</a> : <a href="https://github.com/tiagoporto/generator-swill-boilerplate/issues">😞</a></code>
+  <code>LIKED ? Leave a <a href="https://github.com/tiagoporto/generator-swill-boilerplate/stargazers">⭐</a> : <a href="https://github.com/tiagoporto/generator-swill-boilerplate/issues">😞</a></code>
 </p>
 
 [![Release](https://img.shields.io/npm/v/generator-swill-boilerplate.svg?style=flat-square&label=release)](https://npmjs.org/package/generator-swill-boilerplate)
