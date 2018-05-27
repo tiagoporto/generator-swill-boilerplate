@@ -26,9 +26,10 @@
     "type": "git",
     "url": "https://github.com/tiagoporto/generator-swill-boilerplate.git"
   },
-  "files": [
-    "app"
-  ],
+  "scripts": {
+    "tag": "git tag v$npm_package_version",
+    "postpublish": "npm run tag && git push --tags"
+  },
   "dependencies": {
     "apache-server-configs": "2.14.0",
     "chalk": "2.1.0",
