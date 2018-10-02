@@ -14,11 +14,11 @@
 
 
 <p align="center">
-  <img src="http://tiagoporto.github.io/swillboilerplate.rocks/img/logos/logo.png" alt="Swill Boilerplate Logo">
+  <img src="https://tiagoporto.github.io/swill-boilerplate/img/logos/logo.png" alt="Swill Boilerplate Logo">
   <img src="https://nerdsondotcom.files.wordpress.com/2013/03/yeoman-logo.png" alt="Yeoman Logo" height="215">
 </p>
 
-> Yeoman generator for [Swill Boilerplate](http://swillboilerplate.rocks)
+> Yeoman generator for [Swill Boilerplate](https://tiagoporto.github.io/swill-boilerplate)
 
 ## Features
 
