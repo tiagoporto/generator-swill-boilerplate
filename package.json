@@ -35,7 +35,7 @@
     "chalk": "2.1.0",
     "generator-license": "5.1.0",
     "mkdirp": "0.5.1",
-    "underscore.string": "3.3.4",
+    "underscore.string": "3.3.5",
     "yeoman-generator": "2.0.0",
     "yosay": "2.0.1"
   },
